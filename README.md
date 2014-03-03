@@ -1,9 +1,14 @@
 OmniBase
 ========
 
-OmniBase is Smalltalk efficient objects repository, BTree and filesystem based with full ACID features
-
 Originally at squeaksource, now moved to github.
+
+OmniBase is a Smalltalk efficient object repository. 
+
+Based on BTrees and filesystem, it has full ACID features.
+
+While this software is old and doesn't have elegant code, it works with an impressive performance.
+
 
 ---
 This is the Pharo Smalltalk port of David Gorisek's original work.
