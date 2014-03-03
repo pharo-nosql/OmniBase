@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"externalLong" ],
+	"name" : "ODBWin32FileStream",
+	"pools" : [
+		 ],
+	"super" : "ODBFileStream",
+	"type" : "normal" }

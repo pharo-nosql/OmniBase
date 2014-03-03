@@ -1,0 +1,3 @@
+public
+reorganizeDictionaries
+	^reorganizeDictionaries == true

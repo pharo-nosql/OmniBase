@@ -1,0 +1,3 @@
+*omnibase
+trimBlanks
+	^self withBlanksCondensed

@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		"ClassIDs" ],
+	"commentStamp" : "",
+	"instvars" : [
+		"objectHolder" ],
+	"name" : "ODBDatabaseObject",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,20 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"db",
+		"newDb",
+		"newVersionNumber",
+		"oldHolders",
+		"progressDialog",
+		"progressValue",
+		"versionDescriptor" ],
+	"name" : "OmniBaseArchiver",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

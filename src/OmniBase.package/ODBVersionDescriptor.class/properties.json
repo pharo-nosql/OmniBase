@@ -1,0 +1,18 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"versionNumber",
+		"readVersionNumber",
+		"topVersionNumber",
+		"committingTransactions",
+		"myCommits" ],
+	"name" : "ODBVersionDescriptor",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

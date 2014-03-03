@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBForeignClient",
+	"pools" : [
+		 ],
+	"super" : "ODBClient",
+	"type" : "normal" }

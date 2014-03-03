@@ -1,0 +1,15 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"classesToDescription",
+		"idToClassDescription" ],
+	"name" : "ODBClassManagerForSerialization",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

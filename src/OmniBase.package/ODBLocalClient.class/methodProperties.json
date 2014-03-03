@@ -1,0 +1,19 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"createOn:clientID:" : "dg 12/20/2003 09:36",
+		"currentGlobalLockedTransaction" : "cdg 3/13/2003 18:06",
+		"description:" : "cdg 3/13/2003 18:06",
+		"globalLock" : "cdg 3/13/2003 18:06",
+		"globalUnlock" : "cdg 3/13/2003 18:06",
+		"initialize" : "cdg 3/13/2003 18:06",
+		"isGlobalLocked" : "cdg 3/13/2003 18:06",
+		"isLocal" : "cdg 3/13/2003 18:06",
+		"newReadOnlyTransaction" : "cdg 3/13/2003 18:06",
+		"newTransaction" : "cdg 3/13/2003 18:06",
+		"newTransactionFileFor:" : "",
+		"newTransactionFrom:" : "cdg 3/13/2003 18:06",
+		"newTransactionInVersion:" : "cdg 3/13/2003 18:06",
+		"remove" : "cdg 3/13/2003 18:06",
+		"transactionRemove:" : "cdg 3/13/2003 18:06" } }

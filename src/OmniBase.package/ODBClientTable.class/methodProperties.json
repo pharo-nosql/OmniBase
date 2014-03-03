@@ -1,0 +1,24 @@
+{
+	"class" : {
+		"maxClients" : "" },
+	"instance" : {
+		"activateClientID:" : "cdg 3/13/2003 18:06",
+		"clientTableAt:" : "cdg 3/13/2003 18:06",
+		"clientTableAt:lockAndPut:" : "",
+		"clientTableAt:put:" : "cdg 3/13/2003 18:06",
+		"created" : "cdg 3/13/2003 18:06",
+		"descriptionString" : "cdg 3/13/2003 18:06",
+		"globalLockClientID" : "cdg 3/13/2003 18:06",
+		"globalLockClientID:" : "cdg 3/13/2003 18:06",
+		"globalUnlock" : "",
+		"initialize" : "",
+		"isBeingRemoved:" : "cdg 3/13/2003 18:06",
+		"loadTable" : "cdg 3/13/2003 18:06",
+		"lockTable" : "cdg 3/13/2003 18:06",
+		"onClientIDsDo:" : "",
+		"onNewClientIDDo:" : "",
+		"removeClientID:" : "cdg 3/13/2003 18:06",
+		"removingClientID:" : "",
+		"requestLockForClientID:" : "",
+		"setGlobalLockFor:" : "",
+		"unlockTable" : "cdg 3/13/2003 18:06" } }

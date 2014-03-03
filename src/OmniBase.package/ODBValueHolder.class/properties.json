@@ -1,0 +1,16 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"object",
+		"removed",
+		"objectSet" ],
+	"name" : "ODBValueHolder",
+	"pools" : [
+		 ],
+	"super" : "ODBExternalBuffer",
+	"type" : "normal" }

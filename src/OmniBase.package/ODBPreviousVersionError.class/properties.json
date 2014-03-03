@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBPreviousVersionError",
+	"pools" : [
+		 ],
+	"super" : "Error",
+	"type" : "normal" }

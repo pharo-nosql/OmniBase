@@ -1,0 +1,15 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"addReference:" : "",
+		"asBytesWith:" : "",
+		"createMax256From:" : "",
+		"createMax65536From:" : "",
+		"databaseObjectClassID" : "",
+		"loadFromStream:" : "david@inspiron 2/9/2005 10:23",
+		"loadFromStream:externalReferencesLoaderBlock:" : "david@inspiron 2/11/2005 12:58",
+		"referenceAt:" : "",
+		"referencesDo:" : "cdg 3/13/2003 18:05",
+		"saveOnStream:" : "david@inspiron 2/9/2005 10:43",
+		"transaction:" : "cdg 3/13/2003 18:05" } }

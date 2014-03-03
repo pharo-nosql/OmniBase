@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBSerializedDBObject256References",
+	"pools" : [
+		 ],
+	"super" : "ODBSerializedDBObjectWithoutReferences",
+	"type" : "normal" }

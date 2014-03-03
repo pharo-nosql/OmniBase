@@ -1,0 +1,4 @@
+private
+classManager
+
+    ^classManager

@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBGarbageCollectorRequest",
+	"pools" : [
+		 ],
+	"super" : "ODBByteStorageRequest",
+	"type" : "normal" }

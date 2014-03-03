@@ -1,0 +1,4 @@
+*omnibaseExtensions
+isODBExpired 
+
+	^ false

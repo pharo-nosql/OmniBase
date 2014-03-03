@@ -1,0 +1,19 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"pagePosition",
+		"keyLength",
+		"valueLength",
+		"iterator",
+		"indexOnPage",
+		"itemLength" ],
+	"name" : "ODBBTreePage",
+	"pools" : [
+		 ],
+	"super" : "ODBExternalBuffer",
+	"type" : "normal" }

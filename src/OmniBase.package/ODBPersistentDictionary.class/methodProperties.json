@@ -1,0 +1,13 @@
+{
+	"class" : {
+		"odbDeserialize:" : "ac 3/14/2004 19:53" },
+	"instance" : {
+		"add:" : "",
+		"asDictionary" : "",
+		"at:put:" : "",
+		"odbBasicSerialize:" : "",
+		"odbLoadedIn:" : "cdg 3/13/2003 18:06",
+		"odbMadePersistentIn:" : "",
+		"removeKey:ifAbsent:" : "",
+		"superAt:put:" : "cdg 3/13/2003 18:06",
+		"transaction" : "cdg 3/13/2003 18:06" } }

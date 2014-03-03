@@ -1,0 +1,19 @@
+{
+	"class" : {
+		"new" : "cdg 3/13/2003 18:05" },
+	"instance" : {
+		"at:" : "",
+		"at:put:" : "cdg 3/14/2003 22:49",
+		"do:" : "",
+		"findKey:" : "",
+		"getCurrent" : "",
+		"getFirst" : "cdg 3/13/2003 18:05",
+		"getLast" : "cdg 3/13/2003 18:05",
+		"goTo:" : "cdg 3/13/2003 18:05",
+		"goToNext" : "",
+		"goToPrevious" : "",
+		"includes:" : "cdg 3/13/2003 18:05",
+		"initialize" : "cdg 3/13/2003 18:05",
+		"keysAndValuesDo:" : "",
+		"peekNext" : "",
+		"peekPrevious" : "" } }

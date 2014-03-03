@@ -1,0 +1,21 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"addKey:value:" : "",
+		"at:put:" : "",
+		"at:put:ifLocked:" : "",
+		"basicLockKey:" : "dg 12/20/2003 10:17",
+		"commitChanged" : "",
+		"commitNew" : "",
+		"databaseObjectClass" : "",
+		"initialize" : "cdg 3/13/2003 18:06",
+		"isKeyLocked:" : "",
+		"lockKey:" : "",
+		"objectCommitted" : "",
+		"objectLoaded" : "",
+		"objectStored" : "",
+		"removeKey:" : "",
+		"removeKey:ifLocked:" : "",
+		"size" : "",
+		"unlockKey:" : "" } }

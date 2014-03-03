@@ -1,0 +1,26 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"addOpenedClient:" : "",
+		"clientAt:" : "",
+		"clientFileName:" : "",
+		"clients" : "",
+		"close" : "cdg 3/13/2003 18:05",
+		"closeForeignClients" : "",
+		"createOn:" : "cdg 3/13/2003 18:05",
+		"dirName" : "",
+		"environment" : "cdg 3/13/2003 18:05",
+		"globalUnlock" : "cdg 3/13/2003 18:05",
+		"idFileName" : "",
+		"localClient" : "cdg 3/13/2003 18:05",
+		"newClient" : "",
+		"openOn:" : "cdg 3/13/2003 18:05",
+		"opened" : "",
+		"removeDisconnectedClients" : "",
+		"removeForeignActiveClient:" : "cdg 3/13/2003 18:05",
+		"removeLocksFor:" : "cdg 3/13/2003 18:05",
+		"removePending:" : "cdg 3/13/2003 18:05",
+		"removed:" : "cdg 3/13/2003 18:05",
+		"requestLocksFor:" : "cdg 3/13/2003 18:05",
+		"setGlobalLockFor:" : "cdg 3/13/2003 18:05" } }

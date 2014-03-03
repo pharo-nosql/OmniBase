@@ -1,0 +1,4 @@
+transaction management
+currentTransaction: anODBLocalTransaction
+
+	currentTransaction := anODBLocalTransaction

@@ -1,0 +1,17 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"collections",
+		"current",
+		"readLimit",
+		"lastSize" ],
+	"name" : "ODBMemoryWriteStream",
+	"pools" : [
+		 ],
+	"super" : "ODBStream",
+	"type" : "normal" }

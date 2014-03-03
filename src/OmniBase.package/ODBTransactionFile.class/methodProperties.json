@@ -1,0 +1,21 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"collectLockClassIDsFrom:to:" : "cdg 3/13/2003 18:06",
+		"createOn:" : "cdg 3/13/2003 18:06",
+		"created" : "cdg 3/13/2003 18:06",
+		"descriptionString" : "cdg 3/13/2003 18:06",
+		"initialize" : "cdg 3/13/2003 18:06",
+		"lockAdd:" : "",
+		"lockRemove:" : "",
+		"locks" : "cdg 3/13/2003 18:06",
+		"openOn:" : "cdg 3/13/2003 18:06",
+		"opened" : "",
+		"recovery" : "cdg 3/13/2003 18:06",
+		"recovery:" : "",
+		"reinitialize" : "cdg 3/13/2003 18:06",
+		"transactionID" : "",
+		"transactionID:" : "cdg 3/13/2003 18:06",
+		"versionNumber" : "cdg 3/13/2003 18:06",
+		"versionNumber:" : "cdg 3/13/2003 18:06" } }

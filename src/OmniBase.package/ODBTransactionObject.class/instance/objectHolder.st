@@ -1,0 +1,4 @@
+accessing
+objectHolder
+
+    ^holder

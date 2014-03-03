@@ -1,0 +1,4 @@
+public
+name
+
+	^name

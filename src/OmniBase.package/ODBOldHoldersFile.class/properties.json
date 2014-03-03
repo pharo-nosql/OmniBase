@@ -1,0 +1,16 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"buffer",
+		"bufPos",
+		"filePos" ],
+	"name" : "ODBOldHoldersFile",
+	"pools" : [
+		 ],
+	"super" : "ODBFile",
+	"type" : "normal" }

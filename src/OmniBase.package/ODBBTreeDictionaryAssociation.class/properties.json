@@ -1,0 +1,16 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"valueHolder",
+		"key",
+		"transaction" ],
+	"name" : "ODBBTreeDictionaryAssociation",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

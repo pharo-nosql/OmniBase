@@ -1,0 +1,28 @@
+{
+	"class" : {
+		"createOn:createMode:accessMode:shareMode:cacheMode:" : "dg 12/20/2003 20:14" },
+	"instance" : {
+		"basicPosition:" : "dg 12/20/2003 21:07",
+		"basicPutBytesFrom:len:" : "dg 12/20/2003 22:03",
+		"close" : "dg 12/20/2003 21:04",
+		"closeHandle:" : "dg 12/20/2003 22:00",
+		"createFile:dwDesiredAccess:dwSharedMode:lpSecurityAttributes:dwCreationDistribution:dwFlagsAndAttributes:hTemplateFile:" : "dg 12/20/2003 22:00",
+		"createOn:createMode:accessMode:shareMode:cacheMode:" : "dg 12/20/2003 22:43",
+		"fileIOError" : "dg 12/20/2003 22:11",
+		"fileIOError:" : "dg 12/20/2003 22:46",
+		"flush" : "dg 12/20/2003 21:13",
+		"flushFileBuffers:" : "dg 12/20/2003 22:00",
+		"getFileSize:lpFileSizeHigh:" : "dg 12/20/2003 22:00",
+		"getLastError" : "dg 12/20/2003 22:10",
+		"lockAt:length:" : "dg 12/20/2003 22:09",
+		"lockFile:offsetLow:offsetHigh:lengthLow:lengthHigh:" : "dg 12/20/2003 22:00",
+		"openOn:fileHandle:" : "dg 12/20/2003 21:14",
+		"position" : "dg 12/20/2003 21:11",
+		"readFile:lpBuffer:nNumberOfBytesToRead:lpNumberOfBytesRead:lpOverlapped:" : "dg 12/20/2003 22:06",
+		"setEndOfFile:" : "dg 12/20/2003 22:00",
+		"setFilePointer:lDistanceToMove:lpDistanceToMoveHigh:dwMoveMethod:" : "dg 12/20/2003 22:00",
+		"size" : "dg 12/20/2003 21:01",
+		"truncate:" : "dg 12/20/2003 20:56",
+		"unlockAt:length:" : "dg 12/20/2003 20:58",
+		"unlockFile:offsetLow:offsetHigh:lengthLow:lengthHigh:" : "dg 12/20/2003 22:07",
+		"writeFile:lpBuffer:nNumberOfBytesToWrite:lpNumberOfBytesWritten:lpOverlapped:" : "dg 12/20/2003 22:04" } }

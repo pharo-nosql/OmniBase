@@ -1,0 +1,4 @@
+accessing
+objectManager
+
+    ^objectManager

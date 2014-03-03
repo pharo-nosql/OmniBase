@@ -1,0 +1,3 @@
+private
+keyFromBytes: aByteArray 
+	^aByteArray

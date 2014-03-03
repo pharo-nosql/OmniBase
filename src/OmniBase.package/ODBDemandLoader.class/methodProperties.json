@@ -1,0 +1,11 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"getObject" : "",
+		"odbObjectID" : "cdg 3/13/2003 18:05",
+		"odbSerialize:" : "",
+		"perform:withArguments:" : "cdg 3/13/2003 18:05",
+		"printOn:" : "cdg 3/13/2003 18:05",
+		"setTransaction:objectID:proxyObject:" : "cdg 3/13/2003 18:05",
+		"transaction" : "cdg 3/13/2003 18:05" } }

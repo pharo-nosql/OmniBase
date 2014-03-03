@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBWeakValueIdentityDictionary",
+	"pools" : [
+		 ],
+	"super" : "ODBIdentityDictionary",
+	"type" : "normal" }

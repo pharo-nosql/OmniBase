@@ -1,0 +1,9 @@
+{
+	"class" : {
+		"new" : "cdg 3/13/2003 18:05" },
+	"instance" : {
+		"at:" : "",
+		"at:ifAbsentPutValue:" : "",
+		"at:put:" : "",
+		"initialize" : "cdg 3/13/2003 18:05",
+		"removeKey:" : "" } }

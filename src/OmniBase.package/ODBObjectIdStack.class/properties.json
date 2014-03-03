@@ -1,0 +1,18 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"cache",
+		"top",
+		"filePos",
+		"valueSize",
+		"bottom" ],
+	"name" : "ODBObjectIdStack",
+	"pools" : [
+		 ],
+	"super" : "ODBFile",
+	"type" : "normal" }

@@ -1,0 +1,4 @@
+public
+isBytes
+
+	^bytes

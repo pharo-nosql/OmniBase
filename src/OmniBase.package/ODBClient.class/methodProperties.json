@@ -1,0 +1,14 @@
+{
+	"class" : {
+		"new" : "cdg 3/13/2003 18:05" },
+	"instance" : {
+		"clientID" : "cdg 3/13/2003 18:05",
+		"description" : "cdg 3/13/2003 18:05",
+		"initialize" : "",
+		"isForeign" : "cdg 3/13/2003 18:05",
+		"isTerminated" : "cdg 3/13/2003 18:05",
+		"remove" : "cdg 3/13/2003 18:05",
+		"transactionAdd:" : "cdg 3/13/2003 18:05",
+		"transactionRemove:" : "cdg 3/13/2003 18:05",
+		"transactions" : "cdg 3/13/2003 18:05",
+		"trnFileName:" : "" } }

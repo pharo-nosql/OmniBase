@@ -1,0 +1,18 @@
+{
+	"class" : {
+		"classID" : "cdg 3/13/2003 18:05",
+		"hasExternalFiles" : "" },
+	"instance" : {
+		"associationsDo:" : "",
+		"at:ifAbsent:" : "",
+		"at:put:" : "",
+		"close" : "",
+		"createBackupCopyIn:versionDescriptor:oldHolders:versionNumber:" : "",
+		"createOn:keySize:" : "",
+		"garbageCollectOn:" : "",
+		"iterator" : "cdg 3/13/2003 18:06",
+		"makeTransactionObject:" : "",
+		"openOn:" : "",
+		"remove" : "",
+		"reorganizeBTree" : "",
+		"valuesDo:" : "" } }

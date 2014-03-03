@@ -1,0 +1,3 @@
+private
+lastClassId
+	^idTable getLastID

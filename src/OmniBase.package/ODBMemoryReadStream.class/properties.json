@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"current" ],
+	"name" : "ODBMemoryReadStream",
+	"pools" : [
+		 ],
+	"super" : "ODBStream",
+	"type" : "normal" }

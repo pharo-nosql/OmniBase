@@ -1,0 +1,17 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"application",
+		"changesPackage",
+		"inconsistent",
+		"newObjects" ],
+	"name" : "ODBLocalTransaction",
+	"pools" : [
+		 ],
+	"super" : "ODBTransaction",
+	"type" : "normal" }

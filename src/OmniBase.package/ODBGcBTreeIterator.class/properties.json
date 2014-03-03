@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBGcBTreeIterator",
+	"pools" : [
+		 ],
+	"super" : "ODBBTreeIterator",
+	"type" : "normal" }

@@ -1,0 +1,20 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"addHolders:" : "",
+		"at:" : "",
+		"at:put:" : "",
+		"createOn:" : "cdg 3/13/2003 18:05",
+		"created" : "cdg 3/13/2003 18:05",
+		"descriptionString" : "cdg 3/13/2003 18:05",
+		"flushGCBuffer" : "",
+		"getLastIndex" : "",
+		"indexesAndValuesDo:" : "",
+		"initialize" : "cdg 3/13/2003 18:05",
+		"lock:" : "",
+		"newObjectFileID" : "",
+		"openOn:" : "cdg 3/13/2003 18:05",
+		"removeIndex:" : "",
+		"setLastIndex:" : "",
+		"unlock:" : "" } }

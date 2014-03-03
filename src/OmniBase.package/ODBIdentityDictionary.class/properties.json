@@ -1,0 +1,18 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"elementCount",
+		"emptySlotMarker",
+		"keys",
+		"sizeLimit",
+		"values" ],
+	"name" : "ODBIdentityDictionary",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

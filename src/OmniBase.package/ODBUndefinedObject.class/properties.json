@@ -1,0 +1,19 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"basicHash",
+		"variables",
+		"indexedVariables",
+		"bytes",
+		"classInfo",
+		"basicSize" ],
+	"name" : "ODBUndefinedObject",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

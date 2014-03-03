@@ -1,0 +1,21 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		"currentTransaction",
+		"processToTransactionDict",
+		"processToTransactionMutex",
+		"sessions" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"rootDir",
+		"objectManager",
+		"classManager",
+		"clientManager",
+		"transactionManager" ],
+	"name" : "OmniBase",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

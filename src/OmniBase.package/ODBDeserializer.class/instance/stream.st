@@ -1,0 +1,4 @@
+public
+stream
+
+	^stream

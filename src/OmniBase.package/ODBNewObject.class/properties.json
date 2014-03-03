@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBNewObject",
+	"pools" : [
+		 ],
+	"super" : "ODBDeserializers",
+	"type" : "normal" }

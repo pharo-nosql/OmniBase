@@ -1,0 +1,4 @@
+private
+sizeInBytes
+
+    ^12

@@ -1,0 +1,16 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"fileHandle",
+		"mutex",
+		"pathName" ],
+	"name" : "ODBFileStream",
+	"pools" : [
+		 ],
+	"super" : "ODBStream",
+	"type" : "normal" }

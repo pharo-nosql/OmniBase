@@ -1,0 +1,4 @@
+public/unclassified
+isGlobalLocked
+
+    ^hasGlobalLock

@@ -1,0 +1,3 @@
+public
+currentVersionDescriptor
+	^versionControl versionDescriptor copy

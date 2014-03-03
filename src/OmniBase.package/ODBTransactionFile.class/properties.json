@@ -1,0 +1,18 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"locks",
+		"transactionID",
+		"lockPositions",
+		"recovery",
+		"newLockPosition" ],
+	"name" : "ODBTransactionFile",
+	"pools" : [
+		 ],
+	"super" : "ODBFile",
+	"type" : "normal" }

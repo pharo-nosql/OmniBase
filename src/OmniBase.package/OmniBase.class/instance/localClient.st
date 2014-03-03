@@ -1,0 +1,4 @@
+administration
+localClient
+
+    ^clientManager localClient

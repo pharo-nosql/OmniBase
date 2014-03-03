@@ -1,0 +1,20 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"close" : "",
+		"createOn:" : "",
+		"critical:" : "cdg 3/13/2003 18:05",
+		"currentVersionDescriptor" : "",
+		"initializeOn:" : "david@inspiron 10/31/2004 23:00",
+		"initializeReferences" : "",
+		"oldHolders" : "cdg 3/13/2003 18:05",
+		"oldHoldersFileName" : "",
+		"openOn:" : "",
+		"transactionAborted:" : "",
+		"transactionCommitBegin:" : "",
+		"transactionCommitEnd:" : "",
+		"transactionReferenceAt:" : "",
+		"transactionStart:" : "cdg 3/13/2003 18:05",
+		"vcFileName" : "",
+		"versionControl" : "" } }

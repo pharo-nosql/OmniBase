@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBCannotLockKey",
+	"pools" : [
+		 ],
+	"super" : "ODBLockingConflict",
+	"type" : "normal" }

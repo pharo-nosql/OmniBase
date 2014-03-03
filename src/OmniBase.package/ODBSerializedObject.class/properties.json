@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"changed" ],
+	"name" : "ODBSerializedObject",
+	"pools" : [
+		 ],
+	"super" : "ODBTransactionObject",
+	"type" : "normal" }

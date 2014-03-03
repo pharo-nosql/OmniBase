@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBGlobalLockedTransaction",
+	"pools" : [
+		 ],
+	"super" : "ODBLocalTransaction",
+	"type" : "normal" }

@@ -1,0 +1,15 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"addLock:" : "",
+		"checkpoint" : "cdg 3/13/2003 18:06",
+		"commit" : "cdg 3/13/2003 18:06",
+		"isChanged" : "cdg 3/13/2003 18:06",
+		"isReadOnly" : "cdg 3/13/2003 18:06",
+		"lock:" : "cdg 3/13/2003 18:06",
+		"makePersistent:in:" : "cdg 3/13/2003 18:06",
+		"markDirty:" : "cdg 3/13/2003 18:06",
+		"removeLock:" : "",
+		"store:in:ifLocked:" : "cdg 3/13/2003 18:06",
+		"unlock:" : "cdg 3/13/2003 18:06" } }

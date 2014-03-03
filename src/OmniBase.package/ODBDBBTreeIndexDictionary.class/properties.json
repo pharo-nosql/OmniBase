@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"iterator" ],
+	"name" : "ODBDBBTreeIndexDictionary",
+	"pools" : [
+		 ],
+	"super" : "ODBDatabaseObject",
+	"type" : "normal" }

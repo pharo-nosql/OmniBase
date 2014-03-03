@@ -1,0 +1,19 @@
+{
+	"class" : {
+		"classArray" : "",
+		"deserializeFromBytes:" : "david@inspiron 2/11/2005 12:57",
+		"deserializeFromBytes:externalReferencesLoaderBlock:" : "david@inspiron 2/11/2005 12:59",
+		"init" : "dg 3/14/2005 12:34",
+		"registerDeserializer:withId:" : "david@inspiron 2/9/2005 11:47" },
+	"instance" : {
+		"deserializeFrom:referenceManager:classManager:" : "david@inspiron 2/9/2005 10:25",
+		"deserializeFrom:referenceManager:transaction:" : "ac 3/14/2004 19:52",
+		"existingObject" : "cdg 3/13/2003 18:05",
+		"loadError" : "",
+		"loadReference" : "cdg 3/13/2003 18:05",
+		"newObjectNewClass" : "",
+		"newObjectOldClass" : "cdg 3/13/2003 18:05",
+		"odbNextObject" : "ac 3/14/2004 19:52",
+		"register:" : "cdg 3/13/2003 18:05",
+		"stream" : "cdg 3/13/2003 18:05",
+		"transaction" : "cdg 3/13/2003 18:05" } }

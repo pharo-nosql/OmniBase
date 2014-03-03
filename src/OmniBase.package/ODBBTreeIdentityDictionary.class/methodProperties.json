@@ -1,0 +1,24 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"at:ifAbsent:" : "",
+		"at:put:ifLocked:" : "",
+		"bytesFromKey:" : "",
+		"commit:" : "",
+		"databaseObjectClass" : "",
+		"includesKey:" : "",
+		"initialize" : "",
+		"isChanged" : "",
+		"isKeyLocked:" : "",
+		"keyFromBytes:" : "",
+		"keys" : "",
+		"keysFrom:to:do:" : "",
+		"lockKey:" : "",
+		"objectCommitted" : "",
+		"objectStored" : "",
+		"odbAboutToCommitIn:" : "",
+		"removeKey:ifLocked:" : "",
+		"size" : "",
+		"unlockKey:" : "",
+		"values" : "" } }

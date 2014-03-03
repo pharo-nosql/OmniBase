@@ -1,0 +1,17 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"localClient",
+		"environment",
+		"idTable",
+		"clients" ],
+	"name" : "ODBClientManager",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

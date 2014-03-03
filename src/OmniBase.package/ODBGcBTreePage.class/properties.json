@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBGcBTreePage",
+	"pools" : [
+		 ],
+	"super" : "ODBBTreePage",
+	"type" : "normal" }

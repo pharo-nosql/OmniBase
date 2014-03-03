@@ -1,0 +1,4 @@
+*omnibase
+isODBTransactionObject
+
+	^false

@@ -1,0 +1,13 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"add:" : "",
+		"at:" : "",
+		"at:ifAbsent:" : "",
+		"at:put:" : "",
+		"created" : "cdg 3/13/2003 18:06",
+		"descriptionString" : "cdg 3/13/2003 18:06",
+		"getLastID" : "",
+		"indexesAndValuesDo:" : "",
+		"initialize" : "cdg 3/13/2003 18:06" } }

@@ -1,0 +1,16 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"deltaSize",
+		"initialSize",
+		"newObjects" ],
+	"name" : "ODBBTreeMultiValueDictionary",
+	"pools" : [
+		 ],
+	"super" : "ODBBTreeIndexDictionary",
+	"type" : "normal" }

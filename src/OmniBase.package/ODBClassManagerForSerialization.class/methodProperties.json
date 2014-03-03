@@ -1,0 +1,9 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"classDescriptionAt:" : "david@inspiron 2/9/2005 9:00",
+		"initializeForSerialization" : "david@inspiron 2/9/2005 9:25",
+		"loadFromStream:" : "david@inspiron 2/9/2005 9:23",
+		"register:" : "david@inspiron 2/9/2005 9:04",
+		"saveOnStream:" : "david@inspiron 2/9/2005 9:20" } }

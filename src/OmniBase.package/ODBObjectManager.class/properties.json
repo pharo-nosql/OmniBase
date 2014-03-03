@@ -1,0 +1,17 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"containers",
+		"environment",
+		"idTable",
+		"infoFile" ],
+	"name" : "ODBObjectManager",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

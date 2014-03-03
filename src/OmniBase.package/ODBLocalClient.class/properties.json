@@ -1,0 +1,15 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"hasGlobalLock",
+		"freeTransactionFile" ],
+	"name" : "ODBLocalClient",
+	"pools" : [
+		 ],
+	"super" : "ODBClient",
+	"type" : "normal" }

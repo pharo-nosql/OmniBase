@@ -1,0 +1,7 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"addLock:" : "",
+		"isGlobalLocked" : "",
+		"removeLock:" : "" } }

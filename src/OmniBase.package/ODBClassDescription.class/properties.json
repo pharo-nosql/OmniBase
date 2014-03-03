@@ -1,0 +1,22 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"name",
+		"bytes",
+		"variable",
+		"instSize",
+		"instVarNames",
+		"instVarIndexes",
+		"class",
+		"varOrder",
+		"classID" ],
+	"name" : "ODBClassDescription",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

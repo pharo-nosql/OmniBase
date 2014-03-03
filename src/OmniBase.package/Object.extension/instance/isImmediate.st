@@ -1,0 +1,3 @@
+*omnibase
+isImmediate
+	^false

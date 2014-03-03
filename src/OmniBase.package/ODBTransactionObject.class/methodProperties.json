@@ -1,0 +1,21 @@
+{
+	"class" : {
+		"new" : "cdg 3/13/2003 18:05" },
+	"instance" : {
+		"dataBaseObject" : "cdg 3/13/2003 18:05",
+		"initialize" : "cdg 3/13/2003 18:05",
+		"isLocked" : "cdg 3/13/2003 18:05",
+		"isODBTransactionObject" : "cdg 3/13/2003 18:05",
+		"lock" : "",
+		"objectChanged" : "",
+		"objectHolder" : "cdg 3/13/2003 18:05",
+		"objectID" : "cdg 3/13/2003 18:05",
+		"objectLoaded" : "",
+		"objectStored" : "",
+		"setDataBaseObject:" : "cdg 3/13/2003 18:05",
+		"setObjectHolder:" : "cdg 3/13/2003 18:05",
+		"setObjectHolder:dataBaseObject:transaction:" : "cdg 3/13/2003 18:05",
+		"setObjectHolder:transaction:" : "cdg 3/13/2003 18:05",
+		"transaction" : "cdg 3/13/2003 18:05",
+		"unlock" : "",
+		"value" : "cdg 3/13/2003 18:05" } }

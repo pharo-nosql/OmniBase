@@ -1,0 +1,16 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"objectID",
+		"transaction",
+		"proxyObject" ],
+	"name" : "ODBDemandLoader",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

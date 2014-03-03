@@ -1,0 +1,4 @@
+*omnibase
+odbDeserialize: deserializer
+
+	^nil

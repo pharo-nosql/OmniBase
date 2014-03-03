@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBLockNotification",
+	"pools" : [
+		 ],
+	"super" : "Notification",
+	"type" : "normal" }

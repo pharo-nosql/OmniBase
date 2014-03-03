@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"transactions" ],
+	"name" : "ODBClientFile",
+	"pools" : [
+		 ],
+	"super" : "ODBFile",
+	"type" : "normal" }

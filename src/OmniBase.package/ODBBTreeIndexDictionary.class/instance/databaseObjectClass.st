@@ -1,0 +1,3 @@
+private
+databaseObjectClass
+	^ODBDBBTreeIndexDictionary

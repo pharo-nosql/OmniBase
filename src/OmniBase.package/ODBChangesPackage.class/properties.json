@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"changes" ],
+	"name" : "ODBChangesPackage",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

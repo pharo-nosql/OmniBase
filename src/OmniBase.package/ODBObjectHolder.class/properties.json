@@ -1,0 +1,16 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"container",
+		"objectID",
+		"oldVersion" ],
+	"name" : "ODBObjectHolder",
+	"pools" : [
+		 ],
+	"super" : "ODBExternalBuffer",
+	"type" : "normal" }

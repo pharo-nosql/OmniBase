@@ -1,0 +1,20 @@
+{
+	"class" : {
+		"new" : "cdg 3/13/2003 18:05" },
+	"instance" : {
+		"addClassDescription:withId:" : "",
+		"addClassInfo:" : "cdg 3/13/2003 18:05",
+		"addToDict:" : "",
+		"classDescriptionAt:" : "",
+		"close" : "cdg 3/13/2003 18:05",
+		"createOn:" : "",
+		"find:" : "",
+		"idFileName" : "",
+		"infoFileName" : "",
+		"initialize" : "",
+		"lastClassId" : "",
+		"loadInfoChainFrom:" : "cdg 3/13/2003 18:05",
+		"openOn:" : "sebastiansastre 12/30/2013 20:42",
+		"register:" : "",
+		"registerNewClass:" : "",
+		"registerNewClassVersion:from:" : "" } }

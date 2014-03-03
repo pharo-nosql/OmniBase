@@ -1,0 +1,15 @@
+{
+	"class" : {
+		"addClassIDsTo:" : "cdg 3/13/2003 18:05",
+		"hasBytes" : "",
+		"hasExternalFiles" : "",
+		"initialize" : "dg 12/20/2003 09:24",
+		"persistentClassAt:" : "cdg 3/13/2003 18:05" },
+	"instance" : {
+		"close" : "cdg 3/13/2003 18:05",
+		"garbageCollectOn:" : "",
+		"makeTransactionObject:" : "",
+		"objectHolder" : "cdg 3/13/2003 18:05",
+		"openOn:" : "cdg 3/13/2003 18:05",
+		"referencesDo:" : "cdg 3/13/2003 18:05",
+		"remove" : "cdg 3/13/2003 18:05" } }

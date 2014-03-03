@@ -1,0 +1,18 @@
+{
+	"class" : {
+		"createOn:" : "cdg 3/13/2003 18:05",
+		"new" : "cdg 3/13/2003 18:05",
+		"new:" : "cdg 3/13/2003 18:05" },
+	"instance" : {
+		"bytesAtOffset:count:" : "cdg 3/13/2003 18:05",
+		"bytesAtOffset:put:" : "cdg 3/13/2003 18:05",
+		"contents" : "cdg 3/13/2003 18:05",
+		"contents:" : "cdg 3/13/2003 18:05",
+		"loadFromStream:" : "cdg 3/13/2003 18:05",
+		"loadFromStream:at:" : "",
+		"storeOnStream:" : "cdg 3/13/2003 18:05",
+		"storeOnStream:at:" : "",
+		"uLongAtOffset:" : "cdg 3/13/2003 18:05",
+		"uLongAtOffset:put:" : "cdg 3/13/2003 18:05",
+		"uShortAtOffset:" : "cdg 3/13/2003 18:05",
+		"uShortAtOffset:put:" : "cdg 3/13/2003 18:05" } }

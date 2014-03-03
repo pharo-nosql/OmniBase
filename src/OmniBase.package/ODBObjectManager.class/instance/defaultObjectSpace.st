@@ -1,0 +1,3 @@
+public
+defaultObjectSpace
+	^infoFile defaultObjectSpace

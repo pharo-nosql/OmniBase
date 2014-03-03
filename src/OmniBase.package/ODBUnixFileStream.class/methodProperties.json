@@ -1,0 +1,13 @@
+{
+	"class" : {
+		"createFileStreamForPath:createMode:" : "jf 2/23/2004 20:07",
+		"createOn:createMode:accessMode:shareMode:cacheMode:" : "jf 2/23/2004 20:11",
+		"ensureAccessMode:forFileStream:" : "jf 2/23/2004 20:05",
+		"releaseAllLocksFor:fileHandle:" : "jf 2/26/2004 20:25",
+		"setShareMode:forFileStream:" : "jf 2/23/2004 20:16",
+		"shareModeFlagLocation" : "jf 2/23/2004 21:01",
+		"streamCreationSelectorForMode:" : "jf 2/23/2004 20:07" },
+	"instance" : {
+		"lockAt:length:" : "jf 2/23/2004 19:09",
+		"size" : "avi 5/17/2005 15:46",
+		"unlockAt:length:" : "jf 2/23/2004 19:08" } }

@@ -1,0 +1,21 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"committingTransaction",
+		"dbConnection",
+		"mutex",
+		"oldHolders",
+		"serializingTransactionsMutex",
+		"serializingTransactionsSemaphore",
+		"transactionReferences",
+		"versionControl" ],
+	"name" : "ODBTransactionManager",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

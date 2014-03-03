@@ -1,0 +1,12 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"asBtreeKeyOfSize:" : "cdg 3/14/2003 21:16",
+		"odbAsInteger" : "david@inspiron 1/9/2004 13:47",
+		"odbIsLessOrEqualTo:" : "cdg 3/13/2003 18:18",
+		"odbIsLessThan:" : "cdg 3/13/2003 18:18",
+		"odbLongAt:" : "cdg 3/13/2003 18:18",
+		"odbLongAt:put:" : "cdg 3/13/2003 18:18",
+		"odbShortAt:" : "cdg 3/13/2003 18:18",
+		"odbShortAt:put:" : "cdg 3/13/2003 18:18" } }

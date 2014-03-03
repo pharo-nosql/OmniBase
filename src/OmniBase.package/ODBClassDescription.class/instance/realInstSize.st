@@ -1,0 +1,4 @@
+public
+realInstSize
+
+	^class instSize

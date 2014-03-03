@@ -1,0 +1,15 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"newVersion",
+		"oldVersion" ],
+	"name" : "ODBNewObjectVersion",
+	"pools" : [
+		 ],
+	"super" : "ODBChange",
+	"type" : "normal" }

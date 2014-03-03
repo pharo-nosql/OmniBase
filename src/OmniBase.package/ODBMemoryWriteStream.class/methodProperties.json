@@ -1,0 +1,15 @@
+{
+	"class" : {
+		"new" : "cdg 3/13/2003 18:06" },
+	"instance" : {
+		"asByteArray" : "",
+		"asStringObject" : "",
+		"initialize" : "cdg 3/13/2003 18:06",
+		"makeSpace" : "cdg 3/13/2003 18:06",
+		"moveToNext" : "",
+		"position" : "",
+		"position:" : "",
+		"putByte:" : "",
+		"putBytesFrom:len:" : "",
+		"size" : "",
+		"writeOn:" : "" } }

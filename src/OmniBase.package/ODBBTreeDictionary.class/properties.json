@@ -1,0 +1,16 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"locks",
+		"initialSize",
+		"deltaSize" ],
+	"name" : "ODBBTreeDictionary",
+	"pools" : [
+		 ],
+	"super" : "ODBBTreeIndexDictionary",
+	"type" : "normal" }

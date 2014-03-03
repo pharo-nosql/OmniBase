@@ -1,0 +1,18 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"classes",
+		"idTable",
+		"infoFile",
+		"mutex",
+		"names" ],
+	"name" : "ODBClassManager",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

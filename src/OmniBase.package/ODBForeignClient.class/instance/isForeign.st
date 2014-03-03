@@ -1,0 +1,4 @@
+public/accessing
+isForeign
+
+    ^true

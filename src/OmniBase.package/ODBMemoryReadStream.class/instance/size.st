@@ -1,0 +1,4 @@
+public
+size
+
+    ^current size

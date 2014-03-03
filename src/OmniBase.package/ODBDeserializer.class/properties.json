@@ -1,0 +1,22 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		"classArray" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"classArray",
+		"classes",
+		"classesCounter",
+		"classManager",
+		"counter",
+		"objects",
+		"stream",
+		"referenceManager",
+		"transaction" ],
+	"name" : "ODBDeserializer",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

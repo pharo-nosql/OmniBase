@@ -1,0 +1,23 @@
+{
+	"class" : {
+		"newPersistent" : "cdg 3/13/2003 17:26" },
+	"instance" : {
+		"asBtreeKeyOfSize:" : "cdg 3/13/2003 17:26",
+		"commit:" : "ac 1/23/2004 18:18",
+		"isIdenticalTo:" : "",
+		"isImmediate" : "cdg 3/13/2003 21:40",
+		"isODBReference" : "cdg 3/13/2003 17:26",
+		"isODBTransactionObject" : "cdg 3/13/2003 17:26",
+		"markDirty" : "",
+		"odbAboutToCommitIn:" : "david@inspiron 11/29/2003 18:52",
+		"odbBasicSerialize:" : "cdg 3/13/2003 21:26",
+		"odbDeserialize:" : "cdg 3/13/2003 17:26",
+		"odbDeserialized:" : "cdg 3/13/2003 17:26",
+		"odbLoadedIn:" : "cdg 3/13/2003 17:26",
+		"odbMadePersistentIn:" : "cdg 3/13/2003 17:26",
+		"odbObject" : "cdg 3/13/2003 17:26",
+		"odbObjectID" : "cdg 3/13/2003 17:26",
+		"odbResolve" : "dg 5/7/2003 23:06",
+		"odbSerialize:" : "",
+		"odbToDo" : "cdg 3/13/2003 17:26",
+		"signalError:" : "cdg 3/13/2003 19:25" } }

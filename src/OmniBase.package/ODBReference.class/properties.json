@@ -1,0 +1,15 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"transactionObject",
+		"demandLoader" ],
+	"name" : "ODBReference",
+	"pools" : [
+		 ],
+	"super" : "ProtoObject",
+	"type" : "normal" }

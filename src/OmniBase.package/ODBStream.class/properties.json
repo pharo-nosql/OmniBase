@@ -1,0 +1,15 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		"locks",
+		"lockingMutex" ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"position" ],
+	"name" : "ODBStream",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

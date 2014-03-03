@@ -1,0 +1,16 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"objectID",
+		"transactionObject",
+		"transaction" ],
+	"name" : "ODBChange",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

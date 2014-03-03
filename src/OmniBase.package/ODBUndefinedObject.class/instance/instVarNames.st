@@ -1,0 +1,3 @@
+public
+instVarNames
+	^classInfo instVarNames

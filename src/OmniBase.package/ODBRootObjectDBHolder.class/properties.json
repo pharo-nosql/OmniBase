@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBRootObjectDBHolder",
+	"pools" : [
+		 ],
+	"super" : "ODBDatabaseObject",
+	"type" : "normal" }

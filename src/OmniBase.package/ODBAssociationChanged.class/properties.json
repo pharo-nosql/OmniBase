@@ -1,0 +1,16 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"key",
+		"oldValue",
+		"newValue" ],
+	"name" : "ODBAssociationChanged",
+	"pools" : [
+		 ],
+	"super" : "ODBChange",
+	"type" : "normal" }

@@ -1,0 +1,4 @@
+*omnibaseExtensions
+first
+
+	^ self getFirst

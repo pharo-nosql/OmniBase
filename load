@@ -1,0 +1,12 @@
+#!/bin/bash
+# gets a fresh Pharo 2.0 image and loads PharoToDolphin
+
+echo "Downloading Pharo 2.0 and a VM ..."
+rm pharo
+rm pharo-ui
+rm -rf pharo-vm
+wget -O- get.pharo.org/30+vm | bash
+
+./pharo-ui Pharo.image OmniBaseLoader.st
+
+echo "Ready!"

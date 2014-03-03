@@ -1,0 +1,23 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"atEnd" : "cdg 3/13/2003 18:05",
+		"flush" : "cdg 3/13/2003 18:05",
+		"getBoolean" : "cdg 3/13/2003 18:05",
+		"getBytesFor:" : "cdg 3/13/2003 18:05",
+		"getChar" : "cdg 3/13/2003 18:05",
+		"getInteger" : "",
+		"getLong" : "cdg 3/13/2003 18:05",
+		"getPositiveInteger" : "",
+		"getString" : "cdg 3/13/2003 18:05",
+		"getWord" : "cdg 3/13/2003 18:05",
+		"putBoolean:" : "cdg 3/13/2003 18:05",
+		"putBytesFrom:" : "cdg 3/13/2003 18:05",
+		"putChar:" : "cdg 3/13/2003 18:05",
+		"putInteger:" : "",
+		"putLong:" : "cdg 3/13/2003 18:05",
+		"putPositiveInteger:" : "",
+		"putString:" : "cdg 3/13/2003 18:05",
+		"putWord:" : "cdg 3/13/2003 18:05",
+		"setToEnd" : "cdg 3/13/2003 18:05" } }

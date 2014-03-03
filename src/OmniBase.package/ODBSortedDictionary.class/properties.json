@@ -1,0 +1,17 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"keys",
+		"values",
+		"elementCount",
+		"currentIndex" ],
+	"name" : "ODBSortedDictionary",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

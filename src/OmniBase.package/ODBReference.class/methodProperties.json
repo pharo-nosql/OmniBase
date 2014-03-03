@@ -1,0 +1,24 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"==" : "cdg 3/13/2003 17:26",
+		"doesNotUnderstand:" : "cdg 3/13/2003 17:26",
+		"isIdenticalTo:" : "",
+		"isImmediate" : "",
+		"isMorph" : "ac 1/7/2004 18:10",
+		"isNil" : "cdg 3/13/2003 17:26",
+		"isODBReference" : "",
+		"makePersistent" : "david@inspiron 8/23/2004 23:10",
+		"markDirty" : "david@inspiron 8/23/2004 23:09",
+		"notNil" : "cdg 3/13/2003 17:26",
+		"odbGetOID" : "david@inspiron 8/20/2004 16:43",
+		"odbGetTransaction" : "david@inspiron 8/20/2004 16:43",
+		"odbNotLoaded" : "",
+		"odbObjectID" : "",
+		"odbResolve" : "dg 5/7/2003 23:06",
+		"odbSerialize:" : "cdg 3/13/2003 17:26",
+		"odbSetLoader:" : "cdg 3/13/2003 17:26",
+		"odbSetTransactionObject:" : "",
+		"odbTransaction" : "",
+		"odbTransactionObject" : "" } }

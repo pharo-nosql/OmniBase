@@ -1,0 +1,16 @@
+{
+	"class" : {
+		"new" : "cdg 3/13/2003 18:05" },
+	"instance" : {
+		"add:" : "",
+		"changes" : "",
+		"collectChangeClassIDsFrom:to:" : "cdg 3/13/2003 18:05",
+		"commit" : "",
+		"committed" : "cdg 3/13/2003 18:05",
+		"fixTemps" : "dg 12/20/2003 09:38",
+		"initialize" : "",
+		"loadFromStream:" : "",
+		"rollback" : "",
+		"storeOnStream:" : "",
+		"transaction:" : "",
+		"value:value:" : "" } }

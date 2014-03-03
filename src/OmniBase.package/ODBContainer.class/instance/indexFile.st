@@ -1,0 +1,4 @@
+private-accessing
+indexFile
+
+    ^indexFile

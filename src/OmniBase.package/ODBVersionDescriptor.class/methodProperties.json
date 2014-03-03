@@ -1,0 +1,14 @@
+{
+	"class" : {
+		 },
+	"instance" : {
+		"=" : "",
+		"committingTransactions" : "cdg 3/13/2003 18:05",
+		"copy" : "cdg 3/13/2003 18:05",
+		"fromVersionTable:" : "",
+		"topVersionNumber" : "cdg 3/13/2003 18:05",
+		"topVersionNumber:readVersionNumber:committingTransactions:" : "cdg 3/13/2003 18:05",
+		"versionAtStartOK:" : "",
+		"versionNumber" : "cdg 3/13/2003 18:05",
+		"versionNumber:" : "",
+		"versionOK:" : "" } }

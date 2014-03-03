@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"dictionaries" ],
+	"name" : "ODBObjectIDDictionary",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

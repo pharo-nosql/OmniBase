@@ -1,0 +1,4 @@
+public/accessing
+object
+
+    ^object

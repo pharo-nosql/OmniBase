@@ -1,0 +1,17 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"transaction",
+		"lockIndex",
+		"objectID",
+		"lockID" ],
+	"name" : "ODBLock",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

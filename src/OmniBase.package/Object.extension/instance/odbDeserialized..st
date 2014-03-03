@@ -1,0 +1,4 @@
+*omnibase
+odbDeserialized: deserializer
+
+	^self

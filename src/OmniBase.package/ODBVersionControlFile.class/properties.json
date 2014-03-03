@@ -1,0 +1,15 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"lastReadTime",
+		"versionDescriptor" ],
+	"name" : "ODBVersionControlFile",
+	"pools" : [
+		 ],
+	"super" : "ODBFile",
+	"type" : "normal" }

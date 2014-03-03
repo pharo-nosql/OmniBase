@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBFloatAs100Integer",
+	"pools" : [
+		 ],
+	"super" : "ODBDeserializers",
+	"type" : "normal" }

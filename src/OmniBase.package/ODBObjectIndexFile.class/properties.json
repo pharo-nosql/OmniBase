@@ -1,0 +1,20 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"valueLength",
+		"pageSize",
+		"start",
+		"gcPosition",
+		"gcBuffer",
+		"gcCount",
+		"var1" ],
+	"name" : "ODBObjectIndexFile",
+	"pools" : [
+		 ],
+	"super" : "ODBFile",
+	"type" : "normal" }

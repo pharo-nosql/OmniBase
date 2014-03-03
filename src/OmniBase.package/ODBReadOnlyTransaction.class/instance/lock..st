@@ -1,0 +1,4 @@
+public
+lock: anObject
+
+	^true
