@@ -7,7 +7,7 @@ OmniBase is a Smalltalk efficient object repository.
 
 Based on BTrees and filesystem, it has full ACID features.
 
-While this software is old and doesn't have elegant code, it works with an impressive performance.
+While this software is old and doesn't have elegant code, it works really well for many scenarios and has an impressive performance.
 
 
 ---
