@@ -1,9 +1,9 @@
 {
 	"class" : {
-		"changeClassID" : "cdg 3/13/2003 18:05" },
+		"changeClassID" : "SebastianSastre 3/4/2014 13:39:47" },
 	"instance" : {
-		"commit" : "cdg 3/13/2003 18:06",
-		"deltaSize:" : "cdg 3/13/2003 18:06",
-		"loadFromStream:" : "cdg 3/13/2003 18:06",
-		"rollback" : "cdg 3/13/2003 18:06",
-		"storeOnStream:" : "cdg 3/13/2003 18:06" } }
+		"commit" : "SebastianSastre 3/4/2014 13:39:47",
+		"deltaSize:" : "SebastianSastre 3/4/2014 13:39:47",
+		"loadFromStream:" : "SebastianSastre 3/4/2014 13:39:47",
+		"rollback" : "SebastianSastre 3/4/2014 13:39:47",
+		"storeOnStream:" : "SebastianSastre 3/4/2014 13:39:47" } }

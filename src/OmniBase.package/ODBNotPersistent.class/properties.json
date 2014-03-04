@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBNotPersistent",
+	"pools" : [
+		 ],
+	"super" : "ODBError",
+	"type" : "normal" }

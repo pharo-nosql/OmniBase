@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBMessageSentToAnExpiredObject",
+	"pools" : [
+		 ],
+	"super" : "ODBError",
+	"type" : "normal" }

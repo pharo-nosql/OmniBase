@@ -1,16 +1,16 @@
 {
 	"class" : {
-		"createOn:" : "cdg 3/13/2003 18:06",
-		"readFrom:" : "cdg 3/13/2003 18:06" },
+		"createOn:" : "SebastianSastre 3/4/2014 13:39:47",
+		"readFrom:" : "SebastianSastre 3/4/2014 13:39:47" },
 	"instance" : {
-		"createOn:" : "cdg 3/13/2003 18:06",
-		"getByte" : "cdg 3/13/2003 18:06",
-		"getBytesFor:len:" : "cdg 3/13/2003 18:06",
-		"getChar" : "cdg 3/13/2003 18:06",
-		"getLong" : "dg 4/30/2005 16:02",
-		"getPositiveInteger" : "dg 4/30/2005 16:03",
-		"getWord" : "dg 4/30/2005 16:02",
-		"position" : "cdg 3/13/2003 18:06",
-		"position:" : "cdg 3/13/2003 18:06",
-		"readFrom:" : "cdg 3/13/2003 18:06",
-		"size" : "cdg 3/13/2003 18:06" } }
+		"createOn:" : "SebastianSastre 3/4/2014 13:39:47",
+		"getByte" : "SebastianSastre 3/4/2014 13:39:47",
+		"getBytesFor:len:" : "SebastianSastre 3/4/2014 13:39:47",
+		"getChar" : "SebastianSastre 3/4/2014 13:39:47",
+		"getLong" : "SebastianSastre 3/4/2014 13:39:47",
+		"getPositiveInteger" : "SebastianSastre 3/4/2014 13:39:47",
+		"getWord" : "SebastianSastre 3/4/2014 13:39:47",
+		"position" : "SebastianSastre 3/4/2014 13:39:47",
+		"position:" : "SebastianSastre 3/4/2014 13:39:47",
+		"readFrom:" : "SebastianSastre 3/4/2014 13:39:47",
+		"size" : "SebastianSastre 3/4/2014 13:39:47" } }

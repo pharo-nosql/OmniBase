@@ -1,18 +1,18 @@
 {
 	"class" : {
-		"classDescriptionFor:" : "cdg 3/13/2003 18:05",
-		"classDescriptionFrom:" : "",
-		"new" : "cdg 3/13/2003 18:05",
-		"serialize:on:" : "david@inspiron 2/10/2005 15:26",
-		"serializeToBytes:" : "david@inspiron 2/10/2005 15:25" },
+		"classDescriptionFor:" : "SebastianSastre 3/4/2014 13:39:47",
+		"classDescriptionFrom:" : "SebastianSastre 3/4/2014 13:39:47",
+		"new" : "SebastianSastre 3/4/2014 13:39:47",
+		"serialize:on:" : "SebastianSastre 3/4/2014 13:39:47",
+		"serializeToBytes:" : "SebastianSastre 3/4/2014 13:39:47" },
 	"instance" : {
-		"addExternalReference:objectId:" : "david@inspiron 2/11/2005 13:35",
-		"cantSave:" : "",
-		"initialize" : "cdg 3/13/2003 18:05",
-		"register:" : "",
-		"registerClass:" : "",
-		"saveExternalReference:" : "",
-		"saveInternalReference:" : "cdg 3/13/2003 18:05",
-		"serialize:onStream:referenceManager:classManager:" : "cdg 3/13/2003 18:05",
-		"serializeToBytes:" : "david@inspiron 2/11/2005 13:51",
-		"stream" : "cdg 3/13/2003 18:05" } }
+		"addExternalReference:objectId:" : "SebastianSastre 3/4/2014 13:39:47",
+		"cantSave:" : "SebastianSastre 3/4/2014 13:39:47",
+		"initialize" : "SebastianSastre 3/4/2014 13:39:47",
+		"register:" : "SebastianSastre 3/4/2014 13:39:47",
+		"registerClass:" : "SebastianSastre 3/4/2014 13:39:47",
+		"saveExternalReference:" : "SebastianSastre 3/4/2014 13:39:47",
+		"saveInternalReference:" : "SebastianSastre 3/4/2014 13:39:47",
+		"serialize:onStream:referenceManager:classManager:" : "SebastianSastre 3/4/2014 13:39:47",
+		"serializeToBytes:" : "SebastianSastre 3/4/2014 13:39:47",
+		"stream" : "SebastianSastre 3/4/2014 13:39:47" } }

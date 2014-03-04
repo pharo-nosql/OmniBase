@@ -1,14 +1,14 @@
 {
 	"class" : {
-		"new" : "cdg 3/13/2003 18:05" },
+		"new" : "SebastianSastre 3/4/2014 13:39:47" },
 	"instance" : {
-		"clientID" : "cdg 3/13/2003 18:05",
-		"description" : "cdg 3/13/2003 18:05",
-		"initialize" : "",
-		"isForeign" : "cdg 3/13/2003 18:05",
-		"isTerminated" : "cdg 3/13/2003 18:05",
-		"remove" : "cdg 3/13/2003 18:05",
-		"transactionAdd:" : "cdg 3/13/2003 18:05",
-		"transactionRemove:" : "cdg 3/13/2003 18:05",
-		"transactions" : "cdg 3/13/2003 18:05",
-		"trnFileName:" : "" } }
+		"clientID" : "SebastianSastre 3/4/2014 13:39:47",
+		"description" : "SebastianSastre 3/4/2014 13:39:47",
+		"initialize" : "SebastianSastre 3/4/2014 13:39:47",
+		"isForeign" : "SebastianSastre 3/4/2014 13:39:47",
+		"isTerminated" : "SebastianSastre 3/4/2014 13:39:47",
+		"remove" : "SebastianSastre 3/4/2014 13:39:47",
+		"transactionAdd:" : "SebastianSastre 3/4/2014 13:39:47",
+		"transactionRemove:" : "SebastianSastre 3/4/2014 13:39:47",
+		"transactions" : "SebastianSastre 3/4/2014 13:39:47",
+		"trnFileName:" : "SebastianSastre 3/4/2014 13:39:47" } }

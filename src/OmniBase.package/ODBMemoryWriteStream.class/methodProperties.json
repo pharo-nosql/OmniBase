@@ -1,15 +1,15 @@
 {
 	"class" : {
-		"new" : "cdg 3/13/2003 18:06" },
+		"new" : "SebastianSastre 3/4/2014 13:39:47" },
 	"instance" : {
-		"asByteArray" : "",
-		"asStringObject" : "",
-		"initialize" : "cdg 3/13/2003 18:06",
-		"makeSpace" : "cdg 3/13/2003 18:06",
-		"moveToNext" : "",
-		"position" : "",
-		"position:" : "",
-		"putByte:" : "",
-		"putBytesFrom:len:" : "",
-		"size" : "",
-		"writeOn:" : "" } }
+		"asByteArray" : "SebastianSastre 3/4/2014 13:39:47",
+		"asStringObject" : "SebastianSastre 3/4/2014 13:39:47",
+		"initialize" : "SebastianSastre 3/4/2014 13:39:47",
+		"makeSpace" : "SebastianSastre 3/4/2014 13:39:47",
+		"moveToNext" : "SebastianSastre 3/4/2014 13:39:47",
+		"position" : "SebastianSastre 3/4/2014 13:39:47",
+		"position:" : "SebastianSastre 3/4/2014 13:39:47",
+		"putByte:" : "SebastianSastre 3/4/2014 13:39:47",
+		"putBytesFrom:len:" : "SebastianSastre 3/4/2014 13:39:47",
+		"size" : "SebastianSastre 3/4/2014 13:39:47",
+		"writeOn:" : "SebastianSastre 3/4/2014 13:39:47" } }

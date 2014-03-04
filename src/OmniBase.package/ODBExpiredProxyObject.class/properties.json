@@ -1,0 +1,14 @@
+{
+	"category" : "OmniBase",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"oid" ],
+	"name" : "ODBExpiredProxyObject",
+	"pools" : [
+		 ],
+	"super" : "ProtoObject",
+	"type" : "normal" }

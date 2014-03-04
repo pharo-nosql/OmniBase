@@ -2,13 +2,13 @@
 	"class" : {
 		 },
 	"instance" : {
-		"=" : "",
-		"committingTransactions" : "cdg 3/13/2003 18:05",
-		"copy" : "cdg 3/13/2003 18:05",
-		"fromVersionTable:" : "",
-		"topVersionNumber" : "cdg 3/13/2003 18:05",
-		"topVersionNumber:readVersionNumber:committingTransactions:" : "cdg 3/13/2003 18:05",
-		"versionAtStartOK:" : "",
-		"versionNumber" : "cdg 3/13/2003 18:05",
-		"versionNumber:" : "",
-		"versionOK:" : "" } }
+		"=" : "SebastianSastre 3/4/2014 13:39:47",
+		"committingTransactions" : "SebastianSastre 3/4/2014 13:39:47",
+		"copy" : "SebastianSastre 3/4/2014 13:39:47",
+		"fromVersionTable:" : "SebastianSastre 3/4/2014 13:39:47",
+		"topVersionNumber" : "SebastianSastre 3/4/2014 13:39:47",
+		"topVersionNumber:readVersionNumber:committingTransactions:" : "SebastianSastre 3/4/2014 13:39:47",
+		"versionAtStartOK:" : "SebastianSastre 3/4/2014 13:39:47",
+		"versionNumber" : "SebastianSastre 3/4/2014 13:39:47",
+		"versionNumber:" : "SebastianSastre 3/4/2014 13:39:47",
+		"versionOK:" : "SebastianSastre 3/4/2014 13:39:47" } }

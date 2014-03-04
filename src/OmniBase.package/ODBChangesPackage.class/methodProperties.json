@@ -1,16 +1,16 @@
 {
 	"class" : {
-		"new" : "cdg 3/13/2003 18:05" },
+		"new" : "SebastianSastre 3/4/2014 13:39:47" },
 	"instance" : {
-		"add:" : "",
-		"changes" : "",
-		"collectChangeClassIDsFrom:to:" : "cdg 3/13/2003 18:05",
-		"commit" : "",
-		"committed" : "cdg 3/13/2003 18:05",
-		"fixTemps" : "dg 12/20/2003 09:38",
-		"initialize" : "",
-		"loadFromStream:" : "",
-		"rollback" : "",
-		"storeOnStream:" : "",
-		"transaction:" : "",
-		"value:value:" : "" } }
+		"add:" : "SebastianSastre 3/4/2014 13:39:47",
+		"changes" : "SebastianSastre 3/4/2014 13:39:47",
+		"collectChangeClassIDsFrom:to:" : "SebastianSastre 3/4/2014 13:39:47",
+		"commit" : "SebastianSastre 3/4/2014 13:39:47",
+		"committed" : "SebastianSastre 3/4/2014 13:39:47",
+		"fixTemps" : "SebastianSastre 3/4/2014 13:39:47",
+		"initialize" : "SebastianSastre 3/4/2014 13:39:47",
+		"loadFromStream:" : "SebastianSastre 3/4/2014 13:39:47",
+		"rollback" : "SebastianSastre 3/4/2014 13:39:47",
+		"storeOnStream:" : "SebastianSastre 3/4/2014 13:39:47",
+		"transaction:" : "SebastianSastre 3/4/2014 13:39:47",
+		"value:value:" : "SebastianSastre 3/4/2014 13:39:47" } }

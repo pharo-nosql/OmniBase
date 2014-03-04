@@ -2,14 +2,14 @@
 	"class" : {
 		 },
 	"instance" : {
-		"addReference:" : "",
-		"asBytesWith:" : "",
-		"createMax256From:" : "",
-		"createMax65536From:" : "",
-		"databaseObjectClassID" : "",
-		"loadFromStream:" : "david@inspiron 2/9/2005 10:23",
-		"loadFromStream:externalReferencesLoaderBlock:" : "david@inspiron 2/11/2005 12:58",
-		"referenceAt:" : "",
-		"referencesDo:" : "cdg 3/13/2003 18:05",
-		"saveOnStream:" : "david@inspiron 2/9/2005 10:43",
-		"transaction:" : "cdg 3/13/2003 18:05" } }
+		"addReference:" : "SebastianSastre 3/4/2014 13:39:47",
+		"asBytesWith:" : "SebastianSastre 3/4/2014 13:39:47",
+		"createMax256From:" : "SebastianSastre 3/4/2014 13:39:47",
+		"createMax65536From:" : "SebastianSastre 3/4/2014 13:39:47",
+		"databaseObjectClassID" : "SebastianSastre 3/4/2014 13:39:47",
+		"loadFromStream:" : "SebastianSastre 3/4/2014 13:39:47",
+		"loadFromStream:externalReferencesLoaderBlock:" : "SebastianSastre 3/4/2014 13:39:47",
+		"referenceAt:" : "SebastianSastre 3/4/2014 13:39:47",
+		"referencesDo:" : "SebastianSastre 3/4/2014 13:39:47",
+		"saveOnStream:" : "SebastianSastre 3/4/2014 13:39:47",
+		"transaction:" : "SebastianSastre 3/4/2014 13:39:47" } }

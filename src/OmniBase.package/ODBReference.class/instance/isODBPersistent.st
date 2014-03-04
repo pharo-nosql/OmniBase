@@ -1,0 +1,4 @@
+public
+isODBPersistent
+
+	^ true

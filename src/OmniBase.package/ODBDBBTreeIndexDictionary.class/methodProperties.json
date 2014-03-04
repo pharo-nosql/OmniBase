@@ -1,18 +1,18 @@
 {
 	"class" : {
-		"classID" : "cdg 3/13/2003 18:05",
-		"hasExternalFiles" : "" },
+		"classID" : "SebastianSastre 3/4/2014 13:39:47",
+		"hasExternalFiles" : "SebastianSastre 3/4/2014 13:39:47" },
 	"instance" : {
-		"associationsDo:" : "",
-		"at:ifAbsent:" : "",
-		"at:put:" : "",
-		"close" : "",
-		"createBackupCopyIn:versionDescriptor:oldHolders:versionNumber:" : "",
-		"createOn:keySize:" : "",
-		"garbageCollectOn:" : "",
-		"iterator" : "cdg 3/13/2003 18:06",
-		"makeTransactionObject:" : "",
-		"openOn:" : "",
-		"remove" : "",
-		"reorganizeBTree" : "",
-		"valuesDo:" : "" } }
+		"associationsDo:" : "SebastianSastre 3/4/2014 13:39:47",
+		"at:ifAbsent:" : "SebastianSastre 3/4/2014 13:39:47",
+		"at:put:" : "SebastianSastre 3/4/2014 13:39:47",
+		"close" : "SebastianSastre 3/4/2014 13:39:47",
+		"createBackupCopyIn:versionDescriptor:oldHolders:versionNumber:" : "SebastianSastre 3/4/2014 13:39:47",
+		"createOn:keySize:" : "SebastianSastre 3/4/2014 13:39:47",
+		"garbageCollectOn:" : "SebastianSastre 3/4/2014 13:39:47",
+		"iterator" : "SebastianSastre 3/4/2014 13:39:47",
+		"makeTransactionObject:" : "SebastianSastre 3/4/2014 13:39:47",
+		"openOn:" : "SebastianSastre 3/4/2014 13:39:47",
+		"remove" : "SebastianSastre 3/4/2014 13:39:47",
+		"reorganizeBTree" : "SebastianSastre 3/4/2014 13:39:47",
+		"valuesDo:" : "SebastianSastre 3/4/2014 13:39:47" } }

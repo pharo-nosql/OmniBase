@@ -2,14 +2,14 @@
 	"class" : {
 		 },
 	"instance" : {
-		"add:" : "",
-		"cacheSize" : "cdg 3/13/2003 18:06",
-		"doubleCacheSize" : "cdg 3/13/2003 18:06",
-		"initialize" : "cdg 3/13/2003 18:06",
-		"isEmpty" : "cdg 3/13/2003 18:06",
-		"loadPage" : "",
-		"makeSpace" : "",
-		"removeLast" : "",
-		"removeLastCache1" : "cdg 3/13/2003 18:06",
-		"removeLastCache2" : "cdg 3/13/2003 18:06",
-		"storePage" : "" } }
+		"add:" : "SebastianSastre 3/4/2014 13:39:47",
+		"cacheSize" : "SebastianSastre 3/4/2014 13:39:47",
+		"doubleCacheSize" : "SebastianSastre 3/4/2014 13:39:47",
+		"initialize" : "SebastianSastre 3/4/2014 13:39:47",
+		"isEmpty" : "SebastianSastre 3/4/2014 13:39:47",
+		"loadPage" : "SebastianSastre 3/4/2014 13:39:47",
+		"makeSpace" : "SebastianSastre 3/4/2014 13:39:47",
+		"removeLast" : "SebastianSastre 3/4/2014 13:39:47",
+		"removeLastCache1" : "SebastianSastre 3/4/2014 13:39:47",
+		"removeLastCache2" : "SebastianSastre 3/4/2014 13:39:47",
+		"storePage" : "SebastianSastre 3/4/2014 13:39:47" } }

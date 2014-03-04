@@ -1,0 +1,20 @@
+{
+	"class" : {
+		"on:" : "SebastianSastre 3/4/2014 13:39:47" },
+	"instance" : {
+		"==" : "SebastianSastre 3/4/2014 13:39:47",
+		"becomeForward:" : "SebastianSastre 3/4/2014 13:39:47",
+		"defaultLabelForInspector" : "SebastianSastre 3/4/2014 13:39:47",
+		"doesNotUnderstand:" : "SebastianSastre 3/4/2014 13:39:47",
+		"halt" : "SebastianSastre 3/4/2014 13:39:47",
+		"inspect" : "SebastianSastre 3/4/2014 13:39:47",
+		"inspectorClass" : "SebastianSastre 3/4/2014 13:39:47",
+		"isIdenticalTo:" : "SebastianSastre 3/4/2014 13:39:47",
+		"isImmediate" : "SebastianSastre 3/4/2014 13:39:47",
+		"isODBExpired" : "SebastianSastre 3/4/2014 13:39:47",
+		"isODBPersistent" : "SebastianSastre 3/4/2014 13:39:47",
+		"odbBasicSerialize:" : "SebastianSastre 3/4/2014 13:39:47",
+		"odbSerialize:" : "SebastianSastre 3/4/2014 13:39:47",
+		"oid:" : "SebastianSastre 3/4/2014 13:39:47",
+		"printOn:" : "SebastianSastre 3/4/2014 13:39:47",
+		"value" : "SebastianSastre 3/4/2014 13:39:47" } }

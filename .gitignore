@@ -1,3 +1,5 @@
+*-readonly
+
 pharo-vm/
 pharo
 pharo-ui
