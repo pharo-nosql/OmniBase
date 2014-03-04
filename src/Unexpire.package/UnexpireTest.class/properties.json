@@ -1,0 +1,14 @@
+{
+	"category" : "Unexpire-Test",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"odb" ],
+	"name" : "UnexpireTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

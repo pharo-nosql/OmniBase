@@ -1,0 +1,14 @@
+{
+	"category" : "Unexpire",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"oid" ],
+	"name" : "ODBExpiredProxyObject",
+	"pools" : [
+		 ],
+	"super" : "ProtoObject",
+	"type" : "normal" }
