@@ -1,4 +1,0 @@
-*omnibaseExtensions
-isODBPersistent
-
-	^ true

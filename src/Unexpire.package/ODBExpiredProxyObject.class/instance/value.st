@@ -1,4 +1,0 @@
-public
-value 
-
-	^ self

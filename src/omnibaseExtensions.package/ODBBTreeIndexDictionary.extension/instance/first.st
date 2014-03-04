@@ -1,4 +1,0 @@
-*omnibaseExtensions
-first
-
-	^ self getFirst

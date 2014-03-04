@@ -1,3 +1,0 @@
-*omnibasePatch
-localDefaultObjectSpace
-	^self convertToLocalObjectSpaceNumber: objectManager defaultObjectSpace

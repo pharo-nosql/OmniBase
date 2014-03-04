@@ -1,4 +1,0 @@
-*omnibaseExtensions
-keySize 
-
-	^ keySize 

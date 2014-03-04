@@ -1,3 +1,0 @@
-*omnibasePatch
-locks
-	^ locks 

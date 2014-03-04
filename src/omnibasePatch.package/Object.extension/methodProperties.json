@@ -1,7 +1,0 @@
-{
-	"class" : {
-		"odbLoadVariables:classInfo:" : "sebastian.sastre 12/29/2010 18:00" },
-	"instance" : {
-		"makePersistent" : "sebastiansastre 12/19/2011 16:50",
-		"odbGetOID" : "sebastiansastre 9/30/2011 17:19",
-		"odbGetTransaction" : "sebastiansastre 9/30/2011 17:06" } }
