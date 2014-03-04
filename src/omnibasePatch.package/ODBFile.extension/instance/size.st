@@ -1,0 +1,4 @@
+*omnibasePatch
+size 
+
+	^ stream size

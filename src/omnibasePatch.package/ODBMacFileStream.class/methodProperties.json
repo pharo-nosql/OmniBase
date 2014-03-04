@@ -1,0 +1,13 @@
+{
+	"class" : {
+		"createFileStreamForPath:createMode:" : "sebastian.sastre 6/17/2010 16:51",
+		"createOn:createMode:accessMode:shareMode:cacheMode:" : "sebastian.sastre 9/25/2010 12:57",
+		"ensureAccessMode:forFileStream:" : "sebastian.sastre 9/25/2010 12:57",
+		"releaseAllLocksFor:fileHandle:" : "sebastian.sastre 6/17/2010 16:51",
+		"setShareMode:forFileStream:" : "sebastian.sastre 9/25/2010 12:57",
+		"shareModeFlagLocation" : "sebastian.sastre 6/17/2010 16:51",
+		"streamCreationSelectorForMode:" : "sebastian.sastre 6/17/2010 16:51" },
+	"instance" : {
+		"lockAt:length:" : "sebastian.sastre 6/17/2010 16:51",
+		"size" : "sebastian.sastre 6/17/2010 16:54",
+		"unlockAt:length:" : "sebastian.sastre 6/17/2010 16:51" } }

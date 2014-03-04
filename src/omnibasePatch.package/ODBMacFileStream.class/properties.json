@@ -1,0 +1,14 @@
+{
+	"category" : "omnibasePatch",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ODBMacFileStream",
+	"pools" : [
+		 ],
+	"super" : "ODBFileStream",
+	"type" : "normal" }
