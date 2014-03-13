@@ -1,4 +1,0 @@
-accessing
-aggregates
-
-	^ FLPersonMock findAll

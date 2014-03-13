@@ -1,15 +1,15 @@
 {
 	"class" : {
-		"new" : "SebastianSastre 3/4/2014 13:39:47" },
+		"new" : "SebastianSastre 3/4/2014 14:15:40" },
 	"instance" : {
-		"asByteArray" : "SebastianSastre 3/4/2014 13:39:47",
-		"asStringObject" : "SebastianSastre 3/4/2014 13:39:47",
-		"initialize" : "SebastianSastre 3/4/2014 13:39:47",
-		"makeSpace" : "SebastianSastre 3/4/2014 13:39:47",
-		"moveToNext" : "SebastianSastre 3/4/2014 13:39:47",
-		"position" : "SebastianSastre 3/4/2014 13:39:47",
-		"position:" : "SebastianSastre 3/4/2014 13:39:47",
-		"putByte:" : "SebastianSastre 3/4/2014 13:39:47",
-		"putBytesFrom:len:" : "SebastianSastre 3/4/2014 13:39:47",
-		"size" : "SebastianSastre 3/4/2014 13:39:47",
-		"writeOn:" : "SebastianSastre 3/4/2014 13:39:47" } }
+		"asByteArray" : "SebastianSastre 3/4/2014 14:15:40",
+		"asStringObject" : "SebastianSastre 3/4/2014 14:15:40",
+		"initialize" : "SebastianSastre 3/4/2014 14:15:40",
+		"makeSpace" : "SebastianSastre 3/4/2014 14:15:40",
+		"moveToNext" : "SebastianSastre 3/4/2014 14:15:40",
+		"position" : "SebastianSastre 3/4/2014 14:15:40",
+		"position:" : "SebastianSastre 3/4/2014 14:15:40",
+		"putByte:" : "SebastianSastre 3/4/2014 14:15:40",
+		"putBytesFrom:len:" : "SebastianSastre 3/4/2014 14:15:40",
+		"size" : "SebastianSastre 3/4/2014 14:15:40",
+		"writeOn:" : "SebastianSastre 3/4/2014 14:15:40" } }
