@@ -8,7 +8,7 @@ Class {
 BaselineOfOmniBase >> baseline: spec [
 	<baseline>
 	
-	spec for: #commo do: [
+	spec for: #common do: [
 		spec package: 'OmniBase' ]
 	
 ]
