@@ -1,9 +1,0 @@
-{
-	"class" : {
-		"new" : "SebastianSastre 3/4/2014 14:15:40" },
-	"instance" : {
-		"at:" : "SebastianSastre 3/4/2014 14:15:40",
-		"at:ifAbsentPutValue:" : "SebastianSastre 3/4/2014 14:15:40",
-		"at:put:" : "SebastianSastre 3/4/2014 14:15:40",
-		"initialize" : "SebastianSastre 3/4/2014 14:15:40",
-		"removeKey:" : "SebastianSastre 3/4/2014 14:15:40" } }

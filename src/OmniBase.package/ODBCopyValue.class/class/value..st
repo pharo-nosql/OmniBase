@@ -1,4 +1,0 @@
-accessing
-value: anObject
-
-    ^self new value: anObject

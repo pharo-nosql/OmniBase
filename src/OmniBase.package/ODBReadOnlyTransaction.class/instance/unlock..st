@@ -1,4 +1,0 @@
-public
-unlock: anObject
-
-	^true

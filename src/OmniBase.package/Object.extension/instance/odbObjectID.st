@@ -1,4 +1,0 @@
-*omnibase
-odbObjectID
-
-	^nil

@@ -1,4 +1,0 @@
-initialization
-newChangedDictionary
-
-    ^ODBSortedDictionary new

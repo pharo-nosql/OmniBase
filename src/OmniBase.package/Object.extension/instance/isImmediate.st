@@ -1,3 +1,0 @@
-*omnibase
-isImmediate
-	^false

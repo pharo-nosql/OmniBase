@@ -1,3 +1,0 @@
-private
-localDefaultObjectSpace
-	^self convertToLocalObjectSpaceNumber: objectManager defaultObjectSpace

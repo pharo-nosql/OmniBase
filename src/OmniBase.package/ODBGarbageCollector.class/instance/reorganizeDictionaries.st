@@ -1,3 +1,0 @@
-public
-reorganizeDictionaries
-	^reorganizeDictionaries == true

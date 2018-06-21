@@ -1,4 +1,0 @@
-private
-classManager
-
-    ^classManager

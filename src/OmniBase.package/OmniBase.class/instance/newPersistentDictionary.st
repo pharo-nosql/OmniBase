@@ -1,4 +1,0 @@
-accessing
-newPersistentDictionary
-
-	^self class newPersistentDictionary

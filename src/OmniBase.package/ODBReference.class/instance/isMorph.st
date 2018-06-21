@@ -1,3 +1,0 @@
-hacks
-isMorph
-	^ false

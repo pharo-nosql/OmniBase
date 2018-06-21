@@ -1,4 +1,0 @@
-accessing
-dataBaseObject
-
-    ^dataBaseObject

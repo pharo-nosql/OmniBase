@@ -1,3 +1,0 @@
-private
-fixTemps
-	^self

@@ -1,3 +1,0 @@
-public
-finalize
-	self close

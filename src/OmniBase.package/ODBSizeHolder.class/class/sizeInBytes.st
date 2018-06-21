@@ -1,4 +1,0 @@
-private
-sizeInBytes
-
-    ^12

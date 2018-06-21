@@ -1,4 +1,0 @@
-public
-name
-
-	^name

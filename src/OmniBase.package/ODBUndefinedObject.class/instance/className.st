@@ -1,3 +1,0 @@
-public
-className
-	^classInfo name

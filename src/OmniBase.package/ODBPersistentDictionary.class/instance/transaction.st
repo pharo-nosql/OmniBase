@@ -1,4 +1,0 @@
-public
-transaction
-
-	^transaction

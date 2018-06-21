@@ -1,4 +1,0 @@
-public/accessing
-isTerminated
-
-    ^true

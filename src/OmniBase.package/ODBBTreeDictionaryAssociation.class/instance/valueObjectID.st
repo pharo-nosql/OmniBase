@@ -1,4 +1,0 @@
-accessing
-valueObjectID
-
-    ^valueHolder objectID

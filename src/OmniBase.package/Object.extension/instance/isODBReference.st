@@ -1,4 +1,0 @@
-*omnibase
-isODBReference
-
-	^false

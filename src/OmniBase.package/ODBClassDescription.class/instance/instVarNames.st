@@ -1,4 +1,0 @@
-public
-instVarNames
-
-	^instVarNames

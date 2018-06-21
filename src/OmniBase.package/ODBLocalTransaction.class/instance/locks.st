@@ -1,3 +1,0 @@
-public
-locks
-	^ locks 
