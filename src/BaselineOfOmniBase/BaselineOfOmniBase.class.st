@@ -9,6 +9,19 @@ BaselineOfOmniBase >> baseline: spec [
 	<baseline>
 	
 	spec for: #common do: [
-		spec package: 'OmniBase' ]
+		self osprocess: spec.
+		
+		spec package: 'OmniBase' with: [ spec requires: #('OSProcess')].
+		spec package: 'OmniBase-Tests' ]
 	
+]
+
+{ #category : #baselines }
+BaselineOfOmniBase >> osprocess: spec [
+	
+	
+	spec configuration: 'OSProcess' with: [ 
+		spec
+			versionString: #stable;
+			repository: 'http://smalltalkhub.com/mc/Pharo/MetaRepoForPharo60/main' ]
 ]
