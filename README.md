@@ -9,8 +9,7 @@ In *nix systems it requires [mandatory file locking](http://www.hackinglinuxexpo
 
 For a clean API using it, check: [Aggregate](https://github.com/sebastianconcept/Aggregate)
 
-
-###Loading 
+### Loading 
 
 Use this snippet to load it into your [Pharo](http://www.pharo.org)* image:
 
@@ -27,11 +26,11 @@ This is a fork from Sebastian's original port.
 
 For an intro, take a look at [this presentation on slideshare](http://www.slideshare.net/esug/omni-baseobjectdatabase)
 
-###Contributions
+### Contributions
 
 ...are welcomed, send that push request and hopefully we can review it together
 
-###*Pharo Smalltalk
+### Pharo Smalltalk
 Getting a fresh Pharo Smalltalk image and its virtual machine is as easy as running in your terminal:
  
     wget -O- get.pharo.org | bash
@@ -40,7 +39,7 @@ _______
 
 MIT - License
 
-2014 - [sebastian](http://about.me/sebastianconcept)
+2014 - [sebastian](http://about.me/sebastianconcept)  
 2018 - [esteban](http://github.com/estebanlm)
 
 o/
