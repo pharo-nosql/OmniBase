@@ -12,19 +12,18 @@ For a clean API using it, check: [Aggregate](https://github.com/sebastianconcept
 
 ###Loading 
 
-Use this snippet to load it into your [Pharo](http://www.pharo-project.org/home)* image:
+Use this snippet to load it into your [Pharo](http://www.pharo.org)* image:
 
-    Gofer it 
-		smalltalkhubUser: 'Pharo'
-		project: 'MetaRepoForPharo30'; 
-		package: 'ConfigurationOfOmniBase';
+    Metacello new 
+		repository: 'github://estebanlm/OmniBase/src';
+		baseline: 'OmniBase';
 		load.
-	
-    (Smalltalk at: #ConfigurationOfOmniBase) load
 
 
 ---
 This is the Pharo Smalltalk port of David Gorisek's original work. Originally at squeaksource, now moved to github.
+
+This is a fork from Sebastian's original port.
 
 For an intro, take a look at [this presentation on slideshare](http://www.slideshare.net/esug/omni-baseobjectdatabase)
 
@@ -35,12 +34,13 @@ For an intro, take a look at [this presentation on slideshare](http://www.slides
 ###*Pharo Smalltalk
 Getting a fresh Pharo Smalltalk image and its virtual machine is as easy as running in your terminal:
  
-    wget -O- get.pharo.org/30+vm | bash
+    wget -O- get.pharo.org | bash
 
 _______
 
 MIT - License
 
 2014 - [sebastian](http://about.me/sebastianconcept)
+2018 - [esteban](http://github.com/estebanlm)
 
 o/
