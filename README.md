@@ -13,11 +13,12 @@ For a clean API using it, check: [Aggregate](https://github.com/sebastianconcept
 
 Use this snippet to load it into your [Pharo](http://www.pharo.org)* image:
 
-    Metacello new 
-		repository: 'github://estebanlm/OmniBase/src';
-		baseline: 'OmniBase';
-		load.
-
+```Smalltalk
+Metacello new 
+	repository: 'github://estebanlm/OmniBase/src';
+	baseline: 'OmniBase';
+	load.
+```
 
 ---
 This is the Pharo Smalltalk port of David Gorisek's original work. Originally at squeaksource, now moved to github.
