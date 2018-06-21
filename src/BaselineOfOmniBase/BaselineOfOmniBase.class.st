@@ -19,9 +19,9 @@ BaselineOfOmniBase >> baseline: spec [
 { #category : #baselines }
 BaselineOfOmniBase >> osprocess: spec [
 	
-	
+	self flag: #TODO. "Temporary use of #bleedingEdge because there is no P7 compatible version yet"
 	spec configuration: 'OSProcess' with: [ 
 		spec
-			versionString: #stable;
+			versionString: #bleedingEdge;
 			repository: 'http://smalltalkhub.com/mc/Pharo/MetaRepoForPharo60/main' ]
 ]
