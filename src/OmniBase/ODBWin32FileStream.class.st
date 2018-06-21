@@ -112,8 +112,8 @@ ODBWin32FileStream >> closeHandle: aHandle [
 		HANDLE  hObject 	// handle of object to close  
 	);"
 
-	<apicall: ulong 'CloseHandle' (long) module:'kernel32.dll'>
-	^self externalCallFailed
+	"<apicall: ulong 'CloseHandle' (long) module:'kernel32.dll'>"
+	^ self ffiCall: #(BOOL CloseHandle(long aHandle))
 ]
 
 { #category : #'Win32 primitives' }
@@ -134,8 +134,16 @@ ODBWin32FileStream >> createFile: aStringFileName dwDesiredAccess: anIntegerAcce
 	);
 	Please see Win32 SDK help for more information."
 
-	<apicall: long 'CreateFileA' (char* ulong ulong void* ulong ulong long) module:'kernel32.dll'>
-	^self externalCallFailed
+	"<apicall: long 'CreateFileA' (char* ulong ulong void* ulong ulong long) module:'kernel32.dll'>"
+	
+	^ self ffiCall: #(long CreateFileA(
+		char *aStringFileName, 
+		ulong anIntegerAccessMode, 
+		ulong anIntegerShareMode, 
+		void* aSECURITYATTRIBUTES, 
+		ulong anIntegerCreateMode, 
+		ulong anIntegerAttributeFlag,
+		long aHandle))
 ]
 
 { #category : #private }
@@ -153,6 +161,11 @@ ODBWin32FileStream >> createOn:  aPathname createMode: createMode accessMode: ac
 	(Delay forMilliseconds: 500) wait.
 	].
 	self fileIOError
+]
+
+{ #category : #'library path' }
+ODBWin32FileStream >> ffiLibraryName [
+	^ 'kernel32.dll'
 ]
 
 { #category : #private }
@@ -190,8 +203,8 @@ ODBWin32FileStream >> flushFileBuffers: aHandle [
 		HANDLE hFile // open handle to file whose buffers are to be flushed 
 		);"
 
-	<apicall: ulong 'FlushFileBuffers' (long) module:'kernel32.dll'>
-	^self externalCallFailed
+	"<apicall: ulong 'FlushFileBuffers' (long) module:'kernel32.dll'>"
+	^ self ffiCall: #(ulong FlushFileBuffers(long aHandle))
 ]
 
 { #category : #'Win32 primitives' }
@@ -203,9 +216,8 @@ ODBWin32FileStream >> getFileSize: aHandle lpFileSizeHigh: aDWORD [
 			LPDWORD lpFileSizeHigh, // address of high-order word for file size if required.
 		);"
 
-	<apicall: ulong 'GetFileSize' (long ulong) module:'kernel32.dll'>
-	^self externalCallFailed
-
+	"<apicall: ulong 'GetFileSize' (long ulong) module:'kernel32.dll'>"
+	^ self ffiCall: #(ulong GetFileSize (long aHandle, ulong aDWORD))
 ]
 
 { #category : #'Win32 primitives' }
@@ -213,8 +225,8 @@ ODBWin32FileStream >> getLastError [
 	"Answer the last Win32 error code which occurred.
 		DWORD GetLastError(VOID)"
   
-	<apicall: ulong 'GetLastError' () module:'kernel32.dll'>
-	^self externalCallFailed
+	"<apicall: ulong 'GetLastError' () module:'kernel32.dll'>"
+	^ self ffiCall: #(ulong GetLastError())
 ]
 
 { #category : #public }
@@ -239,8 +251,8 @@ ODBWin32FileStream >> lockFile: aHandle
     offsetLow: loPos offsetHigh: hiPos
     lengthLow: loLength lengthHigh: hiLength [
 
-	<apicall: long 'LockFile' (long ulong ulong ulong ulong) module: 'kernel32.dll'>
-	^self externalCallFailed
+	"<apicall: long 'LockFile' (long ulong ulong ulong ulong) module: 'kernel32.dll'>"
+	^ self ffiCall: #(long LockFile(long aHandle, ulong loPos, ulong hiPos, ulong loLength))
 ]
 
 { #category : #public }
@@ -291,15 +303,20 @@ ODBWin32FileStream >> readFile: aHandle lpBuffer: anAddress nNumberOfBytesToRead
 	Answer a boolean indicating whether the function succeeds. If successful and bytesRead is left set to zero,
 	the file pointer was beyond the current end of the file at the time of the read operation."
 
-	<apicall: long 'ReadFile' (long void* ulong void* void*) module:'kernel32.dll'>
-	^self externalCallFailed
+	"<apicall: long 'ReadFile' (long void* ulong void* void*) module:'kernel32.dll'>"
+	^ self ffiCall: #(long ReadFile(
+		long aHandle, 
+		void *anAddress, 
+		ulong anIntegerBytesToRead, 
+		void *anAddressBytesRead, 
+		void *anOVERLAPPED))
 ]
 
 { #category : #'Win32 primitives' }
 ODBWin32FileStream >> setEndOfFile: aHandle [
 
-	<apicall: long 'SetEndOfFile' (long) module: 'kernel32.dll'>
-	^self externalCallFailed
+	"<apicall: long 'SetEndOfFile' (long) module: 'kernel32.dll'>"
+	^ self ffiCall: #(long SetEndOfFile (long aHandle))
 ]
 
 { #category : #'Win32 primitives' }
@@ -313,8 +330,8 @@ ODBWin32FileStream >> setFilePointer: aHandle lDistanceToMove: loInteger lpDista
 		DWORD dwMoveMethod 			// how to move 
 		);"
 
-	<apicall: ulong 'SetFilePointer' (long long void* ulong) module: 'kernel32.dll'>
-	^self externalCallFailed
+	"<apicall: ulong 'SetFilePointer' (long long void* ulong) module: 'kernel32.dll'>"
+	^ self ffiCall: #(ulong SetFilePointer(long aHandle, long loInteger, void *anAddress, ulong senseOfMove))
 ]
 
 { #category : #public }
@@ -355,8 +372,8 @@ ODBWin32FileStream >> unlockFile: aHandle
     offsetLow: loPos offsetHigh: hiPos
     lengthLow: loLength lengthHigh: hiLength [
 
-	<apicall: long 'UnlockFile' (long ulong ulong ulong ulong) module: 'kernel32.dll'>
-	^self externalCallFailed
+	"<apicall: long 'UnlockFile' (long ulong ulong ulong ulong) module: 'kernel32.dll'>"
+	^ self ffiCall: #(long UnlockFile(long aHandle, ulong loPos, ulong hiPos, ulong loLength, ulong hiLength))
 ]
 
 { #category : #'Win32 primitives' }
@@ -378,6 +395,11 @@ ODBWin32FileStream >> writeFile: aHandle lpBuffer: anAddress nNumberOfBytesToWri
 
 	Answer a boolean indicating whether the function succeeds."
 
-	<apicall: long 'WriteFile' (long void* ulong void* void*) module:'kernel32.dll'>
-	^self externalCallFailed
+	"<apicall: long 'WriteFile' (long void* ulong void* void*) module:'kernel32.dll'>"
+	^ self ffiCall: #(long WriteFile(
+		long aHandle, 
+		void* anAddress, 
+		ulong anIntegerBytesToWrite, 
+		void *anAddressBytesWritten, 
+		void *anOVERLAPPED))
 ]
