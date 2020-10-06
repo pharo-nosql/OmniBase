@@ -292,94 +292,80 @@ ODBGarbageCollector >> swapObjectSpaces [
 ]
 
 { #category : #private }
+ODBGarbageCollector >> walkObjectReferencesOf: objectID addInto: firstToDo oidSets: oidSets progressBlock: progressBlock [
+
+	progressBlock value.
+	(objectManager holderAt: objectID)
+		ifNil: [ OmniBase signalError: 'Invalid object ID' ]
+		ifNotNil: [ :holder |
+			| dbObject |
+			dbObject := holder getObject.
+			dbObject referencesDo: [ :oid |
+				| containerID |
+				containerID := oid containerID.
+				(containerID == 0 or: [
+					(oidSets at: containerID) includes: oid index ])
+					ifFalse: [
+						(oidSets at: containerID) add: oid index.
+						firstToDo add: oid.
+						progressBlock value ] ].
+			dbObject close ]
+
+]
+
+{ #category : #private }
 ODBGarbageCollector >> walkObjects [
 	"Private - Object traversal."
 
-	| toDo firstToDo oidSets set containerID totalObjects objectID holder dbObject count |
+	| toDo firstToDo oidSets set totalObjects count progressBlock |
 	gcFile status = 6 ifTrue: [ ^self ].
 	"create OID sets"
 	oidSets := OrderedCollection new.
+	"notifying progress count"
+	count := 0.
+	progressBlock := [
+		self
+			progressNotification: nil
+			value: (count := count + 1) / (totalObjects * 2) ].
 	
 	[
-	totalObjects := 0.
-	containers do: [ :container | 
-		set := ODBIntegerSet createOn: (self oidSetFilenameFor: container).
-		[ oidSets size < container id ] whileTrue: [ oidSets add: nil ].
-		oidSets at: container id put: set.
-		totalObjects := totalObjects + container numberOfObjects ].
-	count := 0.
-	self progressNotification: 'Traversing objects' value: 0.
+		totalObjects := 0.
+		containers do: [ :container | 
+			set := ODBIntegerSet createOn: (self oidSetFilenameFor: container).
+			[ oidSets size < container id ] whileTrue: [ oidSets add: nil ].
+			oidSets at: container id put: set.
+			totalObjects := totalObjects + container numberOfObjects ].
 
-	"first load all from rootObject"
-	firstToDo := OrderedCollection new.
-	"create OID stack"
-	toDo := ODBObjectIdStack createOn: self oidStackFileName.
+		self progressNotification: 'Traversing objects' value: 0.
 
-	"walk objects"
-	(oidSets at: 1) add: 1.	"mark (1:1)"
-	firstToDo add: (ODBObjectID containerID: 1 index: 1).
+		"first load all from rootObject"
+		firstToDo := OrderedCollection new.
+		"create OID stack"
+		toDo := ODBObjectIdStack createOn: self oidStackFileName.
+		"walk objects"
+		(oidSets at: 1) add: 1.	"mark (1:1)"
+		firstToDo add: (ODBObjectID containerID: 1 index: 1).
 
-	[ firstToDo size = 1 ] whileTrue: [
-		objectID := firstToDo removeLast.
-		self
-			progressNotification: nil
-			value: (count := count + 1) / (totalObjects * 2).
-		(holder := objectManager holderAt: objectID) 
-			ifNotNil: [
-				dbObject := holder getObject.
-				dbObject referencesDo: [ :oid | 
-					containerID := oid containerID.
-					(containerID == 0 or: [
-						(oidSets at: containerID) includes: oid index ])
-						ifFalse: [
-							(oidSets at: containerID) add: oid index.
-							firstToDo add: oid.
-							self
-								progressNotification: nil
-								value: (count := count + 1) / (totalObjects * 2) ]].
-				dbObject close ]
-			ifNil: [ OmniBase signalError: 'Invalid object ID' ] ].
+		[ firstToDo size = 1 ] whileTrue: [
+			self
+				walkObjectReferencesOf: firstToDo removeLast
+				addInto: firstToDo
+				oidSets: oidSets
+				progressBlock: progressBlock ].
 
-	firstToDo do: [ :eachOID | 
-		self
-			progressNotification: nil
-			value: (count := count + 1) / (totalObjects * 2).
-		(holder := objectManager holderAt: eachOID)
-			ifNotNil: [
-				dbObject := holder getObject.
-				dbObject referencesDo: [ :oid |
-					containerID := oid containerID.
-					(containerID == 0 or: [
-						(oidSets at: containerID) includes: oid index ])
-						ifFalse: [
-							(oidSets at: containerID) add: oid index.
-							toDo add: oid.
-							self
-								progressNotification: nil
-								value: (count := count + 1) / (totalObjects * 2) ]].
-				dbObject close ]
-			ifNil: [ OmniBase signalError: 'Invalid object ID' ] ].
+		firstToDo do: [ :eachOID | 
+			self
+				walkObjectReferencesOf: eachOID
+				addInto: toDo
+				oidSets: oidSets
+				progressBlock: progressBlock ].
 
-	[ toDo isEmpty ] whileFalse: [
-		objectID := toDo removeLast.
-		self
-			progressNotification: nil
-			value: (count := count + 1) / (totalObjects * 2).
-		(holder := objectManager holderAt: objectID)
-			ifNotNil: [
-				dbObject := holder getObject.
-				dbObject referencesDo: [ :oid |
-					containerID := oid containerID.
-					(containerID == 0 or: [
-						(oidSets at: containerID) includes: oid index ])
-						ifFalse: [
-							(oidSets at: containerID) add: oid index.
-							toDo add: oid.
-							self
-								progressNotification: nil
-								value: (count := count + 1) / (totalObjects * 2) ]].
-				dbObject close ]
-			ifNil: [ OmniBase signalError: 'Invalid object ID' ] ]
+		[ toDo isEmpty ] whileFalse: [
+			self
+				walkObjectReferencesOf: toDo removeLast
+				addInto: toDo
+				oidSets: oidSets
+				progressBlock: progressBlock ].
 	
 	] ensure: [
 		"remove OID stack"
