@@ -10,7 +10,7 @@ Class {
 		'reorganizeDictionaries',
 		'reorganizeIndexSets'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #private }
@@ -50,51 +50,28 @@ ODBGarbageCollector >> basicRun [
 				objectManager environment globalUnlock]
 ]
 
-{ #category : #private }
-ODBGarbageCollector >> checkDiskSpace [
-	"Private - Check for avaiable disk space and set total number of objects in wait dialog."
-
-	"       | totalObjects maxContainerSize n gcSpace |
-        maxContainerSize := 0.
-        gcSpace := 0.
-        totalObjects := 0.
-        containers do: [:container |
-                n := container numberOfObjects.
-                gcSpace := n // 8 + gcSpace.
-                maxContainerSize := container bytesAllocated max: maxContainerSize.
-                totalObjects := totalObjects + n
-        ].
-        waitDialog maxValue: totalObjects.
-        maxContainerSize + gcSpace < objectManager environment freeDiskSpace ifTrue: [ ^true ].
-        ^OmniBase confirmationMessage: 'Disk space low.
-Are you sure you want to continue ?'!
-"
-
-	^true
-]
-
 { #category : #public }
-ODBGarbageCollector >> checkDiskSpace: containersColl [ 
+ODBGarbageCollector >> checkDiskSpace: containersCollection [
 	"Private - Check for avaiable disk space and set total number of objects in wait dialog."
 
 	| maxContainerSize n gcSpace |
 	maxContainerSize := 0.
 	gcSpace := 0.
-	containersColl do: 
-			[:container | 
-			n := container numberOfObjects.
-			gcSpace := n // 8 + gcSpace.
-			maxContainerSize := container bytesAllocated max: maxContainerSize].
-	maxContainerSize + gcSpace < objectManager environment freeDiskSpace ifTrue: [^true].
-	^progressDialog isNil 
-		ifTrue: [OmniBase logWarning: '[OmniBase GC] Warning disk space low']
-		ifFalse: [OmniBase confirmationMessage: 'Disk space low.
-Are you sure you want to continue ?']
+	containersCollection do: [ :container | 
+		n := container numberOfObjects.
+		gcSpace := n // 8 + gcSpace.
+		maxContainerSize := container bytesAllocated max: maxContainerSize ].
+	maxContainerSize + gcSpace < objectManager environment freeDiskSpace
+		ifTrue: [ ^ true ].
+	^ progressDialog
+		ifNil: [ OmniBase warningMessage: '[OmniBase GC] Warning disk space low' ]
+		ifNotNil: [ OmniBase confirmationMessage: 'Disk space low.
+Are you sure you want to continue ?' ]
 ]
 
 { #category : #public }
 ODBGarbageCollector >> close [
-	gcFile notNil ifTrue: [gcFile close]
+	gcFile ifNotNil: [ gcFile close ]
 ]
 
 { #category : #public }
@@ -136,16 +113,19 @@ ODBGarbageCollector >> copyObjects [
 	"Private - Copy objects from oldObject space to new object space."
 
 	| set objectSpace |
-	gcFile status = 5 ifFalse: [^self].
+	gcFile status = 5
+		ifFalse: [ ^ self ].
 	objectSpace := objectManager defaultObjectSpace.
-	containers do: 
-			[:container | 
-			[set := ODBIntegerSet openOn: (self oidSetFilenameFor: container)] on: Error do: [set := nil].
-			set isNil 
-				ifFalse: 
-					[self compactObjectSpaceForContainer: container reachableObjectsSet: set.
-					set remove.
-					container removeObjectSpace: 1 - objectSpace]].
+	containers do: [ :container | 
+		[ set := ODBIntegerSet openOn: (self oidSetFilenameFor: container) ]
+			on: Error
+			do: [ set := nil ].
+		set ifNotNil: [
+			self
+				compactObjectSpaceForContainer: container
+				reachableObjectsSet: set.
+			set remove.
+			container removeObjectSpace: 1 - objectSpace ] ].
 	gcFile status: 6
 ]
 
@@ -153,8 +133,8 @@ ODBGarbageCollector >> copyObjects [
 ODBGarbageCollector >> createNewObjectSpaces [
 	"Private - Create new object space for each container."
 
-	gcFile status = 1 ifFalse: [^self].
-	containers do: [:each | each createNewObjectSpace].
+	gcFile status = 1 ifFalse: [ ^self ].
+	containers do: [:each | each createNewObjectSpace ].
 	"new object spaces created"
 	gcFile status: 2
 ]
@@ -167,7 +147,7 @@ ODBGarbageCollector >> gcFileName [
 { #category : #private }
 ODBGarbageCollector >> lockObjectManager [
 	gcFile status = 0 ifFalse: [^self].
-	"objectManager lock."	"don't lock it because db is allready opened exclusively"
+	"objectManager lock."	"don't lock it because db is already opened exclusively"
 	"object manager has been locked"
 	gcFile status: 1
 ]
@@ -240,26 +220,28 @@ ODBGarbageCollector >> run [
 ]
 
 { #category : #public }
-ODBGarbageCollector >> run: silenceBool [ 
-	(objectManager environment globalLock and: [objectManager reopenExclusively]) 
-		ifFalse: 
-			[objectManager environment globalUnlock.
+ODBGarbageCollector >> run: shouldBeSilent [
+
+	(objectManager environment globalLock
+		and: [ objectManager reopenExclusively ])
+		ifFalse: [ objectManager environment globalUnlock.
 			self close.
-			silenceBool = true 
-				ifFalse: [OmniBase warningMessage: 'Database is still being accessed by other users !'].
-			^false].
-	silenceBool = true 
-		ifTrue: [self basicRun]
-		ifFalse: 
-			['OmniBase garbage collection in progress'
-				displayProgressAt: Sensor cursorPoint
-				from: 0 to: 100
-				during:
-					[:bar |
-						progressDialog := bar.
-						progressValue := bar.
-						self basicRun]].
-	^true
+			shouldBeSilent ifFalse: [
+				OmniBase warningMessage: 
+					'Database is still being accessed by other users !' ].
+			^ false ].
+
+	shouldBeSilent
+		ifTrue: [ self basicRun ]
+		ifFalse: [
+			'OmniBase garbage collection in progress'
+				displayProgressFrom: 0
+				to: 100
+				during: [ :bar | 
+					progressDialog := bar.
+					progressValue := bar.
+					self basicRun ] ].
+	^ true
 ]
 
 { #category : #public }
@@ -298,10 +280,13 @@ ODBGarbageCollector >> swapObjectSpaces [
 	| newObjectSpace |
 	gcFile status = 3 ifFalse: [^self].
 	newObjectSpace := gcFile newObjectSpace.
+
 	objectManager defaultObjectSpace == newObjectSpace 
-		ifFalse: 
-			[containers do: [:each | each lockObjectSpace: 1 - newObjectSpace].
-			objectManager defaultObjectSpace: newObjectSpace].
+		ifFalse: [
+			containers do: [ :each |
+				each lockObjectSpace: 1 - newObjectSpace ].
+			objectManager defaultObjectSpace: newObjectSpace ].
+
 	"object spaces have been swaped"
 	gcFile status: 4
 ]
@@ -311,78 +296,96 @@ ODBGarbageCollector >> walkObjects [
 	"Private - Object traversal."
 
 	| toDo firstToDo oidSets set containerID totalObjects objectID holder dbObject count |
-	gcFile status = 6 ifTrue: [^self].
+	gcFile status = 6 ifTrue: [ ^self ].
 	"create OID sets"
 	oidSets := OrderedCollection new.
 	
-	[totalObjects := 0.
-	containers do: 
-			[:container | 
-			set := ODBIntegerSet createOn: (self oidSetFilenameFor: container).
-			[oidSets size < container id] whileTrue: [oidSets add: nil].
-			oidSets at: container id put: set.
-			totalObjects := totalObjects + container numberOfObjects].
+	[
+	totalObjects := 0.
+	containers do: [ :container | 
+		set := ODBIntegerSet createOn: (self oidSetFilenameFor: container).
+		[ oidSets size < container id ] whileTrue: [ oidSets add: nil ].
+		oidSets at: container id put: set.
+		totalObjects := totalObjects + container numberOfObjects ].
 	count := 0.
 	self progressNotification: 'Traversing objects' value: 0.
+
 	"first load all from rootObject"
 	firstToDo := OrderedCollection new.
 	"create OID stack"
 	toDo := ODBObjectIdStack createOn: self oidStackFileName.
+
 	"walk objects"
 	(oidSets at: 1) add: 1.	"mark (1:1)"
 	firstToDo add: (ODBObjectID containerID: 1 index: 1).
-	[firstToDo size = 1] whileTrue: 
-			[objectID := firstToDo removeLast.
-			self progressNotification: nil value: (count := count + 1) / (totalObjects * 2).
-			(holder := objectManager holderAt: objectID) isNil 
-				ifFalse: 
-					[dbObject := holder getObject.
-					dbObject referencesDo: 
-							[:oid | 
-							containerID := oid containerID.
-							(containerID == 0 or: [(oidSets at: containerID) includes: oid index]) 
-								ifFalse: 
-									[(oidSets at: containerID) add: oid index.
-									firstToDo add: oid.
-									self progressNotification: nil value: (count := count + 1) / (totalObjects * 2)]].
-					dbObject close]
-				ifTrue: [OmniBase signalError: 'Invalid object ID']].
-	firstToDo do: 
-			[:eachOID | 
-			self progressNotification: nil value: (count := count + 1) / (totalObjects * 2).
-			(holder := objectManager holderAt: eachOID) == nil 
-				ifFalse: 
-					[dbObject := holder getObject.
-					dbObject referencesDo: 
-							[:oid | 
-							containerID := oid containerID.
-							(containerID == 0 or: [(oidSets at: containerID) includes: oid index]) 
-								ifFalse: 
-									[(oidSets at: containerID) add: oid index.
-									toDo add: oid.
-									self progressNotification: nil value: (count := count + 1) / (totalObjects * 2)]].
-					dbObject close]
-				ifTrue: [OmniBase signalError: 'Invalid object ID']].
-	[toDo isEmpty] whileFalse: 
-			[objectID := toDo removeLast.
-			self progressNotification: nil value: (count := count + 1) / (totalObjects * 2).
-			(holder := objectManager holderAt: objectID) == nil 
-				ifFalse: 
-					[dbObject := holder getObject.
-					dbObject referencesDo: 
-							[:oid | 
-							containerID := oid containerID.
-							(containerID == 0 or: [(oidSets at: containerID) includes: oid index]) 
-								ifFalse: 
-									[(oidSets at: containerID) add: oid index.
-									toDo add: oid.
-									self progressNotification: nil value: (count := count + 1) / (totalObjects * 2)]].
-					dbObject close]
-				ifTrue: [OmniBase signalError: 'Invalid object ID']]] 
-			ensure: 
-				["remove OID stack"
-				toDo isNil ifFalse: [toDo remove].
-				"close OID sets"
-				oidSets do: [:each | each notNil ifTrue: [each close]]].
+
+	[ firstToDo size = 1 ] whileTrue: [
+		objectID := firstToDo removeLast.
+		self
+			progressNotification: nil
+			value: (count := count + 1) / (totalObjects * 2).
+		(holder := objectManager holderAt: objectID) 
+			ifNotNil: [
+				dbObject := holder getObject.
+				dbObject referencesDo: [ :oid | 
+					containerID := oid containerID.
+					(containerID == 0 or: [
+						(oidSets at: containerID) includes: oid index ])
+						ifFalse: [
+							(oidSets at: containerID) add: oid index.
+							firstToDo add: oid.
+							self
+								progressNotification: nil
+								value: (count := count + 1) / (totalObjects * 2) ]].
+				dbObject close ]
+			ifNil: [ OmniBase signalError: 'Invalid object ID' ] ].
+
+	firstToDo do: [ :eachOID | 
+		self
+			progressNotification: nil
+			value: (count := count + 1) / (totalObjects * 2).
+		(holder := objectManager holderAt: eachOID)
+			ifNotNil: [
+				dbObject := holder getObject.
+				dbObject referencesDo: [ :oid |
+					containerID := oid containerID.
+					(containerID == 0 or: [
+						(oidSets at: containerID) includes: oid index ])
+						ifFalse: [
+							(oidSets at: containerID) add: oid index.
+							toDo add: oid.
+							self
+								progressNotification: nil
+								value: (count := count + 1) / (totalObjects * 2) ]].
+				dbObject close ]
+			ifNil: [ OmniBase signalError: 'Invalid object ID' ] ].
+
+	[ toDo isEmpty ] whileFalse: [
+		objectID := toDo removeLast.
+		self
+			progressNotification: nil
+			value: (count := count + 1) / (totalObjects * 2).
+		(holder := objectManager holderAt: objectID)
+			ifNotNil: [
+				dbObject := holder getObject.
+				dbObject referencesDo: [ :oid |
+					containerID := oid containerID.
+					(containerID == 0 or: [
+						(oidSets at: containerID) includes: oid index ])
+						ifFalse: [
+							(oidSets at: containerID) add: oid index.
+							toDo add: oid.
+							self
+								progressNotification: nil
+								value: (count := count + 1) / (totalObjects * 2) ]].
+				dbObject close ]
+			ifNil: [ OmniBase signalError: 'Invalid object ID' ] ]
+	
+	] ensure: [
+		"remove OID stack"
+		toDo ifNotNil: [ toDo remove ].
+		"close OID sets"
+		oidSets do: [:each | each ifNotNil: [ each close ]]].
+
 	gcFile status: 5
 ]
