@@ -6,12 +6,12 @@ Class {
 		'mutex',
 		'pathName'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #'create/open flags' }
 ODBFileStream class >> accessModeReadOnly [
-	^#accessModeReadonly
+	^#accessModeReadOnly
 ]
 
 { #category : #'create/open flags' }
