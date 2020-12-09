@@ -1,7 +1,7 @@
 Class {
 	#name : #OmniBaseTest,
 	#superclass : #TestCase,
-	#category : 'OmniBase-Tests'
+	#category : #'OmniBase-Tests'
 }
 
 { #category : #benchmarks }
@@ -374,6 +374,7 @@ OmniBaseTest >> testGC [
 	"Test garbage collection"
 
 	| db |
+	self timeLimit: 1 minute. 
 	db := OmniBase openOn: self dir.
 	self shouldnt: [db garbageCollect] raise: Error.
 	db close

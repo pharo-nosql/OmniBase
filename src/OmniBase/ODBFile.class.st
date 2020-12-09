@@ -4,19 +4,13 @@ Class {
 	#instVars : [
 		'stream'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #'instance creation' }
 ODBFile class >> createOn: aString [
 
     ^self new createOn: aString
-]
-
-{ #category : #'instance creation' }
-ODBFile class >> new [
-
-    ^super new initialize
 ]
 
 { #category : #'instance creation' }
