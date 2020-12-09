@@ -252,7 +252,7 @@ ODBWin32FileStream >> lockFile: aHandle
     lengthLow: loLength lengthHigh: hiLength [
 
 	"<apicall: long 'LockFile' (long ulong ulong ulong ulong) module: 'kernel32.dll'>"
-	^ self ffiCall: #(long LockFile(long aHandle, ulong loPos, ulong hiPos, ulong loLength))
+	^ self ffiCall: #(long LockFile(long aHandle, ulong loPos, ulong hiPos, ulong loLength, ulong hiLength))
 ]
 
 { #category : #public }
