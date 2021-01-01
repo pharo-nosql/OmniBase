@@ -15,7 +15,7 @@ Use this snippet to load it into your [Pharo](http://www.pharo.org)* image:
 
 ```Smalltalk
 Metacello new 
-	repository: 'github://estebanlm/OmniBase/src';
+	repository: 'github://pharo-nosql/OmniBase/src';
 	baseline: 'OmniBase';
 	load.
 ```
