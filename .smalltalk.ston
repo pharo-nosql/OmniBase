@@ -1,0 +1,10 @@
+SmalltalkCISpec {
+  #loading : [
+      SCIMetacelloLoadSpec {
+          #baseline : 'OmniBase',
+          #directory : 'src',
+          #platforms : [ #pharo ]
+      }
+  ]
+}
+
