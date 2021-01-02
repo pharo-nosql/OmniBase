@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBMacFileStream,
 	#superclass : #ODBFileStream,
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #private }
@@ -75,10 +75,10 @@ ODBMacFileStream class >> shareModeFlagLocation [
 { #category : #private }
 ODBMacFileStream class >> streamCreationSelectorForMode: createMode [
 	^ createMode caseOf:  {
-		[self createModeCreateAlways] -> [#forceNewFileNamed:].
-		[self createModeCreateNew] -> [#newFileNamed:].
-		[self createModeOpenAlways] -> [#fileNamed:].
-		[self createModeOpenExisting] -> [#oldFileNamed:]}
+		[self createModeCreateAlways] -> [#openAndTruncateForWriteFileNamed:].
+		[self createModeCreateNew] -> [#openForWriteFileNamed:].
+		[self createModeOpenAlways] -> [#openForWriteFileNamed:].
+		[self createModeOpenExisting] -> [#openForWriteFileNamed:]}
 
 ]
 

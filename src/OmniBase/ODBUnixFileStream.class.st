@@ -10,14 +10,15 @@ The best approximation I can come up with is to lock a special byte.  If you wan
 Class {
 	#name : #ODBUnixFileStream,
 	#superclass : #ODBFileStream,
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #private }
 ODBUnixFileStream class >> createFileStreamForPath: pathString createMode: createMode [
-	^ FileStream concreteStream
-			perform: (self streamCreationSelectorForMode: createMode)
-			with: pathString
+
+	^ File
+		perform: (self streamCreationSelectorForMode: createMode)
+		with: pathString
 ]
 
 { #category : #'create/open' }
@@ -37,20 +38,21 @@ ODBUnixFileStream class >> createOn: pathString createMode: createMode accessMod
 ODBUnixFileStream class >> ensureAccessMode: accessMode forFileStream: aFileStream [
 	"Check the special byte is appropriately set to allow the desired access mode.  Signal a locking conflict if there is a problem.
 	See the class comment for more information on what's going on here."
-	
 	| needsWriteAccess |
+	
 	needsWriteAccess := (accessMode = self accessModeReadOnly) not.
-	(OSProcess accessor
+	self flag: #TODO.
+	"(OSProcess accessor
 		isLockableFile: aFileStream
 		from: self shareModeFlagLocation
 		to: self shareModeFlagLocation
 		exclusive: needsWriteAccess)
-			ifFalse: [ODBLockingConflict signal].
+			ifFalse: [ODBLockingConflict signal]."
 ]
 
 { #category : #locking }
 ODBUnixFileStream class >> releaseAllLocksFor: pathName fileHandle: fileHandle [
-	OSProcess accessor unlockAllForFile: fileHandle
+	"OSProcess accessor unlockAllForFile: fileHandle"
 ]
 
 { #category : #private }
@@ -65,13 +67,14 @@ ODBUnixFileStream class >> setShareMode: shareMode forFileStream: aFileStream [
 			[self shareModeShareNone] -> [true].
 			[self shareModeShareWrite] -> [self halt] "don't know how to implement this on unix and it is currently unused"}.
 
-	flagState ifNotNil:
+	self flag: #TODO.
+	"flagState ifNotNil:
 		[(OSProcess accessor
 			lockFile: aFileStream
 			from: self shareModeFlagLocation
 			to: self shareModeFlagLocation
 			exclusive: flagState)
-				ifNil: [ODBLockingConflict signal]].
+				ifNil: [ODBLockingConflict signal]]."
 ]
 
 { #category : #private }
@@ -84,16 +87,17 @@ ODBUnixFileStream class >> shareModeFlagLocation [
 { #category : #private }
 ODBUnixFileStream class >> streamCreationSelectorForMode: createMode [
 	^ createMode caseOf:  {
-		[self createModeCreateAlways] -> [#forceNewFileNamed:].
-		[self createModeCreateNew] -> [#newFileNamed:].
-		[self createModeOpenAlways] -> [#fileNamed:].
-		[self createModeOpenExisting] -> [#oldFileNamed:]}
+		[self createModeCreateAlways] -> [#openAndTruncateForWriteFileNamed:].
+		[self createModeCreateNew] -> [#openForWriteFileNamed:].
+		[self createModeOpenAlways] -> [#openForWriteFileNamed:].
+		[self createModeOpenExisting] -> [#openForWriteFileNamed:]}
 
 ]
 
 { #category : #public }
 ODBUnixFileStream >> lockAt: pos length: length [
-	^ (OSProcess accessor lockFile: fileHandle from: pos to: pos + length -1) notNil
+	self flag: #TODO.
+	^ true "(OSProcess accessor lockFile: fileHandle from: pos to: pos + length -1) notNil"
 ]
 
 { #category : #'as yet unclassified' }
@@ -110,5 +114,6 @@ ODBUnixFileStream >> size [
 
 { #category : #public }
 ODBUnixFileStream >> unlockAt: pos length: length [
-	^ (OSProcess accessor unlockFile: fileHandle from: pos to: pos + length -1) notNil
+	self flag: #TODO.
+	^ true "(OSProcess accessor unlockFile: fileHandle from: pos to: pos + length -1) notNil"
 ]

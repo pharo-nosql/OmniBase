@@ -6,7 +6,7 @@ Class {
 		'mutex',
 		'pathName'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #'create/open flags' }
@@ -366,7 +366,7 @@ ODBFileStream >> basicGetBytesFor: aByteCollection len: len [
 		"Read len bytes from stream to aByteCollection. 
 		Answer number of bytes actualy read."
 
-	^fileHandle flush; readInto: aByteCollection startingAt: 1 for: len
+	^fileHandle flush; readInto: aByteCollection startingAt: 1 count: len
 ]
 
 { #category : #public }
