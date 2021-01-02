@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'externalLong'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #'instance creation' }
@@ -113,7 +113,7 @@ ODBWin32FileStream >> closeHandle: aHandle [
 	);"
 
 	"<apicall: ulong 'CloseHandle' (long) module:'kernel32.dll'>"
-	^ self ffiCall: #(BOOL CloseHandle(long aHandle))
+	^ self ffiCall: #(ulong CloseHandle(long aHandle))
 ]
 
 { #category : #'Win32 primitives' }
@@ -252,7 +252,7 @@ ODBWin32FileStream >> lockFile: aHandle
     lengthLow: loLength lengthHigh: hiLength [
 
 	"<apicall: long 'LockFile' (long ulong ulong ulong ulong) module: 'kernel32.dll'>"
-	^ self ffiCall: #(long LockFile(long aHandle, ulong loPos, ulong hiPos, ulong loLength))
+	^ self ffiCall: #(long LockFile(long aHandle, ulong loPos, ulong hiPos, ulong loLength, ulong hiLength))
 ]
 
 { #category : #public }

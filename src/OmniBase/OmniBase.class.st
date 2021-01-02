@@ -14,7 +14,7 @@ Class {
 		'processToTransactionMutex',
 		'sessions'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #private }
@@ -63,7 +63,7 @@ OmniBase class >> commit [
 
 { #category : #public }
 OmniBase class >> confirmationMessage: aString [ 
-	^MessageBox confirm: aString
+	^self confirm: aString
 ]
 
 { #category : #public }

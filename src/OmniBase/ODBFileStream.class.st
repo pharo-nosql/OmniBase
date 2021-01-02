@@ -11,7 +11,7 @@ Class {
 
 { #category : #'create/open flags' }
 ODBFileStream class >> accessModeReadOnly [
-	^#accessModeReadonly
+	^#accessModeReadOnly
 ]
 
 { #category : #'create/open flags' }
