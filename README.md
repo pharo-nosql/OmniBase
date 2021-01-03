@@ -35,12 +35,3 @@ For an intro, take a look at [this presentation on slideshare](http://www.slides
 Getting a fresh Pharo Smalltalk image and its virtual machine is as easy as running in your terminal:
  
     wget -O- get.pharo.org | bash
-
-_______
-
-MIT - License
-
-2014 - [sebastian](http://about.me/sebastianconcept)  
-2018 - [esteban](http://github.com/estebanlm)
-
-o/
