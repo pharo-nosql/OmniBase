@@ -40,41 +40,34 @@ ODBUnixFileStream class >> ensureAccessMode: accessMode forFileStream: aFileStre
 	See the class comment for more information on what's going on here."
 	| needsWriteAccess |
 	
-	needsWriteAccess := (accessMode = self accessModeReadOnly) not.
-	self flag: #TODO.
-	"(OSProcess accessor
-		isLockableFile: aFileStream
-		from: self shareModeFlagLocation
-		to: self shareModeFlagLocation
-		exclusive: needsWriteAccess)
-			ifFalse: [ODBLockingConflict signal]."
-]
-
-{ #category : #locking }
-ODBUnixFileStream class >> releaseAllLocksFor: pathName fileHandle: fileHandle [
-	"OSProcess accessor unlockAllForFile: fileHandle"
+	needsWriteAccess := accessMode ~= self accessModeReadOnly.
+	(FLock
+		canLock: aFileStream fileHandle
+			from: self shareModeFlagLocation
+			to: self shareModeFlagLocation
+			exclusive: needsWriteAccess)
+		ifFalse: [ ODBLockingConflict signal ]
 ]
 
 { #category : #private }
 ODBUnixFileStream class >> setShareMode: shareMode forFileStream: aFileStream [
 	"Set the special byte appropriately for the desired share mode.  Signal a locking conflict if there is a problem.
 	See the class comment for more information on what's going on here."
-	
 	| flagState |
+
 	flagState := shareMode caseOf: {
 			[self shareModeShareAll] -> [nil].
 			[self shareModeShareRead] -> [false].
 			[self shareModeShareNone] -> [true].
 			[self shareModeShareWrite] -> [self halt] "don't know how to implement this on unix and it is currently unused"}.
 
-	self flag: #TODO.
-	"flagState ifNotNil:
-		[(OSProcess accessor
-			lockFile: aFileStream
-			from: self shareModeFlagLocation
-			to: self shareModeFlagLocation
-			exclusive: flagState)
-				ifNil: [ODBLockingConflict signal]]."
+	flagState ifNotNil: [
+		(FLock
+			lock: aFileStream fileHandle
+				from: self shareModeFlagLocation
+				to: self shareModeFlagLocation
+				exclusive: flagState)
+			ifNil: [ ODBLockingConflict signal ] ]
 ]
 
 { #category : #private }
@@ -96,8 +89,11 @@ ODBUnixFileStream class >> streamCreationSelectorForMode: createMode [
 
 { #category : #public }
 ODBUnixFileStream >> lockAt: pos length: length [
-	self flag: #TODO.
-	^ true "(OSProcess accessor lockFile: fileHandle from: pos to: pos + length -1) notNil"
+	
+	^ FLock 
+		lock: fileHandle fileHandle
+		from: pos 
+		to: pos + length -1
 ]
 
 { #category : #'as yet unclassified' }
@@ -114,6 +110,9 @@ ODBUnixFileStream >> size [
 
 { #category : #public }
 ODBUnixFileStream >> unlockAt: pos length: length [
-	self flag: #TODO.
-	^ true "(OSProcess accessor unlockFile: fileHandle from: pos to: pos + length -1) notNil"
+
+	^ FLock 
+		unlock: fileHandle fileHandle
+		from: pos 
+		to: pos + length -1
 ]

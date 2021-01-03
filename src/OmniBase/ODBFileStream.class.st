@@ -396,8 +396,11 @@ ODBFileStream >> close [
 		"Close file associatied with receiver."
 
 	fileHandle notNil ifTrue: [
-		self class releaseAllLocksFor: pathName fileHandle: fileHandle.
-		fileHandle closed ifFalse: [fileHandle close]].
+		FLock 
+			unlock: fileHandle fileHandle 
+			from: 0 
+			to: self size.
+		fileHandle closed ifFalse: [ fileHandle close ] ].
 	fileHandle := nil.
 ]
 
@@ -562,10 +565,10 @@ ODBFileStream >> remove [
 
 { #category : #public }
 ODBFileStream >> size [
-		"Answer the size of the file in bytes or
-		signal a FileException if the operation fails."
+	"Answer the size of the file in bytes or
+	signal a FileException if the operation fails."
 
-	^fileHandle size
+	^ fileHandle size
 ]
 
 { #category : #public }
