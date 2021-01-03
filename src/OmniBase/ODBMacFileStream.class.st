@@ -84,7 +84,11 @@ ODBMacFileStream class >> streamCreationSelectorForMode: createMode [
 
 { #category : #public }
 ODBMacFileStream >> lockAt: pos length: length [
-	^ (OSProcess accessor lockFile: fileHandle from: pos to: pos + length -1) notNil
+	
+	^ FLock 
+		lock: fileHandle fileHandle
+		from: pos 
+		to: pos + length - 1
 ]
 
 { #category : #public }
@@ -101,5 +105,9 @@ ODBMacFileStream >> size [
 
 { #category : #public }
 ODBMacFileStream >> unlockAt: pos length: length [
-	^ (OSProcess accessor unlockFile: fileHandle from: pos to: pos + length -1) notNil
+
+	^ FLock 
+		unlock: fileHandle fileHandle
+		from: pos 
+		to: pos + length - 1
 ]

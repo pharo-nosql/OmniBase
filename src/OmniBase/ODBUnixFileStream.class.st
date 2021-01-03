@@ -93,10 +93,10 @@ ODBUnixFileStream >> lockAt: pos length: length [
 	^ FLock 
 		lock: fileHandle fileHandle
 		from: pos 
-		to: pos + length -1
+		to: pos + length - 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accesing }
 ODBUnixFileStream >> size [
 	"the unix Squeak VM gives the wrong answer for #size"
 	| file |
