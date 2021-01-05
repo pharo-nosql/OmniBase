@@ -1,9 +1,6 @@
 Class {
 	#name : #ODBDatabaseTest,
 	#superclass : #ODBDiskBasedTest,
-	#instVars : [
-		'db'
-	],
 	#category : #'OmniBase-Tests'
 }
 
