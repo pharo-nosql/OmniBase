@@ -7,7 +7,7 @@ Class {
 		'objectID',
 		'lockID'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #public }
@@ -52,6 +52,11 @@ ODBLock >> objectID [
 ODBLock >> objectID: anObjectID [
 
     objectID := anObjectID
+]
+
+{ #category : #accessing }
+ODBLock >> transaction [
+	^ transaction
 ]
 
 { #category : #'public/accessing' }
