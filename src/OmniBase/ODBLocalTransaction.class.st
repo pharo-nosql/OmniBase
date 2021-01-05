@@ -7,21 +7,24 @@ Class {
 		'inconsistent',
 		'newObjects'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #private }
 ODBLocalTransaction >> addLock: aLock [
-        "Private - Add aLock to receiver."
-
-    locks add: aLock
+   "Private - Add aLock to receiver." 
+	
+	aLock transaction: self.
+	dbConnection lockRegistry 
+		addLock: aLock
 ]
 
 { #category : #private }
 ODBLocalTransaction >> addLoggedLock: aLock [ 
 	"Private - Add aLock to receiver and store it to transaction file."
-
-	locks add: aLock.
+	aLock transaction: self.
+	dbConnection lockRegistry 
+		addLock: aLock.
 	transactionFile lockAdd: aLock
 ]
 
@@ -97,12 +100,18 @@ ODBLocalTransaction >> committed [
     changesPackage := nil.
 ]
 
+{ #category : #testing }
+ODBLocalTransaction >> hasLockForObjectID: anODBObjectID [ 
+	^ dbConnection lockRegistry 
+		hasLockForObjectID: anODBObjectID 
+]
+
 { #category : #initialization }
 ODBLocalTransaction >> initialize [
         "Private - Initialize receiver."
 
     super initialize.
-    newObjects := Array new: 16
+    newObjects := Array new: 16.
 ]
 
 { #category : #public }
@@ -140,22 +149,19 @@ ODBLocalTransaction >> lock: anObject [
 ]
 
 { #category : #private }
+ODBLocalTransaction >> lockForObjectId: anODBObjectID [ 
+	^ dbConnection lockRegistry 
+		lockAt: anODBObjectID 
+]
+
+{ #category : #private }
 ODBLocalTransaction >> lockID [
 	"Private - Answer unique lock ID. Create transaction 
 	file, if no locks have been set before. Answer <nil> 
 	if database is globally locked by another user and no 
 	locks can currently be set."
 
-	locks isNil 
-		ifTrue: 
-			[(transactionFile := client newTransactionFileFor: self) isNil ifTrue: [^nil].
-			locks := OrderedCollection new].
-	^transactionFile transactionID
-]
-
-{ #category : #public }
-ODBLocalTransaction >> locks [
-	^ locks 
+	^ transactionFile ifNotNil: [ transactionFile transactionID ]
 ]
 
 { #category : #public }
@@ -295,14 +301,16 @@ ODBLocalTransaction >> removeCachedObjectID: objectID [
 ODBLocalTransaction >> removeLock: aLock [ 
 	"Private - Remove aLock from collection of set locks."
 
-	locks remove: aLock ifAbsent: []
+	dbConnection lockRegistry 
+		removeLockForObjectID: aLock objectID 
 ]
 
 { #category : #private }
 ODBLocalTransaction >> removeLoggedLock: aODBLock [ 
 	"Private - Remove anODBLock from receiver and remove it from transaction file."
 
-	locks remove: aODBLock ifAbsent: [].
+	dbConnection lockRegistry 
+		removeLockForObjectID: aODBLock objectID.
 	transactionFile lockRemove: aODBLock
 ]
 

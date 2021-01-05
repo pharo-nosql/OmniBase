@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBTerminatedTransaction,
 	#superclass : #ODBTransaction,
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #'public/start/commit/abort' }
@@ -11,7 +11,9 @@ ODBTerminatedTransaction >> start [
 
     transactionManager transactionStart: self.
     versionDescriptor versionNumber: transactionFile versionNumber.
-    locks := transactionFile locks
+
+    transactionFile locks do: [ :each |
+		dbConnection lockRegistry addLock: each ]
 ]
 
 { #category : #'private/accessing' }

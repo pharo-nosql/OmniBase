@@ -5,14 +5,13 @@ Class {
 		'cacheMutex',
 		'client',
 		'dbConnection',
-		'locks',
 		'objectIndex',
 		'objects',
 		'transactionFile',
 		'transactionManager',
 		'versionDescriptor'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #private }
@@ -44,16 +43,16 @@ ODBTransaction >> basicAbort [
 	| changes |
 	dbConnection isNil 
 		ifFalse: 
-			[locks isNil 
-				ifFalse: 
-					[(changes := transactionFile recovery) isNil 
-						ifFalse: 
-							[changes
-								transaction: self;
-								rollback.
-							transactionFile recovery: nil].
-					locks do: 
-							[:each | 
+			[
+				(dbConnection lockRegistry removeLocksForTransaction: self)
+					ifNotEmpty: [ :locks | 
+						(changes := transactionFile recovery) isNil 
+							ifFalse: 
+								[changes
+									transaction: self;
+									rollback.
+								transactionFile recovery: nil].
+						locks do: [:each | 
 							each
 								transaction: self;
 								unlock]].
@@ -316,7 +315,8 @@ ODBTransaction >> root [
 ODBTransaction >> setClient: aClient environment: anOmniBase [ 
 	client := aClient.
 	dbConnection := anOmniBase.
-	transactionManager := dbConnection transactionManager
+	transactionManager := dbConnection transactionManager.
+	transactionFile := client newTransactionFileFor: self
 ]
 
 { #category : #'private/accessing' }

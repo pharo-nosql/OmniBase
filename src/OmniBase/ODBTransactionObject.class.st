@@ -7,7 +7,7 @@ Class {
 		'holder',
 		'dataBaseObject'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #'instance creation' }
@@ -44,8 +44,8 @@ ODBTransactionObject >> lock [
 	"Lock receiver."
 
 	| lockID lockObj |
-	lockObject isNil 
-		ifTrue: 
+	(transaction hasLockForObjectID: holder objectID) 
+		ifFalse: 
 			[(lockID := transaction lockID) isNil ifTrue: [^false].
 			transaction isGlobalLocked ifTrue: [^true].
 			lockObj := ODBObjectLock new.
@@ -57,7 +57,10 @@ ODBTransactionObject >> lock [
 				ifFalse: 
 					[transaction removeLock: lockObj.
 					^false].
-			lockObject := lockObj].
+			lockObject := lockObj]
+	ifTrue: [
+		((transaction lockForObjectId: holder objectID) hasSameTransaction: transaction) ifFalse: [ 
+			^ false ] ].
 	^true
 ]
 

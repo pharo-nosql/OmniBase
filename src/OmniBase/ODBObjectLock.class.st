@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBObjectLock,
 	#superclass : #ODBLock,
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #'as yet unclassified' }
@@ -10,6 +10,11 @@ ODBObjectLock class >> lockClassID [
         or <nil> if lock does not need to be stored."
 
     ^1
+]
+
+{ #category : #testing }
+ODBObjectLock >> hasSameTransaction: aTransaction [
+	^ transaction == aTransaction 
 ]
 
 { #category : #'public/load/store' }

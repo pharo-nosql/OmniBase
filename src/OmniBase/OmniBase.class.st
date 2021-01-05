@@ -6,7 +6,8 @@ Class {
 		'objectManager',
 		'classManager',
 		'clientManager',
-		'transactionManager'
+		'transactionManager',
+		'lockRegistry'
 	],
 	#classInstVars : [
 		'currentTransaction',
@@ -372,7 +373,8 @@ OmniBase >> globalUnlock [
 { #category : #initialization }
 OmniBase >> initialize [
 
-    ODBDatabaseObject initialize
+   ODBDatabaseObject initialize.
+	lockRegistry := ODBLockRegistry new 
 ]
 
 { #category : #accessing }
@@ -385,6 +387,11 @@ OmniBase >> isGlobalLocked [
 OmniBase >> localClient [
 
     ^clientManager localClient
+]
+
+{ #category : #accessing }
+OmniBase >> lockRegistry [
+	^ lockRegistry
 ]
 
 { #category : #accessing }

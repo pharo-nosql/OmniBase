@@ -5,7 +5,7 @@ Class {
 		'hasGlobalLock',
 		'freeTransactionFile'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #public }
@@ -139,6 +139,9 @@ ODBLocalClient >> newTransactionFileFor: aTransaction [
 			transactions add: aTransaction.
 			^transactionFile].
 	transactionID := id bitShift: 8.
+	self flag: #todo.
+	"Is the limit for 256 transactions really necessary. Whatever number it might be this
+	ought to be a configuration"
 	256 timesRepeat: 
 			[(transactionFiles includes: transactionID) 
 				ifFalse: 
