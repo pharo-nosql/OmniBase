@@ -1,5 +1,5 @@
 Class {
 	#name : #ODBCannotLockObject,
 	#superclass : #ODBLockingConflict,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Exceptions'
 }

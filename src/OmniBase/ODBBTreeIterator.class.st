@@ -13,7 +13,7 @@ Class {
 		'version',
 		'mutex'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #public }
@@ -107,11 +107,6 @@ ODBBTreeIterator >> descriptionString [
 OmniBase 1.0, David Gorisek (c) 1998
 
 '
-]
-
-{ #category : #public }
-ODBBTreeIterator >> fixTemps [
-	^self
 ]
 
 { #category : #public }

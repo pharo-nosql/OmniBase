@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBStreamLockedNotification,
 	#superclass : #Notification,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Exceptions'
 }
 
 { #category : #public }

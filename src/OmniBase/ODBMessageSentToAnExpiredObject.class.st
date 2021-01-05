@@ -1,5 +1,5 @@
 Class {
 	#name : #ODBMessageSentToAnExpiredObject,
 	#superclass : #ODBError,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Exceptions'
 }

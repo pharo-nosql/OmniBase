@@ -10,7 +10,7 @@ Class {
 		'progressValue',
 		'versionDescriptor'
 	],
-	#category : #OmniBase
+	#category : #'OmniBase-Base'
 }
 
 { #category : #private }

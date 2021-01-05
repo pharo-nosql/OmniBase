@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'changes'
 	],
-	#category : 'OmniBase'
+	#category : #OmniBase
 }
 
 { #category : #'as yet unclassified' }
@@ -42,11 +42,6 @@ ODBChangesPackage >> committed [
         "Changes have just been committed."
 
     changes do: [:each | each committed]
-]
-
-{ #category : #private }
-ODBChangesPackage >> fixTemps [
-	^self
 ]
 
 { #category : #private }
