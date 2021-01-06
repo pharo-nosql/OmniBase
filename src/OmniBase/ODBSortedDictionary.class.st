@@ -7,7 +7,7 @@ Class {
 		'elementCount',
 		'currentIndex'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #'as yet unclassified' }

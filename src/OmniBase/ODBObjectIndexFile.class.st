@@ -10,7 +10,7 @@ Class {
 		'gcCount',
 		'var1'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Files'
 }
 
 { #category : #public }

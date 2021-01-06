@@ -8,7 +8,7 @@ Class {
 		'locks',
 		'lockingMutex'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Streams'
 }
 
 { #category : #public }

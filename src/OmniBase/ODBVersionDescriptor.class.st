@@ -8,7 +8,7 @@ Class {
 		'committingTransactions',
 		'myCommits'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #public }

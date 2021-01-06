@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBObjectStorage,
 	#superclass : #ODBFile,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Files'
 }
 
 { #category : #'private/initialization' }

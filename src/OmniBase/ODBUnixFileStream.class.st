@@ -10,7 +10,7 @@ The best approximation I can come up with is to lock a special byte.  If you wan
 Class {
 	#name : #ODBUnixFileStream,
 	#superclass : #ODBFileStream,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Streams'
 }
 
 { #category : #private }

@@ -6,7 +6,7 @@ Class {
 		'mutex',
 		'pathName'
 	],
-	#category : #OmniBase
+	#category : #'OmniBase-Streams'
 }
 
 { #category : #'create/open flags' }

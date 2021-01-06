@@ -8,7 +8,7 @@ Class {
 		'clientManager',
 		'transactionFiles'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Base'
 }
 
 { #category : #'instance creation' }

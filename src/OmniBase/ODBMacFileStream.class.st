@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBMacFileStream,
 	#superclass : #ODBFileStream,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Streams'
 }
 
 { #category : #private }

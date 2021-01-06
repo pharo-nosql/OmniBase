@@ -11,7 +11,7 @@ Class {
 		'transactionReferences',
 		'versionControl'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Base'
 }
 
 { #category : #public }

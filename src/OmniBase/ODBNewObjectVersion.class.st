@@ -5,7 +5,7 @@ Class {
 		'newVersion',
 		'oldVersion'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Events'
 }
 
 { #category : #'as yet unclassified' }

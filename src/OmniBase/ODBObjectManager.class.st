@@ -7,7 +7,7 @@ Class {
 		'idTable',
 		'infoFile'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Base'
 }
 
 { #category : #private }

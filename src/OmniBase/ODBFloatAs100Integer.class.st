@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBFloatAs100Integer,
 	#superclass : #ODBDeserializers,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Serializers'
 }
 
 { #category : #accessing }

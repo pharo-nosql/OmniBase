@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBTerminatedTransaction,
 	#superclass : #ODBTransaction,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #'public/start/commit/abort' }

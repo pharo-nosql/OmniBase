@@ -6,7 +6,7 @@ Class {
 		'initialSize',
 		'deltaSize'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #private }

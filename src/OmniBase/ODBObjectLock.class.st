@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBObjectLock,
 	#superclass : #ODBLock,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #'as yet unclassified' }

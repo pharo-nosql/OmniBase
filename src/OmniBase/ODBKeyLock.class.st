@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'key'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #'as yet unclassified' }

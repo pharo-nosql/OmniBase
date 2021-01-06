@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBGcBTreeIterator,
 	#superclass : #ODBBTreeIterator,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Files'
 }
 
 { #category : #private }

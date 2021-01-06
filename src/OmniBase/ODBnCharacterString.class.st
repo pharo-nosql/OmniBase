@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'n'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Serializers'
 }
 
 { #category : #creation }

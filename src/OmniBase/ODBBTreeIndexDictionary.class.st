@@ -6,7 +6,7 @@ Class {
 		'currentKey',
 		'keySize'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #'as yet unclassified' }

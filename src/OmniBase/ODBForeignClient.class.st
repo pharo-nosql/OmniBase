@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBForeignClient,
 	#superclass : #ODBClient,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Base'
 }
 
 { #category : #'public/accessing' }

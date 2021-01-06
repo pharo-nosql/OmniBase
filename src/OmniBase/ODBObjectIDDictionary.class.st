@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'dictionaries'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #'as yet unclassified' }

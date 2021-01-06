@@ -7,7 +7,7 @@ Class {
 		'holder',
 		'dataBaseObject'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #'instance creation' }

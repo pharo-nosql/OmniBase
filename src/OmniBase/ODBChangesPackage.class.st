@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'changes'
 	],
-	#category : #OmniBase
+	#category : #'OmniBase-Events'
 }
 
 { #category : #'as yet unclassified' }

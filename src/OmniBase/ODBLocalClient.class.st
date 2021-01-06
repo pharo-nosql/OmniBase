@@ -5,7 +5,7 @@ Class {
 		'hasGlobalLock',
 		'freeTransactionFile'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Base'
 }
 
 { #category : #public }

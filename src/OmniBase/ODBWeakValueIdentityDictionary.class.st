@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBWeakValueIdentityDictionary,
 	#superclass : #ODBIdentityDictionary,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #public }

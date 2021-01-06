@@ -6,7 +6,7 @@ Class {
 		'bufPos',
 		'filePos'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Files'
 }
 
 { #category : #public }

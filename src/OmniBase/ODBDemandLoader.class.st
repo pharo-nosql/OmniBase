@@ -6,7 +6,7 @@ Class {
 		'transaction',
 		'proxyObject'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Storage'
 }
 
 { #category : #public }

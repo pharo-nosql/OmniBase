@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'lastID'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Files'
 }
 
 { #category : #public }

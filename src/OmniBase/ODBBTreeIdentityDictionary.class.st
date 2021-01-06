@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'newKeys'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #public }

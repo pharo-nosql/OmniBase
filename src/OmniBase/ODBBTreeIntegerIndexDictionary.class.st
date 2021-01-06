@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBBTreeIntegerIndexDictionary,
 	#superclass : #ODBBTreeIndexDictionary,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #public }

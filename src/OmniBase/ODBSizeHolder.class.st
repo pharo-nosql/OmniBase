@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBSizeHolder,
 	#superclass : #ODBExternalBuffer,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Storage'
 }
 
 { #category : #private }

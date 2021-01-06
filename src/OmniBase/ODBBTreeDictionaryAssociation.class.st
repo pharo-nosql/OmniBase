@@ -6,7 +6,7 @@ Class {
 		'key',
 		'transaction'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #accessing }

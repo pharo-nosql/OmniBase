@@ -12,7 +12,7 @@ Class {
 		'transactionManager',
 		'versionDescriptor'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #private }

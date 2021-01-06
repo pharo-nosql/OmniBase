@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBSerializedDBObjectWithoutReferences,
 	#superclass : #ODBDatabaseObject,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #defining }

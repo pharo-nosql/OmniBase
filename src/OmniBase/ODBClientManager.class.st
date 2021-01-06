@@ -7,7 +7,7 @@ Class {
 		'idTable',
 		'clients'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Base'
 }
 
 { #category : #private }

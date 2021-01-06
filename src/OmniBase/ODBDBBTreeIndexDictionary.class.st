@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'iterator'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #defining }

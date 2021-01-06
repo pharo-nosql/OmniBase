@@ -5,7 +5,7 @@ Class {
 		'transactionObject',
 		'demandLoader'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #'predefined intercepted messages' }

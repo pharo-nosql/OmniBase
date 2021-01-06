@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBNewObject,
 	#superclass : #ODBDeserializers,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Serializers'
 }
 
 { #category : #'as yet unclassified' }

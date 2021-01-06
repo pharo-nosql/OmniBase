@@ -15,7 +15,7 @@ Class {
 	#classInstVars : [
 		'classArray'
 	],
-	#category : #OmniBase
+	#category : #'OmniBase-Serializers'
 }
 
 { #category : #private }

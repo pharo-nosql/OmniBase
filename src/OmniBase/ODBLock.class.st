@@ -7,7 +7,7 @@ Class {
 		'objectID',
 		'lockID'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #public }

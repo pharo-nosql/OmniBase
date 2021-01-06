@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'current'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Streams'
 }
 
 { #category : #'as yet unclassified' }
