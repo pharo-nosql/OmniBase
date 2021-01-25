@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'table'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Files'
 }
 
 { #category : #public }

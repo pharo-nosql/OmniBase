@@ -12,7 +12,7 @@ Class {
 		'varOrder',
 		'classID'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #private }

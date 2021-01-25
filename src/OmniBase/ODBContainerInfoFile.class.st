@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBContainerInfoFile,
 	#superclass : #ODBBTreeIterator,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Files'
 }
 
 { #category : #'private/initialization' }

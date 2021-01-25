@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBGlobalLockedTransaction,
 	#superclass : #ODBLocalTransaction,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #private }

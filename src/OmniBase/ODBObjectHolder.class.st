@@ -6,7 +6,7 @@ Class {
 		'objectID',
 		'oldVersion'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Storage'
 }
 
 { #category : #private }

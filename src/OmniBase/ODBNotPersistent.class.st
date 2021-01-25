@@ -1,5 +1,5 @@
 Class {
 	#name : #ODBNotPersistent,
 	#superclass : #ODBError,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Exceptions'
 }

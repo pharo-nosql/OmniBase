@@ -6,7 +6,7 @@ Class {
 		'removed',
 		'objectSet'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Storage'
 }
 
 { #category : #private }

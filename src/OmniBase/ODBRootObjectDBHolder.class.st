@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBRootObjectDBHolder,
 	#superclass : #ODBDatabaseObject,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #'as yet unclassified' }

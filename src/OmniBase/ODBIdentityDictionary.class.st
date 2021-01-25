@@ -8,7 +8,7 @@ Class {
 		'sizeLimit',
 		'values'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #'instance creation' }

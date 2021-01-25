@@ -5,7 +5,7 @@ Class {
 		'lastReadTime',
 		'versionDescriptor'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Files'
 }
 
 { #category : #'public/create/open/close' }

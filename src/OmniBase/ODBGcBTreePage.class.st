@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBGcBTreePage,
 	#superclass : #ODBBTreePage,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Storage'
 }
 
 { #category : #public }

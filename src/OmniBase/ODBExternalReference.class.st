@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBExternalReference,
 	#superclass : #ODBDeserializers,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Serializers'
 }
 
 { #category : #serialization }

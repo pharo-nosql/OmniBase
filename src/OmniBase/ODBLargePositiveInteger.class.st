@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBLargePositiveInteger,
 	#superclass : #ODBDeserializers,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Serializers'
 }
 
 { #category : #'no category' }

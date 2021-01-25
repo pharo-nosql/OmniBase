@@ -1,5 +1,5 @@
 Class {
 	#name : #ODBUnexpectedNetworkError,
 	#superclass : #Error,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Exceptions'
 }

@@ -1,5 +1,5 @@
 Class {
 	#name : #ODBPreviousVersionError,
 	#superclass : #Error,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Exceptions'
 }

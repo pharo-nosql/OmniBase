@@ -5,7 +5,7 @@ Class {
 		'containerID',
 		'index'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #'as yet unclassified' }

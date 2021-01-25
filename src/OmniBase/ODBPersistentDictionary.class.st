@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'transaction'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Storage'
 }
 
 { #category : #public }

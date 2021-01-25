@@ -15,7 +15,7 @@ Class {
 		'path',
 		'queueSize'
 	],
-	#category : #OmniBase
+	#category : #'OmniBase-Storage'
 }
 
 { #category : #'instance creation' }

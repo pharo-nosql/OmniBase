@@ -13,7 +13,7 @@ Class {
 		'stream',
 		'referenceManager'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Serializers'
 }
 
 { #category : #public }

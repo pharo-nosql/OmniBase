@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'references'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Base'
 }
 
 { #category : #public }

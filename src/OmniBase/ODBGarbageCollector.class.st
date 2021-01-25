@@ -10,7 +10,7 @@ Class {
 		'reorganizeDictionaries',
 		'reorganizeIndexSets'
 	],
-	#category : #OmniBase
+	#category : #'OmniBase-Storage'
 }
 
 { #category : #private }

@@ -14,7 +14,7 @@ Class {
 		'processToTransactionMutex',
 		'sessions'
 	],
-	#category : #OmniBase
+	#category : #'OmniBase-Base'
 }
 
 { #category : #private }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'stream'
 	],
-	#category : #OmniBase
+	#category : #'OmniBase-Files'
 }
 
 { #category : #'instance creation' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBLockNotification,
 	#superclass : #Notification,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Exceptions'
 }
 
 { #category : #public }

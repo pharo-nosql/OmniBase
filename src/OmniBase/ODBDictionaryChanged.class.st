@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'dataBaseObject'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Events'
 }
 
 { #category : #public }

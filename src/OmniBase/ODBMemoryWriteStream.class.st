@@ -7,7 +7,7 @@ Class {
 		'readLimit',
 		'lastSize'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Streams'
 }
 
 { #category : #'instance creation' }

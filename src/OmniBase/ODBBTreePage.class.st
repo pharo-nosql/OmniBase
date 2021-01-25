@@ -9,7 +9,7 @@ Class {
 		'indexOnPage',
 		'itemLength'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Storage'
 }
 
 { #category : #'as yet unclassified' }

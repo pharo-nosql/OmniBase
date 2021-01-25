@@ -6,7 +6,7 @@ Class {
 		'transactionObject',
 		'transaction'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Events'
 }
 
 { #category : #public }

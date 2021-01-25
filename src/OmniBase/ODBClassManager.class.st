@@ -8,7 +8,7 @@ Class {
 		'mutex',
 		'names'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Base'
 }
 
 { #category : #'as yet unclassified' }

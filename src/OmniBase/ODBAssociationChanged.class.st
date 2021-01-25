@@ -6,7 +6,7 @@ Class {
 		'oldValue',
 		'newValue'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Events'
 }
 
 { #category : #'as yet unclassified' }

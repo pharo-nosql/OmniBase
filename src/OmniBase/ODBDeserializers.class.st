@@ -1,5 +1,5 @@
 Class {
 	#name : #ODBDeserializers,
 	#superclass : #Object,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Serializers'
 }

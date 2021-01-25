@@ -5,7 +5,7 @@ Class {
 		'classesToDescription',
 		'idToClassDescription'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Base'
 }
 
 { #category : #public }

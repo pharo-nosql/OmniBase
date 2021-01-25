@@ -8,7 +8,7 @@ Class {
 		'recovery',
 		'newLockPosition'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Files'
 }
 
 { #category : #'private/unclassified' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBGarbageCollectorRequest,
 	#superclass : #ODBByteStorageRequest,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Storage'
 }
 
 { #category : #public }

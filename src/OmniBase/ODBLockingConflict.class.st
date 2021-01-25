@@ -1,5 +1,5 @@
 Class {
 	#name : #ODBLockingConflict,
 	#superclass : #ODBError,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Exceptions'
 }

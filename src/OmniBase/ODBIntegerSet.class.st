@@ -6,7 +6,7 @@ Class {
 		'currentPage',
 		'changed'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Files'
 }
 
 { #category : #public }

@@ -1,7 +1,7 @@
 Class {
 	#name : #ODBDBBTreeIdentityDictionary,
 	#superclass : #ODBDBBTreeDictionary,
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #public }

@@ -6,7 +6,7 @@ Class {
 		'initialSize',
 		'newObjects'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Transaction'
 }
 
 { #category : #public }

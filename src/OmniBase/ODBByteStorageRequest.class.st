@@ -5,7 +5,7 @@ Class {
 		'objectHolder',
 		'byteArray'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Storage'
 }
 
 { #category : #'public/accessing' }

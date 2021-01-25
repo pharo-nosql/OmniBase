@@ -7,7 +7,7 @@ Class {
 	#classVars : [
 		'ClassIDs'
 	],
-	#category : 'OmniBase'
+	#category : #'OmniBase-Model'
 }
 
 { #category : #private }
