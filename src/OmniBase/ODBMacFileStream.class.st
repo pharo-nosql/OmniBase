@@ -36,7 +36,7 @@ ODBMacFileStream class >> ensureAccessMode: accessMode forFileStream: aFileStrea
 			from: self shareModeFlagLocation
 			to: self shareModeFlagLocation
 			exclusive: needsWriteAccess)
-		ifFalse: [ ((ExternalAddress loadSymbol: 'errno') signedLongAt: 1) inspect . ODBLockingConflict signal ]
+		ifFalse: [ ODBLockingConflict signal ]
 ]
 
 { #category : #locking }
