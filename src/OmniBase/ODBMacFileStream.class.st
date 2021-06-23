@@ -6,7 +6,7 @@ Class {
 
 { #category : #private }
 ODBMacFileStream class >> createFileStreamForPath: pathString createMode: createMode [
-	^ FileStream concreteStream
+	^ File
 			perform: (self streamCreationSelectorForMode: createMode)
 			with: pathString
 ]
@@ -28,15 +28,15 @@ ODBMacFileStream class >> createOn: pathString createMode: createMode accessMode
 ODBMacFileStream class >> ensureAccessMode: accessMode forFileStream: aFileStream [
 	"Check the special byte is appropriately set to allow the desired access mode.  Signal a locking conflict if there is a problem.
 	See the class comment for more information on what's going on here."
-	
 	| needsWriteAccess |
-	needsWriteAccess := (accessMode = self accessModeReadOnly) not.
-	(OSProcess accessor
-		isLockableFile: aFileStream
-		from: self shareModeFlagLocation
-		to: self shareModeFlagLocation
-		exclusive: needsWriteAccess)
-			ifFalse: [ODBLockingConflict signal].
+	
+	needsWriteAccess := accessMode ~= self accessModeReadOnly.
+	(BSDFLock
+		canLock: aFileStream fileHandle
+			from: self shareModeFlagLocation
+			to: self shareModeFlagLocation
+			exclusive: needsWriteAccess)
+		ifFalse: [ ((ExternalAddress loadSymbol: 'errno') signedLongAt: 1) inspect . ODBLockingConflict signal ]
 ]
 
 { #category : #locking }
@@ -48,21 +48,21 @@ ODBMacFileStream class >> releaseAllLocksFor: pathName fileHandle: fileHandle [
 ODBMacFileStream class >> setShareMode: shareMode forFileStream: aFileStream [
 	"Set the special byte appropriately for the desired share mode.  Signal a locking conflict if there is a problem.
 	See the class comment for more information on what's going on here."
-	
 	| flagState |
+
 	flagState := shareMode caseOf: {
 			[self shareModeShareAll] -> [nil].
 			[self shareModeShareRead] -> [false].
 			[self shareModeShareNone] -> [true].
 			[self shareModeShareWrite] -> [self halt] "don't know how to implement this on unix and it is currently unused"}.
 
-	flagState ifNotNil:
-		[(OSProcess accessor
-			lockFile: aFileStream
-			from: self shareModeFlagLocation
-			to: self shareModeFlagLocation
-			exclusive: flagState)
-				ifNil: [ODBLockingConflict signal]].
+	flagState ifNotNil: [
+		(BSDFLock
+			lock: aFileStream fileHandle
+				from: self shareModeFlagLocation
+				to: self shareModeFlagLocation
+				exclusive: flagState)
+			ifNil: [ ODBLockingConflict signal ] ]
 ]
 
 { #category : #private }
@@ -85,7 +85,7 @@ ODBMacFileStream class >> streamCreationSelectorForMode: createMode [
 { #category : #public }
 ODBMacFileStream >> lockAt: pos length: length [
 	
-	^ FLock 
+	^ BSDFLock 
 		lock: fileHandle fileHandle
 		from: pos 
 		to: pos + length - 1
@@ -106,7 +106,7 @@ ODBMacFileStream >> size [
 { #category : #public }
 ODBMacFileStream >> unlockAt: pos length: length [
 
-	^ FLock 
+	^ BSDFLock 
 		unlock: fileHandle fileHandle
 		from: pos 
 		to: pos + length - 1
