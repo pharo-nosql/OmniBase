@@ -96,17 +96,17 @@ BSDFLock class >> initialize [
 	__off64_t := FFIUInt64.
 	__pid_t := FFIUInt32.
 	
-	F_RDLCK := 0.
-	F_WRLCK := 1.
+	F_RDLCK := 1.
 	F_UNLCK := 2.
+	F_WRLCK := 3.
 	
 	SEEK_SET := 0.
 	SEEK_CUR := 1.
 	SEEK_END := 2.
 	
-	F_GETLK := 5. "12?"
-	F_SETLK := 6. "13?"
-	F_SETLKW := 7. "14?"
+	F_GETLK := 7. "12?"
+	F_SETLK := 8. "13?"
+	F_SETLKW := 9. "14?"
 	
 	F_GETFL := 3.
 	F_SETFL := 4.
