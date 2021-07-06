@@ -22,7 +22,7 @@ Class {
 		'__off64_t',
 		'__pid_t'
 	],
-	#category : #'OmniBase-FLock'
+	#category : #'OmniBase-Files'
 }
 
 { #category : #testing }
