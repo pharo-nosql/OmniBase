@@ -48,7 +48,7 @@ ODBClassManager >> addClassDescription: aClassDescription withId: classId [
 	[lastPos := pos.
 	stream position: pos.
 	previousVersionPos := stream getLong.
-	classDesc := ODBSerializer classDescriptionFrom: stream.
+	classDesc := self classDescriptionFrom: stream.
 	classDesc classID: stream getLong.
 	previousVersionPos = 0] 
 			whileFalse: [pos := previousVersionPos].
@@ -106,10 +106,21 @@ ODBClassManager >> classDescriptionAt: anInteger [
 				ifTrue: [OmniBase signalError: 'Unknown class ID in serialized persistent object'].
 			stream := infoFile stream.
 			stream position: pos + 4.
-			classInfo := ODBSerializer classDescriptionFrom: stream.
+			classInfo := self classDescriptionFrom: stream.
 			classInfo classID: anInteger.
 			self addClassInfo: classInfo].
 	^classInfo
+]
+
+{ #category : #public }
+ODBClassManager >> classDescriptionFor: aClass [
+
+    ^ ODBClassDescription new createFor: aClass
+]
+
+{ #category : #public }
+ODBClassManager >> classDescriptionFrom: aStream [ 
+	^ ODBClassDescription new loadFromStream: aStream
 ]
 
 { #category : #'public/create/open/close' }
@@ -172,7 +183,7 @@ ODBClassManager >> loadInfoChainFrom: anInteger [
         stream position: pos.
         lastPos := pos.
         pos := stream getLong.
-        info := ODBSerializer classDescriptionFrom: stream.
+        info := self classDescriptionFrom: stream.
         info classID: stream getLong.
         self addClassInfo: info].
     ^lastPos
@@ -209,7 +220,7 @@ ODBClassManager >> registerNewClass: aClass [
 
 	| info pos stream unlocked |
 	unlocked := false.
-	info := ODBSerializer classDescriptionFor: aClass.
+	info := self classDescriptionFor: aClass.
 	idTable waitForAddingLock.
 	
 	[pos := infoFile at: aClass name
@@ -249,7 +260,7 @@ ODBClassManager >> registerNewClassVersion: aClass from: anInteger [
 			pos := stream getLong.
 			pos == 0 
 				ifTrue: 
-					[info := ODBSerializer classDescriptionFor: aClass.
+					[info := self classDescriptionFor: aClass.
 					pos := stream setToEnd.
 					info classID: (idTable add: pos).
 					stream putLong: 0.
@@ -262,7 +273,7 @@ ODBClassManager >> registerNewClassVersion: aClass from: anInteger [
 					unlocked := idTable unlockAdding.
 					self addClassInfo: info.
 					^info].
-			info := ODBSerializer classDescriptionFrom: stream.
+			info := self classDescriptionFrom: stream.
 			info classID: stream getLong.
 			self addClassInfo: info.
 			(info := self find: aClass) isNil 

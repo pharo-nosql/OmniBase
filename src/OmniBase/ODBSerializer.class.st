@@ -17,20 +17,9 @@ Class {
 }
 
 { #category : #public }
-ODBSerializer class >> classDescriptionFor: aClass [
-
-    ^ODBClassDescription new createFor: aClass
-]
-
-{ #category : #public }
-ODBSerializer class >> classDescriptionFrom: aStream [ 
-	^ODBClassDescription new loadFromStream: aStream
-]
-
-{ #category : #public }
 ODBSerializer class >> new [
 
-	^super new initialize
+	^ super new 
 ]
 
 { #category : #public }

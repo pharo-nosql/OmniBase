@@ -14,6 +14,17 @@ ODBClassManagerForSerialization >> classDescriptionAt: anInteger [
 		ifAbsent: [self error: '[Deserializer] Class description not found']
 ]
 
+{ #category : #public }
+ODBClassManagerForSerialization >> classDescriptionFor: aClass [
+
+    ^ODBClassDescription new createFor: aClass
+]
+
+{ #category : #public }
+ODBClassManagerForSerialization >> classDescriptionFrom: aStream [ 
+	^ ODBClassDescription new loadFromStream: aStream
+]
+
 { #category : #private }
 ODBClassManagerForSerialization >> initializeForSerialization [
 	idToClassDescription := OrderedCollection new.
@@ -29,7 +40,7 @@ ODBClassManagerForSerialization >> loadFromStream: stream [
 	1 to: n
 		do: 
 			[:i | 
-			classDescription := ODBSerializer classDescriptionFrom: stream.
+			classDescription := self classDescriptionFrom: stream.
 			classDescription classID: i.
 			idToClassDescription add: classDescription]
 ]
@@ -39,7 +50,7 @@ ODBClassManagerForSerialization >> register: aClass [
 	| classDescription |
 	^classesToDescription at: aClass
 		ifAbsentPut: 
-			[classDescription := ODBSerializer classDescriptionFor: aClass.
+			[classDescription := self classDescriptionFor: aClass.
 			idToClassDescription add: classDescription.
 			classDescription classID: idToClassDescription size.
 			classDescription]
