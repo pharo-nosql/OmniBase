@@ -250,13 +250,27 @@ OmniBase class >> warningMessage: aString [
 { #category : #private }
 OmniBase >> classManager [
 
-    ^classManager
+	^ classManager ifNil: [ 
+		classManager := self classManagerClass new ]
+]
+
+{ #category : #'as yet unclassified' }
+OmniBase >> classManagerClass [ 
+
+	^ ODBClassManager 
 ]
 
 { #category : #private }
 OmniBase >> clientManager [
 
-    ^clientManager
+	^ clientManager ifNil: [ 
+		clientManager := self clientManagerClass new ]
+]
+
+{ #category : #public }
+OmniBase >> clientManagerClass [ 
+
+	^ ODBClientManager
 ]
 
 { #category : #public }
@@ -307,10 +321,10 @@ OmniBase >> createOn: dirName [
 	[rootDir := dirName.
 	(ODBFileStream directoryExists: rootDir) 
 		ifFalse: [ODBFileStream directoryCreate: rootDir].
-	classManager := ODBClassManager new createOn: self.
-	objectManager := ODBObjectManager new createOn: self.
-	transactionManager := ODBTransactionManager new createOn: self.
-	clientManager := ODBClientManager new createOn: self.
+	classManager := self classManager createOn: self.
+	objectManager := self objectManager createOn: self.
+	transactionManager := self transactionManager createOn: self.
+	clientManager := self clientManager createOn: self.
 	self opened.
 	clientManager localClient makeRootObject] 
 			ifCurtailed: [self close]
@@ -457,7 +471,14 @@ OmniBase >> numberOfClients [
 { #category : #private }
 OmniBase >> objectManager [
 
-    ^objectManager
+	^ objectManager ifNil: [ 
+		objectManager := self objectManagerClass new ]
+]
+
+{ #category : #public }
+OmniBase >> objectManagerClass [ 
+
+	^ ODBObjectManager
 ]
 
 { #category : #private }
@@ -476,10 +497,10 @@ OmniBase >> openOn: dirName [
 
 	
 	[rootDir := dirName.
-	classManager := ODBClassManager new openOn: self.
-	objectManager := ODBObjectManager new openOn: self.
-	transactionManager := ODBTransactionManager new openOn: self.
-	clientManager := ODBClientManager new openOn: self.
+	classManager := self classManager openOn: self.
+	objectManager := self objectManager openOn: self.
+	transactionManager := self transactionManager openOn: self.
+	clientManager := self clientManager openOn: self.
 	self opened] 
 			ifCurtailed: [self close].
 	self freeDiskSpace < 5242880 ifTrue: [OmniBase warningMessage: 'Low disk space !']
@@ -530,5 +551,11 @@ OmniBase >> setUserDescription: aString [
 { #category : #private }
 OmniBase >> transactionManager [
 
-    ^transactionManager
+    ^ transactionManager ifNil: [ 
+		transactionManager := self transactionManagerClass new ]
+]
+
+{ #category : #public }
+OmniBase >> transactionManagerClass [ 
+	^ ODBTransactionManager
 ]
