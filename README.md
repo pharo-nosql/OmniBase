@@ -19,5 +19,4 @@ Metacello new
 
 ---
 
-
 MIT - License

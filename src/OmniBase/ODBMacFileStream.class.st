@@ -75,16 +75,20 @@ ODBMacFileStream class >> shareModeFlagLocation [
 { #category : #private }
 ODBMacFileStream class >> streamCreationSelectorForMode: createMode [
 	^ createMode caseOf:  {
-		[self createModeCreateAlways] -> [#forceNewFileNamed:].
-		[self createModeCreateNew] -> [#newFileNamed:].
-		[self createModeOpenAlways] -> [#fileNamed:].
-		[self createModeOpenExisting] -> [#oldFileNamed:]}
+		[self createModeCreateAlways] -> [#openAndTruncateForWriteFileNamed:].
+		[self createModeCreateNew] -> [#openForWriteFileNamed:].
+		[self createModeOpenAlways] -> [#openForWriteFileNamed:].
+		[self createModeOpenExisting] -> [#openForWriteFileNamed:]}
 
 ]
 
 { #category : #public }
 ODBMacFileStream >> lockAt: pos length: length [
-	^ (OSProcess accessor lockFile: fileHandle from: pos to: pos + length -1) notNil
+	
+	^ FLock 
+		lock: fileHandle fileHandle
+		from: pos 
+		to: pos + length - 1
 ]
 
 { #category : #public }
@@ -101,5 +105,9 @@ ODBMacFileStream >> size [
 
 { #category : #public }
 ODBMacFileStream >> unlockAt: pos length: length [
-	^ (OSProcess accessor unlockFile: fileHandle from: pos to: pos + length -1) notNil
+
+	^ FLock 
+		unlock: fileHandle fileHandle
+		from: pos 
+		to: pos + length - 1
 ]
