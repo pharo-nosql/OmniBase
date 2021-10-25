@@ -394,7 +394,7 @@ ODBLocalTransaction >> store: anObject in: anODBContainerOrString ifLocked: aBlo
 			anObject odbTransaction == self ifFalse: [objectToStore := anObject odbResolve]].
 	transactionObject := self getTransactionObject: objectToStore
 				ifAbsent: 
-					[anODBContainerOrString class == String 
+					[(anODBContainerOrString class inheritsFrom: String) 
 						ifTrue: 
 							[container := dbConnection objectManager containerNamed: anODBContainerOrString
 										ifAbsent: [OmniBase signalError: 'Invalid container name']]

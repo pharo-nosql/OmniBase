@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'status'
 	],
-	#category : #'OmniBase-Files'
+	#category : #'OmniBase-GC'
 }
 
 { #category : #public }

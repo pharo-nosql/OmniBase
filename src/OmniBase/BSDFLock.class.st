@@ -1,9 +1,5 @@
-"
-A flock structure as defined in <fcntl.h>
-It implements some lock/unlock functions (wrapping `fcntl` function).
-"
 Class {
-	#name : #FLock,
+	#name : #BSDFLock,
 	#superclass : #FFIStructure,
 	#classVars : [
 		'F_GETFL',
@@ -30,7 +26,7 @@ Class {
 }
 
 { #category : #testing }
-FLock class >> canLock: fileHandle from: start to: length exclusive: exclusive [
+BSDFLock class >> canLock: fileHandle from: start to: length exclusive: exclusive [
 	| lock result |
 	
 	lock := self newLockExclusive: exclusive start: start length: length.
@@ -44,7 +40,7 @@ FLock class >> canLock: fileHandle from: start to: length exclusive: exclusive [
 ]
 
 { #category : #private }
-FLock class >> fcntl: fd command: cmd struct: struct [
+BSDFLock class >> fcntl: fd command: cmd struct: struct [
 
 	^ self 
 		ffiCall: #(int fcntl(int fd, int cmd, FLock *struct))
@@ -52,7 +48,7 @@ FLock class >> fcntl: fd command: cmd struct: struct [
 ]
 
 { #category : #private }
-FLock class >> fcntl: fd command: cmd value: value [
+BSDFLock class >> fcntl: fd command: cmd value: value [
 
 	^ self 
 		ffiCall: #(int fcntl(int fd, int cmd, int value))
@@ -60,20 +56,20 @@ FLock class >> fcntl: fd command: cmd value: value [
 ]
 
 { #category : #'field definition' }
-FLock class >> fieldsDesc [
+BSDFLock class >> fieldsDesc [
 	"self rebuildFieldAccessors"
 
 	^ #(
-	short l_type;
-	short l_whence;
 	__off64_t l_start;
 	__off64_t l_len;
 	__pid_t l_pid;	
+	int l_type;
+	int l_whence;
 	)
 ]
 
 { #category : #private }
-FLock class >> fileno: stream [
+BSDFLock class >> fileno: stream [
 
 	^ self 
 		ffiCall: #(int fileno("FILE *"void *stream))
@@ -81,7 +77,7 @@ FLock class >> fileno: stream [
 ]
 
 { #category : #private }
-FLock class >> flock: fd operation: operation [
+BSDFLock class >> flock: fd operation: operation [
 
 	^ self 
 		ffiCall: #(int flock(int fd, int operation))
@@ -89,28 +85,28 @@ FLock class >> flock: fd operation: operation [
 ]
 
 { #category : #private }
-FLock class >> getpid [
+BSDFLock class >> getpid [
 
 	^ self ffiCall: #(__pid_t getpid()) module: LibC
 ]
 
 { #category : #'class initialization' }
-FLock class >> initialize [
+BSDFLock class >> initialize [
 
 	__off64_t := FFIUInt64.
 	__pid_t := FFIUInt32.
 	
-	F_RDLCK := 0.
-	F_WRLCK := 1.
+	F_RDLCK := 1.
 	F_UNLCK := 2.
+	F_WRLCK := 3.
 	
 	SEEK_SET := 0.
 	SEEK_CUR := 1.
 	SEEK_END := 2.
 	
-	F_GETLK := 5. "12?"
-	F_SETLK := 6. "13?"
-	F_SETLKW := 7. "14?"
+	F_GETLK := 7. "12?"
+	F_SETLK := 8. "13?"
+	F_SETLKW := 9. "14?"
 	
 	F_GETFL := 3.
 	F_SETFL := 4.
@@ -119,7 +115,7 @@ FLock class >> initialize [
 ]
 
 { #category : #'accessing locking' }
-FLock class >> lock: fileHandle from: start to: length [
+BSDFLock class >> lock: fileHandle from: start to: length [
 	
 	^ self 
 		lock: fileHandle 
@@ -129,7 +125,7 @@ FLock class >> lock: fileHandle from: start to: length [
 ]
 
 { #category : #'accessing locking' }
-FLock class >> lock: fileHandle from: start to: length exclusive: exclusive [
+BSDFLock class >> lock: fileHandle from: start to: length exclusive: exclusive [
 	| lock result |
 	
 	lock := self newLockExclusive: exclusive start: start length: length.
@@ -142,7 +138,7 @@ FLock class >> lock: fileHandle from: start to: length exclusive: exclusive [
 ]
 
 { #category : #'instance creation' }
-FLock class >> newLockExclusive: exclusive start: start length: length [
+BSDFLock class >> newLockExclusive: exclusive start: start length: length [
 	
 	^ self 
 		newType: (exclusive ifTrue: [ F_WRLCK ] ifFalse: [ F_RDLCK ])
@@ -151,7 +147,7 @@ FLock class >> newLockExclusive: exclusive start: start length: length [
 ]
 
 { #category : #'instance creation' }
-FLock class >> newType: type start: start length: length [
+BSDFLock class >> newType: type start: start length: length [
 	
 	^ self new 
 		l_type: type;
@@ -163,7 +159,7 @@ FLock class >> newType: type start: start length: length [
 ]
 
 { #category : #'instance creation' }
-FLock class >> newUnlockStart: start length: length [
+BSDFLock class >> newUnlockStart: start length: length [
 	
 	^ self 
 		newType: F_UNLCK
@@ -172,7 +168,7 @@ FLock class >> newUnlockStart: start length: length [
 ]
 
 { #category : #accessing }
-FLock class >> setNonBlock: fileHandle [
+BSDFLock class >> setNonBlock: fileHandle [
 	| fd flags |
 	
 	fd := self fileno: fileHandle.
@@ -183,7 +179,7 @@ FLock class >> setNonBlock: fileHandle [
 ]
 
 { #category : #'accessing locking' }
-FLock class >> unlock: fileHandle from: start to: length [
+BSDFLock class >> unlock: fileHandle from: start to: length [
 	| lock result |
 	
 	lock := self newUnlockStart: start length: length.
@@ -195,68 +191,68 @@ FLock class >> unlock: fileHandle from: start to: length [
 	^ result ~= -1
 ]
 
-{ #category : #'accessing structure variables' }
-FLock >> l_len [
+{ #category : #'accessing - structure variables' }
+BSDFLock >> l_len [
 	"This method was automatically generated"
 	^handle unsignedLongLongAt: OFFSET_L_LEN
 ]
 
-{ #category : #'accessing structure variables' }
-FLock >> l_len: anObject [
+{ #category : #'accessing - structure variables' }
+BSDFLock >> l_len: anObject [
 	"This method was automatically generated"
 	handle unsignedLongLongAt: OFFSET_L_LEN put: anObject
 ]
 
-{ #category : #'accessing structure variables' }
-FLock >> l_pid [
+{ #category : #'accessing - structure variables' }
+BSDFLock >> l_pid [
 	"This method was automatically generated"
 	^handle unsignedLongAt: OFFSET_L_PID
 ]
 
-{ #category : #'accessing structure variables' }
-FLock >> l_pid: anObject [
+{ #category : #'accessing - structure variables' }
+BSDFLock >> l_pid: anObject [
 	"This method was automatically generated"
 	handle unsignedLongAt: OFFSET_L_PID put: anObject
 ]
 
-{ #category : #'accessing structure variables' }
-FLock >> l_start [
+{ #category : #'accessing - structure variables' }
+BSDFLock >> l_start [
 	"This method was automatically generated"
 	^handle unsignedLongLongAt: OFFSET_L_START
 ]
 
-{ #category : #'accessing structure variables' }
-FLock >> l_start: anObject [
+{ #category : #'accessing - structure variables' }
+BSDFLock >> l_start: anObject [
 	"This method was automatically generated"
 	handle unsignedLongLongAt: OFFSET_L_START put: anObject
 ]
 
-{ #category : #'accessing structure variables' }
-FLock >> l_type [
+{ #category : #'accessing - structure variables' }
+BSDFLock >> l_type [
 	"This method was automatically generated"
-	^handle signedShortAt: OFFSET_L_TYPE
+	^handle signedLongAt: OFFSET_L_TYPE
 ]
 
-{ #category : #'accessing structure variables' }
-FLock >> l_type: anObject [
+{ #category : #'accessing - structure variables' }
+BSDFLock >> l_type: anObject [
 	"This method was automatically generated"
-	handle signedShortAt: OFFSET_L_TYPE put: anObject
+	handle signedLongAt: OFFSET_L_TYPE put: anObject
 ]
 
-{ #category : #'accessing structure variables' }
-FLock >> l_whence [
+{ #category : #'accessing - structure variables' }
+BSDFLock >> l_whence [
 	"This method was automatically generated"
-	^handle signedShortAt: OFFSET_L_WHENCE
+	^handle signedLongAt: OFFSET_L_WHENCE
 ]
 
-{ #category : #'accessing structure variables' }
-FLock >> l_whence: anObject [
+{ #category : #'accessing - structure variables' }
+BSDFLock >> l_whence: anObject [
 	"This method was automatically generated"
-	handle signedShortAt: OFFSET_L_WHENCE put: anObject
+	handle signedLongAt: OFFSET_L_WHENCE put: anObject
 ]
 
 { #category : #printing }
-FLock >> printOn: aStream [ 
+BSDFLock >> printOn: aStream [ 
 	"Append to the argument, aStream, the names and values of all the record's variables."
 
 	aStream nextPutAll: self class name; nextPutAll: ' ( '; cr.

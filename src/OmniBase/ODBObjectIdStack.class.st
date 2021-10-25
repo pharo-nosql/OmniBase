@@ -8,7 +8,7 @@ Class {
 		'valueSize',
 		'bottom'
 	],
-	#category : #'OmniBase-Files'
+	#category : #'OmniBase-GC'
 }
 
 { #category : #public }

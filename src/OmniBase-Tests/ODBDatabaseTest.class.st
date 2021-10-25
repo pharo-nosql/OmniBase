@@ -128,7 +128,7 @@ ODBDatabaseTest >> testMakePersistent [
 
 { #category : #tests }
 ODBDatabaseTest >> testNewPersistent [
-
+self halt.
 	[ OrderedCollection newPersistent
 		add: 'string object';
 		add: 1;
@@ -137,7 +137,7 @@ ODBDatabaseTest >> testNewPersistent [
 ]
 
 { #category : #tests }
-ODBDatabaseTest >> testNumberOfClientsIsZero [
+ODBDatabaseTest >> testNoClientsAfterCreation [
 
 	self assert: db numberOfClients equals: 0.
 	
@@ -186,4 +186,13 @@ ODBDatabaseTest >> testObjectLocking [
 	
 	"Object should be changed"
 	self assert: coll first = 'Changed collection'
+]
+
+{ #category : #tests }
+ODBDatabaseTest >> testOneClientAfterOpening [
+
+	| client |
+	client := db localClient.
+	self assert: db numberOfClients equals: 1.
+	
 ]
