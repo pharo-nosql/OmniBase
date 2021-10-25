@@ -6,6 +6,8 @@ The changes at the time are only a little twist on the code as it is on the name
 
 MoniBase is a Smalltalk efficient object repository. Based on [BTrees](http://en.wikipedia.org/wiki/B-tree) and the filesystem, it has full [ACID](http://en.wikipedia.org/wiki/ACID) features.
 
+For a log of changes have a look at [Changes](./changes.md)
+
 ### Loading 
 
 Use this snippet to load it into your [Pharo](http://www.pharo.org)* image:
