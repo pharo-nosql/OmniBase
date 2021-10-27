@@ -56,6 +56,7 @@ ODBDatabaseTest >> expectedFailures [
 
 { #category : #tests }
 ODBDatabaseTest >> testBackup [
+
 	"Test database backup."
 
 	| t obj |
@@ -68,15 +69,16 @@ ODBDatabaseTest >> testBackup [
 	obj at: 'test' put: 'test'.
 	t root at: 'backup2' put: obj.
 	t commit.
-	db createBackupOn: self dir, 'BackupTest'.
+	db createBackupOn: self dir , 'BackupTest'.
 	db close.
-	db := OmniBase openOn: self dir, 'BackupTest'.
+	db := OmniBase openOn: self dir , 'BackupTest'.
 	t := db newTransaction.
-	
-	self assert: (t root at: 'backup1') = (Array with: 'to je test').
-	self assert: ((t root at: 'backup2') at: 'test') = 'test'.
-	
-	(self dir, 'BackupTest') asFileReference ensureDeleteAll
+	self
+		assert: (t root at: 'backup1')
+		equals: (Array with: 'to je test').
+	self assert: ((t root at: 'backup2') at: 'test') equals: 'test'.
+
+	(self dir , 'BackupTest') asFileReference ensureDeleteAll
 ]
 
 { #category : #tests }
@@ -167,15 +169,15 @@ ODBDatabaseTest >> testNoClientsAfterCreation [
 
 { #category : #tests }
 ODBDatabaseTest >> testObjectLocking [
+
 	"Test if local object locking works with transactions running within one database connection."
 
 	| t1 t2 t3 coll collCopy |
-	
 	"prepare"
-	
-	[coll := OrderedCollection with: 'This collection will be locked'.
-	OmniBase root at: 'lockTest' put: coll] 
-			evaluateAndCommitIn: db newTransaction.
+	[ 
+	coll := OrderedCollection with: 'This collection will be locked'.
+	OmniBase root at: 'lockTest' put: coll ] evaluateAndCommitIn:
+		db newTransaction.
 	"test"
 	t1 := db newTransaction.
 	t2 := db newTransaction.
@@ -199,15 +201,14 @@ ODBDatabaseTest >> testObjectLocking [
 		markDirty: coll;
 		commit.
 	collCopy := t2 root at: 'lockTest'.
-	
-	self assert: collCopy first = 'This collection will be locked'.
+	self assert: collCopy first equals: 'This collection will be locked'.
 	"Lock should fail as it is already changed in t1"
 	self deny: (t2 lock: collCopy).
 	t2 := db newTransaction.
 	coll := t2 root at: 'lockTest'.
-	
+
 	"Object should be changed"
-	self assert: coll first = 'Changed collection'
+	self assert: coll first equals: 'Changed collection'
 ]
 
 { #category : #tests }
