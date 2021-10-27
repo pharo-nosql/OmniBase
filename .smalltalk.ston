@@ -1,7 +1,7 @@
 SmalltalkCISpec {
   #loading : [
       SCIMetacelloLoadSpec {
-          #baseline : 'OmniBase',
+          #baseline : 'MoniBase',
           #directory : 'src',
           #platforms : [ #pharo ]
       }
