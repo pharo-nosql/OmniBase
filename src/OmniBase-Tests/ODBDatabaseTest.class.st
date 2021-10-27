@@ -184,6 +184,7 @@ ODBDatabaseTest >> testObjectLocking [
 		commit.
 	collCopy := t2 root at: 'lockTest'.
 	self assert: collCopy first equals: 'This collection will be locked'.
+	"Lock should fail as it is already changed in t1"
 	self deny: (t2 lock: collCopy).
 	t2 := db newTransaction.
 	coll := t2 root at: 'lockTest'.

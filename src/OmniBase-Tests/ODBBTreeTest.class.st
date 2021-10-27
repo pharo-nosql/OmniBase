@@ -6,7 +6,9 @@ Class {
 
 { #category : #tests }
 ODBBTreeTest >> testBTree [
+
 	"Test basic B-Tree dictionary functionality."
+
 	| t dict |
 	t := db newTransaction.
 	dict := db newBTreeDictionary: 20.
@@ -27,7 +29,7 @@ ODBBTreeTest >> testBTree [
 	self deny: (dict includesKey: 'none').
 	self assert: (dict includesKey: 3).
 	self deny: (dict includesKey: 'temp').
-	self assert: dict size = 5.
+	self assert: dict size equals: 5.
 
 	t makePersistent: dict.
 
@@ -49,7 +51,7 @@ ODBBTreeTest >> testBTree [
 	self assert: (dict includesKey: 'Test').
 	self deny: (dict includesKey: 'none').
 	self assert: (dict includesKey: 3).
-	dict size = 5 ifFalse: [self halt].
+	self assert: dict size equals: 5.
 
 	t root at: 'b-tree' put: dict.
 	t commit.
@@ -64,7 +66,7 @@ ODBBTreeTest >> testBTree [
 	self assert: (dict includesKey: 'Test').
 	self deny: (dict includesKey: 'none').
 	self assert: (dict includesKey: 3).
-	self assert: dict size = 5.
+	self assert: dict size equals: 5.
 
 	dict removeKey: 2.
 	self deny: (dict includesKey: 2).
@@ -74,13 +76,13 @@ ODBBTreeTest >> testBTree [
 	t checkpoint.
 
 	dict at: 2 put: 'blabla'.
-	self assert: dict size = 5.
+	self assert: dict size equals: 5.
 
 	t commit.
 
 	t := db newTransaction.
 	dict := t root at: 'b-tree'.
-	(dict at: 2) = 'blabla' ifFalse: [self halt].
+	self assert: (dict at: 2) equals: 'blabla'
 ]
 
 { #category : #tests }
