@@ -28,7 +28,6 @@ ODBObjectManagerTest >> testClassVersionReshapes [
 		one: 'one1';
 		two: 'two1';
 		three: 'three1'.
-		self halt.
 	transaction := db newTransaction.
 	transaction makePersistent: obj1.
 	transaction root at: 'test1' put: obj1.
