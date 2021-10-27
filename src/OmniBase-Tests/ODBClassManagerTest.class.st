@@ -27,11 +27,11 @@ ODBClassManagerTest >> testClassChangeBumpsVersion [
 	tmpClass := ODBTestClass1 copy.
 	classInfo := classManager registerNewClass: ODBTestClass1.
 	classInfo2 := classManager registerNewClass: ODBTestClass1.
-	self assert: classInfo2 equals: classInfo. 
-	self assert: classInfo2 == classInfo. 
+	self assert: classInfo2 equals: classInfo.
+	self assert: classInfo2 identicalTo: classInfo.
 	classInfo3 := classManager registerNewClass: ODBTestClass1.
-	self assert: classInfo3 equals: classInfo. 
-	self assert: classManager lastClassId equals: 1.
+	self assert: classInfo3 equals: classInfo.
+	self assert: classManager lastClassId equals: 1
 ]
 
 { #category : #tests }
@@ -41,11 +41,10 @@ ODBClassManagerTest >> testClassIdIncrementAfterRegister [
 	self assert: classManager lastClassId equals: 0.
 	classInfo := classManager registerNewClass: ODBTestClass1.
 	self assert: classManager lastClassId equals: 1.
-	
+
 	self assert: classInfo classID equals: 1.
-	self assert: classInfo name = 'ODBTestClass1'.
-	self assert: classInfo instVarNames equals: #( one two three ).
-	
+	self assert: classInfo name equals: 'ODBTestClass1'.
+	self assert: classInfo instVarNames equals: #( one two three )
 ]
 
 { #category : #tests }
@@ -61,9 +60,9 @@ ODBClassManagerTest >> testRegisterMultipleTimesDoesNotChange [
 	self assert: classManager lastClassId equals: 0.
 	classInfo := classManager registerNewClass: ODBTestClass1.
 	classInfo2 := classManager registerNewClass: ODBTestClass1.
-	self assert: classInfo2 equals: classInfo. 
-	self assert: classInfo2 == classInfo. 
+	self assert: classInfo2 equals: classInfo.
+	self assert: classInfo2 identicalTo: classInfo.
 	classInfo3 := classManager registerNewClass: ODBTestClass1.
-	self assert: classInfo3 equals: classInfo. 
-	self assert: classManager lastClassId equals: 1.
+	self assert: classInfo3 equals: classInfo.
+	self assert: classManager lastClassId equals: 1
 ]

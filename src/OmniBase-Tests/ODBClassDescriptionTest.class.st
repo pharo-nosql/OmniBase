@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 ODBClassDescriptionTest >> testReshape [
 
-	| tmpClass obj1 obj2 transaction2 transaction info1 info2 desc1 desc2 |
+	| tmpClass desc1 desc2 |
 	tmpClass := ODBTestClass1 copy.
 	desc1 := ODBClassDescription new createFor: tmpClass. 
 	

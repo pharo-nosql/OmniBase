@@ -85,6 +85,7 @@ ODBBTreeTest >> testBTree [
 
 { #category : #tests }
 ODBBTreeTest >> testBTreeIdentity [
+
 	"Test B-Tree identity dictionary functionality."
 
 	| t dict1 dict2 obj1 obj2 obj3 |
@@ -96,32 +97,28 @@ ODBBTreeTest >> testBTreeIdentity [
 	obj3 := Array with: Date today.
 	t root at: 'obj2' put: obj2.
 	dict1 at: obj1 put: obj2.
-	
-	self assert: (dict1 at: obj1) == obj2.
-	
+	self assert: (dict1 at: obj1) identicalTo: obj2.
+
 	dict2 at: obj1 put: t root.
 	dict2 at: t root put: obj1.
 	dict1 at: t root put: obj1.
 	dict2 at: t root put: dict1.
 	dict2 at: dict2 put: obj1.
-	
-	self assert: (dict2 at: obj1) == t root.
-	self assert: dict1 size = 2.
-	self assert: dict2 size = 3.
-	
+	self assert: (dict2 at: obj1) identicalTo: t root.
+	self assert: dict1 size equals: 2.
+	self assert: dict2 size equals: 3.
+
 	dict1 at: obj3 put: Date today.
 	t makePersistent: dict2.
 	dict2 at: obj3 put: Date today.
 	dict1 removeKey: obj3.
 	dict2 removeKey: obj3.
 	t makePersistent: dict1.
-	
-	self assert: dict1 size = 2.
-	self assert: dict2 size = 3.
-	
+	self assert: dict1 size equals: 2.
+	self assert: dict2 size equals: 3.
+
 	t checkpoint.
-	
-	self assert: (dict1 at: obj1) == obj2.
+	self assert: (dict1 at: obj1) identicalTo: obj2.
 	t root at: 'identity-dict1' put: dict1.
 	dict1 at: t root put: dict2.
 	t commit.
@@ -130,10 +127,10 @@ ODBBTreeTest >> testBTreeIdentity [
 	dict2 := dict1 at: t root.
 	obj1 := dict2 at: dict2.
 	obj2 := dict1 at: obj1.
-	
+
 	self assert: ((dict2 at: obj1) isIdenticalTo: t root).
 	self assert: ((dict2 at: t root) isIdenticalTo: dict1).
-	
+
 	t checkpoint.
 	t commit.
 	t := db newTransaction
@@ -141,21 +138,22 @@ ODBBTreeTest >> testBTreeIdentity [
 
 { #category : #tests }
 ODBBTreeTest >> testBTreeIterator [
-		"Test b-tree iterator by inserting large number of associations into b-tree dictionary."
+
+	"Test b-tree iterator by inserting large number of associations into b-tree dictionary."
 
 	| dict |
-
-	[dict := OmniBase newBTreeDictionary: 5.
+	[ 
+	dict := OmniBase newBTreeDictionary: 5.
 	OmniBase root at: 'big-dict' put: dict.
-	0 to: 300 by: 2 do: [:i | dict at: i put: i printString].
-	299 to: 1 by: -2 do: [:i | dict at: i put: i printString]]
+	0 to: 300 by: 2 do: [ :i | dict at: i put: i printString ].
+	299 to: 1 by: -2 do: [ :i | dict at: i put: i printString ] ] 
 		evaluateAndCommitIn: db newTransaction.
 
-	[dict := OmniBase root at: 'big-dict'.
-	299 to: 1 by: -2 do: [:i | 
-		self assert: (dict at: i) = i printString].
-	0 to: 300 by: 2 do: [:i | 
-		self assert: (dict at: i) = i printString]]
-		evaluateIn: db newTransaction.
-
+	[ 
+	dict := OmniBase root at: 'big-dict'.
+	299 to: 1 by: -2 do: [ :i | 
+	self assert: (dict at: i) equals: i printString ].
+	0 to: 300 by: 2 do: [ :i | 
+	self assert: (dict at: i) equals: i printString ] ] evaluateIn:
+		db newTransaction
 ]
