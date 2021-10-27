@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfOmniBase,
+	#name : #BaselineOfMoniBase,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfOmniBase
+	#category : #BaselineOfMoniBase
 }
 
 { #category : #baselines }
-BaselineOfOmniBase >> baseline: spec [
+BaselineOfMoniBase >> baseline: spec [
 	<baseline>
 
 	spec for: #common do: [
