@@ -28,6 +28,38 @@ ODBTransactionTest >> testDoubleNestedContainer [
 ]
 
 { #category : #tests }
+ODBTransactionTest >> testReadOnlyTransaction [
+	| transaction accountA accountB balanceB oldBalanceA oldBalanceB |
+	"populate accounts"
+	[  OmniBase root at: 'Accounts'  put: (Dictionary new 
+		at: 'A' put: (Account new balance: 100);
+		at: 'B' put: (Account new balance: 200);
+		yourself)] evaluateAndCommitIn: db newTransaction.
+	
+	"create transaction at a point in time before the modifying transaction"
+	transaction := db newReadOnlyTransaction.
+	oldBalanceA := ((transaction root at: 'Accounts') at: 'A') balance.
+	self assert: oldBalanceA equals: 100.
+	oldBalanceB := ((transaction root at: 'Accounts') at: 'B') balance.
+	self assert: oldBalanceB equals: 200.
+	
+	accountA := (transaction root at: 'Accounts') at: 'A'.
+	accountB := (transaction root at: 'Accounts') at: 'B'.
+	accountA transfer: 1000 to: accountB.
+	transaction markDirty: (transaction root at: 'Accounts').
+	transaction commit.
+	
+	"now check if it was not commited"
+	transaction := db newTransaction.
+	
+	"now get balance of account B" 
+	balanceB := ((transaction root at: 'Accounts') at: 'B') balance.
+	"should be still the old value as the re-only transaction should have no impact"
+	self assert: balanceB equals: 200.
+
+]
+
+{ #category : #tests }
 ODBTransactionTest >> testReferenceToSecondContainer [
 	| testString second transaction transaction2 |
 	second := db objectManager containerNew: 'second'.
