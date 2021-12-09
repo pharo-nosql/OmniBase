@@ -153,11 +153,16 @@ ODBDatabaseTest >> testMakePersistent [
 
 { #category : #tests }
 ODBDatabaseTest >> testNewPersistent [
-	[ OrderedCollection newPersistent
+	| collection |
+	[ collection := OrderedCollection newPersistent
 		add: 'string object';
 		add: 1;
-		add: Date today ] evaluateAndCommitIn: db newTransaction.
-
+		add: Date today;
+		yourself ] evaluateAndCommitIn: db newTransaction.
+	
+	self assert: collection first equals: 'string object'.
+	self assert: collection second equals: 1.
+	self assert: collection third equals: Date today.
 ]
 
 { #category : #tests }
