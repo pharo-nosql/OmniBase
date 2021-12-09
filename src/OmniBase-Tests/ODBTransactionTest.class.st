@@ -24,7 +24,7 @@ ODBTransactionTest >> testDoubleNestedContainer [
 	self assert: (transaction2 root at: 'dict')  isODBReference.
 	self assert: ((transaction2 root at: 'dict') at: 'nestedkey')  isODBReference.
 	self assert: (db objectManager containerNamed: 'second') numberOfObjects equals: 1.
-	self assert: (db objectManager containerNamed: 'third') numberOfObjects equals: 1.
+	self assert: (db containerNamed: 'third') numberOfObjects equals: 1.
 ]
 
 { #category : #tests }
@@ -62,7 +62,8 @@ ODBTransactionTest >> testReadOnlyTransaction [
 { #category : #tests }
 ODBTransactionTest >> testReferenceToSecondContainer [
 	| testString second transaction transaction2 |
-	second := db objectManager containerNew: 'second'.
+	second := db newContainer: 'second'.
+	self assert: (db existsContainerNamed: 'second').
 	transaction := db newTransaction.
 	testString := 'myteststring'.
 	transaction store:  testString in: 'second'.
@@ -73,7 +74,8 @@ ODBTransactionTest >> testReferenceToSecondContainer [
 	self assert: db objectManager containers size equals: 2.
 	transaction2 := db newTransaction. 
 	self assert: (transaction2 root at: 'test1') first isODBReference.
-	self assert: (db objectManager containerNamed: 'second') numberOfObjects equals: 1.
+	self assert: (db containerNamed: 'second' ifAbsent: [self error]) numberOfObjects equals: 1.
+	
 ]
 
 { #category : #tests }
