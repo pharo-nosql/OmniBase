@@ -149,7 +149,7 @@ ODBDeserializer >> deserializeFrom: aStream referenceManager: aReferenceManager 
 	classes := OrderedCollection new: 30.
 	counter := 0.
 	classesCounter := 0.
-	^self nextObject
+	^self odbNextObject
 ]
 
 { #category : #public }
