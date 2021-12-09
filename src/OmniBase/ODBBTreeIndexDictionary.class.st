@@ -32,7 +32,7 @@ ODBBTreeIndexDictionary >> at: aKey ifAbsent: aBlock [
 ]
 
 { #category : #public }
-ODBBTreeIndexDictionary >> at: aKey ifAbsentPut: aBlock [ 
+ODBBTreeIndexDictionary >> at: aKey ifAbsentPut: aBlock [
 	^ self at: aKey ifAbsent: [self at: aKey put: aBlock value]
 ]
 
