@@ -12,9 +12,6 @@ Class {
 		'referenceManager',
 		'transaction'
 	],
-	#pools : [
-		'ODBTypeCodes'
-	],
 	#classInstVars : [
 		'classArray'
 	],
