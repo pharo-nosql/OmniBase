@@ -8,6 +8,24 @@ Class {
 }
 
 { #category : #tests }
+ODBIdentityDictionaryTest >> testAssociationsDo [
+	| dict |
+	dict := ODBIdentityDictionary new.
+	dict at: #hello put: true.
+	dict at: #hell2 put: true.
+	dict associationsDo: [ :each | self assert: each value ]
+]
+
+{ #category : #tests }
+ODBIdentityDictionaryTest >> testAtifAbsentPut [
+	| dict |
+	dict := ODBIdentityDictionary new.
+	dict at: #hello ifAbsentPut: #something.
+	dict at: #hello ifAbsentPut: #somethingElse.
+	self assert: (dict at: #hello) equals: #something
+]
+
+{ #category : #tests }
 ODBIdentityDictionaryTest >> testIncludesKey [
 	| dict |
 	dict := ODBIdentityDictionary new.
