@@ -91,7 +91,26 @@ ODBSerializationTest >> testSerializationCharacter [
 	self assert: (serialized at: 7) equals: ODBCharacterCode.
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
-	self assert: materialized equals: object
+	self assert: materialized equals: object.
+	
+	object := 16rF600 asCharacter.
+	serialized := ODBSerializer serializeToBytes: object.
+	self assert: serialized equals: #[0 0 0 0 0 0 29 0 246].
+	self assert: (serialized at: 7) equals: ODBDoubleByteCharacterCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object.
+]
+
+{ #category : #tests }
+ODBSerializationTest >> testSerializationClass [
+	| object serialized materialized |
+	object := Point.
+	serialized := ODBSerializer serializeToBytes: object.
+	self assert: serialized equals: #[0 0 0 0 0 0 26 5 80 111 105 110 116].
+	self assert: (serialized at: 7) equals: ODBClassCode.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized  equals: Point.
 ]
 
 { #category : #tests }
@@ -179,6 +198,33 @@ ODBSerializationTest >> testSerializationMessage [
 ]
 
 { #category : #tests }
+ODBSerializationTest >> testSerializationMessageSend [
+	| object serialized materialized |
+	object := MessageSend receiver: 1 selector: #+ argument: 2.
+	serialized := ODBSerializer serializeToBytes: object.
+	self assert: serialized equals: #[0 0 2 0 0 0 20 51 18 1 43 35 1 52].
+	self assert: (serialized at: 7) equals: ODBMessageSendCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized selector equals: object selector.
+	self assert: materialized arguments equals: object arguments.
+	self assert: materialized receiver equals: object receiver.
+]
+
+{ #category : #tests }
+ODBSerializationTest >> testSerializationODBPersistentDictionary [
+	| object serialized materialized |
+	object :=  ODBPersistentDictionary new.
+	object at: #key put: 1.
+	serialized := ODBSerializer serializeToBytes: object.
+	self assert: serialized equals: #[0 0 1 0 0 0 83 1 18 3 107 101 121 51].
+	self assert: (serialized at: 7) equals: ODBPersistentDictionaryCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object
+]
+
+{ #category : #tests }
 ODBSerializationTest >> testSerializationObject [
 	| object serialized materialized |
 	object := Object new.
@@ -187,6 +233,30 @@ ODBSerializationTest >> testSerializationObject [
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized class equals: Object
+]
+
+{ #category : #tests }
+ODBSerializationTest >> testSerializationOrderedCollection [
+	| object serialized materialized |
+	object := #(1 2 3 5) asOrderedCollection.
+	serialized := ODBSerializer serializeToBytes: object.
+	self assert: serialized equals: #[0 0 1 0 0 0 81 4 51 52 53 55].
+	self assert: (serialized at: 7) equals: ODBOrderedCollectionCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object
+]
+
+{ #category : #tests }
+ODBSerializationTest >> testSerializationProcessSchedulerCode [
+	| object serialized materialized |
+	object := Processor.
+	serialized := ODBSerializer serializeToBytes: object.
+	self assert: serialized equals: #[0 0 0 0 0 0 22].
+	self assert: (serialized at: 7) equals: ODBProcessSchedulerCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: Processor
 ]
 
 { #category : #tests }
@@ -261,6 +331,21 @@ ODBSerializationTest >> testSerializationSymbol [
 	
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: #someSelector
+]
+
+{ #category : #tests }
+ODBSerializationTest >> testSerializationSystemDictionary [
+	| object serialized materialized |
+	object := Smalltalk globals.
+	object at: #Object put: Object.
+	serialized := ODBSerializer serializeToBytes: object.
+	self assert: serialized equals: #[0 0 0 0 0 0 19].
+	self assert: (serialized at: 7) equals: ODBSystemDictionaryCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self flag: #TODO.
+	"this shows that we do not de-serialize the dictionary, but the global Smalltalk binding"
+	self assert: materialized equals: Smalltalk
 ]
 
 { #category : #tests }
