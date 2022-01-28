@@ -45,19 +45,19 @@ Class {
 		'ODBWideStringCode'
 	],
 	#classInstVars : [
-		'encoding'
+		'encoder'
 	],
 	#category : #'OmniBase-Base'
 }
 
 { #category : #accessing }
-ODBTypeCodes class >> encoding [
-	^encoding
+ODBTypeCodes class >> encoder [
+	^encoder
 ]
 
 { #category : #accessing }
 ODBTypeCodes class >> encoding: aString [
-	encoding := aString
+	encoder := aString asZnCharacterEncoder
 ]
 
 { #category : #initialization }
@@ -69,7 +69,7 @@ ODBTypeCodes class >> initialize [
 { #category : #initialization }
 ODBTypeCodes class >> initializeEncoding [
 	"see ZnUTFEncoder knownEncodingIdentifiers for all supported encodings"
-	encoding := #utf8
+	self encoding: #utf8
 ]
 
 { #category : #initialization }

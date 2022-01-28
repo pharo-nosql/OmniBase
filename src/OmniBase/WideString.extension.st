@@ -4,7 +4,7 @@ Extension { #name : #WideString }
 WideString >> odbBasicSerialize: serializer [
 	| buf |
 	
-	buf := (ODBTypeCodes encoding asZnCharacterEncoder) encodeString: self.
+	buf := ODBTypeCodes encoder encodeString: self.
 	serializer stream
 		putByte: 36;
 		putPositiveInteger: buf size;
@@ -17,5 +17,5 @@ WideString class >> odbDeserialize: deserializer [
 	| buf len |
 	buf := ByteArray new: (len := deserializer stream getPositiveInteger).
 	deserializer stream getBytesFor: buf len: len.
-	^deserializer register: ((ODBTypeCodes encoding asZnCharacterEncoder) decodeBytes: buf)
+	^deserializer register: (ODBTypeCodes encoder decodeBytes: buf)
 ]
