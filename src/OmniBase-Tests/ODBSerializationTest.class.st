@@ -4,11 +4,6 @@ Class {
 	#category : #'OmniBase-Tests'
 }
 
-{ #category : #testing }
-ODBSerializationTest >> expectedFailures [ 
-	^ #( testSerializationWideString )
-]
-
 { #category : #tests }
 ODBSerializationTest >> testSerializationString [ 
 	| string serialized materialized |
@@ -24,13 +19,18 @@ ODBSerializationTest >> testSerializationString [
 
 { #category : #tests }
 ODBSerializationTest >> testSerializationWideString [ 
-	| smileyCodePoint string serialized materialized |
-	smileyCodePoint := Character codePoint: 16rF600.
-	string := 'hello ', smileyCodePoint asString.
+	| string serialized materialized |
+	string := String
+		with: 16r0154 asCharacter
+		with: 16r0110 asCharacter
+		with: 16r0155 asCharacter
+		with: 16r0111 asCharacter.
+	
 	serialized := ODBSerializer serializeToBytes: string.
+	self assert: serialized equals: #[0 0 1 0 0 0 36 8 197 148 196 144 197 149 196 145].
 
-	materialized := ODBDeserializer deserializeFromBytes: serialized.
-	self assert: materialized equals: string
+	materialized := ODBDeserializer deserializeFromBytes: serialized .
+	self assert: materialized equals: string.
 
 
 ]

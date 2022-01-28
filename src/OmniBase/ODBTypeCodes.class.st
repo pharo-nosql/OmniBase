@@ -41,14 +41,35 @@ Class {
 		'ODBTimeCode',
 		'ODBTransactionCode',
 		'ODBTrueCode',
-		'ODBUndefinedObjectCode'
+		'ODBUndefinedObjectCode',
+		'ODBWideStringCode'
+	],
+	#classInstVars : [
+		'encoding'
 	],
 	#category : #'OmniBase-Base'
 }
 
+{ #category : #accessing }
+ODBTypeCodes class >> encoding [
+	^encoding
+]
+
+{ #category : #accessing }
+ODBTypeCodes class >> encoding: aString [
+	encoding := aString
+]
+
 { #category : #initialization }
 ODBTypeCodes class >> initialize [ 
-	self initializeTypeCodes
+	self initializeTypeCodes.
+	self initializeEncoding
+]
+
+{ #category : #initialization }
+ODBTypeCodes class >> initializeEncoding [
+	"see ZnUTFEncoder knownEncodingIdentifiers for all supported encodings"
+	encoding := #utf8
 ]
 
 { #category : #initialization }
@@ -80,7 +101,7 @@ ODBTypeCodes class >> initializeTypeCodes [
 	ODBTimeCode := 33.
 	ODBStringCode := 34.
 	ODBArrayCode := 35.
-	"36"
+	ODBWideStringCode := 36.
 	ODBDictionaryCode := 37.
 	ODBIdentityDictionaryCode := 38.
 	ODBFractionCode := 39.

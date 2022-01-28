@@ -85,7 +85,7 @@ ODBDeserializer class >> init [
 		at: 33 put: Time;
 		at: 34 put: String;
 		at: 35 put: Array;
-"		at: 36 put: UnicodeString;"
+		at: ODBWideStringCode put: WideString;
 		at: 37 put: Dictionary;
 		at: 38 put: IdentityDictionary;
 		at: 39 put: Fraction;
@@ -133,8 +133,7 @@ ODBDeserializer class >> init [
 		at: 81 put: OrderedCollection;
 		at: 82 put: ODBIdentityDictionary;
 		at: 83 put: ODBPersistentDictionary;
-		at: 84 put: ODBTransaction;
-		yourself.
+		at: 84 put: ODBTransaction.
 ]
 
 { #category : #public }
