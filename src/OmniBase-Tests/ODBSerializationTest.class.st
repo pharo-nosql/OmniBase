@@ -165,6 +165,27 @@ ODBSerializationTest >> testSerializationIdentityDictionary [
 { #category : #tests }
 ODBSerializationTest >> testSerializationLargeInteger [
 	| object serialized materialized |
+	
+	"Integers are small if they are in between -3 and 16"
+	"The test in addition tests LargeIntegers, but for the databse, they are just the same"
+	
+	object := 17.
+	serialized := ODBSerializer serializeToBytes: object.
+	self assert: serialized equals: #[0 0 0 0 0 0 11 17].
+	self assert: (serialized at: 7) equals: ODBLargePositiveIntegerCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object.
+	
+	object := -4.
+	serialized := ODBSerializer serializeToBytes: object.
+	self assert: serialized equals: #[0 0 0 0 0 0 12 4].
+	self assert: (serialized at: 7) equals: ODBLargeNegativeIntegerCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object.
+	
+	
 	object := SmallInteger maxVal + 1.
 	serialized := ODBSerializer serializeToBytes: object.
 	self assert: serialized equals: #[0 0 0 0 0 0 11 128 128 128 128 128 128 128 128 16].
