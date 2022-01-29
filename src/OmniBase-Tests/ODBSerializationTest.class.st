@@ -116,9 +116,9 @@ ODBSerializationTest >> testSerializationClass [
 { #category : #tests }
 ODBSerializationTest >> testSerializationDate [
 	| object serialized materialized |
-	object := Date today.
+	object := Date fromString: '29 January 2022'.
 	serialized := ODBSerializer serializeToBytes: object.
-	self assert: serialized equals: #[0 0 1 0 0 0 32 252 178 5 2].
+	self assert: serialized equals: #[0 0 1 0 0 0 32 254 178 5 2].
 	self assert: (serialized at: 7) equals: ODBDateCode.
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
