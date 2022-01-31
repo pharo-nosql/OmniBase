@@ -43,3 +43,17 @@ ODBPersistentDictionaryTest >> testRemoveKeyifAbsent [
 	
 
 ]
+
+{ #category : #tests }
+ODBPersistentDictionaryTest >> testTransaction [
+	| dict transaction |
+	transaction := db newTransaction.
+	[ dict := OmniBase newPersistentDictionary
+		add: (#test -> true);
+		yourself.
+		self assert: dict transaction equals: transaction.	
+		] evaluateAndCommitIn: transaction.
+	self assert: (dict at: #test)
+	
+
+]
