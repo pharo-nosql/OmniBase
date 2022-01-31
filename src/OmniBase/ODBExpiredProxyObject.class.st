@@ -34,13 +34,6 @@ ODBExpiredProxyObject >> becomeForward: otherObject [
 ]
 
 { #category : #public }
-ODBExpiredProxyObject >> defaultLabelForInspector [
-	"Answer the default label to be used for an Inspector window on the receiver."
-
-	^ self class name
-]
-
-{ #category : #public }
 ODBExpiredProxyObject >> doesNotUnderstand: aMessage [
 	
 	| currentTransaction freshTarget |
@@ -74,14 +67,6 @@ ODBExpiredProxyObject >> halt [
 ODBExpiredProxyObject >> inspect [
 	"Create and schedule an Inspector in which the user can examine the receiver's variables."
 	Smalltalk tools inspect: self
-]
-
-{ #category : #public }
-ODBExpiredProxyObject >> inspectorClass [
-	"Answer the class of the inspector to be used on the receiver.  Called by inspect; 
-	use basicInspect to get a normal (less useful) type of inspector."
-
-	^ Smalltalk tools inspector
 ]
 
 { #category : #public }
