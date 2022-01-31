@@ -56,6 +56,7 @@ ODBDatabaseTest >> expectedFailures [
 
 { #category : #tests }
 ODBDatabaseTest >> testBackup [
+
 	"Test database backup."
 
 	| t obj |
@@ -68,15 +69,16 @@ ODBDatabaseTest >> testBackup [
 	obj at: 'test' put: 'test'.
 	t root at: 'backup2' put: obj.
 	t commit.
-	db createBackupOn: self dir, 'BackupTest'.
+	db createBackupOn: self dir , 'BackupTest'.
 	db close.
-	db := OmniBase openOn: self dir, 'BackupTest'.
+	db := OmniBase openOn: self dir , 'BackupTest'.
 	t := db newTransaction.
-	
-	self assert: (t root at: 'backup1') = (Array with: 'to je test').
-	self assert: ((t root at: 'backup2') at: 'test') = 'test'.
-	
-	(self dir, 'BackupTest') asFileReference ensureDeleteAll
+	self
+		assert: (t root at: 'backup1')
+		equals: (Array with: 'to je test').
+	self assert: ((t root at: 'backup2') at: 'test') equals: 'test'.
+
+	(self dir , 'BackupTest') asFileReference ensureDeleteAll
 ]
 
 { #category : #tests }
@@ -122,6 +124,24 @@ ODBDatabaseTest >> testIdentity [
 ]
 
 { #category : #tests }
+ODBDatabaseTest >> testIsChanged [
+	| txn obj |
+	txn := db newTransaction.
+	obj := ODBTestClass1 new .
+	txn makePersistent: obj.
+	self assert: txn isChanged
+]
+
+{ #category : #tests }
+ODBDatabaseTest >> testIsPersistent [ 
+	| txn obj |
+	txn := db newTransaction.
+	obj := ODBTestClass1 new .
+	txn makePersistent: obj.
+	self assert: (txn isPersistent: obj)
+]
+
+{ #category : #tests }
 ODBDatabaseTest >> testMakePersistent [
 
 	| txn |
@@ -154,15 +174,15 @@ ODBDatabaseTest >> testNoClientsAfterCreation [
 
 { #category : #tests }
 ODBDatabaseTest >> testObjectLocking [
+
 	"Test if local object locking works with transactions running within one database connection."
 
 	| t1 t2 t3 coll collCopy |
-	
 	"prepare"
-	
-	[coll := OrderedCollection with: 'This collection will be locked'.
-	OmniBase root at: 'lockTest' put: coll] 
-			evaluateAndCommitIn: db newTransaction.
+	[ 
+	coll := OrderedCollection with: 'This collection will be locked'.
+	OmniBase root at: 'lockTest' put: coll ] evaluateAndCommitIn:
+		db newTransaction.
 	"test"
 	t1 := db newTransaction.
 	t2 := db newTransaction.
@@ -186,15 +206,14 @@ ODBDatabaseTest >> testObjectLocking [
 		markDirty: coll;
 		commit.
 	collCopy := t2 root at: 'lockTest'.
-	
-	self assert: collCopy first = 'This collection will be locked'.
+	self assert: collCopy first equals: 'This collection will be locked'.
 	"Lock should fail as it is already changed in t1"
 	self deny: (t2 lock: collCopy).
 	t2 := db newTransaction.
 	coll := t2 root at: 'lockTest'.
-	
+
 	"Object should be changed"
-	self assert: coll first = 'Changed collection'
+	self assert: coll first equals: 'Changed collection'
 ]
 
 { #category : #tests }
@@ -203,5 +222,125 @@ ODBDatabaseTest >> testOneClientAfterOpening [
 	| client |
 	client := db localClient.
 	self assert: db numberOfClients equals: 1.
+	
+]
+
+{ #category : #tests }
+ODBDatabaseTest >> testPersistTwoObjectsInCluster [
+	| txn obj1 obj2 |
+	obj1 := ODBTestClass1 new.
+	obj2 := ODBTestClass1 new.
+	obj1 one: obj2.
+	txn := db newTransaction.
+
+	"making only obj1 persistent stores both objects with in one byte cluster"
+	txn makePersistent: obj1.
+	txn prepare.
+	
+	self assert: txn changesPackage changes size equals: 1.
+	txn abort.
+	
+]
+
+{ #category : #tests }
+ODBDatabaseTest >> testPersistTwoObjectsSeparate [
+	| txn obj1 obj2 |
+	obj1 := ODBTestClass1 new.
+	obj2 := ODBTestClass1 new.
+	obj1 one: obj2.
+	txn := db newTransaction.
+
+	"manually making both objects persistent will lead to two separate stored objects"
+	txn makePersistent: obj2.
+	txn makePersistent: obj1.
+	txn prepare.
+	
+	self assert: txn changesPackage changes size equals: 2.
+	txn abort.
+	
+]
+
+{ #category : #tests }
+ODBDatabaseTest >> testPersistTwoObjectsWithCollectionInCluster [
+	| txn obj1 obj2 |
+	obj1 := ODBTestClass1 new.
+	obj2 := ODBTestClass1 new.
+	obj1 one: (OrderedCollection with: obj2).
+	txn := db newTransaction.
+
+	"Storing two objects with an intermediate collection stores all three objects
+	into one cluster"
+	txn makePersistent: obj1.
+	txn prepare.
+	
+	self assert: txn changesPackage changes size equals: 1.
+	txn abort.
+	
+]
+
+{ #category : #tests }
+ODBDatabaseTest >> testPersistTwoObjectsWithCollectionSeparate [
+	| txn obj1 obj2 |
+	obj1 := ODBTestClass1 new.
+	obj2 := ODBTestClass1 new.
+	obj1 one: (OrderedCollection with: obj2).
+	txn := db newTransaction.
+
+	"storing two objects with intermediate collection making both objects persistent 
+	leads to two clusters: cluster1 contains obj1 and the collection. Cluster2 contains
+	obj2"
+	txn makePersistent: obj2.
+	txn makePersistent: obj1.
+	txn prepare.
+	
+	self assert: txn changesPackage changes size equals: 2.
+	txn abort.
+	
+]
+
+{ #category : #tests }
+ODBDatabaseTest >> testPersistTwoObjectsWithDictionaryInCluster [
+	| txn obj1 obj2 dict |
+	obj1 := ODBTestClass1 new.
+	obj2 := ODBTestClass1 new.
+	txn := db newTransaction.
+	
+	"Storing two objects with an intermediate Dictionary and making both objects
+	persistent will store them into two clusters: cluster1 contains obj1 and the 
+	dictionary. Cluster2 contains obj2"
+	dict := Dictionary new.
+	txn makePersistent: dict.
+	obj1 one: dict.
+	dict at: #key put: obj2.
+	
+	txn makePersistent: obj1.
+	txn prepare.
+	
+	self assert: txn changesPackage changes size equals: 2.
+	txn abort.
+	
+]
+
+{ #category : #tests }
+ODBDatabaseTest >> testPersistTwoObjectsWithODBDictionary [
+	| txn obj1 obj2 dict |
+	obj1 := ODBTestClass1 new.
+	obj2 := ODBTestClass1 new.
+	txn := db newTransaction.
+	
+	"Storing two objects with an intermediate ODBPersistentDictionary and making 
+	obj1 and the dictionary persistent will store in multiple clusters. Cluster1 for
+	obj1 and cluster2 for the dictionary. The ODBPersistentDictionary makes all its
+	values persistent so we get three clusters"
+	dict := ODBPersistentDictionary new.
+	txn makePersistent: dict.
+	obj1 one: dict.
+	dict at: #key put: obj2.
+	
+	txn makePersistent: obj1.
+	txn prepare.
+	
+	self assert: txn changesPackage changes size equals: 3.
+	txn abort.
 	
 ]

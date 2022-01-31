@@ -295,9 +295,15 @@ OmniBase >> close [
 ]
 
 { #category : #public }
+OmniBase >> containerNamed: aName [
+	 "Answer container with containerName or default container, if container is not found."
+
+	^ objectManager containerNamed: aName
+]
+
+{ #category : #public }
 OmniBase >> containerNamed: aName ifAbsent: aBlock [
-	"Answers the container the receiver locates 
-	at aName or executes aBlock if not found."
+	"Answers the container the receiver locates at aName or executes aBlock if not found."
 
 	^ objectManager containerNamed: aName ifAbsent: aBlock 
 ]
