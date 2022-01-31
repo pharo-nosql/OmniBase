@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+OmniBaseTest class >> packageNamesUnderTest [
+	^ #(OmniBase)
+]
+
+{ #category : #accessing }
 OmniBaseTest >> collection [
 
 	| coll |
