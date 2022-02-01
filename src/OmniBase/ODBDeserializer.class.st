@@ -63,7 +63,7 @@ ODBDeserializer class >> init [
 	classArray
 		at: 2 put: ODBNewObjectNewClass;
 		at: 3 put: ODBNewObject;
-		at: ODBInternalReference put: ODBExistingObject;
+		at: 4 put: ODBExistingObject;
 		at: 5 put: ODBExternalReference;
 		at: 6 put: ODBClassManagerForSerialization;
 		at: 10 put: nil;
@@ -85,7 +85,7 @@ ODBDeserializer class >> init [
 		at: 33 put: Time;
 		at: 34 put: String;
 		at: 35 put: Array;
-		at: ODBWideStringCode put: WideString;
+		at: 36 put: WideString;
 		at: 37 put: Dictionary;
 		at: 38 put: IdentityDictionary;
 		at: 39 put: Fraction;
