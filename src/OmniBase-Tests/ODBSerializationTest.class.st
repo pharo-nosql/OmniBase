@@ -286,7 +286,7 @@ ODBSerializationTest >> testSerializationSmallFloat64 [
 	float := 1.11.
 	self assert: float class equals: SmallFloat64.
 	serialized := ODBSerializer serializeToBytes: float.
-	self assert: serialized equals: #[0 0 1 0 0 0 47 158 138 142 255 7 134 215 199 194 11].
+	self assert: serialized equals: #[0 0 0 0 0 0 47 158 138 142 255 7 134 215 199 194 11].
 	self assert: (serialized at: 7) equals: ODBSmallFloat64Code.
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized class equals: SmallFloat64.
