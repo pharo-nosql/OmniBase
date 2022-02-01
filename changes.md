@@ -2,6 +2,7 @@ Changes
 =======
 
 
+- introduced unicode serialization/deserialization with new type code 36
 - a fix for Floats to be written as immediates. Solves a problem when the same floats are written
 
 2022-01-31 - Release 0.3
