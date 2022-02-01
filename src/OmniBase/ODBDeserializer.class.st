@@ -63,26 +63,26 @@ ODBDeserializer class >> init [
 		at: 4 put: ODBExistingObject;
 		at: 5 put: ODBExternalReference;
 		at: 6 put: ODBClassManagerForSerialization;
-		at: 15 put: true;
-		at: 16 put: false;
-		at: 17 put: Message;
-		at: 20 put: MessageSend;
-		at: 19 put: Smalltalk;
-		at: 22 put: Processor;
+		at: 10 put: nil;
 		at: 11 put: ODBLargePositiveInteger;
 		at: 12 put: ODBLargeNegativeInteger;
 		at: 13 put: Character;
-		at: 29 put: ODBDoubleByteCharacter;
 		at: 14 put: UndefinedObject;
-		at: 10 put: nil;
+		at: 15 put: true;
+		at: 16 put: false;
+		at: 17 put: Message;
 		at: 18 put: Symbol;
+		at: 19 put: Smalltalk;
+		at: 20 put: MessageSend;
+		at: 22 put: Processor;
 		at: 26 put: Class;
+		at: 29 put: ODBDoubleByteCharacter;
 		at: 31 put: Association;
 		at: 32 put: Date;
 		at: 33 put: Time;
 		at: 34 put: String;
 		at: 35 put: Array;
-"		at: 36 put: UnicodeString;"
+		at: 36 put: WideString;
 		at: 37 put: Dictionary;
 		at: 38 put: IdentityDictionary;
 		at: 39 put: Fraction;
@@ -130,8 +130,7 @@ ODBDeserializer class >> init [
 		at: 81 put: OrderedCollection;
 		at: 82 put: ODBIdentityDictionary;
 		at: 83 put: ODBPersistentDictionary;
-		at: 84 put: ODBTransaction;
-		yourself.
+		at: 84 put: ODBTransaction.
 ]
 
 { #category : #public }

@@ -14,8 +14,8 @@ MessageSend class >> odbDeserialize: deserializer [
 	| result |
 	deserializer register: (result := self new).
 	^result
-		receiver: deserializer nextObject;
-		selector: deserializer nextObject;
-		arguments: deserializer nextObject;
+		receiver: deserializer odbNextObject;
+		selector: deserializer odbNextObject;
+		arguments: deserializer odbNextObject;
 		yourself
 ]
