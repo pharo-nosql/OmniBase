@@ -1,17 +1,15 @@
 OmniBase
 ========
 
-OmniBase is a Smalltalk efficient object repository. Based on [BTrees](http://en.wikipedia.org/wiki/B-tree) and the filesystem, it has full [ACID](http://en.wikipedia.org/wiki/ACID) features.
+OmniBase is a Smalltalk efficient object repository. Based on [BTrees](http://en.wikipedia.org/wiki/B-tree) and the filesystem, it has full [ACID](http://en.wikipedia.org/wiki/ACID) features. It also provides multi version concurrency control.
 
-Truth should be told, this software is old and doesn't have elegant code. **But**... it works really well for many scenarios and has a remarkable performance.
+In *nix systems if multiple instances of an database needs to kept it requires [mandatory file locking](http://www.hackinglinuxexposed.com/articles/20030623.html), so be sure you use mand on your fstab. This will be fixed in the future.
 
-In *nix systems it requires [mandatory file locking](http://www.hackinglinuxexposed.com/articles/20030623.html), so be sure you use mand on your fstab.
-
-For a clean API using it, check: [Aggregate](https://github.com/sebastianconcept/Aggregate)
-
+Omnibase uses now a unified FFI based implementations for fnctl calls for locking. Because of this the minimal supported version has changed to Pharo9.
 ### Loading 
 
-Use this snippet to load it into your [Pharo](http://www.pharo.org)* image:
+
+Use this snippet to load it into your [Pharo9](http://www.pharo.org) image:
 
 ```Smalltalk
 Metacello new 
@@ -23,9 +21,7 @@ Metacello new
 ---
 This is the Pharo Smalltalk port of David Gorisek's original work. Originally at squeaksource, now moved to github.
 
-This is a fork from Sebastian's original port.
-
-For an intro, take a look at [this presentation on slideshare](http://www.slideshare.net/esug/omni-baseobjectdatabase)
+For an intro, take a look at [this presentation on slideshare](http://www.slideshare.net/esug/omni-baseobjectdatabase) and have a look in the [Docs](docs/) folder
 
 ### Contributions
 
