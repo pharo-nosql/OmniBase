@@ -16,7 +16,7 @@ Use this snippet to load it into your [Pharo9](http://www.pharo.org) image:
 
 ```Smalltalk
 Metacello new 
-	repository: 'github://ApptiveGrid/MoniBase/src';
+	repository: 'github://pharo-nosql/OmniBase/src';
 	baseline: 'MoniBase';
 	load.
 ```
