@@ -9,8 +9,8 @@ Float >> asBtreeKeyOfSize: keySize [
 { #category : #'*omnibase' }
 Float class >> odbDeserialize: deserializer [
 
-^ BoxedFloat64  basicNew
-		at: 1 put: deserializer stream getInteger;
-		at: 2 put: deserializer stream getInteger;
-		* 1
+	^ BoxedFloat64 basicNew
+		  at: 1 put: deserializer stream getInteger;
+		  at: 2 put: deserializer stream getInteger;
+		  * 1
 ]

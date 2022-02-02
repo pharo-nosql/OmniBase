@@ -39,11 +39,6 @@ ODBMacFileStream class >> ensureAccessMode: accessMode forFileStream: aFileStrea
 		ifFalse: [ ODBLockingConflict signal ]
 ]
 
-{ #category : #locking }
-ODBMacFileStream class >> releaseAllLocksFor: pathName fileHandle: fileHandle [
-	OSProcess accessor unlockAllForFile: fileHandle
-]
-
 { #category : #private }
 ODBMacFileStream class >> setShareMode: shareMode forFileStream: aFileStream [
 	"Set the special byte appropriately for the desired share mode.  Signal a locking conflict if there is a problem.
@@ -80,6 +75,19 @@ ODBMacFileStream class >> streamCreationSelectorForMode: createMode [
 		[self createModeOpenAlways] -> [#openForWriteFileNamed:].
 		[self createModeOpenExisting] -> [#openForWriteFileNamed:]}
 
+]
+
+{ #category : #'initialize-release' }
+ODBMacFileStream >> close [
+		"Close file associatied with receiver."
+
+	fileHandle notNil ifTrue: [
+		BSDFLock 
+			unlock: fileHandle fileHandle 
+			from: 0 
+			to: self size.
+		fileHandle closed ifFalse: [ fileHandle close ] ].
+	fileHandle := nil.
 ]
 
 { #category : #public }

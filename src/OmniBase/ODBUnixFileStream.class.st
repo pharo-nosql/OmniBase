@@ -87,6 +87,19 @@ ODBUnixFileStream class >> streamCreationSelectorForMode: createMode [
 
 ]
 
+{ #category : #'initialize-release' }
+ODBUnixFileStream >> close [
+		"Close file associatied with receiver."
+
+	fileHandle notNil ifTrue: [
+		FLock 
+			unlock: fileHandle fileHandle 
+			from: 0 
+			to: self size.
+		fileHandle closed ifFalse: [ fileHandle close ] ].
+	fileHandle := nil.
+]
+
 { #category : #public }
 ODBUnixFileStream >> lockAt: pos length: length [
 	

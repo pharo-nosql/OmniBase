@@ -7,6 +7,11 @@ Class {
 	#category : #'OmniBase-Tests'
 }
 
+{ #category : #accessing }
+ODBDiskBasedTest class >> defaultTimeLimit [ 
+	^ 5 seconds
+]
+
 { #category : #running }
 ODBDiskBasedTest >> createDatabaseOnFileSystem [
 	| tmpDB |
