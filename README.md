@@ -1,4 +1,4 @@
-MoniBase
+Omnibase
 ========
 [![CI matrix](https://github.com//ApptiveGrid/MoniBase/actions/workflows/build.yml/badge.svg)](https://github.com//pharo-nosql/Omnibase/actions/workflows/build.yml)
 
