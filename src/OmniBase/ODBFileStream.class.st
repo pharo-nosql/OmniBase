@@ -213,26 +213,6 @@ ODBFileStream class >> pathSeparatorString [
 
 ]
 
-{ #category : #locking }
-ODBFileStream class >> releaseAllLocksFor: pathName fileHandle: fileHandle [
-
-	| newFileLocks fileLocks |
-	self lockingMutex critical: [
-	fileLocks := locks at: pathName ifAbsent: [^self].
-	newFileLocks := OrderedCollection new.
-	fileLocks do: [:each |
-		each last == fileHandle
-			ifFalse: [newFileLocks add: each]
-			ifTrue: [
-				[ fileHandle position: each first top; lock: false for: each first height ]
-					on: Error
-					do: [ :error | ]]].
-	newFileLocks isEmpty
-		ifTrue: [locks removeKey: pathName]
-		ifFalse: [locks at: pathName put: newFileLocks].
-	].
-]
-
 { #category : #'directory operations' }
 ODBFileStream class >> remove: fileName [
 	"Remove file named fileName. Answer <true> if successful, <false> if failed."
@@ -393,15 +373,7 @@ ODBFileStream >> basicPutBytesFrom: aByteArray len: length [
 
 { #category : #public }
 ODBFileStream >> close [
-		"Close file associatied with receiver."
-
-	fileHandle notNil ifTrue: [
-		FLock 
-			unlock: fileHandle fileHandle 
-			from: 0 
-			to: self size.
-		fileHandle closed ifFalse: [ fileHandle close ] ].
-	fileHandle := nil.
+	self subclassResponsibility 
 ]
 
 { #category : #public }

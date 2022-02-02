@@ -1,3 +1,6 @@
+"
+This class is not yet implemented.
+"
 Class {
 	#name : #ODBBTreeMultiValueDictionary,
 	#superclass : #ODBBTreeIndexDictionary,
@@ -8,13 +11,6 @@ Class {
 	],
 	#category : #'OmniBase-Transaction'
 }
-
-{ #category : #public }
-ODBBTreeMultiValueDictionary >> COMMENT [
-	"This class is not yet implemented."
-
-	
-]
 
 { #category : #public }
 ODBBTreeMultiValueDictionary >> add: anAssociation [ 
