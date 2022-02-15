@@ -102,12 +102,6 @@ ODBExpiredProxyObject >> isODBPersistent [
 ]
 
 { #category : #public }
-ODBExpiredProxyObject >> odbBasicSerialize: serializer [ 
-	OmniBase 
-		signalError: 'This object can not be serialized. The transaction in which this proxy was loaded is already aborted.'
-]
-
-{ #category : #public }
 ODBExpiredProxyObject >> odbSerialize: serializer [ 
 	OmniBase 
 		signalError: 'This object can not be serialized. The transaction in which this proxy was loaded is already aborted.'

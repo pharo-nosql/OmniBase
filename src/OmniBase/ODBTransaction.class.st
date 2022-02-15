@@ -263,12 +263,6 @@ ODBTransaction >> objectHolderAt: objectID [
 ]
 
 { #category : #'private/unclassified' }
-ODBTransaction >> odbBasicSerialize: serializer [
-
-	serializer stream putByte: 84
-]
-
-{ #category : #'private/unclassified' }
 ODBTransaction >> odbObjectID [
 
     ^ODBObjectID containerID: 0 index: 1000

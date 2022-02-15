@@ -1,12 +1,6 @@
 Extension { #name : #UndefinedObject }
 
 { #category : #'*omnibase' }
-UndefinedObject >> odbBasicSerialize: serializer [
-
-	serializer stream putByte: 14
-]
-
-{ #category : #'*omnibase' }
 UndefinedObject >> odbDeserialize: deserializer [
 
 	deserializer loadError
