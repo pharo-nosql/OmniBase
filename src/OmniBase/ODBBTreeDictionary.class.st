@@ -148,9 +148,8 @@ ODBBTreeDictionary >> databaseObjectClass [
 	^ODBDBBTreeDictionary
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBBTreeDictionary >> initialize [
-        "Private - Initialize receiver."
 
     super initialize.
     initialSize := 0.

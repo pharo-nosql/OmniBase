@@ -69,7 +69,7 @@ ODBIDTable >> indexesAndValuesDo: aBlock [
 	1 to: self getLastID do: [:index | aBlock value: index value: (self at: index)]
 ]
 
-{ #category : #'private/initialization' }
+{ #category : #initialization }
 ODBIDTable >> initialize [
 
     lastID := 0

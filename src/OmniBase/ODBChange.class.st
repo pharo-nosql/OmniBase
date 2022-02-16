@@ -31,7 +31,7 @@ ODBChange >> commit [
 ODBChange >> committed [
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBChange >> initialize [
 	
 ]

@@ -168,7 +168,7 @@ ODBObjectIndexFile >> indexesAndValuesDo: aBlock [
 				gcBuffer := nil]
 ]
 
-{ #category : #'private/initialization' }
+{ #category : #initialization }
 ODBObjectIndexFile >> initialize [
 
     start := self headerLength + 16.

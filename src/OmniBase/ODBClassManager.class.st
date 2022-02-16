@@ -161,7 +161,7 @@ ODBClassManager >> infoFileName [
 	^ODBFileStream pathSeparatorString , 'omnibase.odl'
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBClassManager >> initialize [
 	classes := OrderedCollection new.
 	names := ODBIdentityDictionary new

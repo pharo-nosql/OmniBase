@@ -351,9 +351,8 @@ ODBBTreeIndexDictionary >> includesKey: aKey [
 	^value isRemoved not
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBBTreeIndexDictionary >> initialize [
-	"Private - Initialize receiver."
 
 	super initialize.
 	keySize := 32

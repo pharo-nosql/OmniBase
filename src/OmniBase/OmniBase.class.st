@@ -119,7 +119,7 @@ OmniBase class >> getCurrentAndSet: anOmniBaseTransaction for: aProcess [
 	^previousTxn
 ]
 
-{ #category : #public }
+{ #category : #'class initialization' }
 OmniBase class >> initialize [
 	processToTransactionMutex isNil 
 		ifTrue: 
