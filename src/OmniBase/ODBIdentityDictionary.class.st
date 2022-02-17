@@ -79,11 +79,6 @@ ODBIdentityDictionary >> at: anObject ifAbsentPut: aBlock [
 ]
 
 { #category : #public }
-ODBIdentityDictionary >> at: aKey ifAbsentPutValue: anObject [ 
-	^self at: aKey ifAbsent: [self at: aKey put: anObject]
-]
-
-{ #category : #public }
 ODBIdentityDictionary >> at: aKey put: anObject [ 
 	"Answer anObject. If aKey exists in the receiver,
 	replace the corresponding value with anObject, else

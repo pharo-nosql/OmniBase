@@ -23,11 +23,11 @@ ODBObjectIDDictionary >> at: objectID [
 ]
 
 { #category : #public }
-ODBObjectIDDictionary >> at: objectID ifAbsentPutValue: anObject [ 
+ODBObjectIDDictionary >> at: objectID ifAbsentPut: anObject [ 
 	| dict |
 	(dict := dictionaries at: objectID containerID) isNil 
 		ifTrue: [dictionaries at: objectID containerID put: (dict := ODBIdentityDictionary new)].
-	^dict at: objectID index ifAbsentPutValue: anObject
+	^dict at: objectID index ifAbsentPut: anObject
 ]
 
 { #category : #public }
