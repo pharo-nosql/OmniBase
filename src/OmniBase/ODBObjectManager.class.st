@@ -267,7 +267,6 @@ ODBObjectManager >> initContainerAt: position [
 
 { #category : #initialization }
 ODBObjectManager >> initialize [
-        "Private - Initialize receiver."
 
     containers := Array new: 32
 ]

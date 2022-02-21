@@ -44,7 +44,7 @@ ODBChangesPackage >> committed [
     changes do: [:each | each committed]
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBChangesPackage >> initialize [
 	changes := (SortedCollection new: 300) sortBlock: self
 ]

@@ -201,7 +201,7 @@ ODBTransaction >> getTransactionObject: anObject ifAbsent: aBlock [
 	^transactionObject isNil ifTrue: [aBlock value] ifFalse: [transactionObject]
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBTransaction >> initialize [
 	cacheMutex := Semaphore forMutualExclusion.
 	objects := ODBObjectIDDictionary new.

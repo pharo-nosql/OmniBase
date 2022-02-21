@@ -19,9 +19,8 @@ ODBBTreeIntegerIndexDictionary >> databaseObjectClass [
 	^ODBDBBTreeIntegerIndexDictionary
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBBTreeIntegerIndexDictionary >> initialize [
-	"Private - Initialize receiver."
 
 	super initialize.
 	keySize := 4

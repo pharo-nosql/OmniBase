@@ -31,7 +31,7 @@ ODBClient >> description [
     ^clientFile clientDescription
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBClient >> initialize [
 
     transactions := OrderedCollection new.

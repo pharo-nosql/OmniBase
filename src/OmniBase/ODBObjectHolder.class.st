@@ -63,7 +63,6 @@ ODBObjectHolder >> getObject [
 
 { #category : #initialization }
 ODBObjectHolder >> initialize [
-        "Private - Initialize receiver."
 
     oldVersion := false
 ]

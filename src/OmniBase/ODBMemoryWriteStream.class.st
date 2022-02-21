@@ -69,7 +69,7 @@ ODBMemoryWriteStream >> asStringObject [
 	^string
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBMemoryWriteStream >> initialize [
 
     collections := OrderedCollection new.

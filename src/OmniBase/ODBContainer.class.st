@@ -197,7 +197,7 @@ ODBContainer >> initHolders: holders [
     indexFile addHolders: holders
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBContainer >> initialize [
 	dbFiles := ODBWeakValueIdentityDictionary new.
 	dbFilesMutex := Semaphore forMutualExclusion.

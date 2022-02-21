@@ -82,7 +82,7 @@ ODBClientTable >> globalUnlock [
 	[self globalLockClientID: 0] ensure: [self unlockTable]
 ]
 
-{ #category : #public }
+{ #category : #initialization }
 ODBClientTable >> initialize [
 	table := ByteArray new: self class maxClients + 1
 ]

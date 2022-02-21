@@ -74,7 +74,7 @@ ODBSerializer >> cantSave: anObject [
 	anObject class name , ' can''t be stored!' odbSerialize: self
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBSerializer >> initialize [
 
 	externalObjects := ODBIdentityDictionary new: 127

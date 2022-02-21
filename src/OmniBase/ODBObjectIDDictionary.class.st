@@ -38,7 +38,7 @@ ODBObjectIDDictionary >> at: objectID put: anObject [
 	^dict at: objectID index put: anObject
 ]
 
-{ #category : #'private/initialization' }
+{ #category : #initialization }
 ODBObjectIDDictionary >> initialize [
 
     dictionaries := Array new: 255

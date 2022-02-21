@@ -67,7 +67,7 @@ ODBBTreeIdentityDictionary >> includesKey: aKey [
 				ifFalse: [super includesKey: oid]]
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBBTreeIdentityDictionary >> initialize [
 	super initialize.
 	keySize := ODBObjectID sizeInBytes.

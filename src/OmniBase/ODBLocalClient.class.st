@@ -69,13 +69,14 @@ ODBLocalClient >> globalUnlock [
     ^true
 ]
 
-{ #category : #'private/initialization' }
+{ #category : #initialization }
 ODBLocalClient >> initialize [
-        "Private - Initialize receiver."
 
-    transactions := IdentitySet new: 20.
-    transactionFiles := OrderedCollection new.
-    hasGlobalLock := false.
+	self flag: #Cleanup.
+	"should do super initialize, but super uses OrderedCollection for transactions"
+	transactions := IdentitySet new: 20.
+	transactionFiles := OrderedCollection new.
+	hasGlobalLock := false
 ]
 
 { #category : #'public/unclassified' }

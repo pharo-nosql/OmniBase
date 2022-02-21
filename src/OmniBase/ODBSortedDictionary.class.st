@@ -125,7 +125,7 @@ ODBSortedDictionary >> includes: aKey [
     ^(self findKey: aKey) > 0
 ]
 
-{ #category : #'private/initialization' }
+{ #category : #initialization }
 ODBSortedDictionary >> initialize [
 
     keys := Array new: 128.
