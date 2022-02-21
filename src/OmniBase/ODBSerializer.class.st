@@ -95,7 +95,7 @@ ODBSerializer >> register: anObject [
 							[self saveExternalReference: id.
 							^true]].
 			^false].
-	(id := dict at: anObject ifAbsentPutValue: counter + 1) > counter 
+	(id := dict at: anObject ifAbsentPut: counter + 1) > counter 
 		ifTrue: 
 			[counter := id.
 			anObject == mainObject 
