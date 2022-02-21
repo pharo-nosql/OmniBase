@@ -8,16 +8,6 @@ Class {
 	#category : #'OmniBase-Model'
 }
 
-{ #category : #'predefined intercepted messages' }
-ODBReference >> == anObject [
-	"Answer true if the receiver and the argument are the same object (have the same
-	object pointer) and false otherwise.  Do not redefine the message == in any
-	other class!  No Lookup."
-
-	<primitive: 110>
-	self primitiveFailed
-]
-
 { #category : #accessing }
 ODBReference >> demandLoader [
 
@@ -74,12 +64,6 @@ ODBReference >> isImmediate [
 ODBReference >> isMorph [
 	^ false
 
-]
-
-{ #category : #'predefined intercepted messages' }
-ODBReference >> isNil [
-
-    ^false
 ]
 
 { #category : #public }

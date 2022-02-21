@@ -31,11 +31,6 @@ ODBChange >> commit [
 ODBChange >> committed [
 ]
 
-{ #category : #initialization }
-ODBChange >> initialize [
-	
-]
-
 { #category : #public }
 ODBChange >> loadFromStream: aStream [ 
 	"Load receiver from aStream.  Implemented by subclasses."
