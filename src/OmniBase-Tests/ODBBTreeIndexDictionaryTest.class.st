@@ -50,6 +50,17 @@ ODBBTreeIndexDictionaryTest >> testGetLast [
 ]
 
 { #category : #tests }
+ODBBTreeIndexDictionaryTest >> testIsChanged [
+ 	| dict |
+ 	[ dict := (OmniBase newBTreeIndexDictionary: 10)
+ 		at: #test put: true;
+		at: #test2 put: true;
+ 		yourself.
+	 ] evaluateAndCommitIn: db newTransaction. 
+	self assert: dict isChanged
+]
+
+{ #category : #tests }
 ODBBTreeIndexDictionaryTest >> testKeyLength [
  	| dict |
  	[ dict := (OmniBase newBTreeIndexDictionary: 10)
@@ -72,6 +83,18 @@ ODBBTreeIndexDictionaryTest >> testKeySize [
 ]
 
 { #category : #tests }
+ODBBTreeIndexDictionaryTest >> testLast [
+ 	| dict |
+ 	[ dict := (OmniBase newBTreeIndexDictionary: 10)
+ 		at: #test put: false;
+		at: #test2 put: true;
+ 		yourself.
+		self assert: dict getLast
+	 ] evaluateAndCommitIn: db newTransaction.
+	self assert: (dict last: 1 ) first
+]
+
+{ #category : #tests }
 ODBBTreeIndexDictionaryTest >> testNewBTreeIndexDictionary [
  	| dict |
  	[ dict := (OmniBase newBTreeIndexDictionary: 10)
@@ -79,6 +102,19 @@ ODBBTreeIndexDictionaryTest >> testNewBTreeIndexDictionary [
  		yourself.
 	 ] evaluateAndCommitIn: db newTransaction.
  	self assert: (dict at: #test)
+]
+
+{ #category : #tests }
+ODBBTreeIndexDictionaryTest >> testRemoveKey [
+ 	| dict |
+ 	[ dict := (OmniBase newBTreeIndexDictionary: 10)
+ 		at: #test put: true;
+		at: #test2 put: true;
+		removeKey: #test2;
+ 		yourself
+	 ] evaluateAndCommitIn: db newTransaction.
+	self assert: (dict at: #test).
+	self assert: dict values size equals: 1
 ]
 
 { #category : #tests }
