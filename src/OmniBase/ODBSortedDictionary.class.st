@@ -10,12 +10,6 @@ Class {
 	#category : #'OmniBase-Model'
 }
 
-{ #category : #'as yet unclassified' }
-ODBSortedDictionary class >> new [
-
-    ^super new initialize
-]
-
 { #category : #public }
 ODBSortedDictionary >> at: aKey [ 
 	| index |

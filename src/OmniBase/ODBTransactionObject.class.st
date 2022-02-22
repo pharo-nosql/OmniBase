@@ -10,12 +10,6 @@ Class {
 	#category : #'OmniBase-Transaction'
 }
 
-{ #category : #'instance creation' }
-ODBTransactionObject class >> new [
-
-    ^super new initialize
-]
-
 { #category : #accessing }
 ODBTransactionObject >> dataBaseObject [
 

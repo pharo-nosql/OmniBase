@@ -15,7 +15,7 @@ ODBObjectHolder class >> createOn: aByteArray [
     ^self basicNew createOn: aByteArray
 ]
 
-{ #category : #private }
+{ #category : #'instance creation' }
 ODBObjectHolder class >> new [
 
     ^super new initialize

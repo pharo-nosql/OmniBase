@@ -14,7 +14,7 @@ ODBObjectID class >> containerID: containerID index: index [
     ^super new containerID: containerID index: index
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 ODBObjectID class >> new [
 
     ^super new containerID: 0 index: 0
