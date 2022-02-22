@@ -11,12 +11,6 @@ Class {
 	#category : #'OmniBase-Base'
 }
 
-{ #category : #'as yet unclassified' }
-ODBClassManager class >> new [
-
-    ^super new initialize
-]
-
 { #category : #private }
 ODBClassManager >> addClassDescription: aClassDescription withId: classId [ 
 	"Private - Add aClassDescription under a given ID."

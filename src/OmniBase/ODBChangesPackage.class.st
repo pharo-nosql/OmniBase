@@ -7,12 +7,6 @@ Class {
 	#category : #'OmniBase-Events'
 }
 
-{ #category : #'as yet unclassified' }
-ODBChangesPackage class >> new [
-
-    ^super new initialize
-]
-
 { #category : #public }
 ODBChangesPackage >> add: aChange [ 
 	changes add: aChange

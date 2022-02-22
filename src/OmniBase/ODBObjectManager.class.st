@@ -10,12 +10,6 @@ Class {
 	#category : #'OmniBase-Base'
 }
 
-{ #category : #private }
-ODBObjectManager class >> new [
-
-    ^super new initialize
-]
-
 { #category : #'create/open/close' }
 ODBObjectManager >> close [
         "Close object manager and all opened containers."
