@@ -17,12 +17,6 @@ Class {
 }
 
 { #category : #public }
-ODBSerializer class >> new [
-
-	^ super new 
-]
-
-{ #category : #public }
 ODBSerializer class >> serialize: anObject on: aWriteStream [ 
 	| classManager byteStream byteStream2 |
 	classManager := ODBClassManagerForSerialization new initializeForSerialization.

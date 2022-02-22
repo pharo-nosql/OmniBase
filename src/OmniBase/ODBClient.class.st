@@ -11,12 +11,6 @@ Class {
 	#category : #'OmniBase-Base'
 }
 
-{ #category : #'instance creation' }
-ODBClient class >> new [
-
-    ^super new initialize
-]
-
 { #category : #'public/accessing' }
 ODBClient >> clientID [
         "Answer client ID."

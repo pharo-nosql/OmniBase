@@ -16,12 +16,6 @@ Class {
 }
 
 { #category : #private }
-ODBTransaction class >> new [
-
-	^super new initialize
-]
-
-{ #category : #private }
 ODBTransaction class >> odbDeserialize: deserializer [
 
 	^deserializer transaction

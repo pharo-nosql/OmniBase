@@ -127,10 +127,10 @@ OmniBase class >> initialize [
 			processToTransactionMutex := Semaphore forMutualExclusion]
 ]
 
-{ #category : #private }
+{ #category : #'instance creation' }
 OmniBase class >> new [
 	self initialize.
-	^super new initialize
+	^super new
 ]
 
 { #category : #public }

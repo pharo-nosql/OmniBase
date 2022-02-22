@@ -7,12 +7,6 @@ Class {
 	#category : #'OmniBase-Model'
 }
 
-{ #category : #'as yet unclassified' }
-ODBObjectIDDictionary class >> new [
-
-    ^super new initialize
-]
-
 { #category : #public }
 ODBObjectIDDictionary >> at: objectID [ 
 	"Answer transaction object at objectID or <nil> if absent."

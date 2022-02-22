@@ -18,12 +18,6 @@ Class {
 	#category : #'OmniBase-Storage'
 }
 
-{ #category : #'instance creation' }
-ODBContainer class >> new [
-
-    ^super new initialize
-]
-
 { #category : #public }
 ODBContainer >> addByteStorageRequest: anODBByteStorageRequest [ 
 	byteStorageQueue add: anODBByteStorageRequest.

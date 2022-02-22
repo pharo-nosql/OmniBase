@@ -4,7 +4,7 @@ Class {
 	#category : #'OmniBase-Transaction'
 }
 
-{ #category : #public }
+{ #category : #'instance creation' }
 ODBBTreeIntegerIndexDictionary class >> new [
 	^super new keySize: 4
 ]
