@@ -10,7 +10,8 @@ Class {
 		'objects',
 		'transactionFile',
 		'transactionManager',
-		'versionDescriptor'
+		'versionDescriptor',
+		'lockRegistry'
 	],
 	#category : #'OmniBase-Transaction'
 }
@@ -44,7 +45,7 @@ ODBTransaction >> basicAbort [
 	| changes |
 	dbConnection isNil 
 		ifFalse: 
-			[locks isNil 
+			[lockRegistry isEmpty 
 				ifFalse: 
 					[(changes := transactionFile recovery) isNil 
 						ifFalse: 
@@ -52,11 +53,12 @@ ODBTransaction >> basicAbort [
 								transaction: self;
 								rollback.
 							transactionFile recovery: nil].
-					locks do: 
+					lockRegistry locks do: 
 							[:each | 
 							each
 								transaction: self;
-								unlock]].
+								unlock.
+							lockRegistry removeLock: each]].
 			transactionManager transactionAborted: self.
 			client transactionRemove: self].
 	objects := nil.
@@ -316,7 +318,8 @@ ODBTransaction >> root [
 ODBTransaction >> setClient: aClient environment: anOmniBase [ 
 	client := aClient.
 	dbConnection := anOmniBase.
-	transactionManager := dbConnection transactionManager
+	transactionManager := dbConnection transactionManager.
+	lockRegistry := dbConnection lockRegistry
 ]
 
 { #category : #'private/accessing' }

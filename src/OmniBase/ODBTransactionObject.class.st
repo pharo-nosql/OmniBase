@@ -46,7 +46,9 @@ ODBTransactionObject >> lock [
 	| lockID lockObj |
 	lockObject isNil 
 		ifTrue: 
-			[(lockID := transaction lockID) isNil ifTrue: [^false].
+			[
+			(transaction hasLockFor: holder objectID) ifTrue: [ ^ false ].
+			(lockID := transaction lockID) isNil ifTrue: [^false].
 			transaction isGlobalLocked ifTrue: [^true].
 			lockObj := ODBObjectLock new.
 			lockObj

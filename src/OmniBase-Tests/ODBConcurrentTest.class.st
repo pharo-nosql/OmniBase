@@ -4,11 +4,6 @@ Class {
 	#category : #'OmniBase-Tests'
 }
 
-{ #category : #testing }
-ODBConcurrentTest >> expectedFailures [ 
-	^ #( testObjectLocking2 )
-]
-
 { #category : #tests }
 ODBConcurrentTest >> testBTreeKeyLocking [
 
@@ -134,7 +129,6 @@ ODBConcurrentTest >> testObjectLockingSameDatabase [
 	t1 := db newTransaction.
 	t2 := db newTransaction.
 	coll := t1 root at: 'lockTest'.
-	self halt.
 	self assert: (t1 lock: coll).
 	collCopy := t2 root at: 'lockTest'.
 	self deny: (t2 lock: collCopy).

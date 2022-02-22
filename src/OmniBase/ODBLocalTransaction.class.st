@@ -14,14 +14,14 @@ Class {
 ODBLocalTransaction >> addLock: aLock [
         "Private - Add aLock to receiver."
 
-    locks add: aLock
+    lockRegistry addLock: aLock
 ]
 
 { #category : #private }
 ODBLocalTransaction >> addLoggedLock: aLock [ 
 	"Private - Add aLock to receiver and store it to transaction file."
 
-	locks add: aLock.
+	lockRegistry addLock: aLock.
 	transactionFile lockAdd: aLock
 ]
 
@@ -97,6 +97,11 @@ ODBLocalTransaction >> committed [
     changesPackage := nil.
 ]
 
+{ #category : #testing }
+ODBLocalTransaction >> hasLockFor: anODBObjectID [ 
+	^ lockRegistry hasLockFor: anODBObjectID 
+]
+
 { #category : #initialization }
 ODBLocalTransaction >> initialize [
 
@@ -145,16 +150,10 @@ ODBLocalTransaction >> lockID [
 	if database is globally locked by another user and no 
 	locks can currently be set."
 
-	locks isNil 
+	lockRegistry isEmpty 
 		ifTrue: 
-			[(transactionFile := client newTransactionFileFor: self) isNil ifTrue: [^nil].
-			locks := OrderedCollection new].
+			[(transactionFile := client newTransactionFileFor: self) isNil ifTrue: [^nil] ].
 	^transactionFile transactionID
-]
-
-{ #category : #public }
-ODBLocalTransaction >> locks [
-	^ locks 
 ]
 
 { #category : #public }
@@ -294,14 +293,14 @@ ODBLocalTransaction >> removeCachedObjectID: objectID [
 ODBLocalTransaction >> removeLock: aLock [ 
 	"Private - Remove aLock from collection of set locks."
 
-	locks remove: aLock ifAbsent: []
+	lockRegistry removeLock: aLock 
 ]
 
 { #category : #private }
 ODBLocalTransaction >> removeLoggedLock: aODBLock [ 
 	"Private - Remove anODBLock from receiver and remove it from transaction file."
 
-	locks remove: aODBLock ifAbsent: [].
+	lockRegistry removeLock: aODBLock.
 	transactionFile lockRemove: aODBLock
 ]
 
