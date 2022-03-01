@@ -6,7 +6,8 @@ Class {
 		'objectManager',
 		'classManager',
 		'clientManager',
-		'transactionManager'
+		'transactionManager',
+		'lockRegistry'
 	],
 	#classInstVars : [
 		'currentTransaction',
@@ -291,6 +292,10 @@ OmniBase >> close [
 		ifTrue: 
 			[transactionManager close.
 			transactionManager := nil].
+	lockRegistry notNil 
+		ifTrue: [ 
+			lockRegistry checkRemoval.
+			lockRegistry := nil ].
 	self class remove: self
 ]
 
@@ -331,6 +336,7 @@ OmniBase >> createOn: dirName [
 	objectManager := self objectManager createOn: self.
 	transactionManager := self transactionManager createOn: self.
 	clientManager := self clientManager createOn: self.
+	lockRegistry := ODBLockRegistry forPath: dirName.
 	self opened.
 	clientManager localClient makeRootObject] 
 			ifCurtailed: [self close]
@@ -408,6 +414,11 @@ OmniBase >> localClient [
 ]
 
 { #category : #accessing }
+OmniBase >> lockRegistry [
+	^ lockRegistry
+]
+
+{ #category : #accessing }
 OmniBase >> newBTreeDictionary: keySize [
 
 	^self class newBTreeDictionary: keySize
@@ -455,7 +466,6 @@ OmniBase >> newReadOnlyTransaction [
 
 { #category : #accessing }
 OmniBase >> newTransaction [
-
     ^clientManager localClient newTransaction
 ]
 
@@ -507,6 +517,7 @@ OmniBase >> openOn: dirName [
 	objectManager := self objectManager openOn: self.
 	transactionManager := self transactionManager openOn: self.
 	clientManager := self clientManager openOn: self.
+	lockRegistry := ODBLockRegistry forPath: dirName.
 	self opened] 
 			ifCurtailed: [self close].
 	self freeDiskSpace < 5242880 ifTrue: [OmniBase warningMessage: 'Low disk space !']

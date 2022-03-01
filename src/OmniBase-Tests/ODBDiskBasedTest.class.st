@@ -40,6 +40,7 @@ ODBDiskBasedTest >> setUp [
 
 { #category : #running }
 ODBDiskBasedTest >> tearDown [
-	db close.
+	db ifNotNil: [ db close ].
+	ODBLockRegistry reset.
 	self deleteDatabaseOnFileSystem 
 ]

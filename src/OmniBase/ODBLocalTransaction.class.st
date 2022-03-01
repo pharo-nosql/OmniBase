@@ -11,18 +11,23 @@ Class {
 }
 
 { #category : #private }
-ODBLocalTransaction >> addLock: aLock [
-        "Private - Add aLock to receiver."
-
-    locks add: aLock
+ODBLocalTransaction >> addLock: anObjectLock [
+   "Private - Add aLock to receiver."
+	anObjectLock transaction: self.
+	locks add: anObjectLock.
+   ^ lockRegistry addLock: anObjectLock
 ]
 
 { #category : #private }
-ODBLocalTransaction >> addLoggedLock: aLock [ 
+ODBLocalTransaction >> addLoggedLock: aKeyLock [ 
 	"Private - Add aLock to receiver and store it to transaction file."
 
-	locks add: aLock.
-	transactionFile lockAdd: aLock
+	aKeyLock transaction: self.
+	(lockRegistry addLock: aKeyLock) ifFalse: [ ^ false ]. 
+	locks add: aKeyLock.
+	transactionFile lockAdd: aKeyLock.
+	^ true
+	
 ]
 
 { #category : #public }
@@ -97,11 +102,31 @@ ODBLocalTransaction >> committed [
     changesPackage := nil.
 ]
 
+{ #category : #testing }
+ODBLocalTransaction >> hasForeignLockFor: aTransactionObject [
+	^ lockRegistry hasForeignLockFor: aTransactionObject transaction: self
+]
+
+{ #category : #testing }
+ODBLocalTransaction >> hasKeyLockOn: aBtreeDictionary key: aCollection [ 
+	^ lockRegistry 
+		hasKeyLockOn: aBtreeDictionary 
+		key: aCollection 
+
+]
+
+{ #category : #testing }
+ODBLocalTransaction >> hasLocks [
+ 	
+	^ locks notEmpty
+]
+
 { #category : #initialization }
 ODBLocalTransaction >> initialize [
 
-    super initialize.
-    newObjects := Array new: 16
+	super initialize.
+	locks := OrderedCollection new.
+	newObjects := Array new: 16
 ]
 
 { #category : #public }
@@ -128,6 +153,14 @@ ODBLocalTransaction >> isPersistent: anObject [
 	
 ]
 
+{ #category : #testing }
+ODBLocalTransaction >> keyLockOn: aBtreeDictionary key: key ifAbsent: aBlock [
+	^ lockRegistry 
+		keyLockOn: aBtreeDictionary 
+		key: key 
+		ifAbsent: aBlock
+]
+
 { #category : #public }
 ODBLocalTransaction >> lock: anObject [ 
 	"Lock anObject."
@@ -145,16 +178,10 @@ ODBLocalTransaction >> lockID [
 	if database is globally locked by another user and no 
 	locks can currently be set."
 
-	locks isNil 
-		ifTrue: 
-			[(transactionFile := client newTransactionFileFor: self) isNil ifTrue: [^nil].
-			locks := OrderedCollection new].
+	self hasLocks 
+		ifFalse: 
+			[(transactionFile := client newTransactionFileFor: self) isNil ifTrue: [^nil] ].
 	^transactionFile transactionID
-]
-
-{ #category : #public }
-ODBLocalTransaction >> locks [
-	^ locks 
 ]
 
 { #category : #public }
@@ -294,15 +321,17 @@ ODBLocalTransaction >> removeCachedObjectID: objectID [
 ODBLocalTransaction >> removeLock: aLock [ 
 	"Private - Remove aLock from collection of set locks."
 
-	locks remove: aLock ifAbsent: []
+	lockRegistry removeLock: aLock.
+	locks remove: aLock ifAbsent: [  ]
 ]
 
 { #category : #private }
 ODBLocalTransaction >> removeLoggedLock: aODBLock [ 
 	"Private - Remove anODBLock from receiver and remove it from transaction file."
 
-	locks remove: aODBLock ifAbsent: [].
-	transactionFile lockRemove: aODBLock
+	lockRegistry removeLock: aODBLock.
+	transactionFile lockRemove: aODBLock.
+	locks remove: aODBLock ifAbsent: [  ]
 ]
 
 { #category : #public }

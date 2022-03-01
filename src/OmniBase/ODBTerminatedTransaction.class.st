@@ -11,7 +11,8 @@ ODBTerminatedTransaction >> start [
 
     transactionManager transactionStart: self.
     versionDescriptor versionNumber: transactionFile versionNumber.
-    locks := transactionFile locks
+    transactionFile locks do: [ :lock |
+		self addLock: lock ]
 ]
 
 { #category : #'private/accessing' }

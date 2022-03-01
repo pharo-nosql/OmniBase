@@ -21,7 +21,7 @@ ODBObjectManagerTest >> tearDown [
 
 { #category : #tests }
 ODBObjectManagerTest >> testClassVersionReshapes [
-	| tmpClass obj1 obj2 transaction2 transaction info1 info2 |
+	| tmpClass obj1 obj2 transaction info1 info2 |
 	tmpClass := ODBTestClass1 copy.
 	self assertCollection: tmpClass instVarNames hasSameElements: #( one two three).
 	obj1 := tmpClass new 
@@ -48,12 +48,7 @@ ODBObjectManagerTest >> testClassVersionReshapes [
 
 	self assert: obj2 one equals: 'one2'.
 	self assert: obj2 two equals: 'two2'.
-	self assert: obj2 three equals: 'three2'.
-
-	transaction2 := db newTransaction.
-	transaction2 root at: 'test2' put: obj2.
-	transaction2 commit.
-		
+	self assert: obj2 three equals: 'three2'
 ]
 
 { #category : #tests }

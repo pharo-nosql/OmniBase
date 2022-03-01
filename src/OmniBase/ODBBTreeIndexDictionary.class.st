@@ -344,6 +344,13 @@ ODBBTreeIndexDictionary >> goTo: aKey [
 	self basicGoTo: (self bytesFromKey: aKey)
 ]
 
+{ #category : #testing }
+ODBBTreeIndexDictionary >> hasLockAt: key [ 
+	^ transaction 
+		hasKeyLockOn: self
+		key: key
+]
+
 { #category : #public }
 ODBBTreeIndexDictionary >> includesKey: aKey [ 
 	| value |
@@ -430,6 +437,11 @@ ODBBTreeIndexDictionary >> last: anInteger [
 		result add: current value].
 	
 	^ result
+]
+
+{ #category : #accessing }
+ODBBTreeIndexDictionary >> lockRegistryKeyAt: aKey [
+	^ self objectID lockRegistryKeyAt: aKey
 ]
 
 { #category : #initialization }

@@ -51,7 +51,7 @@ ODBDatabaseTest >> benchmarkCommitNewObjects [
 
 { #category : #testing }
 ODBDatabaseTest >> expectedFailures [ 
-	^ #( testBackup testObjectLocking )
+	^ #( testBackup )
 ]
 
 { #category : #tests }

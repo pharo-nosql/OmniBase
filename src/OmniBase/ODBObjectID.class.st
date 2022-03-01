@@ -105,6 +105,29 @@ ODBObjectID >> loadFromStream: aStream [
     self fromBytes: bytes at: 1
 ]
 
+{ #category : #'as yet unclassified' }
+ODBObjectID >> lockRegistryKey [
+	^ String streamContents: [ :stream |
+		self lockRegistryKeyOn: stream ]
+]
+
+{ #category : #'as yet unclassified' }
+ODBObjectID >> lockRegistryKeyAt: aKey [
+	^ String streamContents: [ :stream |
+		self lockRegistryKeyOn: stream.
+		stream 
+			<< ':'
+			<< aKey asInteger asString ]
+]
+
+{ #category : #'as yet unclassified' }
+ODBObjectID >> lockRegistryKeyOn: aStream [
+	aStream 
+		<< containerID asString 
+		<< ':'
+		<< index asString
+]
+
 { #category : #public }
 ODBObjectID >> printOn: aStream [ 
 	super printOn: aStream.
