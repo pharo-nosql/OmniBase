@@ -35,7 +35,7 @@ ODBLockRegistry class >> forPath: aString [
 			self new path: path  ] 
 ]
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 ODBLockRegistry class >> initialize [ 
 	self reset
 ]
@@ -63,7 +63,7 @@ ODBLockRegistry class >> removePath: aString [
 	
 ]
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 ODBLockRegistry class >> reset [ 
 	registries := Dictionary new
 ]
@@ -75,7 +75,7 @@ ODBLockRegistry >> addLock: aKeyLock [
 		put: aKeyLock 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #removing }
 ODBLockRegistry >> checkRemoval [
 	locks isEmpty ifTrue: [ 
 		self remove ]
@@ -157,7 +157,7 @@ ODBLockRegistry >> removeLock: anODBObjectLock [
 
 { #category : #initialization }
 ODBLockRegistry >> reset [
-	locks := Dictionary 
+	locks := Dictionary new
 ]
 
 { #category : #accessing }
