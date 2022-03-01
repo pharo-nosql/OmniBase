@@ -18,13 +18,6 @@ ODBReference >> == anObject [
 	self primitiveFailed
 ]
 
-{ #category : #public }
-ODBReference >> defaultLabelForInspector [
-	"Answer the default label to be used for an Inspector window on the receiver."
-
-	^ self class name
-]
-
 { #category : #accessing }
 ODBReference >> demandLoader [
 
@@ -53,14 +46,6 @@ ODBReference >> halt [
 ODBReference >> inspect [
 	"Create and schedule an Inspector in which the user can examine the receiver's variables."
 	Smalltalk tools inspector inspect: self
-]
-
-{ #category : #public }
-ODBReference >> inspectorClass [
-	"Answer the class of the inspector to be used on the receiver.  Called by inspect; 
-	use basicInspect to get a normal (less useful) type of inspector."
-
-	^ Smalltalk tools inspector
 ]
 
 { #category : #accessing }

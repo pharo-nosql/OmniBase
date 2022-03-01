@@ -281,7 +281,7 @@ ODBLocalTransaction >> printOn: aStream [
 
 	super printOn: aStream.
 	
-	aStream nextPutAll: '(',self hash asString,')'
+	aStream nextPutAll: '(',self hash asString,'): ', dbConnection asString
 ]
 
 { #category : #private }
