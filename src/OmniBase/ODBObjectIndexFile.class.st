@@ -17,7 +17,7 @@ Class {
 ODBObjectIndexFile >> addHolders: holders [ 
 	"Add object holders to table and initialize their object ID indexes."
 
-	| lastIndex freeHolders count count2 buffer holder |
+	| lastIndex count count2 buffer holder |
 	count := holders size.
 	count2 := 0.
 	buffer := ByteArray new: 8.

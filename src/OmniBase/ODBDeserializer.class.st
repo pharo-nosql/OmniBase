@@ -26,7 +26,7 @@ ODBDeserializer class >> classArray [
 
 { #category : #public }
 ODBDeserializer class >> deserializeFromBytes: aByteArray [ 
-	| memoryStream referenceManager classManager |
+	| memoryStream classManager |
 	memoryStream := ODBMemoryReadStream new createOn: aByteArray.
 	memoryStream getPositiveInteger = 0 
 		ifFalse: [self error: 'External references not defined'].
