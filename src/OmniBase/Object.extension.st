@@ -147,7 +147,6 @@ Object >> odbGetTransaction [
 
 	"immediate objects can not be made persistent"
 
-	| allReferences |
 	self isImmediateObject ifTrue: [^nil].
 
 	"first check all inst vars if any references a proxy from which we could get a reference to transaction"

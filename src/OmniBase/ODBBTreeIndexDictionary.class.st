@@ -228,7 +228,7 @@ ODBBTreeIndexDictionary >> forKeysStartingWith: aStringOrByteArray do: aBlock [
 ODBBTreeIndexDictionary >> from: start to: end [
 	"Returns occurrences from start to end."
 
-	| assoc result cursor startKey endKey current |
+	| assoc result startKey endKey current |
 	result := OrderedCollection new..
 	startKey := self bytesFromKey: start.
 	endKey := self bytesFromKey: end.
@@ -249,7 +249,7 @@ ODBBTreeIndexDictionary >> fromPosition: start to: end [
 	
 	"Better implementations of this are very welcome :)"
 
-	| assoc result cursor startKey endKey current |
+	| assoc result startKey endKey current |
 	result := OrderedCollection new..
 	startKey := self bytesFromKey: start.
 	endKey := self bytesFromKey: end.
