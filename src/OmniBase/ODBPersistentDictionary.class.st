@@ -27,7 +27,7 @@ ODBPersistentDictionary >> add: anAssociation [
 	super add: anAssociation.
 	transaction := t.
 	transaction isNil ifTrue: [^anAssociation].
-	anAssociation value isImmediate 
+	anAssociation value isImmediateObject 
 		ifFalse: [transaction makePersistent: anAssociation value].
 	transaction markDirty: self.
 	^anAssociation
@@ -52,7 +52,7 @@ ODBPersistentDictionary >> at: key put: value [
 	transaction := oldValue.
 	transaction isNil ifTrue: [^value].
 	transaction markDirty: self.
-	(value isImmediate or: [value == key]) ifFalse: [transaction makePersistent: value].
+	(value isImmediateObject or: [value == key]) ifFalse: [transaction makePersistent: value].
 	^value
 ]
 
@@ -81,7 +81,7 @@ ODBPersistentDictionary >> odbMadePersistentIn: anOmniBaseTransaction [
 	transaction notNil 
 		ifTrue: [self error: 'Object is already persistent in another transaction'].
 	transaction := anOmniBaseTransaction.
-	self do: [:each | each isImmediate ifFalse: [transaction makePersistent: each]]
+	self do: [:each | each isImmediateObject ifFalse: [transaction makePersistent: each]]
 ]
 
 { #category : #public }

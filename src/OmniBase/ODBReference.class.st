@@ -52,14 +52,6 @@ ODBReference >> isIdenticalTo: anObject [
 	^self odbTransactionObject value == anObject
 ]
 
-{ #category : #public }
-ODBReference >> isImmediate [
-	"Private - Answer whether the receiver has an immediate representation (that is it is entirely
-	encoded in an object pointer, e.g. SmallIntegers. Most objects are not immediate."
-
-	^false
-]
-
 { #category : #hacks }
 ODBReference >> isMorph [
 	^ false
