@@ -99,10 +99,6 @@ ODBFile >> headerLength [
 	^128
 ]
 
-{ #category : #initialization }
-ODBFile >> initialize [
-]
-
 { #category : #'create/open/close' }
 ODBFile >> openExclusivelyOn: aString [
 

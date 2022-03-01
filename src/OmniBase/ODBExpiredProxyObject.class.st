@@ -13,16 +13,6 @@ ODBExpiredProxyObject class >> on: oid [
 ]
 
 { #category : #public }
-ODBExpiredProxyObject >> == anObject [
-	"Answer true if the receiver and the argument are the same object (have the same
-	object pointer) and false otherwise.  Do not redefine the message == in any
-	other class!  No Lookup."
-
-	<primitive: 110>
-	self primitiveFailed
-]
-
-{ #category : #public }
 ODBExpiredProxyObject >> becomeForward: otherObject [ 
 	"Primitive. All variables in the entire system that used to point
 	to the receiver now point to the argument.

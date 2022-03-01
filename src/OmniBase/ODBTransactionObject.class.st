@@ -16,10 +16,6 @@ ODBTransactionObject >> dataBaseObject [
     ^dataBaseObject
 ]
 
-{ #category : #initialization }
-ODBTransactionObject >> initialize [
-]
-
 { #category : #'transaction processing' }
 ODBTransactionObject >> isLocked [
         "Answer <true> if the receiver is localy locked."
