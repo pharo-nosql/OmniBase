@@ -6,7 +6,6 @@ Class {
 		'dbConnection',
 		'mutex',
 		'oldHolders',
-		'serializingTransactionsMutex',
 		'serializingTransactionsSemaphore',
 		'transactionReferences',
 		'versionControl'
