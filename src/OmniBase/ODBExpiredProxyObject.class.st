@@ -13,17 +13,6 @@ ODBExpiredProxyObject class >> on: oid [
 ]
 
 { #category : #public }
-ODBExpiredProxyObject >> becomeForward: otherObject [ 
-	"Primitive. All variables in the entire system that used to point
-	to the receiver now point to the argument.
-	Fails if either argument is a SmallInteger."
-
-	(Array with: self)
-		elementsForwardIdentityTo:
-			(Array with: otherObject)
-]
-
-{ #category : #public }
 ODBExpiredProxyObject >> doesNotUnderstand: aMessage [
 	
 	| currentTransaction freshTarget |
@@ -45,18 +34,15 @@ ODBExpiredProxyObject >> doesNotUnderstand: aMessage [
 
 { #category : #public }
 ODBExpiredProxyObject >> halt [
-	"This is the typical message to use for inserting breakpoints during 
-	debugging. It behaves like halt:, but does not call on halt: in order to 
-	avoid putting this message on the stack. Halt is especially useful when 
-	the breakpoint message is an arbitrary one."
-
-	Halt signal
+	"This is the typical message to use for inserting breakpoints during debugging."
+	<debuggerCompleteToSender>
+	Halt now
 ]
 
 { #category : #public }
 ODBExpiredProxyObject >> inspect [
 	"Create and schedule an Inspector in which the user can examine the receiver's variables."
-	Smalltalk tools inspect: self
+	^ Smalltalk tools inspector inspect: self
 ]
 
 { #category : #public }

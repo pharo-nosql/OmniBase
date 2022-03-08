@@ -24,18 +24,15 @@ ODBReference >> doesNotUnderstand: aMessage [
 
 { #category : #public }
 ODBReference >> halt [
-	"This is the typical message to use for inserting breakpoints during 
-	debugging. It behaves like halt:, but does not call on halt: in order to 
-	avoid putting this message on the stack. Halt is especially useful when 
-	the breakpoint message is an arbitrary one."
-
-	Halt signal
+	"This is the typical message to use for inserting breakpoints during debugging."
+	<debuggerCompleteToSender>
+	Halt now
 ]
 
 { #category : #public }
 ODBReference >> inspect [
 	"Create and schedule an Inspector in which the user can examine the receiver's variables."
-	Smalltalk tools inspector inspect: self
+	^ Smalltalk tools inspector inspect: self
 ]
 
 { #category : #accessing }
