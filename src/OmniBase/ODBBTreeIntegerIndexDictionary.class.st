@@ -4,7 +4,7 @@ Class {
 	#category : #'OmniBase-Transaction'
 }
 
-{ #category : #public }
+{ #category : #'instance creation' }
 ODBBTreeIntegerIndexDictionary class >> new [
 	^super new keySize: 4
 ]
@@ -19,9 +19,8 @@ ODBBTreeIntegerIndexDictionary >> databaseObjectClass [
 	^ODBDBBTreeIntegerIndexDictionary
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBBTreeIntegerIndexDictionary >> initialize [
-	"Private - Initialize receiver."
 
 	super initialize.
 	keySize := 4

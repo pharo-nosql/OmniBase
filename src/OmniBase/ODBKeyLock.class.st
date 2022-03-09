@@ -35,6 +35,11 @@ ODBKeyLock >> loadFromStream: aStream [
     key := aStream getString asByteArray
 ]
 
+{ #category : #'as yet unclassified' }
+ODBKeyLock >> lockRegistryKey [ 
+	^ objectID lockRegistryKeyAt: key
+]
+
 { #category : #'public/load/store' }
 ODBKeyLock >> storeOnStream: aStream [
 

@@ -10,12 +10,6 @@ Class {
 	#category : #'OmniBase-Streams'
 }
 
-{ #category : #'instance creation' }
-ODBMemoryWriteStream class >> new [
-
-    ^super new initialize
-]
-
 { #category : #public }
 ODBMemoryWriteStream >> asByteArray [
 	"Answer receiver as byte array."
@@ -69,7 +63,7 @@ ODBMemoryWriteStream >> asStringObject [
 	^string
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBMemoryWriteStream >> initialize [
 
     collections := OrderedCollection new.

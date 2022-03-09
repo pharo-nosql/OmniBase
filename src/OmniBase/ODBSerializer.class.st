@@ -17,12 +17,6 @@ Class {
 }
 
 { #category : #public }
-ODBSerializer class >> new [
-
-	^ super new 
-]
-
-{ #category : #public }
 ODBSerializer class >> serialize: anObject on: aWriteStream [ 
 	| classManager byteStream byteStream2 |
 	classManager := ODBClassManagerForSerialization new initializeForSerialization.
@@ -74,7 +68,7 @@ ODBSerializer >> cantSave: anObject [
 	anObject class name , ' can''t be stored!' odbSerialize: self
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBSerializer >> initialize [
 
 	externalObjects := ODBIdentityDictionary new: 127
@@ -95,7 +89,7 @@ ODBSerializer >> register: anObject [
 							[self saveExternalReference: id.
 							^true]].
 			^false].
-	(id := dict at: anObject ifAbsentPutValue: counter + 1) > counter 
+	(id := dict at: anObject ifAbsentPut: counter + 1) > counter 
 		ifTrue: 
 			[counter := id.
 			anObject == mainObject 

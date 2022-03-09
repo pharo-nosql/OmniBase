@@ -17,11 +17,6 @@ ODBChange class >> changeClassID [
 	^nil
 ]
 
-{ #category : #public }
-ODBChange class >> new [
-	^super new initialize
-]
-
 { #category : #'transaction processing' }
 ODBChange >> commit [
         "Commit changes."
@@ -29,11 +24,6 @@ ODBChange >> commit [
 
 { #category : #'transaction processing' }
 ODBChange >> committed [
-]
-
-{ #category : #private }
-ODBChange >> initialize [
-	
 ]
 
 { #category : #public }

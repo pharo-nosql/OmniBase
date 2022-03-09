@@ -7,12 +7,6 @@ Class {
 	#category : #'OmniBase-Events'
 }
 
-{ #category : #'as yet unclassified' }
-ODBChangesPackage class >> new [
-
-    ^super new initialize
-]
-
 { #category : #public }
 ODBChangesPackage >> add: aChange [ 
 	changes add: aChange
@@ -44,7 +38,7 @@ ODBChangesPackage >> committed [
     changes do: [:each | each committed]
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBChangesPackage >> initialize [
 	changes := (SortedCollection new: 300) sortBlock: self
 ]

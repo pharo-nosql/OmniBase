@@ -18,12 +18,6 @@ Class {
 	#category : #'OmniBase-Storage'
 }
 
-{ #category : #'instance creation' }
-ODBContainer class >> new [
-
-    ^super new initialize
-]
-
 { #category : #public }
 ODBContainer >> addByteStorageRequest: anODBByteStorageRequest [ 
 	byteStorageQueue add: anODBByteStorageRequest.
@@ -197,7 +191,7 @@ ODBContainer >> initHolders: holders [
     indexFile addHolders: holders
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBContainer >> initialize [
 	dbFiles := ODBWeakValueIdentityDictionary new.
 	dbFilesMutex := Semaphore forMutualExclusion.

@@ -10,20 +10,10 @@ Class {
 	#category : #'OmniBase-Transaction'
 }
 
-{ #category : #'instance creation' }
-ODBTransactionObject class >> new [
-
-    ^super new initialize
-]
-
 { #category : #accessing }
 ODBTransactionObject >> dataBaseObject [
 
     ^dataBaseObject
-]
-
-{ #category : #initialization }
-ODBTransactionObject >> initialize [
 ]
 
 { #category : #'transaction processing' }
@@ -46,7 +36,9 @@ ODBTransactionObject >> lock [
 	| lockID lockObj |
 	lockObject isNil 
 		ifTrue: 
-			[(lockID := transaction lockID) isNil ifTrue: [^false].
+			[
+			(transaction hasForeignLockFor: self) ifTrue: [ ^ false ].
+			(lockID := transaction lockID) isNil ifTrue: [^false].
 			transaction isGlobalLocked ifTrue: [^true].
 			lockObj := ODBObjectLock new.
 			lockObj
@@ -59,6 +51,11 @@ ODBTransactionObject >> lock [
 					^false].
 			lockObject := lockObj].
 	^true
+]
+
+{ #category : #'as yet unclassified' }
+ODBTransactionObject >> lockRegistryKey [
+	^ self objectID lockRegistryKey 
 ]
 
 { #category : #public }

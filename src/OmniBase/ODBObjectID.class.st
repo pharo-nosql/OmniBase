@@ -14,7 +14,7 @@ ODBObjectID class >> containerID: containerID index: index [
     ^super new containerID: containerID index: index
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 ODBObjectID class >> new [
 
     ^super new containerID: 0 index: 0
@@ -103,6 +103,29 @@ ODBObjectID >> loadFromStream: aStream [
     bytes := ByteArray new: self class sizeInBytes.
     aStream getBytesFor: bytes.
     self fromBytes: bytes at: 1
+]
+
+{ #category : #'as yet unclassified' }
+ODBObjectID >> lockRegistryKey [
+	^ String streamContents: [ :stream |
+		self lockRegistryKeyOn: stream ]
+]
+
+{ #category : #'as yet unclassified' }
+ODBObjectID >> lockRegistryKeyAt: aKey [
+	^ String streamContents: [ :stream |
+		self lockRegistryKeyOn: stream.
+		stream 
+			<< ':'
+			<< aKey asInteger asString ]
+]
+
+{ #category : #'as yet unclassified' }
+ODBObjectID >> lockRegistryKeyOn: aStream [
+	aStream 
+		<< containerID asString 
+		<< ':'
+		<< index asString
 ]
 
 { #category : #public }
