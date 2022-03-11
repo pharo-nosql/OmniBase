@@ -82,6 +82,16 @@ ODBStream >> getWord [
     ^self getByte bitOr: (self getByte bitShift: 8)
 ]
 
+{ #category : #accessing }
+ODBStream >> position [
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+ODBStream >> position: arg1 [ 
+	^ self subclassResponsibility
+]
+
 { #category : #public }
 ODBStream >> putBoolean: aBool [
 

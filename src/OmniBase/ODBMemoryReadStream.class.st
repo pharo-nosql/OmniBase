@@ -7,13 +7,13 @@ Class {
 	#category : #'OmniBase-Streams'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 ODBMemoryReadStream class >> createOn: bytes [
 
     ^self new createOn: bytes
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 ODBMemoryReadStream class >> readFrom: aStream [
 
     ^self new readFrom: aStream

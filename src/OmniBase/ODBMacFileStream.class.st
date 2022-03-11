@@ -49,7 +49,7 @@ ODBMacFileStream class >> setShareMode: shareMode forFileStream: aFileStream [
 			[self shareModeShareAll] -> [nil].
 			[self shareModeShareRead] -> [false].
 			[self shareModeShareNone] -> [true].
-			[self shareModeShareWrite] -> [self halt] "don't know how to implement this on unix and it is currently unused"}.
+			[self shareModeShareWrite] -> [self error: 'not supported'] "don't know how to implement this on unix and it is currently unused"}.
 
 	flagState ifNotNil: [
 		(BSDFLock
@@ -77,9 +77,9 @@ ODBMacFileStream class >> streamCreationSelectorForMode: createMode [
 
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #public }
 ODBMacFileStream >> close [
-		"Close file associatied with receiver."
+	"Close file associatied with receiver."
 
 	fileHandle notNil ifTrue: [
 		BSDFLock 

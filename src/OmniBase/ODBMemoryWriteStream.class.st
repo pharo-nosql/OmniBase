@@ -95,7 +95,7 @@ ODBMemoryWriteStream >> moveToNext [
 				do: [:i | (collections at: i) == current ifTrue: [^current := collections at: i + 1]]]
 ]
 
-{ #category : #public }
+{ #category : #accessing }
 ODBMemoryWriteStream >> position [
 	"Answer current position on stream."
 
@@ -109,7 +109,7 @@ ODBMemoryWriteStream >> position [
 	^size + position
 ]
 
-{ #category : #public }
+{ #category : #accessing }
 ODBMemoryWriteStream >> position: anInteger [ 
 	"Set current position on stream."
 
@@ -154,7 +154,7 @@ ODBMemoryWriteStream >> putBytesFrom: aByteCollection len: len [
 			position := position + len]
 ]
 
-{ #category : #public }
+{ #category : #accessing }
 ODBMemoryWriteStream >> size [
 	"Answer stream size."
 
