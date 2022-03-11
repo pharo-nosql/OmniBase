@@ -3,12 +3,10 @@ Class {
 	#superclass : #ODBFile,
 	#instVars : [
 		'valueLength',
-		'pageSize',
 		'start',
 		'gcPosition',
 		'gcBuffer',
-		'gcCount',
-		'var1'
+		'gcCount'
 	],
 	#category : #'OmniBase-Files'
 }
