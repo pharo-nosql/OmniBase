@@ -252,7 +252,13 @@ OmniBase class >> warningMessage: aString [
 { #category : #private }
 OmniBase >> classManager [
 
-	^ classManager ifNil: [ classManager := ODBClassManager new ]
+	^ classManager ifNil: [ classManager := self classManagerClass new ]
+]
+
+{ #category : #public }
+OmniBase >> classManagerClass [ 
+
+	^ ODBClassManager
 ]
 
 { #category : #private }
