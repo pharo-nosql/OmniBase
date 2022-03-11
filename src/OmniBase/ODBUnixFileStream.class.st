@@ -59,7 +59,7 @@ ODBUnixFileStream class >> setShareMode: shareMode forFileStream: aFileStream [
 			[self shareModeShareAll] -> [nil].
 			[self shareModeShareRead] -> [false].
 			[self shareModeShareNone] -> [true].
-			[self shareModeShareWrite] -> [self halt] "don't know how to implement this on unix and it is currently unused"}.
+			[self shareModeShareWrite] -> [self error: 'not supported'] "don't know how to implement this on unix and it is currently unused"}.
 
 	flagState ifNotNil: [
 		(FLock
@@ -87,9 +87,9 @@ ODBUnixFileStream class >> streamCreationSelectorForMode: createMode [
 
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #public }
 ODBUnixFileStream >> close [
-		"Close file associatied with receiver."
+	"Close file associatied with receiver."
 
 	fileHandle notNil ifTrue: [
 		FLock 
@@ -109,7 +109,7 @@ ODBUnixFileStream >> lockAt: pos length: length [
 		to: pos + length - 1
 ]
 
-{ #category : #accesing }
+{ #category : #public }
 ODBUnixFileStream >> size [
 	"the unix Squeak VM gives the wrong answer for #size"
 	| file |
