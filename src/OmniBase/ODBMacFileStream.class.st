@@ -100,18 +100,6 @@ ODBMacFileStream >> lockAt: pos length: length [
 ]
 
 { #category : #public }
-ODBMacFileStream >> size [
-	"the unix Squeak VM gives the wrong answer for #size"
-	| file |
-	fileHandle flush.
-	file := fileHandle readOnlyCopy.
-	^ [file size] ensure: [file close]
-	
-
-
-]
-
-{ #category : #public }
 ODBMacFileStream >> unlockAt: pos length: length [
 
 	^ BSDFLock 
