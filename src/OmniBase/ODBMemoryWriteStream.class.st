@@ -2,6 +2,7 @@ Class {
 	#name : #ODBMemoryWriteStream,
 	#superclass : #ODBStream,
 	#instVars : [
+		'position',
 		'collections',
 		'current',
 		'readLimit',
@@ -61,6 +62,13 @@ ODBMemoryWriteStream >> asStringObject [
 		with: coll
 		startingAt: 1.
 	^string
+]
+
+{ #category : #public }
+ODBMemoryWriteStream >> basicPosition: anInteger [
+	"Positiones stream to anInteger. Answer anInteger."
+
+	^position := anInteger
 ]
 
 { #category : #initialization }
