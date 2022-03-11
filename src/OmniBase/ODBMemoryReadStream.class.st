@@ -2,6 +2,7 @@ Class {
 	#name : #ODBMemoryReadStream,
 	#superclass : #ODBStream,
 	#instVars : [
+		'position',
 		'current'
 	],
 	#category : #'OmniBase-Streams'
@@ -17,6 +18,14 @@ ODBMemoryReadStream class >> createOn: bytes [
 ODBMemoryReadStream class >> readFrom: aStream [
 
     ^self new readFrom: aStream
+]
+
+{ #category : #public }
+ODBMemoryReadStream >> basicPosition: anInteger [
+	"Positiones stream to anInteger. Answer anInteger."
+
+	^position := anInteger
+
 ]
 
 { #category : #initializing }

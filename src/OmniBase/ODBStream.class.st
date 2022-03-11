@@ -1,9 +1,6 @@
 Class {
 	#name : #ODBStream,
 	#superclass : #Object,
-	#instVars : [
-		'position'
-	],
 	#classInstVars : [
 		'locks',
 		'lockingMutex'

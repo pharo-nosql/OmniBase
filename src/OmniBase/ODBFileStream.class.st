@@ -288,8 +288,7 @@ ODBFileStream >> basicPosition: anInteger [
 	"Positiones stream to anInteger. Answer anInteger."
 
 	fileHandle position: anInteger.
-	^position := anInteger
-
+	^anInteger
 ]
 
 { #category : #public }
@@ -300,7 +299,6 @@ ODBFileStream >> basicPutBytesFrom: aByteArray len: length [
 		for: length)
 		= length ifFalse: [OmniBase signalError: 'Could not write the whole data'].
 	fileHandle flush.
-	position := position + length.
 	^self
 
 ]
@@ -403,7 +401,6 @@ ODBFileStream >> openOn: aString fileHandle: anIOAccessor [
 
 	pathName := aString.
 	fileHandle := anIOAccessor.
-	position := 0.
 	mutex := Semaphore forMutualExclusion.
 ]
 
@@ -416,7 +413,7 @@ ODBFileStream >> pathName [
 { #category : #public }
 ODBFileStream >> position [
 
-	^position
+	^fileHandle position
 ]
 
 { #category : #public }
