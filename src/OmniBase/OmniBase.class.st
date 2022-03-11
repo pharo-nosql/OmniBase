@@ -88,7 +88,7 @@ OmniBase class >> currentTransaction [
 	processToTransactionMutex critical: 
 			[transaction := processToTransactionDict at: Processor activeProcess
 						ifAbsent: [transaction]].
-	transaction isNil ifFalse: [^transaction].
+	transaction ifNotNil: [^transaction].
 	self signalError: 'No transaction is active'
 ]
 
@@ -122,10 +122,10 @@ OmniBase class >> getCurrentAndSet: anOmniBaseTransaction for: aProcess [
 
 { #category : #'class initialization' }
 OmniBase class >> initialize [
-	processToTransactionMutex isNil 
-		ifTrue: 
-			[processToTransactionDict := IdentityDictionary new.
-			processToTransactionMutex := Semaphore forMutualExclusion]
+
+	processToTransactionMutex ifNil: [ 
+		processToTransactionDict := IdentityDictionary new.
+		processToTransactionMutex := Semaphore forMutualExclusion ]
 ]
 
 { #category : #'instance creation' }
@@ -187,11 +187,12 @@ OmniBase class >> openOn: dirName [
 ]
 
 { #category : #private }
-OmniBase class >> remove: anOmniBase [ 
+OmniBase class >> remove: anOmniBase [
+
 	"Private - Deregisters an opened database session."
 
-	sessions isNil ifTrue: [^self].
-	sessions remove: anOmniBase ifAbsent: []
+	sessions ifNil: [ ^ self ].
+	sessions remove: anOmniBase ifAbsent: [  ]
 ]
 
 { #category : #handling }
@@ -202,7 +203,7 @@ OmniBase class >> removeFor: aProcess [
 		critical: [processToTransactionDict removeKey: aProcess ifAbsent: []]
 ]
 
-{ #category : #public }
+{ #category : #'class initialization' }
 OmniBase class >> reset [
 	"Use wisely. Makes a complete reset of all related to this persistance clients."
 	self closeAll.
@@ -251,14 +252,13 @@ OmniBase class >> warningMessage: aString [
 { #category : #private }
 OmniBase >> classManager [
 
-	^ classManager ifNil: [ 
-		classManager := self classManagerClass new ]
+	^ classManager ifNil: [ classManager := self classManagerClass new ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #public }
 OmniBase >> classManagerClass [ 
 
-	^ ODBClassManager 
+	^ ODBClassManager
 ]
 
 { #category : #private }
