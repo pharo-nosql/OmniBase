@@ -204,7 +204,7 @@ ODBFile >> waitForLockAt: pos length: length whileWaitingDo: aBlock [
 				ifFalse: [
 					ODBLockNotification signal
 						ifTrue: [startTime := currentTime]
-						ifFalse: [^ODBCannotLock signal]]]]
+						ifFalse: [ ^ ODBCannotLock signal ] ] ] ]
 ]
 
 { #category : #private }
