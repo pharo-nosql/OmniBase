@@ -183,10 +183,10 @@ ODBFile >> waitForAddingLock [
 ODBFile >> waitForLockAt: pos length: length [ 
 	"Wait for lock at given position."
 
-	^self 
+	^ self 
 		waitForLockAt: pos
 		length: length
-		whileWaitingDo: [(Delay forMilliseconds: 250) wait]
+		whileWaitingDo: [(Delay forMilliseconds: 10) wait]
 ]
 
 { #category : #locking }
