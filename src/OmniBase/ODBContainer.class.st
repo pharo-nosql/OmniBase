@@ -228,8 +228,7 @@ ODBContainer >> lockDataFile [
 
     | currentSpace defaultSpace |
 
-    activeDataFile waitForAddingLockWhileWaitingDo:
-    [currentSpace := activeDataFile == dataFileA ifTrue: [0] ifFalse: [1].
+    currentSpace := activeDataFile == dataFileA ifTrue: [0] ifFalse: [1].
     defaultSpace := objectManager defaultObjectSpace.
     currentSpace == defaultSpace
         ifFalse:
@@ -242,7 +241,8 @@ openOn: self dataFileNameA].
                     [dataFileB isNil ifTrue: [dataFileB := ODBObjectStorage
 openOn: self dataFileNameB].
                     activeDataFile := dataFileB].
-            ^self lockDataFile]] 
+            ].
+	^ activeDataFile waitForAddingLock
 ]
 
 { #category : #public }
