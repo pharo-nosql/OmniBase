@@ -8,7 +8,7 @@ Class {
 	#category : #'OmniBase-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 ODBObjectID class >> containerID: containerID index: index [
 
     ^super new containerID: containerID index: index
@@ -29,7 +29,7 @@ ODBObjectID class >> sizeInBytes [
 	^4
 ]
 
-{ #category : #public }
+{ #category : #comparing }
 ODBObjectID >> = other [
 
     ^ self species = other species and: [
@@ -105,13 +105,13 @@ ODBObjectID >> loadFromStream: aStream [
     self fromBytes: bytes at: 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'public/accessing' }
 ODBObjectID >> lockRegistryKey [
 	^ String streamContents: [ :stream |
 		self lockRegistryKeyOn: stream ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'public/accessing' }
 ODBObjectID >> lockRegistryKeyAt: aKey [
 	^ String streamContents: [ :stream |
 		self lockRegistryKeyOn: stream.
@@ -120,7 +120,7 @@ ODBObjectID >> lockRegistryKeyAt: aKey [
 			<< aKey asInteger asString ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #printing }
 ODBObjectID >> lockRegistryKeyOn: aStream [
 	aStream 
 		<< containerID asString 
@@ -128,7 +128,7 @@ ODBObjectID >> lockRegistryKeyOn: aStream [
 		<< index asString
 ]
 
-{ #category : #public }
+{ #category : #printing }
 ODBObjectID >> printOn: aStream [ 
 	super printOn: aStream.
 	aStream nextPut: $(.

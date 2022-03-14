@@ -9,7 +9,7 @@ Class {
 	#category : #'OmniBase-Transaction'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 ODBBTreeIndexDictionary class >> createWithKeyLength: keyLength [
         "Answer new instance of dictionary with max keyLength characters for keys."
 

@@ -4,7 +4,7 @@ Class {
 	#category : #'OmniBase-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defining }
 ODBRootObjectDBHolder class >> classID [
         "Answer database object classID."
 

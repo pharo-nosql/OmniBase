@@ -7,7 +7,7 @@ Class {
 	#category : #'OmniBase-Transaction'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #public }
 ODBKeyLock class >> lockClassID [
         "Answer unique class ID used for storing locks 
         or <nil> if lock does not need to be stored."
@@ -35,7 +35,7 @@ ODBKeyLock >> loadFromStream: aStream [
     key := aStream getString asByteArray
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'public/accessing' }
 ODBKeyLock >> lockRegistryKey [ 
 	^ objectID lockRegistryKeyAt: key
 ]
