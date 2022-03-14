@@ -193,7 +193,7 @@ ODBContainer >> initHolders: holders [
 
 { #category : #initialization }
 ODBContainer >> initialize [
-	dbFiles := ODBWeakValueIdentityDictionary new.
+	dbFiles := WeakIdentityValueDictionary new.
 	dbFilesMutex := Semaphore forMutualExclusion.
 	byteStorageQueue := OrderedCollection new.
 	queueSize := 0
@@ -310,14 +310,15 @@ ODBContainer >> onNewObjectFileDo: aBlock [
 ]
 
 { #category : #public }
-ODBContainer >> openObjectFile: index ifAbsentPut: aBlock [ 
-	| file |
-	dbFilesMutex critical: 
-			[((file := dbFiles at: index) isNil or: [file stream isNil]) 
-				ifTrue: 
-					[file := aBlock value: (self fileNameFromIndex: index).
-					dbFiles at: index put: file]].
-	^file
+ODBContainer >> openObjectFile: index ifAbsentPut: aBlock [
+
+	^ dbFilesMutex critical: [ 
+		| file |
+		file := dbFiles at: index ifAbsent: [ nil ].
+		(file isNil or: [ file stream isNil ]) ifTrue: [ 
+			file := aBlock value: (self fileNameFromIndex: index).
+			dbFiles at: index put: file ]. 
+		file]
 ]
 
 { #category : #accessing }
