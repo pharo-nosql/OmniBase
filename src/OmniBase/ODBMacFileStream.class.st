@@ -81,20 +81,20 @@ ODBMacFileStream class >> streamCreationSelectorForMode: createMode [
 ODBMacFileStream >> close [
 	"Close file associatied with receiver."
 
-	fileHandle notNil ifTrue: [
+	stream notNil ifTrue: [
 		BSDFLock 
-			unlock: fileHandle fileHandle 
+			unlock: stream fileHandle 
 			from: 0 
 			to: self size.
-		fileHandle closed ifFalse: [ fileHandle close ] ].
-	fileHandle := nil.
+		stream closed ifFalse: [ stream close ] ].
+	stream := nil.
 ]
 
 { #category : #public }
 ODBMacFileStream >> lockAt: pos length: length [
 	
 	^ BSDFLock 
-		lock: fileHandle fileHandle
+		lock: stream fileHandle
 		from: pos 
 		to: pos + length - 1
 ]
@@ -103,7 +103,7 @@ ODBMacFileStream >> lockAt: pos length: length [
 ODBMacFileStream >> unlockAt: pos length: length [
 
 	^ BSDFLock 
-		unlock: fileHandle fileHandle
+		unlock: stream fileHandle
 		from: pos 
 		to: pos + length - 1
 ]

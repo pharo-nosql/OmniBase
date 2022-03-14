@@ -4,9 +4,6 @@ ODBMemoryReadStream wraps a ReadStream and provides easy data reading (e.g. getB
 Class {
 	#name : #ODBMemoryReadStream,
 	#superclass : #ODBStream,
-	#instVars : [
-		'stream'
-	],
 	#category : #'OmniBase-Streams'
 }
 
@@ -44,22 +41,7 @@ ODBMemoryReadStream >> getBytesFor: aByteCollection len: len [
 	^ stream readInto: aByteCollection startingAt: 1 count: len
 ]
 
-{ #category : #accessing }
-ODBMemoryReadStream >> position [
-	^ stream position
-]
-
-{ #category : #accessing }
-ODBMemoryReadStream >> position: aPostion [
-	stream position: aPostion
-]
-
 { #category : #'instance creation' }
 ODBMemoryReadStream >> readFrom: aStream [
 	stream := aStream
-]
-
-{ #category : #accessing }
-ODBMemoryReadStream >> size [
-	^ stream size
 ]
