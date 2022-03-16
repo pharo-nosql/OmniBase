@@ -4,7 +4,7 @@ Class {
 	#category : #'OmniBase-Storage'
 }
 
-{ #category : #public }
+{ #category : #'public/unclassified' }
 ODBGarbageCollectorRequest >> bytesStored [
 	objectHolder container indexFile at: objectHolder objectID index
 		put: objectHolder contents

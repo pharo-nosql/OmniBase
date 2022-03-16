@@ -264,8 +264,7 @@ OmniBase >> classManagerClass [
 { #category : #private }
 OmniBase >> clientManager [
 
-	^ clientManager ifNil: [ 
-		clientManager := self clientManagerClass new ]
+	^ clientManager ifNil: [ clientManager := self clientManagerClass new ]
 ]
 
 { #category : #public }
