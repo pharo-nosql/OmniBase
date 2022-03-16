@@ -179,9 +179,9 @@ ODBFileStream class >> remove: fileName [
 	"Remove file named fileName. Answer <true> if successful, <false> if failed."
 
 	[ fileName asFileReference delete.
-		^true ]
+		^ true ]
 			on: Error
-			do: [:ex | ^false ]
+			do: [:ex | ^ false ]
 ]
 
 { #category : #'create/open flags' }
