@@ -9,7 +9,7 @@ Class {
 	#category : #'OmniBase-Events'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #public }
 ODBAssociationChanged class >> changeClassID [
         "Answer unique class ID used for storing changes into 
         transaction file or <nil> if change does not need to be stored."

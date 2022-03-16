@@ -25,6 +25,21 @@ ODBCleanCodeTest >> testNoDuplicatedMethodInHierarchy [
 ]
 
 { #category : #tests }
+ODBCleanCodeTest >> testNoUncategorizedMethods [
+	"Check that we have no #'as yet unclassified' protocols left"
+
+	| violating classes |
+	classes := OmniBase package definedClasses
+	           , OmniBase package definedClasses collect: [ :each | each classSide ].
+
+	violating := classes select: [ :class | 
+		             class protocols includes: #'as yet unclassified' ].
+	self
+		assert: violating isEmpty
+		description: 'the following classes have uncategorized methods: ', violating asString
+]
+
+{ #category : #tests }
 ODBCleanCodeTest >> testNoUnusedInstanceVariablesLeft [
 	| variables classes validExceptions remaining |
 	

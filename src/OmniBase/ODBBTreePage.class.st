@@ -12,7 +12,7 @@ Class {
 	#category : #'OmniBase-Storage'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 ODBBTreePage class >> createOnFile: anODBTreeIterator
     position: position
     keyLength: keyLen
@@ -25,7 +25,7 @@ ODBBTreePage class >> createOnFile: anODBTreeIterator
         valueLength: valueLen
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 ODBBTreePage class >> loadFromFile: anODBTreeIterator
     position: position
     keyLength: keyLen
