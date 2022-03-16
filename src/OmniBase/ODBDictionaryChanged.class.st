@@ -7,11 +7,12 @@ Class {
 	#category : #'OmniBase-Events'
 }
 
-{ #category : #public }
+{ #category : #'transaction processing' }
 ODBDictionaryChanged >> committed [
+
 	"Changes have been committed, update transaction object."
 
-	dataBaseObject isNil ifFalse: [transactionObject setDataBaseObject: dataBaseObject].
+	dataBaseObject ifNotNil: [ transactionObject setDataBaseObject: dataBaseObject ].
 	transactionObject objectCommitted
 ]
 

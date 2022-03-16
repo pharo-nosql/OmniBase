@@ -16,14 +16,14 @@ ODBNewObjectVersion class >> changeClassID [
     ^1
 ]
 
-{ #category : #'public/transaction processing' }
+{ #category : #'transaction processing' }
 ODBNewObjectVersion >> commit [
         "Commit changes."
 
     newVersion store
 ]
 
-{ #category : #'public/transaction processing' }
+{ #category : #'transaction processing' }
 ODBNewObjectVersion >> committed [
         "Changes have been committed, update transaction object."
 
@@ -32,7 +32,7 @@ ODBNewObjectVersion >> committed [
         objectCommitted
 ]
 
-{ #category : #'public/load/store' }
+{ #category : #public }
 ODBNewObjectVersion >> loadFromStream: aStream [
 
     objectID := ODBObjectID new loadFromStream: aStream.
@@ -64,23 +64,23 @@ ODBNewObjectVersion >> oldVersion: anObjectHolder [
     oldVersion := anObjectHolder
 ]
 
-{ #category : #public }
+{ #category : #'transaction processing' }
 ODBNewObjectVersion >> rollback [
+
 	"Rollback changes."
 
 	| currentHolder |
-	(currentHolder := transaction objectHolderAt: objectID) isNil ifTrue: [^self].
-	currentHolder versionNumber > newVersion versionNumber 
-		ifFalse: 
-			[currentHolder
-				contents: oldVersion contents;
-				store]
+	(currentHolder := transaction objectHolderAt: objectID) ifNil: [ ^ self ].
+	currentHolder versionNumber > newVersion versionNumber ifFalse: [ 
+		currentHolder
+			contents: oldVersion contents;
+			store ]
 ]
 
-{ #category : #'public/load/store' }
+{ #category : #'load/store' }
 ODBNewObjectVersion >> storeOnStream: aStream [
 
-        objectID storeOnStream: aStream.
-        oldVersion storeOnStream: aStream.
-        newVersion storeOnStream: aStream
+	objectID storeOnStream: aStream.
+	oldVersion storeOnStream: aStream.
+	newVersion storeOnStream: aStream
 ]
