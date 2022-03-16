@@ -1,6 +1,9 @@
 Class {
 	#name : #ODBStream,
 	#superclass : #Object,
+	#instVars : [
+		'stream'
+	],
 	#classInstVars : [
 		'locks',
 		'lockingMutex'
@@ -81,12 +84,12 @@ ODBStream >> getWord [
 
 { #category : #accessing }
 ODBStream >> position [
-	^ self subclassResponsibility
+	^ stream position
 ]
 
 { #category : #accessing }
-ODBStream >> position: arg1 [ 
-	^ self subclassResponsibility
+ODBStream >> position: aPostion [
+	stream position: aPostion
 ]
 
 { #category : #public }
@@ -145,4 +148,9 @@ ODBStream >> setToEnd [
         "Set to stream to end and answer position."
 
     ^self position: self size
+]
+
+{ #category : #public }
+ODBStream >> size [
+	^ stream size
 ]

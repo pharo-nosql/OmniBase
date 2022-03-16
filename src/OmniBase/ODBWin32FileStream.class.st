@@ -41,7 +41,7 @@ ODBWin32FileStream >> basicGetBytesFor: aByteCollection len: len [
 
 	| startTime currentTime errorCode |
 	(self 
-		readFile: fileHandle
+		readFile: stream
 		lpBuffer: aByteCollection
 		nNumberOfBytesToRead: len
 		lpNumberOfBytesRead: externalLong
@@ -58,7 +58,7 @@ ODBWin32FileStream >> basicGetBytesFor: aByteCollection len: len [
 										ifTrue: [startTime := currentTime]
 										ifFalse: [self fileIOError: errorCode]].
 							(self 
-								readFile: fileHandle
+								readFile: stream
 								lpBuffer: aByteCollection
 								nNumberOfBytesToRead: len
 								lpNumberOfBytesRead: externalLong
@@ -75,7 +75,7 @@ ODBWin32FileStream >> basicPosition: anInteger [
 
 	| result |
 	result := self 
-				setFilePointer: fileHandle
+				setFilePointer: stream
 				lDistanceToMove: anInteger
 				lpDistanceToMoveHigh: nil
 				dwMoveMethod: 0. "FILE_BEGIN"
@@ -87,7 +87,7 @@ ODBWin32FileStream >> basicPutBytesFrom: aByteCollection len: len [
 	"Private - Write len bytes from aByteCollection to file."
 
 	(self 
-		writeFile: fileHandle
+		writeFile: stream
 		lpBuffer: aByteCollection asByteArray
 		nNumberOfBytesToWrite: len
 		lpNumberOfBytesWritten: externalLong
@@ -98,8 +98,8 @@ ODBWin32FileStream >> basicPutBytesFrom: aByteCollection len: len [
 ODBWin32FileStream >> close [
 	"Close file associatied with receiver."
 
-	self closeHandle: fileHandle.
-	fileHandle := nil.
+	self closeHandle: stream.
+	stream := nil.
 ]
 
 { #category : #'Win32 primitives' }
@@ -190,7 +190,7 @@ ODBWin32FileStream >> fileIOError: errorCode [
 ODBWin32FileStream >> flush [
 	"Force all data written to the receiver to be recorded on disk."
 
-	(self flushFileBuffers: fileHandle) = 0 ifTrue: [self fileIOError]
+	(self flushFileBuffers: stream) = 0 ifTrue: [self fileIOError]
 ]
 
 { #category : #'Win32 primitives' }
@@ -236,7 +236,7 @@ ODBWin32FileStream >> lockAt: pos length: length [
 
 	| errorCode |
 	(self 
-		lockFile: fileHandle
+		lockFile: stream
 		offsetLow: pos
 		offsetHigh: 0
 		lengthLow: length
@@ -268,7 +268,8 @@ ODBWin32FileStream >> openOn: aString fileHandle: win32Handle [
 	"Private - Initialize receiver."
 
 	pathName := aString.
-	fileHandle := win32Handle.
+	"To fix: on win stream is a handle"
+	stream := win32Handle.
 	mutex := Semaphore forMutualExclusion.
 	externalLong := ByteArray new: 4.
 ]
@@ -277,7 +278,7 @@ ODBWin32FileStream >> openOn: aString fileHandle: win32Handle [
 ODBWin32FileStream >> position [
 	| pos |
 	pos := self 
-				setFilePointer: fileHandle
+				setFilePointer: stream
 				lDistanceToMove: 0
 				lpDistanceToMoveHigh: nil
 				dwMoveMethod: 1. "FILE_CURRENT"
@@ -340,7 +341,7 @@ ODBWin32FileStream >> size [
 	signal a FileException if the operation fails."
 
 	| result |
-	result := self getFileSize: fileHandle lpFileSizeHigh: nil.
+	result := self getFileSize: stream lpFileSizeHigh: nil.
 	^16rFFFFFFFF = result ifFalse: [result] ifTrue: [self fileIOError]
 ]
 
@@ -351,7 +352,7 @@ ODBWin32FileStream >> truncate: anInteger [
 
 	mutex critical: 
 			[self basicPosition: anInteger.
-			(self setEndOfFile: fileHandle) = 0 ifTrue: [self fileIOError]]
+			(self setEndOfFile: stream) = 0 ifTrue: [self fileIOError]]
 ]
 
 { #category : #public }
@@ -360,7 +361,7 @@ ODBWin32FileStream >> unlockAt: pos length: length [
 	Answer <true> if successfull, <false> if failed."
 
 	^(self
-		unlockFile: fileHandle
+		unlockFile: stream
 		offsetLow: pos
 		offsetHigh: 0
 		lengthLow: length

@@ -2,7 +2,6 @@ Class {
 	#name : #ODBFileStream,
 	#superclass : #ODBStream,
 	#instVars : [
-		'fileHandle',
 		'mutex',
 		'pathName'
 	],
@@ -280,25 +279,25 @@ ODBFileStream >> basicGetBytesFor: aByteCollection len: len [
 		"Read len bytes from stream to aByteCollection. 
 		Answer number of bytes actualy read."
 
-	^fileHandle flush; readInto: aByteCollection startingAt: 1 count: len
+	^stream flush; readInto: aByteCollection startingAt: 1 count: len
 ]
 
 { #category : #public }
 ODBFileStream >> basicPosition: anInteger [
 	"Positiones stream to anInteger. Answer anInteger."
 
-	fileHandle position: anInteger.
+	stream position: anInteger.
 	^anInteger
 ]
 
 { #category : #public }
 ODBFileStream >> basicPutBytesFrom: aByteArray len: length [ 
-	(fileHandle
+	(stream
 		writeFrom: aByteArray
 		startingAt: 1
 		for: length)
 		= length ifFalse: [OmniBase signalError: 'Could not write the whole data'].
-	fileHandle flush.
+	stream flush.
 	^self
 
 ]
@@ -334,7 +333,7 @@ ODBFileStream >> flush [
 		"Force all data written to the 
 		receiver to be recorded on disk."
 
-	fileHandle flush
+	stream flush
 ]
 
 { #category : #public }
@@ -400,7 +399,7 @@ ODBFileStream >> openOn: aString fileHandle: anIOAccessor [
 		"Private - Initialize receiver."
 
 	pathName := aString.
-	fileHandle := anIOAccessor.
+	stream := anIOAccessor.
 	mutex := Semaphore forMutualExclusion.
 ]
 
@@ -408,12 +407,6 @@ ODBFileStream >> openOn: aString fileHandle: anIOAccessor [
 ODBFileStream >> pathName [
 
     ^pathName
-]
-
-{ #category : #public }
-ODBFileStream >> position [
-
-	^fileHandle position
 ]
 
 { #category : #public }
@@ -468,21 +461,13 @@ ODBFileStream >> remove [
 ]
 
 { #category : #public }
-ODBFileStream >> size [
-	"Answer the size of the file in bytes or
-	signal a FileException if the operation fails."
-
-	^ fileHandle size
-]
-
-{ #category : #public }
 ODBFileStream >> truncate: anInteger [ 
 	"Truncate stream so that its size will be anInteger. 
         Position to anInteger."
 
 	mutex critical: 
 			[self basicPosition: anInteger.
-			fileHandle truncate: anInteger]
+			stream truncate: anInteger]
 ]
 
 { #category : #public }
