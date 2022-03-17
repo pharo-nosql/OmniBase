@@ -40,6 +40,17 @@ ODBCleanCodeTest >> testNoUncategorizedMethods [
 ]
 
 { #category : #tests }
+ODBCleanCodeTest >> testNoUnusedClasses [
+	"Fail if there are Classes that are not used. They should either be tested or deleted.
+	(check how to override #isUsed for cases where classes are discovered reflectively)"
+	| found  |
+	found := OmniBase package definedClasses reject: [ :class | class isUsed].
+	self 
+		assert: found isEmpty 
+		description: ('the following classes are unused: ', found asString)
+]
+
+{ #category : #tests }
 ODBCleanCodeTest >> testNoUnusedInstanceVariablesLeft [
 	| variables classes validExceptions remaining |
 	
