@@ -4,10 +4,6 @@ Class {
 	#instVars : [
 		'stream'
 	],
-	#classInstVars : [
-		'locks',
-		'lockingMutex'
-	],
 	#category : #'OmniBase-Streams'
 }
 
