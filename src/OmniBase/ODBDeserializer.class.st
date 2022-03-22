@@ -91,8 +91,7 @@ ODBDeserializer class >> init [
 		at: 42 put: (ODBCopyValue value: 1.0);
 		at: 43 put: ODBFloatAsInteger;
 		at: 44 put: ODBFloatAs100Integer;
-		at: 45 put: ODB8ByteFloat;
-		"should be ScaledDecimal but Squeak has not support for ScaledDecimal class, e.g. 1.0s does not work"
+		at: 45 put: ScaledDecimal;
 		at: 46 put: Float;
 		at: 47 put: SmallFloat64;
 	

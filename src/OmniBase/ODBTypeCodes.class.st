@@ -2,7 +2,6 @@ Class {
 	#name : #ODBTypeCodes,
 	#superclass : #SharedPool,
 	#classVars : [
-		'ODB8ByteFloatCode',
 		'ODBArrayCode',
 		'ODBAssociationCode',
 		'ODBByteArrayCode',
@@ -32,6 +31,7 @@ Class {
 		'ODBOrderedCollectionCode',
 		'ODBPersistentDictionaryCode',
 		'ODBProcessSchedulerCode',
+		'ODBScaledDecimalCode',
 		'ODBSmallFloat64Code',
 		'ODBSmallPositiveIntegerBaseCode',
 		'ODBSmallStringBaseCode',
@@ -110,7 +110,7 @@ ODBTypeCodes class >> initializeTypeCodes [
 	ODBFloatValue1 := 42.
 	ODBFloatAsIntegerCode := 43.
 	ODBFloatAs100IntegerCode := 44.
-	ODB8ByteFloatCode := 45. "should be scaled decimal"
+	ODBScaledDecimalCode := 45.
 	ODBFloatCode := 46.
 	ODBSmallFloat64Code := 47.
 	"integers <= 16 are stored with code 50 + number"
