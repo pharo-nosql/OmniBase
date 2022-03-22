@@ -36,12 +36,14 @@ ODBExpiredProxyObject >> doesNotUnderstand: aMessage [
 ODBExpiredProxyObject >> halt [
 	"This is the typical message to use for inserting breakpoints during debugging."
 	<debuggerCompleteToSender>
+	<ignoreForCoverage>
 	Halt now
 ]
 
 { #category : #public }
 ODBExpiredProxyObject >> inspect [
 	"Create and schedule an Inspector in which the user can examine the receiver's variables."
+	<ignoreForCoverage>
 	^ Smalltalk tools inspector inspect: self
 ]
 
