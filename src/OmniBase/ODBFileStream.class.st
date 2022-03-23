@@ -8,50 +8,15 @@ Class {
 	#category : #'OmniBase-Streams'
 }
 
-{ #category : #'create/open flags' }
-ODBFileStream class >> accessModeReadOnly [
-	^#accessModeReadOnly
-]
-
-{ #category : #'create/open flags' }
-ODBFileStream class >> accessModeReadWrite [
-	^#accessModeReadWrite
-]
-
-{ #category : #'create/open flags' }
-ODBFileStream class >> cacheModeAtomicWrite [
-	^#cacheModeAtomicWrite
-]
-
-{ #category : #'create/open flags' }
-ODBFileStream class >> createModeCreateAlways [
-	^#createModeCreateAlways
-]
-
-{ #category : #'create/open flags' }
-ODBFileStream class >> createModeCreateNew [
-	^#createModeCreateNew
-]
-
-{ #category : #'create/open flags' }
-ODBFileStream class >> createModeOpenAlways [
-	^#createModeOpenAlways
-]
-
-{ #category : #'create/open flags' }
-ODBFileStream class >> createModeOpenExisting [
-	^#createModeOpenExisting
-]
-
 { #category : #'create/open' }
 ODBFileStream class >> createNewOn: pathName [
         "Create new file on pathName. Trigger an error 
         if the file allready exists or if it can not be created."
 
     ^self createOn: pathName
-        createMode: self createModeCreateNew
-        accessMode: self accessModeReadWrite
-        shareMode: self shareModeShareAll
+        createMode: #createModeCreateNew
+        accessMode: #accessModeReadWrite
+        shareMode: #shareModeShareAll
 ]
 
 { #category : #'create/open' }
@@ -60,9 +25,9 @@ ODBFileStream class >> createOn: pathName [
         exception if the file can not be created."
 
     ^self createOn: pathName
-        createMode: self createModeCreateAlways
-        accessMode: self accessModeReadWrite
-        shareMode: self shareModeShareAll
+        createMode: #createModeCreateAlways
+        accessMode: #accessModeReadWrite
+        shareMode: #shareModeShareAll
 ]
 
 { #category : #'create/open' }
@@ -138,9 +103,9 @@ ODBFileStream class >> openExclusivelyOn: pathName [
 		Trigger an exception if the file can not be opened."
 
 	^self createOn: pathName
-		createMode: self createModeOpenExisting
-		accessMode: self accessModeReadWrite
-		shareMode: self shareModeShareNone
+		createMode: #createModeOpenExisting
+		accessMode: #accessModeReadWrite
+		shareMode: #shareModeShareNone
 ]
 
 { #category : #'create/open' }
@@ -149,9 +114,9 @@ ODBFileStream class >> openOn: pathName [
         exception if the file can not be opened."
 
     ^self createOn: pathName
-        createMode: self createModeOpenExisting
-        accessMode: self accessModeReadWrite
-        shareMode: self shareModeShareAll
+        createMode: #createModeOpenExisting
+        accessMode: #accessModeReadWrite
+        shareMode: #shareModeShareAll
 ]
 
 { #category : #'create/open' }
@@ -161,9 +126,9 @@ ODBFileStream class >> openReadOnlyOn: pathName [
 
 	^self 
 		createOn: pathName
-		createMode: self createModeOpenExisting
-		accessMode: self accessModeReadOnly
-		shareMode: self shareModeShareAll
+		createMode: #createModeOpenExisting
+		accessMode: #accessModeReadOnly
+		shareMode: #shareModeShareAll
 ]
 
 { #category : #public }
@@ -181,26 +146,6 @@ ODBFileStream class >> remove: fileName [
 		^ true ]
 			on: Error
 			do: [:ex | ^ false ]
-]
-
-{ #category : #'create/open flags' }
-ODBFileStream class >> shareModeShareAll [
-	^#shareModeShareAll
-]
-
-{ #category : #'create/open flags' }
-ODBFileStream class >> shareModeShareNone [
-	^#shareModeShareNone
-]
-
-{ #category : #'create/open flags' }
-ODBFileStream class >> shareModeShareRead [
-	^#shareModeShareRead
-]
-
-{ #category : #'create/open flags' }
-ODBFileStream class >> shareModeShareWrite [
-	^#shareModeShareWrite
 ]
 
 { #category : #public }

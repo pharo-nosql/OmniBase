@@ -26,7 +26,6 @@ ODBWin32FileStream class >> createOn: pathName createMode: createMode accessMode
 	shareMode = #shareModeShareAll ifTrue: [shMode := 3 "FILE_SHARE_READ | FILE_SHARE_WRITE"].
 	shareMode = #shareModeShareNone ifTrue: [shMode := 0].
 	shareMode = #shareModeShareRead ifTrue: [shMode := 1 "FILE_SHARE_READ"].
-	shareMode = #shareModeShareWrite ifTrue: [shMode := 2 "FILE_SHARE_WRITE"].
 	caMode := 0.
 	cacheMode = #cacheModeAtomicWrite ifTrue: [caMode := 512  "FILE_FLAG_ATOMIC_WRITE"].
 	cacheMode = #cacheModeSequentialScan ifTrue: [caMode := 134217728 "FILE_FLAG_SEQUENTIAL_SCAN"].

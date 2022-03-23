@@ -12,10 +12,10 @@ Class {
 ODBVersionControlFile >> createOn: aString [
 
     stream := ODBFileStream createOn: aString
-                            createMode: ODBFileStream createModeCreateAlways
-                            accessMode: ODBFileStream accessModeReadWrite
-                            shareMode: ODBFileStream shareModeShareAll
-                            cacheMode: ODBFileStream cacheModeAtomicWrite.
+                            createMode: #createModeCreateAlways
+                            accessMode: #accessModeReadWrite
+                            shareMode: #shareModeShareAll
+                            cacheMode:  #cacheModeAtomicWrite.
     ^self writeHeader
 ]
 
@@ -59,10 +59,10 @@ ODBVersionControlFile >> openOn: aString [
         "Open transaction file. Signal an error if failed."
 
     stream := ODBFileStream createOn: aString
-                            createMode: ODBFileStream createModeOpenExisting
-                            accessMode: ODBFileStream accessModeReadWrite
-                            shareMode: ODBFileStream shareModeShareAll
-                            cacheMode: ODBFileStream cacheModeAtomicWrite.
+                            createMode: #createModeOpenExisting
+                            accessMode: #accessModeReadWrite
+                            shareMode: #shareModeShareAll
+                            cacheMode:  #cacheModeAtomicWrite..
     ^self compareHeader
 ]
 

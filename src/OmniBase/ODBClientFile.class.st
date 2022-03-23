@@ -33,9 +33,9 @@ ODBClientFile >> createOn: aString [
         "Create client file. Signal an error if failed."
 
     stream := ODBFileStream createOn: aString
-                            createMode: ODBFileStream createModeCreateNew
-                            accessMode: ODBFileStream accessModeReadWrite
-                            shareMode: ODBFileStream shareModeShareRead.
+                            createMode: #createModeCreateNew
+                            accessMode: #accessModeReadWrite
+                            shareMode: #shareModeShareAll.
     ^self writeHeader
 ]
 
@@ -63,9 +63,9 @@ ODBClientFile >> openOn: aString [
         "Open client file. Signal an error if failed."
 
     stream := ODBFileStream createOn: aString
-                            createMode: ODBFileStream createModeOpenExisting
-                            accessMode: ODBFileStream accessModeReadWrite
-                            shareMode: ODBFileStream shareModeShareRead.
+                            createMode: #createModeOpenExisting
+                            accessMode: #accessModeReadWrite
+                            shareMode: #shareModeShareRead.
     ^self compareHeader
 ]
 

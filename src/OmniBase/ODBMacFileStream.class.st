@@ -30,7 +30,7 @@ ODBMacFileStream class >> ensureAccessMode: accessMode forFileStream: aFileStrea
 	See the class comment for more information on what's going on here."
 	| needsWriteAccess |
 	
-	needsWriteAccess := accessMode ~= self accessModeReadOnly.
+	needsWriteAccess := accessMode ~= #accessModeReadOnly.
 	(BSDFLock
 		canLock: aFileStream fileHandle
 			from: self shareModeFlagLocation
@@ -46,10 +46,9 @@ ODBMacFileStream class >> setShareMode: shareMode forFileStream: aFileStream [
 	| flagState |
 
 	flagState := shareMode caseOf: {
-			[self shareModeShareAll] -> [nil].
-			[self shareModeShareRead] -> [false].
-			[self shareModeShareNone] -> [true].
-			[self shareModeShareWrite] -> [self error: 'not supported'] "don't know how to implement this on unix and it is currently unused"}.
+			[#shareModeShareAll] -> [nil].
+			[#shareModeShareRead] -> [false].
+			[#shareModeShareNone] -> [true]}.
 
 	flagState ifNotNil: [
 		(BSDFLock
@@ -70,10 +69,10 @@ ODBMacFileStream class >> shareModeFlagLocation [
 { #category : #private }
 ODBMacFileStream class >> streamCreationSelectorForMode: createMode [
 	^ createMode caseOf:  {
-		[self createModeCreateAlways] -> [#openAndTruncateForWriteFileNamed:].
-		[self createModeCreateNew] -> [#openForWriteFileNamed:].
-		[self createModeOpenAlways] -> [#openForWriteFileNamed:].
-		[self createModeOpenExisting] -> [#openForWriteFileNamed:]}
+		[#createModeCreateAlways] -> [#openAndTruncateForWriteFileNamed:].
+		[#createModeCreateNew] -> [#openForWriteFileNamed:].
+		[#createModeOpenAlways] -> [#openForWriteFileNamed:].
+		[#createModeOpenExisting] -> [#openForWriteFileNamed:]}
 
 ]
 

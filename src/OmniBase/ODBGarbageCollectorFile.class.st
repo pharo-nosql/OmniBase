@@ -13,9 +13,9 @@ ODBGarbageCollectorFile >> createOn: aString [
 
 	stream := ODBFileStream 
 				createOn: aString
-				createMode: ODBFileStream createModeCreateNew
-				accessMode: ODBFileStream accessModeReadWrite
-				shareMode: ODBFileStream shareModeShareRead.
+				createMode: #createModeCreateNew
+				accessMode: #accessModeReadWrite
+				shareMode:  #shareModeShareRead.
 	^self writeHeader
 ]
 
@@ -55,9 +55,9 @@ ODBGarbageCollectorFile >> openOn: aString [
 
 	stream := ODBFileStream 
 				createOn: aString
-				createMode: ODBFileStream createModeOpenExisting
-				accessMode: ODBFileStream accessModeReadWrite
-				shareMode: ODBFileStream shareModeShareRead.
+				createMode: #createModeOpenExisting
+				accessMode: #accessModeReadWrite
+				shareMode:  #shareModeShareRead.
 	^self compareHeader
 ]
 
