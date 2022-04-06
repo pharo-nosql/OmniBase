@@ -61,6 +61,15 @@ ODBBTreeIndexDictionaryTest >> testIsChanged [
 ]
 
 { #category : #tests }
+ODBBTreeIndexDictionaryTest >> testIsEmpty [
+	[ | dict |
+	dict := OmniBase newBTreeIndexDictionary: 10.
+	self assert: dict isEmpty.
+	dict at: #test put: true.
+	self deny: dict isEmpty ] evaluateAndCommitIn: db newTransaction
+]
+
+{ #category : #tests }
 ODBBTreeIndexDictionaryTest >> testKeyLength [
  	| dict |
  	[ dict := (OmniBase newBTreeIndexDictionary: 10)
@@ -115,6 +124,15 @@ ODBBTreeIndexDictionaryTest >> testRemoveKey [
 	 ] evaluateAndCommitIn: db newTransaction.
 	self assert: (dict at: #test).
 	self assert: dict values size equals: 1
+]
+
+{ #category : #tests }
+ODBBTreeIndexDictionaryTest >> testSize [
+	[ | dict |
+	dict := OmniBase newBTreeIndexDictionary: 10.
+	self assert: dict isEmpty.
+	dict at: #test put: true.
+	self assert: dict size equals: 1 ] evaluateAndCommitIn: db newTransaction
 ]
 
 { #category : #tests }
