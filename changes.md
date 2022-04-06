@@ -1,6 +1,19 @@
 Changes
 =======
 
+2022-04-06 - Release 0.6
+------------------------
+
+- removal of double stream position handling. Started to use pharo file streams instead of omnibase streams
+- removed unusued classes and instVars. 
+
+2022-03-09 - Release 0.5
+------------------------
+
+- added in-image locking facility to complement fnctl style locking on unix/linux systems.
+
+2022-03-01 - Release 0.4
+------------------------
 
 - introduced unicode serialization/deserialization with new type code 36
 - a fix for Floats to be written as immediates. Solves a problem when the same floats are written
