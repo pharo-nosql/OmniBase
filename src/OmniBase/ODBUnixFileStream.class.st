@@ -40,7 +40,7 @@ ODBUnixFileStream class >> ensureAccessMode: accessMode forFileStream: aFileStre
 	See the class comment for more information on what's going on here."
 	| needsWriteAccess |
 	
-	needsWriteAccess := accessMode ~= self accessModeReadOnly.
+	needsWriteAccess := accessMode ~= #accessModeReadOnly.
 	(FLock
 		canLock: aFileStream fileHandle
 			from: self shareModeFlagLocation
@@ -56,10 +56,9 @@ ODBUnixFileStream class >> setShareMode: shareMode forFileStream: aFileStream [
 	| flagState |
 
 	flagState := shareMode caseOf: {
-			[self shareModeShareAll] -> [nil].
-			[self shareModeShareRead] -> [false].
-			[self shareModeShareNone] -> [true].
-			[self shareModeShareWrite] -> [self error: 'not supported'] "don't know how to implement this on unix and it is currently unused"}.
+			[#shareModeShareAll] -> [nil].
+			[#shareModeShareRead] -> [false].
+			[#shareModeShareNone] -> [true]}.
 
 	flagState ifNotNil: [
 		(FLock
@@ -80,10 +79,10 @@ ODBUnixFileStream class >> shareModeFlagLocation [
 { #category : #private }
 ODBUnixFileStream class >> streamCreationSelectorForMode: createMode [
 	^ createMode caseOf:  {
-		[self createModeCreateAlways] -> [#openAndTruncateForWriteFileNamed:].
-		[self createModeCreateNew] -> [#openForWriteFileNamed:].
-		[self createModeOpenAlways] -> [#openForWriteFileNamed:].
-		[self createModeOpenExisting] -> [#openForWriteFileNamed:]}
+		[#createModeCreateAlways] -> [#openAndTruncateForWriteFileNamed:].
+		[#createModeCreateNew] -> [#openForWriteFileNamed:].
+		[#createModeOpenAlways] -> [#openForWriteFileNamed:].
+		[#createModeOpenExisting] -> [#openForWriteFileNamed:]}
 
 ]
 
