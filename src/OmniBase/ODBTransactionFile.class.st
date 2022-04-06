@@ -47,7 +47,7 @@ OmniBase 1.0, David Gorisek (c) 1998
 '
 ]
 
-{ #category : #'private/initialization' }
+{ #category : #initialization }
 ODBTransactionFile >> initialize [
 
     locks := OrderedCollection new.

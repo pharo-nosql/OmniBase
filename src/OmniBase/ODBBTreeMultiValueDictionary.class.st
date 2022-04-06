@@ -6,8 +6,7 @@ Class {
 	#superclass : #ODBBTreeIndexDictionary,
 	#instVars : [
 		'deltaSize',
-		'initialSize',
-		'newObjects'
+		'initialSize'
 	],
 	#category : #'OmniBase-Transaction'
 }
@@ -33,9 +32,8 @@ ODBBTreeMultiValueDictionary >> at: aKey put: anObject [
 ODBBTreeMultiValueDictionary >> atKey: aKey add: anObject [
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBBTreeMultiValueDictionary >> initialize [
-	"Private - Initialize receiver."
 
 	super initialize.
 	initialSize := 0.

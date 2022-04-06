@@ -38,9 +38,8 @@ OmniBase 1.0, David Gorisek (c) 1998
 '
 ]
 
-{ #category : #'private/initialization' }
+{ #category : #initialization }
 ODBContainerInfoFile >> initialize [
-        "Private - Initialize receiver."
 
     super initialize.
     keyLength := 20.

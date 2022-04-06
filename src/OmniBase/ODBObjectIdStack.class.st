@@ -13,7 +13,7 @@ Class {
 
 { #category : #public }
 ODBObjectIdStack >> add: objectID [ 
-	| oid index pos |
+	| pos |
 	top > self doubleCacheSize ifTrue: [self makeSpace].
 	pos := top.
 	top := top + 1.

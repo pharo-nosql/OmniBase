@@ -4,7 +4,7 @@ Class {
 	#category : #'OmniBase-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defining }
 ODBSerializedDBObject65536References class >> classID [
         "Answer database object classID."
 

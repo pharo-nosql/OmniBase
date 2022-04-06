@@ -2,7 +2,6 @@ Class {
 	#name : #ODBFileStream,
 	#superclass : #ODBStream,
 	#instVars : [
-		'fileHandle',
 		'mutex',
 		'pathName'
 	],
@@ -16,8 +15,6 @@ ODBFileStream class >> accessModeReadOnly [
 
 { #category : #'create/open flags' }
 ODBFileStream class >> accessModeReadWrite [
-
-	
 	^#accessModeReadWrite
 ]
 
@@ -28,8 +25,6 @@ ODBFileStream class >> cacheModeAtomicWrite [
 
 { #category : #'create/open flags' }
 ODBFileStream class >> createModeCreateAlways [
-
-	
 	^#createModeCreateAlways
 ]
 
@@ -94,10 +89,7 @@ ODBFileStream class >> createOn: pathName createMode: createMode accessMode: acc
 				['Win32'] -> [ODBWin32FileStream].
 				}
 			otherwise: 
-				[self notify: 'File sharing & locking not implemented for this platform'.
-				^ self 
-					createWithoutSharingAndLockingOn: pathName 
-					accessMode: accessMode].
+				[^self error: 'Platform not Supported'].
 			
 	^ fileStreamClass
 		createOn: pathName 
@@ -105,14 +97,6 @@ ODBFileStream class >> createOn: pathName createMode: createMode accessMode: acc
 		accessMode: accessMode 
 		shareMode: shareMode 
 		cacheMode: cacheMode
-]
-
-{ #category : #'create/open' }
-ODBFileStream class >> createWithoutSharingAndLockingOn: pathName accessMode: accessMode [
-	| stream  |
-	stream := FileStream fileNamed: pathName.
-	accessMode = #accessModeReadOnly ifTrue: [stream readOnly].
-	^self new openOn: pathName fileHandle: stream.
 ]
 
 { #category : #'directory operations' }
@@ -136,30 +120,6 @@ ODBFileStream class >> exists: fileName [
 
 	
 	^ fileName asFileReference exists
-]
-
-{ #category : #locking }
-ODBFileStream class >> lockAt: pos length: length pathName: pathName fileHandle: fileHandle seekingMutex: seekingMutex position: position [
-		"Lock portion of file starting at position pos.
-		Answer <true> if successfull, <false> otherwise."
-
-	| result lockInterval fileLocks |
-	lockInterval := 0 @ pos extent: 1 @ length.
-	seekingMutex critical: [
-	self lockingMutex critical: [
-	(fileLocks := locks at: pathName ifAbsent: []) isNil
-		ifFalse: [fileLocks do: [:each | (each first intersects: lockInterval) ifTrue: [^false]]].
-	result := true.
-	[ fileHandle position: pos; lock: true for: length ]
-		on: Error
-		do: [ :error | result := false ].
-	result
-		ifTrue: [
-			fileLocks isNil ifTrue: [locks at: pathName put: (fileLocks := OrderedCollection new)].
-			fileLocks add: (Array with: lockInterval with: fileHandle) ].
-	fileHandle position: position.
-	]].
-	^result
 ]
 
 { #category : #locking }
@@ -218,9 +178,9 @@ ODBFileStream class >> remove: fileName [
 	"Remove file named fileName. Answer <true> if successful, <false> if failed."
 
 	[ fileName asFileReference delete.
-		^true ]
+		^ true ]
 			on: Error
-			do: [:ex | ^false ]
+			do: [:ex | ^ false ]
 ]
 
 { #category : #'create/open flags' }
@@ -241,33 +201,6 @@ ODBFileStream class >> shareModeShareRead [
 { #category : #'create/open flags' }
 ODBFileStream class >> shareModeShareWrite [
 	^#shareModeShareWrite
-]
-
-{ #category : #locking }
-ODBFileStream class >> unlockAt: pos length: length pathName: pathName fileHandle: fileHandle seekingMutex: seekingMutex position: position [
-		"Unlock portion of file at position pos. 
-		Answer <true> if successfull, <false> if failed."
-
-	| result lockInterval newFileLocks fileLocks |
-	seekingMutex critical: [
-	self lockingMutex critical: [
-	(fileLocks := locks at: pathName ifAbsent: []) isNil ifTrue: [^false].
-	lockInterval := 0 @ pos extent: 1 @ length.
-	newFileLocks := OrderedCollection new.
-	fileLocks do: [:each |
-		((each first intersects: lockInterval) and: [each last == fileHandle])
-			ifFalse: [newFileLocks add: each]
-			ifTrue: [each first = lockInterval ifFalse: [self error: 'Partial unlock is not allowed']]].
-	newFileLocks isEmpty
-		ifTrue: [locks removeKey: pathName]
-		ifFalse: [locks at: pathName put: newFileLocks].
-	result := true.
-	[ fileHandle position: pos; lock: false for: length ]
-		on: Error
-		do: [ :error | result := false ].
-	fileHandle position: position.
-	]].
-	^result
 ]
 
 { #category : #public }
@@ -346,27 +279,25 @@ ODBFileStream >> basicGetBytesFor: aByteCollection len: len [
 		"Read len bytes from stream to aByteCollection. 
 		Answer number of bytes actualy read."
 
-	^fileHandle flush; readInto: aByteCollection startingAt: 1 count: len
+	^stream flush; readInto: aByteCollection startingAt: 1 count: len
 ]
 
 { #category : #public }
 ODBFileStream >> basicPosition: anInteger [
 	"Positiones stream to anInteger. Answer anInteger."
 
-	fileHandle position: anInteger.
-	^position := anInteger
-
+	stream position: anInteger.
+	^anInteger
 ]
 
 { #category : #public }
 ODBFileStream >> basicPutBytesFrom: aByteArray len: length [ 
-	(fileHandle
+	(stream
 		writeFrom: aByteArray
 		startingAt: 1
 		for: length)
 		= length ifFalse: [OmniBase signalError: 'Could not write the whole data'].
-	fileHandle flush.
-	position := position + length.
+	stream flush.
 	^self
 
 ]
@@ -402,7 +333,7 @@ ODBFileStream >> flush [
 		"Force all data written to the 
 		receiver to be recorded on disk."
 
-	fileHandle flush
+	stream flush
 ]
 
 { #category : #public }
@@ -447,13 +378,14 @@ ODBFileStream >> getWord [
 
 { #category : #public }
 ODBFileStream >> lockAt: pos length: length [
-		"Lock portion of file starting at position pos. 
-		Answer <true> if successfull, <false> if failed.
-		Also sets an internal lock to prevent setting lock twice.
-		Unix style fcntl locking will answer true if a lock is set twice.
-		For OmniBase this is not allowed."
 
-	^self class lockAt: pos length: length pathName: pathName fileHandle: fileHandle seekingMutex: mutex position: position
+	"Lock portion of file starting at position pos. 
+	Answer <true> if successfull, <false> if failed.
+	Also sets an internal lock to prevent setting lock twice.
+	Unix style fcntl locking will answer true if a lock is set twice.
+	For OmniBase this is not allowed."
+
+	^ self subclassResponsibility
 ]
 
 { #category : #public }
@@ -467,8 +399,7 @@ ODBFileStream >> openOn: aString fileHandle: anIOAccessor [
 		"Private - Initialize receiver."
 
 	pathName := aString.
-	fileHandle := anIOAccessor.
-	position := 0.
+	stream := anIOAccessor.
 	mutex := Semaphore forMutualExclusion.
 ]
 
@@ -476,12 +407,6 @@ ODBFileStream >> openOn: aString fileHandle: anIOAccessor [
 ODBFileStream >> pathName [
 
     ^pathName
-]
-
-{ #category : #public }
-ODBFileStream >> position [
-
-	^position
 ]
 
 { #category : #public }
@@ -536,27 +461,19 @@ ODBFileStream >> remove [
 ]
 
 { #category : #public }
-ODBFileStream >> size [
-	"Answer the size of the file in bytes or
-	signal a FileException if the operation fails."
-
-	^ fileHandle size
-]
-
-{ #category : #public }
 ODBFileStream >> truncate: anInteger [ 
 	"Truncate stream so that its size will be anInteger. 
         Position to anInteger."
 
 	mutex critical: 
 			[self basicPosition: anInteger.
-			fileHandle truncate: anInteger]
+			stream truncate: anInteger]
 ]
 
 { #category : #public }
 ODBFileStream >> unlockAt: pos length: length [
-		"Unlock portion of file at position pos.
-		Answer <true> if successfull, <false> if failed."
+	"Unlock portion of file at position pos.
+	Answer <true> if successfull, <false> if failed."
 
-	^self class unlockAt: pos length: length pathName: pathName fileHandle: fileHandle seekingMutex: mutex position: position
+	self subclassResponsibility
 ]

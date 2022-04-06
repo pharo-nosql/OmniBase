@@ -5,21 +5,16 @@ Class {
 		'cacheMutex',
 		'client',
 		'dbConnection',
-		'locks',
 		'objectIndex',
 		'objects',
 		'transactionFile',
 		'transactionManager',
-		'versionDescriptor'
+		'versionDescriptor',
+		'lockRegistry',
+		'locks'
 	],
 	#category : #'OmniBase-Transaction'
 }
-
-{ #category : #private }
-ODBTransaction class >> new [
-
-	^super new initialize
-]
 
 { #category : #private }
 ODBTransaction class >> odbDeserialize: deserializer [
@@ -43,20 +38,17 @@ ODBTransaction >> basicAbort [
 
 	| changes |
 	dbConnection isNil 
-		ifFalse: 
-			[locks isNil 
-				ifFalse: 
-					[(changes := transactionFile recovery) isNil 
-						ifFalse: 
-							[changes
+		ifFalse: [	
+			 locks ifNotEmpty: [
+				(changes := transactionFile recovery) isNil 
+						ifFalse: [
+							changes
 								transaction: self;
 								rollback.
 							transactionFile recovery: nil].
-					locks do: 
-							[:each | 
-							each
-								transaction: self;
-								unlock]].
+				locks do: [:each | 
+					each unlock.
+					lockRegistry removeLock: each ]].
 			transactionManager transactionAborted: self.
 			client transactionRemove: self].
 	objects := nil.
@@ -201,7 +193,7 @@ ODBTransaction >> getTransactionObject: anObject ifAbsent: aBlock [
 	^transactionObject isNil ifTrue: [aBlock value] ifFalse: [transactionObject]
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBTransaction >> initialize [
 	cacheMutex := Semaphore forMutualExclusion.
 	objects := ODBObjectIDDictionary new.
@@ -239,6 +231,11 @@ ODBTransaction >> isReadOnly [
 		"Answer <true> if this is a read-only transaction."
 
 	^false
+]
+
+{ #category : #accessing }
+ODBTransaction >> locks [
+	^ locks
 ]
 
 { #category : #public }
@@ -316,7 +313,8 @@ ODBTransaction >> root [
 ODBTransaction >> setClient: aClient environment: anOmniBase [ 
 	client := aClient.
 	dbConnection := anOmniBase.
-	transactionManager := dbConnection transactionManager
+	transactionManager := dbConnection transactionManager.
+	lockRegistry := dbConnection lockRegistry
 ]
 
 { #category : #'private/accessing' }

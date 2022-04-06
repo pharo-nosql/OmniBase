@@ -1,4 +1,4 @@
-MoniBase
+Omnibase
 ========
 [![CI matrix](https://github.com//ApptiveGrid/MoniBase/actions/workflows/build.yml/badge.svg)](https://github.com//pharo-nosql/Omnibase/actions/workflows/build.yml)
 
@@ -16,8 +16,8 @@ Use this snippet to load it into your [Pharo9](http://www.pharo.org) image:
 
 ```Smalltalk
 Metacello new 
-	repository: 'github://ApptiveGrid/MoniBase/src';
-	baseline: 'MoniBase';
+	repository: 'github://pharo-nosql/OmniBase/src';
+	baseline: 'OmniBase';
 	load.
 ```
 

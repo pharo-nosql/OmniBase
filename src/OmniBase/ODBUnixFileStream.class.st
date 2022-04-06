@@ -23,7 +23,7 @@ ODBUnixFileStream class >> createFileStreamForPath: pathString createMode: creat
 
 { #category : #'create/open' }
 ODBUnixFileStream class >> createOn: pathString createMode: createMode accessMode: accessMode shareMode: shareMode cacheMode: cacheMode [
-	| stream needsWrite |
+	| stream |
 
 	stream := self createFileStreamForPath: pathString createMode: createMode.
 	
@@ -59,7 +59,7 @@ ODBUnixFileStream class >> setShareMode: shareMode forFileStream: aFileStream [
 			[self shareModeShareAll] -> [nil].
 			[self shareModeShareRead] -> [false].
 			[self shareModeShareNone] -> [true].
-			[self shareModeShareWrite] -> [self halt] "don't know how to implement this on unix and it is currently unused"}.
+			[self shareModeShareWrite] -> [self error: 'not supported'] "don't know how to implement this on unix and it is currently unused"}.
 
 	flagState ifNotNil: [
 		(FLock
@@ -87,45 +87,33 @@ ODBUnixFileStream class >> streamCreationSelectorForMode: createMode [
 
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #public }
 ODBUnixFileStream >> close [
-		"Close file associatied with receiver."
+	"Close file associatied with receiver."
 
-	fileHandle notNil ifTrue: [
+	stream notNil ifTrue: [
 		FLock 
-			unlock: fileHandle fileHandle 
+			unlock: stream fileHandle 
 			from: 0 
 			to: self size.
-		fileHandle closed ifFalse: [ fileHandle close ] ].
-	fileHandle := nil.
+		stream closed ifFalse: [ stream close ] ].
+	stream := nil.
 ]
 
 { #category : #public }
 ODBUnixFileStream >> lockAt: pos length: length [
 	
 	^ FLock 
-		lock: fileHandle fileHandle
+		lock: stream fileHandle
 		from: pos 
 		to: pos + length - 1
-]
-
-{ #category : #accesing }
-ODBUnixFileStream >> size [
-	"the unix Squeak VM gives the wrong answer for #size"
-	| file |
-	fileHandle flush.
-	file := fileHandle readOnlyCopy.
-	^ [file size] ensure: [file close]
-	
-
-
 ]
 
 { #category : #public }
 ODBUnixFileStream >> unlockAt: pos length: length [
 
 	^ FLock 
-		unlock: fileHandle fileHandle
+		unlock: stream fileHandle
 		from: pos 
 		to: pos + length -1
 ]

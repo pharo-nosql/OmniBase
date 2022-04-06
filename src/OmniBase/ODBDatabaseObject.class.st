@@ -37,9 +37,9 @@ ODBDatabaseObject class >> hasExternalFiles [
 	^false
 ]
 
-{ #category : #private }
+{ #category : #'class initialization' }
 ODBDatabaseObject class >> initialize [
-	"Private - Initialize ClassIDs array used to convert classID to appropriate class."
+	"Initialize ClassIDs array used to convert classID to appropriate class"
 
 	| dict maxID |
 	dict := IdentityDictionary new.

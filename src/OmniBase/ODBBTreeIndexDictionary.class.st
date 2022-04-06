@@ -9,7 +9,7 @@ Class {
 	#category : #'OmniBase-Transaction'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 ODBBTreeIndexDictionary class >> createWithKeyLength: keyLength [
         "Answer new instance of dictionary with max keyLength characters for keys."
 
@@ -228,7 +228,7 @@ ODBBTreeIndexDictionary >> forKeysStartingWith: aStringOrByteArray do: aBlock [
 ODBBTreeIndexDictionary >> from: start to: end [
 	"Returns occurrences from start to end."
 
-	| assoc result cursor startKey endKey current |
+	| assoc result startKey endKey current |
 	result := OrderedCollection new..
 	startKey := self bytesFromKey: start.
 	endKey := self bytesFromKey: end.
@@ -249,7 +249,7 @@ ODBBTreeIndexDictionary >> fromPosition: start to: end [
 	
 	"Better implementations of this are very welcome :)"
 
-	| assoc result cursor startKey endKey current |
+	| assoc result startKey endKey current |
 	result := OrderedCollection new..
 	startKey := self bytesFromKey: start.
 	endKey := self bytesFromKey: end.
@@ -344,6 +344,13 @@ ODBBTreeIndexDictionary >> goTo: aKey [
 	self basicGoTo: (self bytesFromKey: aKey)
 ]
 
+{ #category : #testing }
+ODBBTreeIndexDictionary >> hasLockAt: key [ 
+	^ transaction 
+		hasKeyLockOn: self
+		key: key
+]
+
 { #category : #public }
 ODBBTreeIndexDictionary >> includesKey: aKey [ 
 	| value |
@@ -351,9 +358,8 @@ ODBBTreeIndexDictionary >> includesKey: aKey [
 	^value isRemoved not
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBBTreeIndexDictionary >> initialize [
-	"Private - Initialize receiver."
 
 	super initialize.
 	keySize := 32
@@ -431,6 +437,11 @@ ODBBTreeIndexDictionary >> last: anInteger [
 		result add: current value].
 	
 	^ result
+]
+
+{ #category : #accessing }
+ODBBTreeIndexDictionary >> lockRegistryKeyAt: aKey [
+	^ self objectID lockRegistryKeyAt: aKey
 ]
 
 { #category : #initialization }

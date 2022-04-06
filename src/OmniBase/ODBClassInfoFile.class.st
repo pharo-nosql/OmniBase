@@ -25,9 +25,8 @@ OmniBase 1.0, David Gorisek (c) 1998
 '
 ]
 
-{ #category : #public }
+{ #category : #initialization }
 ODBClassInfoFile >> initialize [
-	"Private - Initialize receiver."
 
 	super initialize.
 	keyLength := 128.
