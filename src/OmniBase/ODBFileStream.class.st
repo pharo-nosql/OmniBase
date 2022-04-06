@@ -87,16 +87,6 @@ ODBFileStream class >> exists: fileName [
 	^ fileName asFileReference exists
 ]
 
-{ #category : #locking }
-ODBFileStream class >> lockingMutex [
-
-	lockingMutex isNil
-		ifTrue: [
-			lockingMutex := Semaphore forMutualExclusion.
-			locks := Dictionary new ].
-	^lockingMutex
-]
-
 { #category : #'create/open' }
 ODBFileStream class >> openExclusivelyOn: pathName [
 		"Open an existing file on pathName exclusively so that no-one else can open it.
