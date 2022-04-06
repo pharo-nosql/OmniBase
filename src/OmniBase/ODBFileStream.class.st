@@ -45,45 +45,12 @@ ODBFileStream class >> createOn: pathName createMode: createMode accessMode: acc
 ODBFileStream class >> createOn: pathName createMode: createMode accessMode: accessMode shareMode: shareMode cacheMode: cacheMode [
 		"Create new instance of file stream on pathName with given flags."
 
-	| fileStreamClass |
-	fileStreamClass := Smalltalk os platformName
-			caseOf: 
-				{
-				['unix'] -> [ODBUnixFileStream].
-				['Mac OS'] -> [ODBMacFileStream].
-				}
-			otherwise: 
-				[^self error: 'Platform not Supported'].
-			
-	^ fileStreamClass
+	 ^ Smalltalk os omnibaseFileStreamClass
 		createOn: pathName 
 		createMode: createMode 
 		accessMode: accessMode 
 		shareMode: shareMode 
 		cacheMode: cacheMode
-]
-
-{ #category : #'directory operations' }
-ODBFileStream class >> directoryCreate: aPath [
-
-	aPath asFileReference ensureCreateDirectory.
-	
-	^true
-]
-
-{ #category : #'directory operations' }
-ODBFileStream class >> directoryExists: aString [
-
-	^ aString asFileReference exists
-]
-
-{ #category : #'directory operations' }
-ODBFileStream class >> exists: fileName [
-		
-	"Answer <true> if file named fileName exists."
-
-	
-	^ fileName asFileReference exists
 ]
 
 { #category : #'create/open' }
@@ -98,11 +65,11 @@ ODBFileStream class >> openExclusivelyOn: pathName [
 ]
 
 { #category : #'create/open' }
-ODBFileStream class >> openOn: pathName [
+ODBFileStream class >> openOn: aFileReference [ 
         "Open an existing file on pathName. Trigger an 
         exception if the file can not be opened."
 
-    ^self createOn: pathName
+    ^self createOn: aFileReference pathString
         createMode: #createModeOpenExisting
         accessMode: #accessModeReadWrite
         shareMode: #shareModeShareAll
@@ -118,13 +85,6 @@ ODBFileStream class >> openReadOnlyOn: pathName [
 		createMode: #createModeOpenExisting
 		accessMode: #accessModeReadOnly
 		shareMode: #shareModeShareAll
-]
-
-{ #category : #public }
-ODBFileStream class >> pathSeparatorString [
-
-	^ DiskStore delimiter asString
-
 ]
 
 { #category : #'directory operations' }

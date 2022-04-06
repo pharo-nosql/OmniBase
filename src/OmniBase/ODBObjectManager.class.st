@@ -90,12 +90,12 @@ ODBObjectManager >> containerNew: aString path: path [
 	dirName := self convert: aString.
 	
 	[containerPath := (path isEmpty ifTrue: [self dirName] ifFalse: [path]) 
-				, ODBFileStream pathSeparatorString , dirName.
-	ODBFileStream directoryExists: containerPath] 
+				/ dirName.
+	containerPath exists ] 
 			whileTrue: 
 				[pos := pos + 1.
 				dirName := (dirName copyFrom: 1 to: (dirName size min: 7)) , pos printString].
-	ODBFileStream directoryCreate: containerPath.
+	containerPath ensureCreateDirectory.
 	cont := (ODBContainer new)
 				name: containerName;
 				id: containerID;
@@ -163,8 +163,8 @@ ODBObjectManager >> createOn: anOmniBase [
 
 	environment := anOmniBase.
 	
-	[(ODBFileStream directoryExists: self dirName) 
-		ifFalse: [ODBFileStream directoryCreate: self dirName].
+	[(self dirName exists) 
+		ifFalse: [ self dirName ensureCreateDirectory ].
 	idTable := ODBIDTable createOn: self idFileName.
 	infoFile := ODBContainerInfoFile createOn: self infoFileName.
 	self containerNew: 'Default'] 
@@ -196,7 +196,7 @@ ODBObjectManager >> defaultObjectSpace: anInteger [
 ODBObjectManager >> dirName [
 	"Private - Answer directory where containers are placed."
 
-	^environment dirName , ODBFileStream pathSeparatorString , 'Objects'
+	^ environment path / 'Objects'
 ]
 
 { #category : #accessing }
@@ -221,12 +221,12 @@ ODBObjectManager >> holderAt: objectID [
 
 { #category : #private }
 ODBObjectManager >> idFileName [
-	^environment dirName , ODBFileStream pathSeparatorString , 'omnibase.cid'
+	^ 'omnibase.cid'
 ]
 
 { #category : #private }
 ODBObjectManager >> infoFileName [
-	^environment dirName , ODBFileStream pathSeparatorString , 'omnibase.cif'
+	^ 'omnibase.cif'
 ]
 
 { #category : #private }
@@ -255,7 +255,7 @@ ODBObjectManager >> initContainerAt: position [
 				name: name;
 				id: id;
 				objectManager: self;
-				openOn: path , ODBFileStream pathSeparatorString , dirName.
+				openOn: path / dirName.
 	^containers at: id put: cont
 ]
 
@@ -285,8 +285,8 @@ ODBObjectManager >> openOn: anOmniBase [
 
 	environment := anOmniBase.
 	
-	[idTable := ODBIDTable openOn: self idFileName.
-	infoFile := ODBContainerInfoFile openOn: self infoFileName] 
+	[idTable := ODBIDTable openOn: environment path / self idFileName.
+	infoFile := ODBContainerInfoFile openOn: environment path / self infoFileName] 
 			ifCurtailed: [self close]
 ]
 

@@ -104,12 +104,12 @@ ODBContainer >> createOn: aString [
 
 { #category : #private }
 ODBContainer >> dataFileNameA [
-	^path , ODBFileStream pathSeparatorString , 'objects.a'
+	^ path / 'objects.a'
 ]
 
 { #category : #private }
 ODBContainer >> dataFileNameB [
-	^path , ODBFileStream pathSeparatorString , 'objects.b'
+	^ path / 'objects.b'
 ]
 
 { #category : #public }
@@ -129,7 +129,7 @@ ODBContainer >> dirName [
 ODBContainer >> fileNameFromIndex: anInteger [ 
 	"Private - Answer object file name from index."
 
-	^path , ODBFileStream pathSeparatorString , anInteger printString , '.btr'
+	^ path / anInteger printString , 'btr'
 ]
 
 { #category : #public }
@@ -188,7 +188,7 @@ ODBContainer >> indexFile [
 
 { #category : #private }
 ODBContainer >> indexFileName [
-	^path , ODBFileStream pathSeparatorString , 'objects.idx'
+	^ path / 'objects.idx'
 ]
 
 { #category : #public }

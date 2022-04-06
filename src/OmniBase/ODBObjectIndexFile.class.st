@@ -194,10 +194,10 @@ ODBObjectIndexFile >> newObjectFileID [
 ]
 
 { #category : #'public/create/open/close' }
-ODBObjectIndexFile >> openOn: aString [
+ODBObjectIndexFile >> openOn: aFileRefernce [  
         "Open transaction file. Signal an error if failed."
 
-    stream := ODBFileStream createOn: aString
+    stream := ODBFileStream createOn: aFileRefernce pathString
                             createMode: #createModeOpenExisting
                             accessMode: #accessModeReadWrite
                             shareMode: #shareModeShareAll

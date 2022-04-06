@@ -141,7 +141,7 @@ ODBGarbageCollector >> createNewObjectSpaces [
 
 { #category : #private }
 ODBGarbageCollector >> gcFileName [
-	^objectManager environment dirName , ODBFileStream pathSeparatorString , 'GC.log'
+	^ objectManager environment path / 'GC.log'
 ]
 
 { #category : #private }
@@ -159,12 +159,12 @@ ODBGarbageCollector >> message: aString [
 
 { #category : #private }
 ODBGarbageCollector >> oidSetFilenameFor: anODBContainer [ 
-	^anODBContainer dirName , ODBFileStream pathSeparatorString , 'Marked.set'
+	^ anODBContainer path / 'Marked.set'
 ]
 
 { #category : #private }
 ODBGarbageCollector >> oidStackFileName [
-	^objectManager environment dirName , ODBFileStream pathSeparatorString , 'GC.oid'
+	^ objectManager environment path / 'GC.oid'
 ]
 
 { #category : #public }
@@ -174,7 +174,7 @@ ODBGarbageCollector >> openOn: anOmniBase [
 	Answer <true> if previous GC was completed, <false> if it wasn't."
 
 	objectManager := anOmniBase objectManager.
-	(ODBFileStream exists: self gcFileName) 
+	(self gcFileName exists) 
 		ifTrue: 
 			[(gcFile := ODBGarbageCollectorFile openOn: self) isNil 
 				ifFalse: 

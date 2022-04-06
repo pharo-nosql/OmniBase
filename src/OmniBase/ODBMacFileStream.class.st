@@ -5,10 +5,10 @@ Class {
 }
 
 { #category : #private }
-ODBMacFileStream class >> createFileStreamForPath: pathString createMode: createMode [
+ODBMacFileStream class >> createFileStreamForPath: aString createMode: createMode [
 	^ File
 			perform: (self streamCreationSelectorForMode: createMode)
-			with: pathString
+			with: aString
 ]
 
 { #category : #'create/open' }
