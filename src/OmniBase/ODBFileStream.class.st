@@ -51,7 +51,6 @@ ODBFileStream class >> createOn: pathName createMode: createMode accessMode: acc
 				{
 				['unix'] -> [ODBUnixFileStream].
 				['Mac OS'] -> [ODBMacFileStream].
-				['Win32'] -> [ODBWin32FileStream].
 				}
 			otherwise: 
 				[^self error: 'Platform not Supported'].
