@@ -182,7 +182,7 @@ ODBLocalClient >> newTransactionInVersion: aVersionDescriptor [
 { #category : #'public/unclassified' }
 ODBLocalClient >> remove [
 
-    freeTransactionFile isNil ifFalse: [ freeTransactionFile delete . true ].
+    freeTransactionFile isNil ifFalse: [ freeTransactionFile remove ].
     freeTransactionFile := true. "do not cache transaction files anymore"
     ^super remove
 ]
