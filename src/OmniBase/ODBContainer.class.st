@@ -348,7 +348,7 @@ ODBContainer >> removeObjectFile: anInteger [
 			dbFiles removeKey: anInteger.
 			file ifNotNil:[
 				file close].
-			ODBFileStream remove: (self fileNameFromIndex: anInteger)]
+			(self fileNameFromIndex: anInteger) delete ]
 ]
 
 { #category : #private }

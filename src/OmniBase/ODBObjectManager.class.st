@@ -294,7 +294,8 @@ ODBObjectManager >> path [
 { #category : #public }
 ODBObjectManager >> reopen [
 	idTable close.
-	[idTable := ODBIDTable openOn: self idFileName] ifCurtailed: [environment close]
+	[ idTable := ODBIDTable openOn: self idFileName ] 
+		ifCurtailed: [environment close]
 ]
 
 { #category : #public }

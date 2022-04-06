@@ -93,7 +93,7 @@ ODBDatabaseTest >> testEquality [
 ODBDatabaseTest >> testGC [
 	"Test garbage collection"
 	self timeLimit: 1 minute. 
-	"self shouldnt: ["db garbageCollect"] raise: Error."
+	self shouldnt: [ db garbageCollect ] raise: Error.
 
 ]
 

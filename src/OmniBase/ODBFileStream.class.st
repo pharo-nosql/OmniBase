@@ -9,17 +9,6 @@ Class {
 }
 
 { #category : #'create/open' }
-ODBFileStream class >> createNewOn: pathName [
-        "Create new file on pathName. Trigger an error 
-        if the file allready exists or if it can not be created."
-
-    ^self createOn: pathName
-        createMode: #createModeCreateNew
-        accessMode: #accessModeReadWrite
-        shareMode: #shareModeShareAll
-]
-
-{ #category : #'create/open' }
 ODBFileStream class >> createOn: pathName [
         "Create new file on pathName. Trigger an 
         exception if the file can not be created."
@@ -58,7 +47,7 @@ ODBFileStream class >> openExclusivelyOn: pathName [
 		"Open an existing file on pathName exclusively so that no-one else can open it.
 		Trigger an exception if the file can not be opened."
 
-	^self createOn: pathName
+	^ self createOn: pathName
 		createMode: #createModeOpenExisting
 		accessMode: #accessModeReadWrite
 		shareMode: #shareModeShareNone
@@ -85,16 +74,6 @@ ODBFileStream class >> openReadOnlyOn: pathName [
 		createMode: #createModeOpenExisting
 		accessMode: #accessModeReadOnly
 		shareMode: #shareModeShareAll
-]
-
-{ #category : #'directory operations' }
-ODBFileStream class >> remove: fileName [
-	"Remove file named fileName. Answer <true> if successful, <false> if failed."
-
-	[ fileName asFileReference delete.
-		^ true ]
-			on: Error
-			do: [:ex | ^ false ]
 ]
 
 { #category : #public }

@@ -45,7 +45,7 @@ ODBClientManager >> clientAt: clientID [
 ODBClientManager >> clientFileName: clientID [ 
 	"Private - Answer client file name for clientID."
 
-	^self path / clientID printString , 'usr'
+	^ self path / clientID printString , 'usr'
 ]
 
 { #category : #public }
