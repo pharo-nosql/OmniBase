@@ -23,7 +23,7 @@ Metacello new
 
 This is the Pharo Smalltalk port of David Gorisek's original work. Originally at squeaksource, now moved to github.
 
-For an intro, take a look at [this presentation on slideshare](http://www.slideshare.net/esug/omni-baseobjectdatabase) and have a look in the [Docs](docs/) folder
+For an intro, take a look at [this presentation on slideshare](http://www.slideshare.net/esug/omni-baseobjectdatabase) and have a look in the [Docs](documentation/) folder
 
 ### Contributions
 
