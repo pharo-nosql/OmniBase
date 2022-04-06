@@ -117,14 +117,6 @@ ODBContainer >> dataFileSize [
 	^activeDataFile stream size
 ]
 
-{ #category : #'private-accessing' }
-ODBContainer >> dirName [
-
-	"Private - Needed by database objects that are creating their own files."
-
-	^ path
-]
-
 { #category : #private }
 ODBContainer >> fileNameFromIndex: anInteger [ 
 	"Private - Answer object file name from index."

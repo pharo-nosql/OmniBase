@@ -21,9 +21,9 @@ ODBTransactionFile >> collectLockClassIDsFrom: rootClass to: aDictionary [
 ]
 
 { #category : #'public/create/open/close' }
-ODBTransactionFile >> createOn: aString [
+ODBTransactionFile >> createOn: aFileReference [
 
-    stream := ODBFileStream createOn: aString
+    stream := ODBFileStream createOn: aFileReference pathString
                             createMode: #createModeCreateAlways
                             accessMode: #accessModeReadWrite
                             shareMode: #shareModeShareRead

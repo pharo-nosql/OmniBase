@@ -128,8 +128,8 @@ ODBClassManager >> close [
 ODBClassManager >> createOn: anOmniBase [ 
 	mutex := Semaphore forMutualExclusion.
 	
-	[infoFile := ODBClassInfoFile createOn: anOmniBase dirName , self infoFileName.
-	idTable := ODBIDTable createOn: anOmniBase dirName , self idFileName] 
+	[infoFile := ODBClassInfoFile createOn: anOmniBase path / self infoFileName.
+	idTable := ODBIDTable createOn: anOmniBase path / self idFileName] 
 			ifCurtailed: [self close]
 ]
 

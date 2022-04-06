@@ -89,7 +89,7 @@ ODBObjectManager >> containerNew: aString path: path [
 	pos := 0.
 	dirName := self convert: aString.
 	
-	[containerPath := (path isEmpty ifTrue: [self dirName] ifFalse: [path]) 
+	[containerPath := (path isEmpty ifTrue: [self path] ifFalse: [path]) 
 				/ dirName.
 	containerPath exists ] 
 			whileTrue: 
@@ -163,8 +163,9 @@ ODBObjectManager >> createOn: anOmniBase [
 
 	environment := anOmniBase.
 	
-	[(self dirName exists) 
-		ifFalse: [ self dirName ensureCreateDirectory ].
+	[
+		self path exists
+			ifFalse: [ self path ensureCreateDirectory ].
 	idTable := ODBIDTable createOn: self idFileName.
 	infoFile := ODBContainerInfoFile createOn: self infoFileName.
 	self containerNew: 'Default'] 
@@ -192,17 +193,10 @@ ODBObjectManager >> defaultObjectSpace: anInteger [
 	^infoFile defaultObjectSpace: anInteger
 ]
 
-{ #category : #private }
-ODBObjectManager >> dirName [
-	"Private - Answer directory where containers are placed."
-
-	^ environment path / 'Objects'
-]
-
 { #category : #accessing }
 ODBObjectManager >> environment [
 
-    ^environment
+    ^ environment
 ]
 
 { #category : #public }
@@ -221,12 +215,12 @@ ODBObjectManager >> holderAt: objectID [
 
 { #category : #private }
 ODBObjectManager >> idFileName [
-	^ 'omnibase.cid'
+	^ self path / 'omnibase.cid'
 ]
 
 { #category : #private }
 ODBObjectManager >> infoFileName [
-	^ 'omnibase.cif'
+	^ self path / 'omnibase.cif'
 ]
 
 { #category : #private }
@@ -240,7 +234,7 @@ ODBObjectManager >> initContainerAt: position [
 	id := stream getWord.
 	name := stream getString.
 	path := stream getString.
-	path isEmpty ifTrue: [path := self dirName].
+	path isEmpty ifTrue: [path := self path].
 	dirName := stream getString.
 	id > containers size 
 		ifTrue: 
@@ -285,9 +279,16 @@ ODBObjectManager >> openOn: anOmniBase [
 
 	environment := anOmniBase.
 	
-	[idTable := ODBIDTable openOn: environment path / self idFileName.
-	infoFile := ODBContainerInfoFile openOn: environment path / self infoFileName] 
+	[idTable := ODBIDTable openOn: self idFileName.
+	infoFile := ODBContainerInfoFile openOn: self infoFileName] 
 			ifCurtailed: [self close]
+]
+
+{ #category : #private }
+ODBObjectManager >> path [
+	"Private - Answer directory where containers are placed."
+
+	^ environment path / 'Objects'
 ]
 
 { #category : #public }

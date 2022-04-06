@@ -9,9 +9,9 @@ Class {
 }
 
 { #category : #'public/create/open/close' }
-ODBVersionControlFile >> createOn: aString [
+ODBVersionControlFile >> createOn: aFileReference [
 
-    stream := ODBFileStream createOn: aString
+    stream := ODBFileStream createOn: aFileReference pathString
                             createMode: #createModeCreateAlways
                             accessMode: #accessModeReadWrite
                             shareMode: #shareModeShareAll

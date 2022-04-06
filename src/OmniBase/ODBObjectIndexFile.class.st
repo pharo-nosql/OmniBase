@@ -90,9 +90,9 @@ ODBObjectIndexFile >> at: anInteger put: value [
 ]
 
 { #category : #'public/create/open/close' }
-ODBObjectIndexFile >> createOn: aString [
+ODBObjectIndexFile >> createOn: aFileReference [
 
-    stream := ODBFileStream createOn: aString
+    stream := ODBFileStream createOn: aFileReference pathString 
                             createMode: #createModeCreateNew
                             accessMode: #accessModeReadWrite
                             shareMode: #shareModeShareAll

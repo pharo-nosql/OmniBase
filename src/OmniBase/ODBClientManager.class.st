@@ -89,13 +89,6 @@ ODBClientManager >> createOn: anEnvironment [
     ] ifCurtailed: [ self close ]
 ]
 
-{ #category : #private }
-ODBClientManager >> dirName [
-	"Private - Answer directory where user files are placed."
-self halt.
-	^ environment path / 'Users'
-]
-
 { #category : #'public/accessing' }
 ODBClientManager >> environment [
 
