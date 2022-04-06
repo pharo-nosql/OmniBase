@@ -6,7 +6,6 @@ Class {
 		'dbConnection',
 		'mutex',
 		'oldHolders',
-		'serializingTransactionsMutex',
 		'serializingTransactionsSemaphore',
 		'transactionReferences',
 		'versionControl'
@@ -130,7 +129,6 @@ ODBTransactionManager >> transactionReferenceAt: index [
 { #category : #'public/unclassified' }
 ODBTransactionManager >> transactionStart: aTransaction [
                 "Set transaction version descriptor upon transaction start."
-
         aTransaction versionDescriptor: versionControl versionDescriptor copy
 ]
 

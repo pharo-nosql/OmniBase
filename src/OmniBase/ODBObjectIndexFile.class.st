@@ -3,12 +3,10 @@ Class {
 	#superclass : #ODBFile,
 	#instVars : [
 		'valueLength',
-		'pageSize',
 		'start',
 		'gcPosition',
 		'gcBuffer',
-		'gcCount',
-		'var1'
+		'gcCount'
 	],
 	#category : #'OmniBase-Files'
 }
@@ -17,7 +15,7 @@ Class {
 ODBObjectIndexFile >> addHolders: holders [ 
 	"Add object holders to table and initialize their object ID indexes."
 
-	| lastIndex freeHolders count count2 buffer holder |
+	| lastIndex count count2 buffer holder |
 	count := holders size.
 	count2 := 0.
 	buffer := ByteArray new: 8.
@@ -168,7 +166,7 @@ ODBObjectIndexFile >> indexesAndValuesDo: aBlock [
 				gcBuffer := nil]
 ]
 
-{ #category : #'private/initialization' }
+{ #category : #initialization }
 ODBObjectIndexFile >> initialize [
 
     start := self headerLength + 16.

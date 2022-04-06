@@ -15,7 +15,7 @@ ODBObjectHolder class >> createOn: aByteArray [
     ^self basicNew createOn: aByteArray
 ]
 
-{ #category : #private }
+{ #category : #'instance creation' }
 ODBObjectHolder class >> new [
 
     ^super new initialize
@@ -63,7 +63,6 @@ ODBObjectHolder >> getObject [
 
 { #category : #initialization }
 ODBObjectHolder >> initialize [
-        "Private - Initialize receiver."
 
     oldVersion := false
 ]

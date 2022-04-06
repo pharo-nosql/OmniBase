@@ -9,7 +9,7 @@ Class {
 	#category : #'OmniBase-Events'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #public }
 ODBAssociationChanged class >> changeClassID [
         "Answer unique class ID used for storing changes into 
         transaction file or <nil> if change does not need to be stored."
@@ -17,7 +17,7 @@ ODBAssociationChanged class >> changeClassID [
     ^2
 ]
 
-{ #category : #'public/transaction processing' }
+{ #category : #'transaction processing' }
 ODBAssociationChanged >> commit [
 
     transactionObject dataBaseObject at: key put: newValue
@@ -29,7 +29,7 @@ ODBAssociationChanged >> key: aString [
     key := aString
 ]
 
-{ #category : #'public/load/store' }
+{ #category : #public }
 ODBAssociationChanged >> loadFromStream: aStream [
 
     objectID := ODBObjectID new loadFromStream: aStream.
@@ -50,13 +50,13 @@ ODBAssociationChanged >> oldValue: aValue [
     oldValue := aValue
 ]
 
-{ #category : #'public/transaction processing' }
+{ #category : #'transaction processing' }
 ODBAssociationChanged >> rollback [
 
     self transactionObject dataBaseObject at: key put: oldValue
 ]
 
-{ #category : #'public/load/store' }
+{ #category : #'load/store' }
 ODBAssociationChanged >> storeOnStream: aStream [
 
     objectID storeOnStream: aStream.

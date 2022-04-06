@@ -2,11 +2,7 @@ Class {
 	#name : #ODBStream,
 	#superclass : #Object,
 	#instVars : [
-		'position'
-	],
-	#classInstVars : [
-		'locks',
-		'lockingMutex'
+		'stream'
 	],
 	#category : #'OmniBase-Streams'
 }
@@ -26,6 +22,11 @@ ODBStream >> flush [
 ODBStream >> getBoolean [
 
     ^self getByte = 1
+]
+
+{ #category : #public }
+ODBStream >> getByte [
+	^ stream next
 ]
 
 { #category : #public }
@@ -82,10 +83,26 @@ ODBStream >> getWord [
     ^self getByte bitOr: (self getByte bitShift: 8)
 ]
 
+{ #category : #accessing }
+ODBStream >> position [
+	^ stream position
+]
+
+{ #category : #accessing }
+ODBStream >> position: aPostion [
+	stream position: aPostion
+]
+
 { #category : #public }
 ODBStream >> putBoolean: aBool [
 
     self putByte: (aBool ifTrue: [ 1] ifFalse: [0])
+]
+
+{ #category : #public }
+ODBStream >> putByte: anInteger [
+
+    stream nextPut: anInteger
 ]
 
 { #category : #public }
@@ -138,4 +155,9 @@ ODBStream >> setToEnd [
         "Set to stream to end and answer position."
 
     ^self position: self size
+]
+
+{ #category : #public }
+ODBStream >> size [
+	^ stream size
 ]

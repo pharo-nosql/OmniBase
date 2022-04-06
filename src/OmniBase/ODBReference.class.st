@@ -8,16 +8,6 @@ Class {
 	#category : #'OmniBase-Model'
 }
 
-{ #category : #'predefined intercepted messages' }
-ODBReference >> == anObject [
-	"Answer true if the receiver and the argument are the same object (have the same
-	object pointer) and false otherwise.  Do not redefine the message == in any
-	other class!  No Lookup."
-
-	<primitive: 110>
-	self primitiveFailed
-]
-
 { #category : #accessing }
 ODBReference >> demandLoader [
 
@@ -34,18 +24,17 @@ ODBReference >> doesNotUnderstand: aMessage [
 
 { #category : #public }
 ODBReference >> halt [
-	"This is the typical message to use for inserting breakpoints during 
-	debugging. It behaves like halt:, but does not call on halt: in order to 
-	avoid putting this message on the stack. Halt is especially useful when 
-	the breakpoint message is an arbitrary one."
-
-	Halt signal
+	"This is the typical message to use for inserting breakpoints during debugging."
+	<debuggerCompleteToSender>
+	<ignoreForCoverage>
+	Halt now
 ]
 
 { #category : #public }
 ODBReference >> inspect [
 	"Create and schedule an Inspector in which the user can examine the receiver's variables."
-	Smalltalk tools inspector inspect: self
+	<ignoreForCoverage>
+	^ Smalltalk tools inspector inspect: self
 ]
 
 { #category : #accessing }
@@ -62,24 +51,10 @@ ODBReference >> isIdenticalTo: anObject [
 	^self odbTransactionObject value == anObject
 ]
 
-{ #category : #public }
-ODBReference >> isImmediate [
-	"Private - Answer whether the receiver has an immediate representation (that is it is entirely
-	encoded in an object pointer, e.g. SmallIntegers. Most objects are not immediate."
-
-	^false
-]
-
 { #category : #hacks }
 ODBReference >> isMorph [
 	^ false
 
-]
-
-{ #category : #'predefined intercepted messages' }
-ODBReference >> isNil [
-
-    ^false
 ]
 
 { #category : #public }

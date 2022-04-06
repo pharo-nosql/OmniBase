@@ -11,12 +11,6 @@ Class {
 	#category : #'OmniBase-Base'
 }
 
-{ #category : #'as yet unclassified' }
-ODBClassManager class >> new [
-
-    ^super new initialize
-]
-
 { #category : #private }
 ODBClassManager >> addClassDescription: aClassDescription withId: classId [ 
 	"Private - Add aClassDescription under a given ID."
@@ -161,7 +155,7 @@ ODBClassManager >> infoFileName [
 	^ODBFileStream pathSeparatorString , 'omnibase.odl'
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBClassManager >> initialize [
 	classes := OrderedCollection new.
 	names := ODBIdentityDictionary new

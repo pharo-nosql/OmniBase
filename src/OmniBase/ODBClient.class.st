@@ -11,12 +11,6 @@ Class {
 	#category : #'OmniBase-Base'
 }
 
-{ #category : #'instance creation' }
-ODBClient class >> new [
-
-    ^super new initialize
-]
-
 { #category : #'public/accessing' }
 ODBClient >> clientID [
         "Answer client ID."
@@ -31,7 +25,7 @@ ODBClient >> description [
     ^clientFile clientDescription
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBClient >> initialize [
 
     transactions := OrderedCollection new.

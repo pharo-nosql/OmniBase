@@ -7,22 +7,6 @@ BinaryFileStream >> fileHandle [
 ]
 
 { #category : #'*OmniBase' }
-BinaryFileStream >> readInto: aByteArray startingAt: aNumber for: length [
-
-	^ File 
-		read: handle 
-		into: aByteArray 
-		startingAt: aNumber 
-		count: length
-]
-
-{ #category : #'*OmniBase' }
-BinaryFileStream >> readOnlyCopy [
-
-	^ file openForRead
-]
-
-{ #category : #'*OmniBase' }
 BinaryFileStream >> writeFrom: aString startingAt: aNumber for: length [ 
 
 	^ File 

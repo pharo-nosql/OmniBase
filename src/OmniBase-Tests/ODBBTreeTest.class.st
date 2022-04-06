@@ -9,8 +9,14 @@ ODBBTreeTest >> testBTree [
 
 	"Test basic B-Tree dictionary functionality."
 
-	| t dict |
+	| t dict widestring |
 	t := db newTransaction.
+	widestring := String
+		with: 16rF600 asCharacter
+		with: 16rF603 asCharacter
+		with: 16r0155 asCharacter
+		with: 16r0111 asCharacter.
+	
 	dict := db newBTreeDictionary: 20.
 	dict
 		at: 1 put: self collection;
@@ -19,6 +25,8 @@ ODBBTreeTest >> testBTree [
 		at: Date today put: 'danes';
 		at: 'Test' put: 'test';
 		at: 'temp' put: 'temp';
+		at: #hello put: #hello;
+		at: widestring asSymbol put: widestring;
 		removeKey: 'temp'.
 
 	self assert: (dict at: 2) equals: 'Dva'.
@@ -29,8 +37,9 @@ ODBBTreeTest >> testBTree [
 	self deny: (dict includesKey: 'none').
 	self assert: (dict includesKey: 3).
 	self deny: (dict includesKey: 'temp').
-	self assert: dict size equals: 5.
-
+	self assert: dict size equals: 7.
+	self assert: (dict at: #hello) equals: #hello.
+	self assert: (dict at: widestring) equals: widestring.
 	t makePersistent: dict.
 
 	self assert: (dict at: 2) equals: 'Dva'.
@@ -40,7 +49,8 @@ ODBBTreeTest >> testBTree [
 	self assert: (dict includesKey: 'Test').
 	self deny: (dict includesKey: 'none').
 	self assert: (dict includesKey: 3).
-	self assert: dict size equals: 5.
+	self assert: (dict at: #hello) equals: #hello.
+	self assert: dict size equals: 7.
 
 	t checkpoint.
 
@@ -51,7 +61,8 @@ ODBBTreeTest >> testBTree [
 	self assert: (dict includesKey: 'Test').
 	self deny: (dict includesKey: 'none').
 	self assert: (dict includesKey: 3).
-	self assert: dict size equals: 5.
+	
+	self assert: dict size equals: 7.
 
 	t root at: 'b-tree' put: dict.
 	t commit.
@@ -66,17 +77,18 @@ ODBBTreeTest >> testBTree [
 	self assert: (dict includesKey: 'Test').
 	self deny: (dict includesKey: 'none').
 	self assert: (dict includesKey: 3).
-	self assert: dict size equals: 5.
+	self assert: (dict at: #hello) equals: #hello.
+	self assert: dict size equals: 7.
 
 	dict removeKey: 2.
 	self deny: (dict includesKey: 2).
-	self assert: dict size equals: 4.
+	self assert: dict size equals: 6.
 	self assert: (dict at: 2) isNil.
 
 	t checkpoint.
 
 	dict at: 2 put: 'blabla'.
-	self assert: dict size equals: 5.
+	self assert: dict size equals: 7.
 
 	t commit.
 
