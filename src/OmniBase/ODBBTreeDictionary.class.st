@@ -163,6 +163,11 @@ ODBBTreeDictionary >> initialize [
 ]
 
 { #category : #public }
+ODBBTreeDictionary >> isEmpty [
+	^self size = 0
+]
+
+{ #category : #public }
 ODBBTreeDictionary >> isKeyLocked: aKey [ 
 	"Answer <true> if aKey is locked."
 
