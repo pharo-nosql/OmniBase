@@ -330,7 +330,10 @@ ODBFileStream >> remove [
         "Close and remove receiver. Answer <true> if removed."
 
     self close.
-    ^ pathName asFileReference delete
+    [ pathName asFileReference delete ]
+		on: Error 
+		do: [:err | ^ false ].
+	^ true
 ]
 
 { #category : #public }
