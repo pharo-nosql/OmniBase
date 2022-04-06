@@ -10,12 +10,6 @@ Class {
 	#category : #'OmniBase-Base'
 }
 
-{ #category : #private }
-ODBObjectManager class >> new [
-
-    ^super new initialize
-]
-
 { #category : #'create/open/close' }
 ODBObjectManager >> close [
         "Close object manager and all opened containers."
@@ -267,7 +261,6 @@ ODBObjectManager >> initContainerAt: position [
 
 { #category : #initialization }
 ODBObjectManager >> initialize [
-        "Private - Initialize receiver."
 
     containers := Array new: 32
 ]

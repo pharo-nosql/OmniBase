@@ -12,7 +12,7 @@ Class {
 ODBLocalClient >> createOn: aClientManager clientID: anInteger [ 
 	| userName machineName |
 	"get logged in user and local hostname"
-	self odbToDo.
+	self flag: #odbToDo.
 	userName := nil.
 	machineName := nil.
 	(userName isNil or: [userName isEmpty]) ifTrue: [userName := 'unknown-user'].
@@ -69,13 +69,14 @@ ODBLocalClient >> globalUnlock [
     ^true
 ]
 
-{ #category : #'private/initialization' }
+{ #category : #initialization }
 ODBLocalClient >> initialize [
-        "Private - Initialize receiver."
 
-    transactions := IdentitySet new: 20.
-    transactionFiles := OrderedCollection new.
-    hasGlobalLock := false.
+	self flag: #Cleanup.
+	"should do super initialize, but super uses OrderedCollection for transactions"
+	transactions := IdentitySet new: 20.
+	transactionFiles := OrderedCollection new.
+	hasGlobalLock := false
 ]
 
 { #category : #'public/unclassified' }

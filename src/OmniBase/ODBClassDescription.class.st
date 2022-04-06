@@ -21,7 +21,7 @@ ODBClassDescription >> allPersistentInstanceVariablesFor: aClass [
 		reject: [:each | aClass odbTransientInstanceVariables includes: each]) asArray
 ]
 
-{ #category : #public }
+{ #category : #accessing }
 ODBClassDescription >> classID [
 
 	^classID

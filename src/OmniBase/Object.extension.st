@@ -26,11 +26,6 @@ Object >> isIdenticalTo: anObject [
 ]
 
 { #category : #'*omnibase' }
-Object >> isImmediate [
-	^false
-]
-
-{ #category : #'*omnibase' }
 Object >> isODBExpired [ 
 
 	^ false
@@ -152,8 +147,7 @@ Object >> odbGetTransaction [
 
 	"immediate objects can not be made persistent"
 
-	| allReferences |
-	self isImmediate ifTrue: [^nil].
+	self isImmediateObject ifTrue: [^nil].
 
 	"first check all inst vars if any references a proxy from which we could get a reference to transaction"
 	self class isBits
@@ -230,11 +224,6 @@ Object >> odbResolve [
 Object >> odbSerialize: serializer [ 
 	(serializer register: self) ifTrue: [^self].
 	self odbBasicSerialize: serializer
-]
-
-{ #category : #'*omnibase' }
-Object >> odbToDo [
-		"See implementors to list all methods in OmniBase which need to be improved."
 ]
 
 { #category : #'*omnibase' }

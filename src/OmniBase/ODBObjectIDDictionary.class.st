@@ -7,12 +7,6 @@ Class {
 	#category : #'OmniBase-Model'
 }
 
-{ #category : #'as yet unclassified' }
-ODBObjectIDDictionary class >> new [
-
-    ^super new initialize
-]
-
 { #category : #public }
 ODBObjectIDDictionary >> at: objectID [ 
 	"Answer transaction object at objectID or <nil> if absent."
@@ -23,11 +17,11 @@ ODBObjectIDDictionary >> at: objectID [
 ]
 
 { #category : #public }
-ODBObjectIDDictionary >> at: objectID ifAbsentPutValue: anObject [ 
+ODBObjectIDDictionary >> at: objectID ifAbsentPut: anObject [ 
 	| dict |
 	(dict := dictionaries at: objectID containerID) isNil 
 		ifTrue: [dictionaries at: objectID containerID put: (dict := ODBIdentityDictionary new)].
-	^dict at: objectID index ifAbsentPutValue: anObject
+	^dict at: objectID index ifAbsentPut: anObject
 ]
 
 { #category : #public }
@@ -38,7 +32,7 @@ ODBObjectIDDictionary >> at: objectID put: anObject [
 	^dict at: objectID index put: anObject
 ]
 
-{ #category : #'private/initialization' }
+{ #category : #initialization }
 ODBObjectIDDictionary >> initialize [
 
     dictionaries := Array new: 255

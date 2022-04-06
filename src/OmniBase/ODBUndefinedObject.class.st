@@ -2,7 +2,6 @@ Class {
 	#name : #ODBUndefinedObject,
 	#superclass : #Object,
 	#instVars : [
-		'basicHash',
 		'variables',
 		'indexedVariables',
 		'bytes',

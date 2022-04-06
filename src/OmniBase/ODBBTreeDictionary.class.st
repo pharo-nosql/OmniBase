@@ -2,7 +2,6 @@ Class {
 	#name : #ODBBTreeDictionary,
 	#superclass : #ODBBTreeIndexDictionary,
 	#instVars : [
-		'locks',
 		'initialSize',
 		'deltaSize'
 	],
@@ -60,23 +59,30 @@ ODBBTreeDictionary >> basicLockKey: key [
 	dataBaseObject isNil ifTrue: [^true].
 	(lockID := transaction lockID) isNil ifTrue: [^false].
 	transaction isGlobalLocked ifTrue: [^true].
-	locks isNil 
-		ifTrue: [locks := Dictionary new]
-		ifFalse: [(locks includesKey: key) ifTrue: [^true]].
+	"Does the registry contain a lock for this dictionary and key?"
+	lock := transaction 
+		keyLockOn: self
+		key: key 
+		ifAbsent: [ nil ]. 
+	"A present lock is either inside the current transaction which makes
+	it succeed or it is part of another transaction which indicates a
+	locking conflict"
+	lock ifNotNil: [  
+		^ lock isSameTransaction: transaction ].
 	lock := (ODBKeyLock new)
 				objectID: holder objectID;
 				lockID: lockID;
 				key: key.
 	value := self valueAt: key.
 	dataBaseObject iterator critical: 
-			[transaction addLoggedLock: lock.
+			[
+			(transaction addLoggedLock: lock) ifFalse: [ ^ false ].
 			((dataBaseObject iterator)
 				goTo: key;
 				lockCurrentValue: value contents with: lockID) 
 					ifFalse: 
 						[transaction removeLoggedLock: lock.
 						^false]].
-	locks at: key put: lock.
 	^true
 ]
 
@@ -148,13 +154,17 @@ ODBBTreeDictionary >> databaseObjectClass [
 	^ODBDBBTreeDictionary
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBBTreeDictionary >> initialize [
-        "Private - Initialize receiver."
 
     super initialize.
     initialSize := 0.
     deltaSize := 0
+]
+
+{ #category : #public }
+ODBBTreeDictionary >> isEmpty [
+	^self size = 0
 ]
 
 { #category : #public }
@@ -166,7 +176,7 @@ ODBBTreeDictionary >> isKeyLocked: aKey [
 	transaction isGlobalLocked ifTrue: [^false].
 	key := self bytesFromKey: aKey.
 	dataBaseObject iterator critical: 
-			[result := (locks notNil and: [locks includesKey: key]) or: 
+			[result := (self hasLockAt: aKey ) or: 
 							[(dataBaseObject iterator)
 								goTo: key;
 								isLocked]].
@@ -247,10 +257,9 @@ ODBBTreeDictionary >> unlockKey: aKey [
 	dataBaseObject isNil ifTrue: [^true].
 	key := self bytesFromKey: aKey.
 	changed isNil ifFalse: [(changed includes: key) ifTrue: [^false]].
-	locks isNil ifTrue: [^transaction isGlobalLocked].
-	lock := locks at: key ifAbsent: [^false].
+	transaction hasLocks ifFalse: [ ^ transaction isGlobalLocked ].
+	lock := transaction keyLockOn: self key: key ifAbsent: [ ^ false ]. 
 	(dataBaseObject unlockKey: key with: lock lockID) ifFalse: [^false].
 	transaction removeLoggedLock: lock.
-	locks removeKey: key.
 	^true
 ]

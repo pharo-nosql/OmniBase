@@ -18,12 +18,6 @@ Class {
 	#category : #'OmniBase-Storage'
 }
 
-{ #category : #'instance creation' }
-ODBContainer class >> new [
-
-    ^super new initialize
-]
-
 { #category : #public }
 ODBContainer >> addByteStorageRequest: anODBByteStorageRequest [ 
 	byteStorageQueue add: anODBByteStorageRequest.
@@ -31,30 +25,34 @@ ODBContainer >> addByteStorageRequest: anODBByteStorageRequest [
 	queueSize > 65536 ifTrue: [self flushBytes]
 ]
 
-{ #category : #public }
-ODBContainer >> at: index [ 
+{ #category : #accessing }
+ODBContainer >> at: index [
+
 	| bytes |
-	(bytes := indexFile at: index) isNil ifTrue: [^nil].
-	^(ODBObjectHolder createOn: bytes) setContainer: self
-		objectID: (ODBObjectID containerID: id index: index)
+	(bytes := indexFile at: index) ifNil: [ ^ nil ].
+	^ (ODBObjectHolder createOn: bytes)
+		  setContainer: self
+		  objectID: (ODBObjectID containerID: id index: index)
 ]
 
 { #category : #accessing }
 ODBContainer >> bytesAllocated [
+
 	| size1 size2 |
 	size1 := 0.
 	size2 := 0.
-	dataFileA isNil ifFalse: [size1 := dataFileA size].
-	dataFileB isNil ifFalse: [size2 := dataFileB size].
-	^size1 + size2
+	dataFileA ifNotNil: [ size1 := dataFileA size ].
+	dataFileB ifNotNil: [ size2 := dataFileB size ].
+	^ size1 + size2
 ]
 
 { #category : #public }
 ODBContainer >> close [
-	dbFiles do: [:each | each isNil ifFalse: [each close]].
-	indexFile isNil ifFalse: [indexFile close].
-	dataFileA isNil ifFalse: [dataFileA close].
-	dataFileB isNil ifFalse: [dataFileB close]
+
+	dbFiles do: [ :each | each ifNotNil: [ each close ] ].
+	indexFile ifNotNil: [ indexFile close ].
+	dataFileA ifNotNil: [ dataFileA close ].
+	dataFileB ifNotNil: [ dataFileB close ]
 ]
 
 { #category : #public }
@@ -77,12 +75,14 @@ ODBContainer >> convertToLocalObjectSpaceNumber: objectSpaceNumber [
 
 { #category : #public }
 ODBContainer >> createNewObjectSpace [
+
 	"Create new object space for garbage collection."
 
-	dataFileA isNil 
-		ifTrue: [dataFileA := ODBObjectStorage createOn: self dataFileNameA]
-		ifFalse: 
-			[dataFileB isNil ifTrue: [dataFileB := ODBObjectStorage createOn: self dataFileNameB]]
+	dataFileA
+		ifNil: [ dataFileA := ODBObjectStorage createOn: self dataFileNameA ]
+		ifNotNil: [ 
+			dataFileB ifNil: [ 
+				dataFileB := ODBObjectStorage createOn: self dataFileNameB ] ]
 ]
 
 { #category : #public }
@@ -119,10 +119,10 @@ ODBContainer >> dataFileSize [
 
 { #category : #'private-accessing' }
 ODBContainer >> dirName [
-        "Private - Needed by database objects that 
-        are creating their own files."
 
-    ^path
+	"Private - Needed by database objects that are creating their own files."
+
+	^ path
 ]
 
 { #category : #private }
@@ -197,9 +197,9 @@ ODBContainer >> initHolders: holders [
     indexFile addHolders: holders
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 ODBContainer >> initialize [
-	dbFiles := ODBWeakValueIdentityDictionary new.
+	dbFiles := WeakIdentityValueDictionary new.
 	dbFilesMutex := Semaphore forMutualExclusion.
 	byteStorageQueue := OrderedCollection new.
 	queueSize := 0
@@ -234,8 +234,7 @@ ODBContainer >> lockDataFile [
 
     | currentSpace defaultSpace |
 
-    activeDataFile waitForAddingLockWhileWaitingDo:
-    [currentSpace := activeDataFile == dataFileA ifTrue: [0] ifFalse: [1].
+    currentSpace := activeDataFile == dataFileA ifTrue: [0] ifFalse: [1].
     defaultSpace := objectManager defaultObjectSpace.
     currentSpace == defaultSpace
         ifFalse:
@@ -248,7 +247,8 @@ openOn: self dataFileNameA].
                     [dataFileB isNil ifTrue: [dataFileB := ODBObjectStorage
 openOn: self dataFileNameB].
                     activeDataFile := dataFileB].
-            ^self lockDataFile]] 
+            ].
+	^ activeDataFile waitForAddingLock
 ]
 
 { #category : #public }
@@ -316,14 +316,15 @@ ODBContainer >> onNewObjectFileDo: aBlock [
 ]
 
 { #category : #public }
-ODBContainer >> openObjectFile: index ifAbsentPut: aBlock [ 
-	| file |
-	dbFilesMutex critical: 
-			[((file := dbFiles at: index) isNil or: [file stream isNil]) 
-				ifTrue: 
-					[file := aBlock value: (self fileNameFromIndex: index).
-					dbFiles at: index put: file]].
-	^file
+ODBContainer >> openObjectFile: index ifAbsentPut: aBlock [
+
+	^ dbFilesMutex critical: [ 
+		| file |
+		file := dbFiles at: index ifAbsent: [ nil ].
+		(file isNil or: [ file stream isNil ]) ifTrue: [ 
+			file := aBlock value: (self fileNameFromIndex: index).
+			dbFiles at: index put: file ]. 
+		file]
 ]
 
 { #category : #accessing }

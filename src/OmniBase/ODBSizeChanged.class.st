@@ -7,7 +7,7 @@ Class {
 	#category : #'OmniBase-Events'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #public }
 ODBSizeChanged class >> changeClassID [
         "Answer unique class ID used for storing changes into 
         transaction file or <nil> if change does not need to be stored."
@@ -15,7 +15,7 @@ ODBSizeChanged class >> changeClassID [
     ^4
 ]
 
-{ #category : #'public/transaction processing' }
+{ #category : #'transaction processing' }
 ODBSizeChanged >> commit [
 
     transaction := transactionObject transaction.
@@ -25,20 +25,20 @@ ODBSizeChanged >> commit [
         deltaSize: deltaSize
 ]
 
-{ #category : #'public/accessing' }
+{ #category : #accessing }
 ODBSizeChanged >> deltaSize: anInteger [
 
     deltaSize := anInteger
 ]
 
-{ #category : #'public/load/store' }
+{ #category : #public }
 ODBSizeChanged >> loadFromStream: aStream [
 
     objectID := ODBObjectID new loadFromStream: aStream.
     deltaSize := aStream getInteger
 ]
 
-{ #category : #'public/transaction processing' }
+{ #category : #'transaction processing' }
 ODBSizeChanged >> rollback [
 
     self transactionObject dataBaseObject iterator
@@ -47,7 +47,7 @@ ODBSizeChanged >> rollback [
         deltaSize: 0 - deltaSize
 ]
 
-{ #category : #'public/load/store' }
+{ #category : #'load/store' }
 ODBSizeChanged >> storeOnStream: aStream [
 
     objectID storeOnStream: aStream.

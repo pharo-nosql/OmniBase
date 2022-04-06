@@ -10,12 +10,6 @@ Class {
 	#category : #'OmniBase-Model'
 }
 
-{ #category : #'as yet unclassified' }
-ODBSortedDictionary class >> new [
-
-    ^super new initialize
-]
-
 { #category : #public }
 ODBSortedDictionary >> at: aKey [ 
 	| index |
@@ -125,7 +119,7 @@ ODBSortedDictionary >> includes: aKey [
     ^(self findKey: aKey) > 0
 ]
 
-{ #category : #'private/initialization' }
+{ #category : #initialization }
 ODBSortedDictionary >> initialize [
 
     keys := Array new: 128.

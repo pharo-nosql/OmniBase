@@ -16,6 +16,15 @@ ODBPersistentDictionaryTest >> testAdd [
 ]
 
 { #category : #tests }
+ODBPersistentDictionaryTest >> testAddImmediateObject [
+	| dict |
+	[ dict := OmniBase newPersistentDictionary
+		add: (#test -> 1);
+		yourself] evaluateAndCommitIn: db newTransaction.
+	self assert: (dict at: #test) equals: 1.
+]
+
+{ #category : #tests }
 ODBPersistentDictionaryTest >> testNewPersistentDictionary [
 	| dict |
 	[ dict := OmniBase newPersistentDictionary
