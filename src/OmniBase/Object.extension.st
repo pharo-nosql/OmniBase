@@ -227,11 +227,6 @@ Object >> odbSerialize: serializer [
 ]
 
 { #category : #'*omnibase' }
-Object >> odbToDo [
-		"See implementors to list all methods in OmniBase which need to be improved."
-]
-
-{ #category : #'*omnibase' }
 Object >> signalError: aString [
 	self error: aString
 ]
