@@ -12,7 +12,7 @@ Class {
 ODBLocalClient >> createOn: aClientManager clientID: anInteger [ 
 	| userName machineName |
 	"get logged in user and local hostname"
-	self odbToDo.
+	self flag: #odbToDo.
 	userName := nil.
 	machineName := nil.
 	(userName isNil or: [userName isEmpty]) ifTrue: [userName := 'unknown-user'].

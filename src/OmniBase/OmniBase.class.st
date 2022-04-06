@@ -20,17 +20,18 @@ Class {
 
 { #category : #private }
 OmniBase class >> add: anOmniBase [
-		"Private - Registers an opened database session."
 
-	sessions isNil ifTrue: [sessions := OrderedCollection new].
-	sessions add: anOmniBase.
+	"Private - Registers an opened database session."
+
+	sessions ifNil: [ sessions := OrderedCollection new ].
+	sessions add: anOmniBase
 ]
 
 { #category : #accessing }
 OmniBase class >> allSessions [
-		"Answers a collection of all opened database sessions."
+	"Answers a collection of all opened database sessions."
 
-	^sessions
+	^ sessions
 ]
 
 { #category : #public }
@@ -44,13 +45,16 @@ OmniBase class >> checkpoint [
 
 { #category : #public }
 OmniBase class >> closeAll [
+
 	"Closes all opened database sessions. Do not use this method if you're using
 	the Source Tracking System for development since it will also close its connection
 	to the source code repository."
 
-	sessions isNil ifTrue: [^false].
-	sessions copy 
-		do: [:each | [each close] on: Error do: [:er | sessions remove: each ifAbsent: []]]
+	sessions ifNil: [ ^ false ].
+	sessions copy do: [ :each | 
+		[ each close ]
+			on: Error
+			do: [ :er | sessions remove: each ifAbsent: [  ] ] ]
 ]
 
 { #category : #public }
@@ -275,24 +279,24 @@ OmniBase >> clientManagerClass [
 
 { #category : #public }
 OmniBase >> close [
-	clientManager notNil 
-		ifTrue: 
+	clientManager 
+		ifNotNil: 
 			[clientManager close.
 			clientManager := nil].
-	classManager notNil 
-		ifTrue: 
+	classManager 
+		ifNotNil: 
 			[classManager close.
 			classManager := nil].
-	objectManager notNil 
-		ifTrue: 
+	objectManager 
+		ifNotNil: 
 			[objectManager close.
 			objectManager := nil].
-	transactionManager notNil 
-		ifTrue: 
+	transactionManager 
+		ifNotNil: 
 			[transactionManager close.
 			transactionManager := nil].
-	lockRegistry notNil 
-		ifTrue: [ 
+	lockRegistry 
+		ifNotNil: [ 
 			lockRegistry checkRemoval.
 			lockRegistry := nil ].
 	self class remove: self
@@ -349,7 +353,7 @@ OmniBase >> dirName [
 
 { #category : #accessing }
 OmniBase >> existsContainerNamed: aString [
-        "Answer <true> if container named aString exists."
+    "Answer <true> if container named aString exists."
 
     objectManager containerNamed: aString ifAbsent: [^false].
     ^true
@@ -357,7 +361,7 @@ OmniBase >> existsContainerNamed: aString [
 
 { #category : #public }
 OmniBase >> freeDiskSpace [
-	self odbToDo.
+	self flag: #odbToDo.
 	^1024 * 1024 * 1024
 ]
 
@@ -440,7 +444,7 @@ OmniBase >> newBTreeIndexDictionary: keySize [
 
 { #category : #accessing }
 OmniBase >> newContainer: aString [
-        "Create new container named aString."
+	"Create new container named aString."
 
     ^objectManager containerNew: aString
 ]
@@ -486,8 +490,7 @@ OmniBase >> numberOfClients [
 { #category : #private }
 OmniBase >> objectManager [
 
-	^ objectManager ifNil: [ 
-		objectManager := self objectManagerClass new ]
+	^ objectManager ifNil: [ objectManager := self objectManagerClass new ]
 ]
 
 { #category : #public }
@@ -519,7 +522,7 @@ OmniBase >> openOn: dirName [
 	lockRegistry := ODBLockRegistry forPath: dirName.
 	self opened] 
 			ifCurtailed: [self close].
-	self freeDiskSpace < 5242880 ifTrue: [OmniBase warningMessage: 'Low disk space !']
+	self freeDiskSpace < 5242880 ifTrue: [self class warningMessage: 'Low disk space !']
 ]
 
 { #category : #private }
@@ -534,12 +537,14 @@ OmniBase >> opened [
 			do: [:er | #odbTODO]
 ]
 
-{ #category : #public }
+{ #category : #printing }
 OmniBase >> printOn: aStream [
 
 	super printOn: aStream.
-	
-	aStream nextPutAll: '(',self hash asString,')'
+
+	aStream nextPutAll: '('.
+	self hash printOn: aStream.
+	aStream nextPutAll: ')'
 ]
 
 { #category : #public }
@@ -567,8 +572,7 @@ OmniBase >> setUserDescription: aString [
 { #category : #private }
 OmniBase >> transactionManager [
 
-    ^ transactionManager ifNil: [ 
-		transactionManager := self transactionManagerClass new ]
+	^ transactionManager ifNil: [ transactionManager := self transactionManagerClass new ]
 ]
 
 { #category : #public }

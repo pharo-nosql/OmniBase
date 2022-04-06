@@ -18,12 +18,6 @@ ODBMemoryWriteStream >> initialize [
 ]
 
 { #category : #public }
-ODBMemoryWriteStream >> putByte: anInteger [
-
-    self putBytesFrom: (ByteArray with: anInteger) len: 1
-]
-
-{ #category : #public }
 ODBMemoryWriteStream >> putBytesFrom: aByteCollection len: len [
 	stream next: len putAll: aByteCollection startingAt: 1
 ]

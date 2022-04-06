@@ -4,10 +4,6 @@ Class {
 	#instVars : [
 		'stream'
 	],
-	#classInstVars : [
-		'locks',
-		'lockingMutex'
-	],
 	#category : #'OmniBase-Streams'
 }
 
@@ -26,6 +22,11 @@ ODBStream >> flush [
 ODBStream >> getBoolean [
 
     ^self getByte = 1
+]
+
+{ #category : #public }
+ODBStream >> getByte [
+	^ stream next
 ]
 
 { #category : #public }
@@ -96,6 +97,12 @@ ODBStream >> position: aPostion [
 ODBStream >> putBoolean: aBool [
 
     self putByte: (aBool ifTrue: [ 1] ifFalse: [0])
+]
+
+{ #category : #public }
+ODBStream >> putByte: anInteger [
+
+    stream nextPut: anInteger
 ]
 
 { #category : #public }
