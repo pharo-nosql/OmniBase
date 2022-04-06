@@ -154,6 +154,7 @@ ODBSerializationTest >> testSerializationIdentityDictionary [
 	| object serialized materialized |
 	object := IdentityDictionary newFrom: { #test->2 . #now->4 }.
 	serialized := ODBSerializer serializeToBytes: object.
+
 	self assert: (serialized = 
 	"the order of association in the dict is different between Pharo9 and Pharo10, no idea why"
 	#[0 0 1 0 0 0 38 2 18 3 110 111 119 54 18 4 116 101 115 116 52] or: [  

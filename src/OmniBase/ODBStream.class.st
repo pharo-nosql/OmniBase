@@ -29,6 +29,11 @@ ODBStream >> getBoolean [
 ]
 
 { #category : #public }
+ODBStream >> getByte [
+	^ stream next
+]
+
+{ #category : #public }
 ODBStream >> getBytesFor: aByteCollection [
 
     ^self getBytesFor: aByteCollection len: aByteCollection size
@@ -96,6 +101,12 @@ ODBStream >> position: aPostion [
 ODBStream >> putBoolean: aBool [
 
     self putByte: (aBool ifTrue: [ 1] ifFalse: [0])
+]
+
+{ #category : #public }
+ODBStream >> putByte: anInteger [
+
+    stream nextPut: anInteger
 ]
 
 { #category : #public }
