@@ -22,7 +22,7 @@ Class {
 	#category : #'OmniBase-Base'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 ODBLockRegistry class >> forPath: aString [ 
 	| path |
 	"locks are managed per omnibase path on disk. So every instance of 
@@ -40,7 +40,7 @@ ODBLockRegistry class >> initialize [
 	self reset
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 ODBLockRegistry class >> registeredPaths [
 	^ self registries keys
 ]
@@ -50,14 +50,14 @@ ODBLockRegistry class >> registries [
 	^ registries 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #removing }
 ODBLockRegistry class >> remove: aRegistry [ 
 	^ registries 
 		removeKey: aRegistry path 
 		ifAbsent: [ ] 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #removing }
 ODBLockRegistry class >> removePath: aString [ 
 	^ registries removeKey: aString 
 	

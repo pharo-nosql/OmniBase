@@ -4,7 +4,7 @@ Class {
 	#category : #'OmniBase-Model'
 }
 
-{ #category : #public }
+{ #category : #defining }
 ODBDBBTreeIntegerIndexDictionary class >> classID [
 	"Answer database object classID."
 

@@ -2,7 +2,7 @@ Class {
 	#name : #ODBStream,
 	#superclass : #Object,
 	#instVars : [
-		'position'
+		'stream'
 	],
 	#classInstVars : [
 		'locks',
@@ -82,6 +82,16 @@ ODBStream >> getWord [
     ^self getByte bitOr: (self getByte bitShift: 8)
 ]
 
+{ #category : #accessing }
+ODBStream >> position [
+	^ stream position
+]
+
+{ #category : #accessing }
+ODBStream >> position: aPostion [
+	stream position: aPostion
+]
+
 { #category : #public }
 ODBStream >> putBoolean: aBool [
 
@@ -138,4 +148,9 @@ ODBStream >> setToEnd [
         "Set to stream to end and answer position."
 
     ^self position: self size
+]
+
+{ #category : #public }
+ODBStream >> size [
+	^ stream size
 ]

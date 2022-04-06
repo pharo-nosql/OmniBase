@@ -49,7 +49,7 @@ ODBMacFileStream class >> setShareMode: shareMode forFileStream: aFileStream [
 			[self shareModeShareAll] -> [nil].
 			[self shareModeShareRead] -> [false].
 			[self shareModeShareNone] -> [true].
-			[self shareModeShareWrite] -> [self halt] "don't know how to implement this on unix and it is currently unused"}.
+			[self shareModeShareWrite] -> [self error: 'not supported'] "don't know how to implement this on unix and it is currently unused"}.
 
 	flagState ifNotNil: [
 		(BSDFLock
@@ -77,45 +77,33 @@ ODBMacFileStream class >> streamCreationSelectorForMode: createMode [
 
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #public }
 ODBMacFileStream >> close [
-		"Close file associatied with receiver."
+	"Close file associatied with receiver."
 
-	fileHandle notNil ifTrue: [
+	stream notNil ifTrue: [
 		BSDFLock 
-			unlock: fileHandle fileHandle 
+			unlock: stream fileHandle 
 			from: 0 
 			to: self size.
-		fileHandle closed ifFalse: [ fileHandle close ] ].
-	fileHandle := nil.
+		stream closed ifFalse: [ stream close ] ].
+	stream := nil.
 ]
 
 { #category : #public }
 ODBMacFileStream >> lockAt: pos length: length [
 	
 	^ BSDFLock 
-		lock: fileHandle fileHandle
+		lock: stream fileHandle
 		from: pos 
 		to: pos + length - 1
-]
-
-{ #category : #public }
-ODBMacFileStream >> size [
-	"the unix Squeak VM gives the wrong answer for #size"
-	| file |
-	fileHandle flush.
-	file := fileHandle readOnlyCopy.
-	^ [file size] ensure: [file close]
-	
-
-
 ]
 
 { #category : #public }
 ODBMacFileStream >> unlockAt: pos length: length [
 
 	^ BSDFLock 
-		unlock: fileHandle fileHandle
+		unlock: stream fileHandle
 		from: pos 
 		to: pos + length - 1
 ]

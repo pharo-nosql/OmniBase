@@ -256,12 +256,12 @@ ODBGarbageCollector >> runOn: anOmniBase silentMode: silenceBool [
 	"Run garbage collection on anOmniBase."
 
 	objectManager := anOmniBase objectManager.
-	[gcFile := ODBGarbageCollectorFile openOn: self gcFileName] on: Error
-		do: 
-			[:ex | 
+	[ gcFile := ODBGarbageCollectorFile openOn: self gcFileName ] 
+		on: Error
+		do: [:ex | 
 			objectManager isLocked ifTrue: [OmniBase signalError: 'Object manager is locked !'].
-			gcFile := ODBGarbageCollectorFile createOn: self gcFileName].
-	^self run: silenceBool
+			gcFile := ODBGarbageCollectorFile createOn: self gcFileName ].
+	^ self run: silenceBool
 ]
 
 { #category : #private }
@@ -297,8 +297,7 @@ ODBGarbageCollector >> walkObjectReferencesOf: objectID addInto: firstToDo oidSe
 	progressBlock value.
 	(objectManager holderAt: objectID)
 		ifNil: [ OmniBase signalError: 'Invalid object ID' ]
-		ifNotNil: [ :holder |
-			| dbObject |
+		ifNotNil: [ :holder | | dbObject |
 			dbObject := holder getObject.
 			dbObject referencesDo: [ :oid |
 				| containerID |
@@ -318,7 +317,7 @@ ODBGarbageCollector >> walkObjects [
 	"Private - Object traversal."
 
 	| toDo firstToDo oidSets set totalObjects count progressBlock |
-	gcFile status = 6 ifTrue: [ ^self ].
+	gcFile status = 6 ifTrue: [ ^ self ].
 	"create OID sets"
 	oidSets := OrderedCollection new.
 	"notifying progress count"

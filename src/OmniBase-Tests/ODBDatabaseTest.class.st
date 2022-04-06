@@ -49,11 +49,6 @@ ODBDatabaseTest >> benchmarkCommitNewObjects [
 	Transcript show: stream contents
 ]
 
-{ #category : #testing }
-ODBDatabaseTest >> expectedFailures [ 
-	^ #( testBackup )
-]
-
 { #category : #tests }
 ODBDatabaseTest >> testBackup [
 

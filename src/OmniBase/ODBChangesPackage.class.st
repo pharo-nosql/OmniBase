@@ -21,8 +21,7 @@ ODBChangesPackage >> changes [
 ODBChangesPackage >> collectChangeClassIDsFrom: rootClass to: aDictionary [
         "Private - Collect all change classIDs and store them to aDictionary."
 
-    rootClass changeClassID notNil
-        ifTrue: [aDictionary at: rootClass changeClassID put: rootClass].
+    rootClass changeClassID ifNotNil: [aDictionary at: rootClass changeClassID put: rootClass].
     rootClass subclasses do: [:each | self collectChangeClassIDsFrom: each to: aDictionary]
 ]
 
@@ -33,7 +32,7 @@ ODBChangesPackage >> commit [
 
 { #category : #'public/unclassified' }
 ODBChangesPackage >> committed [
-        "Changes have just been committed."
+    "Changes have just been committed."
 
     changes do: [:each | each committed]
 ]
@@ -70,17 +69,16 @@ ODBChangesPackage >> rollback [
 ]
 
 { #category : #public }
-ODBChangesPackage >> storeOnStream: aStream [ 
+ODBChangesPackage >> storeOnStream: aStream [
+
 	"Store receiver on aStream."
 
 	| memoryStream classID |
 	memoryStream := ODBMemoryWriteStream new.
-	changes do: 
-			[:each | 
-			(classID := each class changeClassID) isNil 
-				ifFalse: 
-					[memoryStream putByte: classID.
-					each storeOnStream: memoryStream]].
+	changes do: [ :each | 
+		(classID := each class changeClassID) ifNotNil: [ 
+			memoryStream putByte: classID.
+			each storeOnStream: memoryStream ] ].
 	memoryStream
 		putByte: 0;
 		writeOn: aStream
@@ -92,14 +90,15 @@ ODBChangesPackage >> transaction: aTransaction [
 ]
 
 { #category : #private }
-ODBChangesPackage >> value: change1 value: change2 [ 
+ODBChangesPackage >> value: change1 value: change2 [
+
 	"Private - Answer <true> if change1 is to be committed before change2.
 	Disk access optimization so that files are updated sequentialy."
 
 	| oid1 oid2 cid1 cid2 |
-	(oid1 := change1 objectID) isNil ifTrue: [^true].
-	(oid2 := change2 objectID) isNil ifTrue: [^false].
-	(cid1 := oid1 containerID) == (cid2 := oid2 containerID) 
-		ifTrue: [^oid1 index < oid2 index].
-	^cid1 < cid2
+	(oid1 := change1 objectID) ifNil: [ ^ true ].
+	(oid2 := change2 objectID) ifNil: [ ^ false ].
+	(cid1 := oid1 containerID) == (cid2 := oid2 containerID) ifTrue: [ 
+		^ oid1 index < oid2 index ].
+	^ cid1 < cid2
 ]

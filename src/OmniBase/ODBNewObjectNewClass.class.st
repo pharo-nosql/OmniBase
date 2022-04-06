@@ -4,7 +4,7 @@ Class {
 	#category : #'OmniBase-Serializers'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #serialization }
 ODBNewObjectNewClass class >> odbDeserialize: deserializer [
 
 	^deserializer newObjectNewClass

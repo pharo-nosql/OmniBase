@@ -1,9 +1,6 @@
 Class {
 	#name : #ODBClientFile,
 	#superclass : #ODBFile,
-	#instVars : [
-		'transactions'
-	],
 	#category : #'OmniBase-Files'
 }
 

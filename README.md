@@ -9,6 +9,7 @@ MoniBase is a Smalltalk efficient object repository. Based on [BTrees](http://en
 
 For a log of changes have a look at [Changes](./changes.md)
 
+For further documentation have a look at the [documentation folder](./documentation)
 ### Loading 
 
 Use this snippet to load it into your [Pharo](http://www.pharo.org)* image:

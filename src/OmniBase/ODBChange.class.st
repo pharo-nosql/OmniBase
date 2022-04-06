@@ -64,9 +64,8 @@ ODBChange >> transaction: aTransaction [
 
 { #category : #public }
 ODBChange >> transactionObject [
-	^transactionObject isNil 
-		ifFalse: [transactionObject]
-		ifTrue: [transactionObject := transaction transactionObjectAt: objectID]
+
+	^ transactionObject ifNil: [ transactionObject := transaction transactionObjectAt: objectID ]
 ]
 
 { #category : #accessing }
