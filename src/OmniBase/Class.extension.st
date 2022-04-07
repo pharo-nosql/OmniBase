@@ -3,7 +3,7 @@ Extension { #name : #Class }
 { #category : #'*omnibase' }
 Class class >> odbDeserialize: deserializer [
 
-	^Smalltalk at: deserializer stream getString asSymbol ifAbsent: []
+	^Smalltalk at: deserializer stream getString asSymbol ifAbsent: nil
 ]
 
 { #category : #'*omnibase' }

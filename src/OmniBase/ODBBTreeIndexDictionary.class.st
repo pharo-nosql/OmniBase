@@ -19,7 +19,7 @@ ODBBTreeIndexDictionary class >> createWithKeyLength: keyLength [
 { #category : #accessing }
 ODBBTreeIndexDictionary >> at: aKey [
 
-    ^self at: aKey ifAbsent: []
+    ^self at: aKey ifAbsent: nil
 ]
 
 { #category : #public }

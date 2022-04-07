@@ -119,7 +119,7 @@ OmniBase class >> getCurrentAndSet: anOmniBaseTransaction for: aProcess [
 
 	| previousTxn |
 	processToTransactionMutex critical: 
-			[previousTxn := processToTransactionDict at: aProcess ifAbsent: [].
+			[previousTxn := processToTransactionDict at: aProcess ifAbsent: nil.
 			processToTransactionDict at: aProcess put: anOmniBaseTransaction].
 	^previousTxn
 ]

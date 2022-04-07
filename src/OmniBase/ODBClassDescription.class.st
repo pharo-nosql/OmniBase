@@ -127,7 +127,7 @@ ODBClassDescription >> saveOnStream: aStream [
 { #category : #private }
 ODBClassDescription >> updateVariableOrder [
 	| realNames |
-	class := Smalltalk at: name asSymbol ifAbsent: [].
+	class := Smalltalk at: name asSymbol ifAbsent: nil.
 	varOrder := Array new: instVarNames size.
 	class isNil 
 		ifTrue: [varOrder atAllPut: 1]
