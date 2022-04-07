@@ -14,9 +14,9 @@ ODBFile class >> createOn: aString [
 ]
 
 { #category : #'instance creation' }
-ODBFile class >> openOn: aString [
+ODBFile class >> openOn: aFileReference [
 
-    ^self new openOn: aString
+    ^self new openOn: aFileReference
 ]
 
 { #category : #'create/open/close' }
@@ -43,9 +43,9 @@ ODBFile >> compareHeader [
 ]
 
 { #category : #'create/open/close' }
-ODBFile >> createOn: aString [
+ODBFile >> createOn: aFileReference [
 
-    stream := ODBFileStream createOn: aString.
+    stream := ODBFileStream createOn: aFileReference pathString.
     ^self writeHeader
 ]
 
@@ -107,9 +107,9 @@ ODBFile >> openExclusivelyOn: aString [
 ]
 
 { #category : #'create/open/close' }
-ODBFile >> openOn: aString [
+ODBFile >> openOn: aFileReference [
 
-    stream := ODBFileStream openOn: aString.
+    stream := ODBFileStream openOn: aFileReference.
     ^self compareHeader
 ]
 

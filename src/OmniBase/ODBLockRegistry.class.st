@@ -23,12 +23,12 @@ Class {
 }
 
 { #category : #'instance creation' }
-ODBLockRegistry class >> forPath: aString [ 
+ODBLockRegistry class >> forPath: aFileReference [ 
 	| path |
 	"locks are managed per omnibase path on disk. So every instance of 
 	OmniBase that access the same path gets the same lock registry to 
 	manage conflicts across transaction boundaries"
-	path := aString asFileReference asAbsolute.
+	path := aFileReference asAbsolute.
 	^ registries 
 		at: path 
 		ifAbsentPut: [ 

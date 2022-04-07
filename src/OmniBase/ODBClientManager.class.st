@@ -33,7 +33,7 @@ ODBClientManager >> clientAt: clientID [
 					[client := ODBForeignClient new openOn: self clientID: clientID.
 					client isNil 
 						ifTrue: 
-							[(ODBFileStream exists: (self clientFileName: clientID)) 
+							[(self clientFileName: clientID) exists 
 								ifFalse: 
 									[self
 										removePending: clientID;
@@ -45,7 +45,7 @@ ODBClientManager >> clientAt: clientID [
 ODBClientManager >> clientFileName: clientID [ 
 	"Private - Answer client file name for clientID."
 
-	^self dirName , ODBFileStream pathSeparatorString , clientID printString , '.usr'
+	^ self path / clientID printString , 'usr'
 ]
 
 { #category : #public }
@@ -89,13 +89,6 @@ ODBClientManager >> createOn: anEnvironment [
     ] ifCurtailed: [ self close ]
 ]
 
-{ #category : #private }
-ODBClientManager >> dirName [
-	"Private - Answer directory where user files are placed."
-
-	^environment dirName , ODBFileStream pathSeparatorString , 'Users'
-]
-
 { #category : #'public/accessing' }
 ODBClientManager >> environment [
 
@@ -113,7 +106,7 @@ ODBClientManager >> globalUnlock [
 ODBClientManager >> idFileName [
 	"Private - Answer name of file where client statuses are stored."
 
-	^environment dirName , ODBFileStream pathSeparatorString , 'omnibase.usr'
+	^ environment path / 'omnibase.usr'
 ]
 
 { #category : #'public/unclassified' }
@@ -148,12 +141,16 @@ ODBClientManager >> openOn: anOmniBase [
 { #category : #private }
 ODBClientManager >> opened [
 	"Private - Receiver has just been opened."
-
 	clients := Array new: ODBClientTable maxClients.
-	"ensure that directory exists in case the database was unzipped
-	(WinZIP does not zip and later create empty directories)."
-	(ODBFileStream directoryExists: self dirName) 
-		ifFalse: [ODBFileStream directoryCreate: self dirName]
+	(self path exists) 
+		ifFalse: [ self path ensureCreateDirectory ]
+]
+
+{ #category : #private }
+ODBClientManager >> path [
+	"Private - Answer directory where user files are placed."
+
+	^ environment path / 'Users'
 ]
 
 { #category : #public }

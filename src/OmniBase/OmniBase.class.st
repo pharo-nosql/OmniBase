@@ -2,12 +2,12 @@ Class {
 	#name : #OmniBase,
 	#superclass : #Object,
 	#instVars : [
-		'rootDir',
 		'objectManager',
 		'classManager',
 		'clientManager',
 		'transactionManager',
-		'lockRegistry'
+		'lockRegistry',
+		'path'
 	],
 	#classInstVars : [
 		'currentTransaction',
@@ -185,9 +185,9 @@ OmniBase class >> objectAt: anODBObjectID [
 ]
 
 { #category : #creating }
-OmniBase class >> openOn: dirName [
+OmniBase class >> openOn: path [
 
-	^self new openOn: dirName
+	^self new openOn: path
 ]
 
 { #category : #private }
@@ -328,27 +328,22 @@ OmniBase >> createBackupOn: newDirectoryName [
 ]
 
 { #category : #public }
-OmniBase >> createOn: dirName [ 
+OmniBase >> createOn: aStringOrFileReference [ 
 	"Create new database. If a database already exists signal error."
 
 	
-	[rootDir := dirName.
-	(ODBFileStream directoryExists: rootDir) 
-		ifFalse: [ODBFileStream directoryCreate: rootDir].
+	[
+	path := aStringOrFileReference asFileReference.
+	(path exists) 
+		ifFalse: [ path ensureCreateDirectory ].
 	classManager := self classManager createOn: self.
 	objectManager := self objectManager createOn: self.
 	transactionManager := self transactionManager createOn: self.
 	clientManager := self clientManager createOn: self.
-	lockRegistry := ODBLockRegistry forPath: dirName.
+	lockRegistry := ODBLockRegistry forPath: path.
 	self opened.
-	clientManager localClient makeRootObject] 
-			ifCurtailed: [self close]
-]
-
-{ #category : #accessing }
-OmniBase >> dirName [
-
-    ^rootDir
+	clientManager localClient makeRootObject ] 
+		ifCurtailed: [self close]
 ]
 
 { #category : #accessing }
@@ -372,7 +367,6 @@ OmniBase >> garbageCollect [
 		- remove all objects which are not referenced from the database root
 		- compact all container files and remove old object versions
 	B-tree dictionaries will not be compacted."
-
 	(ODBGarbageCollector new)
 		reorganizeDictionaries: false;
 		reorganizeIndexSets: false;
@@ -509,17 +503,17 @@ OmniBase >> odbObjectID [
 ]
 
 { #category : #public }
-OmniBase >> openOn: dirName [ 
+OmniBase >> openOn: aStringOrFileReference [ 
 	"Open an already existing database environment. 
 	Trigger an exception if failed."
 
 	
-	[rootDir := dirName.
+	[path := aStringOrFileReference asFileReference.
 	classManager := self classManager openOn: self.
 	objectManager := self objectManager openOn: self.
 	transactionManager := self transactionManager openOn: self.
 	clientManager := self clientManager openOn: self.
-	lockRegistry := ODBLockRegistry forPath: dirName.
+	lockRegistry := ODBLockRegistry forPath: path.
 	self opened] 
 			ifCurtailed: [self close].
 	self freeDiskSpace < 5242880 ifTrue: [self class warningMessage: 'Low disk space !']
@@ -535,6 +529,12 @@ OmniBase >> opened [
 		removeDisconnectedClients;
 		closeForeignClients] on: Error
 			do: [:er | #odbTODO]
+]
+
+{ #category : #accessing }
+OmniBase >> path [
+
+    ^ path
 ]
 
 { #category : #printing }

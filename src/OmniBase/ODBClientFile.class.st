@@ -29,10 +29,10 @@ ODBClientFile >> clientDescription: aString [
 ]
 
 { #category : #'public/create/open/close' }
-ODBClientFile >> createOn: aString [
+ODBClientFile >> createOn: aFileReference [
         "Create client file. Signal an error if failed."
 
-    stream := ODBFileStream createOn: aString
+    stream := ODBFileStream createOn: aFileReference pathString 
                             createMode: #createModeCreateNew
                             accessMode: #accessModeReadWrite
                             shareMode: #shareModeShareAll.
@@ -59,10 +59,10 @@ OmniBase 1.0, David Gorisek (c) 1998
 ]
 
 { #category : #'public/create/open/close' }
-ODBClientFile >> openOn: aString [
+ODBClientFile >> openOn: aFileReference [
         "Open client file. Signal an error if failed."
 
-    stream := ODBFileStream createOn: aString
+    stream := ODBFileStream createOn: aFileReference pathString
                             createMode: #createModeOpenExisting
                             accessMode: #accessModeReadWrite
                             shareMode: #shareModeShareRead.

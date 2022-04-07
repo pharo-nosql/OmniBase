@@ -9,17 +9,6 @@ Class {
 }
 
 { #category : #'create/open' }
-ODBFileStream class >> createNewOn: pathName [
-        "Create new file on pathName. Trigger an error 
-        if the file allready exists or if it can not be created."
-
-    ^self createOn: pathName
-        createMode: #createModeCreateNew
-        accessMode: #accessModeReadWrite
-        shareMode: #shareModeShareAll
-]
-
-{ #category : #'create/open' }
 ODBFileStream class >> createOn: pathName [
         "Create new file on pathName. Trigger an 
         exception if the file can not be created."
@@ -45,17 +34,7 @@ ODBFileStream class >> createOn: pathName createMode: createMode accessMode: acc
 ODBFileStream class >> createOn: pathName createMode: createMode accessMode: accessMode shareMode: shareMode cacheMode: cacheMode [
 		"Create new instance of file stream on pathName with given flags."
 
-	| fileStreamClass |
-	fileStreamClass := Smalltalk os platformName
-			caseOf: 
-				{
-				['unix'] -> [ODBUnixFileStream].
-				['Mac OS'] -> [ODBMacFileStream].
-				}
-			otherwise: 
-				[^self error: 'Platform not Supported'].
-			
-	^ fileStreamClass
+	 ^ Smalltalk os omnibaseFileStreamClass
 		createOn: pathName 
 		createMode: createMode 
 		accessMode: accessMode 
@@ -63,46 +42,23 @@ ODBFileStream class >> createOn: pathName createMode: createMode accessMode: acc
 		cacheMode: cacheMode
 ]
 
-{ #category : #'directory operations' }
-ODBFileStream class >> directoryCreate: aPath [
-
-	aPath asFileReference ensureCreateDirectory.
-	
-	^true
-]
-
-{ #category : #'directory operations' }
-ODBFileStream class >> directoryExists: aString [
-
-	^ aString asFileReference exists
-]
-
-{ #category : #'directory operations' }
-ODBFileStream class >> exists: fileName [
-		
-	"Answer <true> if file named fileName exists."
-
-	
-	^ fileName asFileReference exists
-]
-
 { #category : #'create/open' }
 ODBFileStream class >> openExclusivelyOn: pathName [
 		"Open an existing file on pathName exclusively so that no-one else can open it.
 		Trigger an exception if the file can not be opened."
 
-	^self createOn: pathName
+	^ self createOn: pathName
 		createMode: #createModeOpenExisting
 		accessMode: #accessModeReadWrite
 		shareMode: #shareModeShareNone
 ]
 
 { #category : #'create/open' }
-ODBFileStream class >> openOn: pathName [
+ODBFileStream class >> openOn: aFileReference [ 
         "Open an existing file on pathName. Trigger an 
         exception if the file can not be opened."
 
-    ^self createOn: pathName
+    ^self createOn: aFileReference pathString
         createMode: #createModeOpenExisting
         accessMode: #accessModeReadWrite
         shareMode: #shareModeShareAll
@@ -118,23 +74,6 @@ ODBFileStream class >> openReadOnlyOn: pathName [
 		createMode: #createModeOpenExisting
 		accessMode: #accessModeReadOnly
 		shareMode: #shareModeShareAll
-]
-
-{ #category : #public }
-ODBFileStream class >> pathSeparatorString [
-
-	^ DiskStore delimiter asString
-
-]
-
-{ #category : #'directory operations' }
-ODBFileStream class >> remove: fileName [
-	"Remove file named fileName. Answer <true> if successful, <false> if failed."
-
-	[ fileName asFileReference delete.
-		^ true ]
-			on: Error
-			do: [:ex | ^ false ]
 ]
 
 { #category : #public }
@@ -391,7 +330,10 @@ ODBFileStream >> remove [
         "Close and remove receiver. Answer <true> if removed."
 
     self close.
-    ^self class remove: pathName
+    [ pathName asFileReference delete ]
+		on: Error 
+		do: [:err | ^ false ].
+	^ true
 ]
 
 { #category : #public }

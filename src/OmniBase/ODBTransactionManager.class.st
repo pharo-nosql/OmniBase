@@ -75,7 +75,7 @@ ODBTransactionManager >> oldHolders [
 
 { #category : #private }
 ODBTransactionManager >> oldHoldersFileName [
-	^dbConnection dirName , ODBFileStream pathSeparatorString , 'omnibase.log'
+	^ dbConnection path / 'omnibase.log'
 ]
 
 { #category : #public }
@@ -134,7 +134,7 @@ ODBTransactionManager >> transactionStart: aTransaction [
 
 { #category : #private }
 ODBTransactionManager >> vcFileName [
-	^dbConnection dirName , ODBFileStream pathSeparatorString , 'omnibase.vcf'
+	^ dbConnection path / 'omnibase.vcf'
 ]
 
 { #category : #private }

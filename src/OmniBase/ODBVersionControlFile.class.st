@@ -9,9 +9,9 @@ Class {
 }
 
 { #category : #'public/create/open/close' }
-ODBVersionControlFile >> createOn: aString [
+ODBVersionControlFile >> createOn: aFileReference [
 
-    stream := ODBFileStream createOn: aString
+    stream := ODBFileStream createOn: aFileReference pathString
                             createMode: #createModeCreateAlways
                             accessMode: #accessModeReadWrite
                             shareMode: #shareModeShareAll
@@ -55,10 +55,10 @@ ODBVersionControlFile >> getNewVersionNumberFor: clientID [
 ]
 
 { #category : #'public/create/open/close' }
-ODBVersionControlFile >> openOn: aString [
+ODBVersionControlFile >> openOn: aFileReference [
         "Open transaction file. Signal an error if failed."
 
-    stream := ODBFileStream createOn: aString
+    stream := ODBFileStream createOn: aFileReference pathString
                             createMode: #createModeOpenExisting
                             accessMode: #accessModeReadWrite
                             shareMode: #shareModeShareAll

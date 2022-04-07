@@ -128,8 +128,8 @@ ODBClassManager >> close [
 ODBClassManager >> createOn: anOmniBase [ 
 	mutex := Semaphore forMutualExclusion.
 	
-	[infoFile := ODBClassInfoFile createOn: anOmniBase dirName , self infoFileName.
-	idTable := ODBIDTable createOn: anOmniBase dirName , self idFileName] 
+	[infoFile := ODBClassInfoFile createOn: anOmniBase path / self infoFileName.
+	idTable := ODBIDTable createOn: anOmniBase path / self idFileName] 
 			ifCurtailed: [self close]
 ]
 
@@ -147,12 +147,12 @@ ODBClassManager >> find: aClass [
 
 { #category : #private }
 ODBClassManager >> idFileName [
-	^ODBFileStream pathSeparatorString , 'omnibase.odt'
+	^ 'omnibase.odt'
 ]
 
 { #category : #private }
 ODBClassManager >> infoFileName [
-	^ODBFileStream pathSeparatorString , 'omnibase.odl'
+	^ 'omnibase.odl'
 ]
 
 { #category : #initialization }
@@ -189,8 +189,8 @@ ODBClassManager >> openOn: anOmniBase [
 
 	mutex := Semaphore forMutualExclusion.
 	
-	[idTable := ODBIDTable openOn: anOmniBase dirName , self idFileName.
-	infoFile := ODBClassInfoFile openOn: anOmniBase dirName , self infoFileName] 
+	[idTable := ODBIDTable openOn: anOmniBase path / self idFileName.
+	infoFile := ODBClassInfoFile openOn: anOmniBase path / self infoFileName] 
 			ifCurtailed: [self close]
 ]
 

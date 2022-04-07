@@ -89,13 +89,13 @@ ODBObjectManager >> containerNew: aString path: path [
 	pos := 0.
 	dirName := self convert: aString.
 	
-	[containerPath := (path isEmpty ifTrue: [self dirName] ifFalse: [path]) 
-				, ODBFileStream pathSeparatorString , dirName.
-	ODBFileStream directoryExists: containerPath] 
+	[containerPath := (path isEmpty ifTrue: [self path] ifFalse: [path]) 
+				/ dirName.
+	containerPath exists ] 
 			whileTrue: 
 				[pos := pos + 1.
 				dirName := (dirName copyFrom: 1 to: (dirName size min: 7)) , pos printString].
-	ODBFileStream directoryCreate: containerPath.
+	containerPath ensureCreateDirectory.
 	cont := (ODBContainer new)
 				name: containerName;
 				id: containerID;
@@ -163,8 +163,9 @@ ODBObjectManager >> createOn: anOmniBase [
 
 	environment := anOmniBase.
 	
-	[(ODBFileStream directoryExists: self dirName) 
-		ifFalse: [ODBFileStream directoryCreate: self dirName].
+	[
+		self path exists
+			ifFalse: [ self path ensureCreateDirectory ].
 	idTable := ODBIDTable createOn: self idFileName.
 	infoFile := ODBContainerInfoFile createOn: self infoFileName.
 	self containerNew: 'Default'] 
@@ -192,17 +193,10 @@ ODBObjectManager >> defaultObjectSpace: anInteger [
 	^infoFile defaultObjectSpace: anInteger
 ]
 
-{ #category : #private }
-ODBObjectManager >> dirName [
-	"Private - Answer directory where containers are placed."
-
-	^environment dirName , ODBFileStream pathSeparatorString , 'Objects'
-]
-
 { #category : #accessing }
 ODBObjectManager >> environment [
 
-    ^environment
+    ^ environment
 ]
 
 { #category : #public }
@@ -221,12 +215,12 @@ ODBObjectManager >> holderAt: objectID [
 
 { #category : #private }
 ODBObjectManager >> idFileName [
-	^environment dirName , ODBFileStream pathSeparatorString , 'omnibase.cid'
+	^ self path / 'omnibase.cid'
 ]
 
 { #category : #private }
 ODBObjectManager >> infoFileName [
-	^environment dirName , ODBFileStream pathSeparatorString , 'omnibase.cif'
+	^ self path / 'omnibase.cif'
 ]
 
 { #category : #private }
@@ -240,7 +234,7 @@ ODBObjectManager >> initContainerAt: position [
 	id := stream getWord.
 	name := stream getString.
 	path := stream getString.
-	path isEmpty ifTrue: [path := self dirName].
+	path isEmpty ifTrue: [path := self path].
 	dirName := stream getString.
 	id > containers size 
 		ifTrue: 
@@ -255,7 +249,7 @@ ODBObjectManager >> initContainerAt: position [
 				name: name;
 				id: id;
 				objectManager: self;
-				openOn: path , ODBFileStream pathSeparatorString , dirName.
+				openOn: path / dirName.
 	^containers at: id put: cont
 ]
 
@@ -290,10 +284,18 @@ ODBObjectManager >> openOn: anOmniBase [
 			ifCurtailed: [self close]
 ]
 
+{ #category : #private }
+ODBObjectManager >> path [
+	"Private - Answer directory where containers are placed."
+
+	^ environment path / 'Objects'
+]
+
 { #category : #public }
 ODBObjectManager >> reopen [
 	idTable close.
-	[idTable := ODBIDTable openOn: self idFileName] ifCurtailed: [environment close]
+	[ idTable := ODBIDTable openOn: self idFileName ] 
+		ifCurtailed: [environment close]
 ]
 
 { #category : #public }

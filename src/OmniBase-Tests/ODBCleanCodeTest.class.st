@@ -54,8 +54,8 @@ ODBCleanCodeTest >> testNoUnimplementedCalls [
 	
 	self assert: remaining isEmpty description: ('the following methods send selectors that do not exist', remaining asString)
 ]
-  
-{ #category : #tests }	
+
+{ #category : #tests }
 ODBCleanCodeTest >> testNoUnusedClasses [
 	"Fail if there are Classes that are not used. They should either be tested or deleted.
 	(check how to override #isUsed for cases where classes are discovered reflectively)"

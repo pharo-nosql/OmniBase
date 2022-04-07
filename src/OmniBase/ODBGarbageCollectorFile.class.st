@@ -8,11 +8,11 @@ Class {
 }
 
 { #category : #public }
-ODBGarbageCollectorFile >> createOn: aString [ 
+ODBGarbageCollectorFile >> createOn: aFileReference [ 
 	"Create garbage collector file. Answer <nil> if failed."
 
 	stream := ODBFileStream 
-				createOn: aString
+				createOn: aFileReference pathString 
 				createMode: #createModeCreateNew
 				accessMode: #accessModeReadWrite
 				shareMode:  #shareModeShareRead.
@@ -50,11 +50,11 @@ ODBGarbageCollectorFile >> newObjectSpace: anInteger [
 ]
 
 { #category : #public }
-ODBGarbageCollectorFile >> openOn: aString [ 
+ODBGarbageCollectorFile >> openOn: aFileReference [ 
 	"Open garbage collector file. Signal an error if failed."
 
 	stream := ODBFileStream 
-				createOn: aString
+				createOn: aFileReference pathString
 				createMode: #createModeOpenExisting
 				accessMode: #accessModeReadWrite
 				shareMode:  #shareModeShareRead.
