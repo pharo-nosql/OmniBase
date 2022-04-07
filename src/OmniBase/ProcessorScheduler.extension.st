@@ -9,5 +9,5 @@ ProcessorScheduler >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 ProcessorScheduler >> odbSerialize: serializer [
 
-	serializer stream putByte: 22
+	self odbBasicSerialize: serializer
 ]
