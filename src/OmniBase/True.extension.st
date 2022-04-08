@@ -15,5 +15,5 @@ True >> odbObjectID [
 { #category : #'*omnibase' }
 True >> odbSerialize: serializer [
 
-	serializer stream putByte: 15
+	self odbBasicSerialize: serializer
 ]

@@ -9,5 +9,5 @@ SystemDictionary >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 SystemDictionary >> odbSerialize: serializer [
 
-	serializer stream putByte: 19
+	self odbBasicSerialize: serializer
 ]

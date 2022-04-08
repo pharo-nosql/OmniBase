@@ -274,7 +274,7 @@ ODBTransaction >> odbObjectID [
 { #category : #'private/unclassified' }
 ODBTransaction >> odbSerialize: serializer [
 
-	serializer stream putByte: 84
+	self odbBasicSerialize: serializer
 ]
 
 { #category : #'private/accessing' }

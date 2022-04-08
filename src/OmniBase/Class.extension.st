@@ -1,6 +1,12 @@
 Extension { #name : #Class }
 
 { #category : #'*omnibase' }
+Class >> odbBasicSerialize: serializer [
+
+	serializer stream putByte: 26; putString: name asString
+]
+
+{ #category : #'*omnibase' }
 Class class >> odbDeserialize: deserializer [
 
 	^Smalltalk at: deserializer stream getString asSymbol ifAbsent: nil
@@ -9,7 +15,7 @@ Class class >> odbDeserialize: deserializer [
 { #category : #'*omnibase' }
 Class >> odbSerialize: serializer [
 
-	serializer stream putByte: 26; putString: name asString
+	self odbBasicSerialize: serializer
 ]
 
 { #category : #'*omnibase' }

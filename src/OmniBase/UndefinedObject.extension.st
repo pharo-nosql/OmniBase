@@ -33,5 +33,5 @@ UndefinedObject >> odbObjectID [
 { #category : #'*omnibase' }
 UndefinedObject >> odbSerialize: serializer [
 
-	serializer stream putByte: 14
+	self odbBasicSerialize: serializer
 ]
