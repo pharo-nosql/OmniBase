@@ -22,7 +22,7 @@ ODBUnixFileStream class >> createFileStreamForPath: pathString createMode: creat
 ]
 
 { #category : #'create/open' }
-ODBUnixFileStream class >> createOn: pathString createMode: createMode accessMode: accessMode shareMode: shareMode cacheMode: cacheMode [
+ODBUnixFileStream class >> createOn: pathString createMode: createMode accessMode: accessMode shareMode: shareMode [
 	| stream |
 
 	stream := self createFileStreamForPath: pathString createMode: createMode.

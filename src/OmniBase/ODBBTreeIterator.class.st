@@ -361,8 +361,7 @@ ODBBTreeIterator >> openOn: aFileReference [
     stream := ODBFileStream createOn: aFileReference pathString
                             createMode: #createModeOpenExisting
                             accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll
-                            cacheMode: #cacheModeAtomicWrite.
+                            shareMode: #shareModeShareAll.
     ^self compareHeader
 ]
 

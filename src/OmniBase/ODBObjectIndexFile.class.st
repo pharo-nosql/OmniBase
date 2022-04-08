@@ -95,8 +95,7 @@ ODBObjectIndexFile >> createOn: aFileReference [
     stream := ODBFileStream createOn: aFileReference pathString 
                             createMode: #createModeCreateNew
                             accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll
-                            cacheMode: #cacheModeAtomicWrite.
+                            shareMode: #shareModeShareAll.
     ^self writeHeader
 ]
 
@@ -200,8 +199,7 @@ ODBObjectIndexFile >> openOn: aFileRefernce [
     stream := ODBFileStream createOn: aFileRefernce pathString
                             createMode: #createModeOpenExisting
                             accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll
-                            cacheMode: #cacheModeAtomicWrite.
+                            shareMode: #shareModeShareAll.
     ^self compareHeader
 ]
 
