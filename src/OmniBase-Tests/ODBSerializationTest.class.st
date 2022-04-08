@@ -389,9 +389,7 @@ ODBSerializationTest >> testSerializationSystemDictionary [
 	self assert: (serialized at: 7) equals: ODBSystemDictionaryCode.
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
-	self flag: #TODO.
-	"this shows that we do not de-serialize the dictionary, but the global Smalltalk binding"
-	self assert: materialized equals: Smalltalk
+	self assert: materialized equals: Smalltalk globals
 ]
 
 { #category : #tests }
