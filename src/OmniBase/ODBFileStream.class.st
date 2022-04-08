@@ -20,18 +20,7 @@ ODBFileStream class >> createOn: pathName [
 ]
 
 { #category : #'create/open' }
-ODBFileStream class >> createOn: pathName createMode: createMode accessMode: accessMode shareMode: shareMode [
-		"Create new instance of file stream on pathName with given flags."
-
-	^self createOn: pathName
-		createMode: createMode
-		accessMode: accessMode
-		shareMode: shareMode
-		cacheMode: nil
-]
-
-{ #category : #'create/open' }
-ODBFileStream class >> createOn: pathName createMode: createMode accessMode: accessMode shareMode: shareMode cacheMode: cacheMode [
+ODBFileStream class >> createOn: pathName createMode: createMode accessMode: accessMode shareMode: shareMode [ 
 		"Create new instance of file stream on pathName with given flags."
 
 	 ^ Smalltalk os omnibaseFileStreamClass
@@ -39,7 +28,6 @@ ODBFileStream class >> createOn: pathName createMode: createMode accessMode: acc
 		createMode: createMode 
 		accessMode: accessMode 
 		shareMode: shareMode 
-		cacheMode: cacheMode
 ]
 
 { #category : #'create/open' }

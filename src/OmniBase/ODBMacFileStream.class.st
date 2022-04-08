@@ -12,9 +12,9 @@ ODBMacFileStream class >> createFileStreamForPath: aString createMode: createMod
 ]
 
 { #category : #'create/open' }
-ODBMacFileStream class >> createOn: pathString createMode: createMode accessMode: accessMode shareMode: shareMode cacheMode: cacheMode [
+ODBMacFileStream class >> createOn: pathString createMode: createMode accessMode: accessMode shareMode: shareMode [
 	| stream |
-
+self halt.
 	stream := self createFileStreamForPath: pathString createMode: createMode.
 	
 	^	[self ensureAccessMode: accessMode forFileStream: stream.

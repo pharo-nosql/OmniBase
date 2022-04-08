@@ -26,8 +26,7 @@ ODBTransactionFile >> createOn: aFileReference [
     stream := ODBFileStream createOn: aFileReference pathString
                             createMode: #createModeCreateAlways
                             accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareRead
-                            cacheMode: #cacheModeAtomicWrite.
+                            shareMode: #shareModeShareRead.
     ^self writeHeader
 ]
 
@@ -104,8 +103,7 @@ ODBTransactionFile >> openOn: aString [
     stream := ODBFileStream createOn: aString
                             createMode: #createModeOpenExisting
                             accessMode: #accessModeReadWrite
-                            shareMode:  #shareModeShareRead
-                            cacheMode: #cacheModeAtomicWrite.
+                            shareMode:  #shareModeShareRead.
     ^self compareHeader
 ]
 

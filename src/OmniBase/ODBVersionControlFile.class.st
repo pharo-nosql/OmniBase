@@ -14,8 +14,7 @@ ODBVersionControlFile >> createOn: aFileReference [
     stream := ODBFileStream createOn: aFileReference pathString
                             createMode: #createModeCreateAlways
                             accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll
-                            cacheMode:  #cacheModeAtomicWrite.
+                            shareMode: #shareModeShareAll.
     ^self writeHeader
 ]
 
@@ -61,8 +60,7 @@ ODBVersionControlFile >> openOn: aFileReference [
     stream := ODBFileStream createOn: aFileReference pathString
                             createMode: #createModeOpenExisting
                             accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll
-                            cacheMode:  #cacheModeAtomicWrite..
+                            shareMode: #shareModeShareAll.
     ^self compareHeader
 ]
 
