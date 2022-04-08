@@ -51,7 +51,7 @@ ODBConcurrentTest >> testBTreeKeyLocking [
 	self deny: (dict lockKey: 10).
 
 	"wait for half a second to ensure that version descriptor will be reloaded"
-	(Delay forMilliseconds: 501) wait.
+	(Delay forMilliseconds: 505) wait.
 	t1 := db newTransaction.
 	t2 := db2 newTransaction.
 	dict := t1 root at: 'concurrent-btree'.
@@ -105,7 +105,7 @@ ODBConcurrentTest >> testObjectLockingDifferentDatabases [
 	self assert: collCopy first equals: 'This collection will be locked'.
 	self deny: (t2 lock: collCopy).
 	"wait here a little since changes are updated every half a second (500 ms)"
-	(Delay forMilliseconds: 501) wait.
+	(Delay forMilliseconds: 505) wait.
 	t2 := db2 newTransaction.
 	coll := t2 root at: 'lockTest'.
 	self assert: coll first equals: 'Changed collection' ] ensure: [ 
@@ -150,7 +150,7 @@ ODBConcurrentTest >> testObjectLockingSameDatabase [
 	self assert: collCopy first equals: 'This collection will be locked'.
 	self deny: (t2 lock: collCopy).
 	"wait here a little since changes are updated every half a second (500 ms)"
-	(Delay forMilliseconds: 501) wait.
+	(Delay forMilliseconds: 505) wait.
 	t2 := db newTransaction.
 	coll := t2 root at: 'lockTest'.
 	self assert: coll first equals: 'Changed collection' ] ensure: [ 
