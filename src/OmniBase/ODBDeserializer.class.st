@@ -72,7 +72,7 @@ ODBDeserializer class >> init [
 		at: 16 put: false;
 		at: 17 put: Message;
 		at: 18 put: Symbol;
-		at: 19 put: Smalltalk;
+		at: 19 put: Smalltalk globals;
 		at: 20 put: MessageSend;
 		at: 22 put: Processor;
 		at: 26 put: Class;
