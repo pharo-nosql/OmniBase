@@ -357,11 +357,7 @@ ODBBTreeIterator >> lockTree [
 { #category : #'public/create/open/close' }
 ODBBTreeIterator >> openOn: aFileReference [
         "Open transaction file. Signal an error if failed."
-
-    stream := ODBFileStream createOn: aFileReference pathString
-                            createMode: #createModeOpenExisting
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll.
+	stream := self newCodecStreamOn: aFileReference using: [  ].
     ^self compareHeader
 ]
 

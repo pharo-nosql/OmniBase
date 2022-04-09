@@ -30,13 +30,11 @@ ODBClientFile >> clientDescription: aString [
 
 { #category : #'public/create/open/close' }
 ODBClientFile >> createOn: aFileReference [
-        "Create client file. Signal an error if failed."
-
-    stream := ODBFileStream createOn: aFileReference pathString 
-                            createMode: #createModeCreateNew
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll.
-    ^self writeHeader
+   "Create client file. Signal an error if failed."
+	stream := self 
+		newCodecStreamOn: aFileReference 
+		using: [ :s | s truncate: 0 ].
+    ^ self writeHeader
 ]
 
 { #category : #'private/unclassified' }
@@ -60,13 +58,12 @@ OmniBase 1.0, David Gorisek (c) 1998
 
 { #category : #'public/create/open/close' }
 ODBClientFile >> openOn: aFileReference [
-        "Open client file. Signal an error if failed."
-
-    stream := ODBFileStream createOn: aFileReference pathString
-                            createMode: #createModeOpenExisting
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareRead.
-    ^self compareHeader
+	"Open client file. Signal an error if failed."
+	stream := self 
+		newCodecStreamOn: aFileReference  
+		using: [ :s | s shareModeRead ].
+   
+	^ self compareHeader
 ]
 
 { #category : #public }

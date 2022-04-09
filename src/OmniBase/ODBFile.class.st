@@ -44,9 +44,10 @@ ODBFile >> compareHeader [
 
 { #category : #'create/open/close' }
 ODBFile >> createOn: aFileReference [
-
-    stream := ODBFileStream createOn: aFileReference pathString.
-    ^self writeHeader
+	stream := self 
+		newCodecStreamOn: aFileReference 
+		using: [ :s | s truncate: 0 ].
+    ^ self writeHeader
 ]
 
 { #category : #private }
@@ -100,23 +101,37 @@ ODBFile >> headerLength [
 ]
 
 { #category : #'create/open/close' }
-ODBFile >> openExclusivelyOn: aString [
+ODBFile >> newCodecStreamOn: aFileReference using: aBlock [
+	| fileStream |
+	fileStream := (File named: aFileReference pathString) openForWrite.
+	[ aBlock cull: fileStream ]
+		ifCurtailed: [ fileStream close. ^ nil ].
+	^ fileStream asOmnibaseCodecStream.
 
-	stream := ODBFileStream openExclusivelyOn: aString.
-	^self compareHeader
+]
+
+{ #category : #'create/open/close' }
+ODBFile >> openExclusivelyOn: aFileReference [
+
+	stream := ((File named: aFileReference pathString) openForWrite)
+		shareModeExclusive;
+		asOmnibaseCodecStream.
+	^ self compareHeader
 ]
 
 { #category : #'create/open/close' }
 ODBFile >> openOn: aFileReference [
 
-    stream := ODBFileStream openOn: aFileReference.
-    ^self compareHeader
+	stream := ((File named: aFileReference pathString) openForWrite)
+		asOmnibaseCodecStream.
+	^ self compareHeader
 ]
 
 { #category : #'create/open/close' }
-ODBFile >> openReadOnlyOn: aString [
+ODBFile >> openReadOnlyOn: aFileReference [
 
-    stream := ODBFileStream openReadOnlyOn: aString.
+	stream := ((File named: aFileReference pathString) openForRead)
+		asOmnibaseCodecStream.
     ^self compareHeader
 ]
 
@@ -157,14 +172,14 @@ ODBFile >> timeOutLength [
 
 { #category : #locking }
 ODBFile >> unlockAdding [
-        "Unlock file for writing at the end of file."
+	"Unlock file for writing at the end of file."
 
     ^stream unlockAt: 0 length: 1
 ]
 
 { #category : #locking }
 ODBFile >> unlockAt: pos length: length [
-        "Unlock file at pos."
+	"Unlock file at pos."
 
     ^stream unlockAt: pos length: length
 ]

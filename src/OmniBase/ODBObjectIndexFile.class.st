@@ -91,11 +91,9 @@ ODBObjectIndexFile >> at: anInteger put: value [
 
 { #category : #'public/create/open/close' }
 ODBObjectIndexFile >> createOn: aFileReference [
-
-    stream := ODBFileStream createOn: aFileReference pathString 
-                            createMode: #createModeCreateNew
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll.
+	stream := self 
+		newCodecStreamOn: aFileReference 
+		using: [ :s | s truncate: 0 ].
     ^self writeHeader
 ]
 
@@ -193,14 +191,11 @@ ODBObjectIndexFile >> newObjectFileID [
 ]
 
 { #category : #'public/create/open/close' }
-ODBObjectIndexFile >> openOn: aFileRefernce [  
-        "Open transaction file. Signal an error if failed."
+ODBObjectIndexFile >> openOn: aFileReference [  
+	"Open transaction file. Signal an error if failed."
 
-    stream := ODBFileStream createOn: aFileRefernce pathString
-                            createMode: #createModeOpenExisting
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll.
-    ^self compareHeader
+	stream := self newCodecStreamOn: aFileReference using: [ ].
+	^ self compareHeader
 ]
 
 { #category : #public }

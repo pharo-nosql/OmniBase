@@ -10,12 +10,10 @@ Class {
 
 { #category : #'public/create/open/close' }
 ODBVersionControlFile >> createOn: aFileReference [
-
-    stream := ODBFileStream createOn: aFileReference pathString
-                            createMode: #createModeCreateAlways
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll.
-    ^self writeHeader
+	stream := self 
+		newCodecStreamOn: aFileReference 
+		using: [ :s | s truncate: 0 ].
+	^ self writeHeader
 ]
 
 { #category : #public }
@@ -56,11 +54,8 @@ ODBVersionControlFile >> getNewVersionNumberFor: clientID [
 { #category : #'public/create/open/close' }
 ODBVersionControlFile >> openOn: aFileReference [
         "Open transaction file. Signal an error if failed."
-
-    stream := ODBFileStream createOn: aFileReference pathString
-                            createMode: #createModeOpenExisting
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll.
+	stream := ((File named: aFileReference pathString) openForWrite)
+		asOmnibaseCodecStream.
     ^self compareHeader
 ]
 

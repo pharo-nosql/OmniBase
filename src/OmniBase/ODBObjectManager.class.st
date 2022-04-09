@@ -102,7 +102,9 @@ ODBObjectManager >> containerNew: aString path: path [
 				objectManager: self;
 				createOn: containerPath.
 	stream := infoFile stream.
-	pos := stream setToEnd.
+	pos := stream 
+		setToEnd;
+		position.
 	stream
 		putWord: containerID;
 		putString: containerName;

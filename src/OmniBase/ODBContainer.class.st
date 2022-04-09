@@ -132,7 +132,9 @@ ODBContainer >> flushBytes [
 	queueSize == 0 ifTrue: [^self].
 	self lockDataFile.
 	stream := activeDataFile stream.
-	pos := stream setToEnd.
+	pos := stream 
+		setToEnd;
+		position.
 	buf := ByteArray new: queueSize.
 	bufPos := 0.
 	byteStorageQueue do: 
