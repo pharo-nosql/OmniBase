@@ -336,6 +336,11 @@ ODBContainer >> openOn: aString [
 			ifCurtailed: [self close]
 ]
 
+{ #category : #accessing }
+ODBContainer >> path [ 
+	^ path
+]
+
 { #category : #'byte storage management' }
 ODBContainer >> removeHolderAt: index [
 

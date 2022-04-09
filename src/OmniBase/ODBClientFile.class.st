@@ -28,15 +28,6 @@ ODBClientFile >> clientDescription: aString [
 		len: 128
 ]
 
-{ #category : #'public/create/open/close' }
-ODBClientFile >> createOn: aFileReference [
-   "Create client file. Signal an error if failed."
-	stream := self 
-		newCodecStreamOn: aFileReference 
-		using: [ :s | s truncate: 0 ].
-    ^ self writeHeader
-]
-
 { #category : #'private/unclassified' }
 ODBClientFile >> created [
                 "Private - Put default values into file."

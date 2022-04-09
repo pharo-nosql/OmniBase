@@ -89,14 +89,6 @@ ODBObjectIndexFile >> at: anInteger put: value [
 		len: valueLength
 ]
 
-{ #category : #'public/create/open/close' }
-ODBObjectIndexFile >> createOn: aFileReference [
-	stream := self 
-		newCodecStreamOn: aFileReference 
-		using: [ :s | s truncate: 0 ].
-    ^self writeHeader
-]
-
 { #category : #'private/unclassified' }
 ODBObjectIndexFile >> created [
 
@@ -188,14 +180,6 @@ ODBObjectIndexFile >> newObjectFileID [
 	stream atPosition: self headerLength putLong: newID] 
 			ensure: [self unlockAt: self headerLength length: 4].
 	^newID
-]
-
-{ #category : #'public/create/open/close' }
-ODBObjectIndexFile >> openOn: aFileReference [  
-	"Open transaction file. Signal an error if failed."
-
-	stream := self newCodecStreamOn: aFileReference.
-	^ self compareHeader
 ]
 
 { #category : #public }

@@ -8,14 +8,6 @@ Class {
 	#category : #'OmniBase-Files'
 }
 
-{ #category : #'public/create/open/close' }
-ODBVersionControlFile >> createOn: aFileReference [
-	stream := self 
-		newCodecStreamOn: aFileReference 
-		using: [ :s | s truncate: 0 ].
-	^ self writeHeader
-]
-
 { #category : #public }
 ODBVersionControlFile >> created [
 	"Create version table for maximum 255 clients."
@@ -49,13 +41,6 @@ ODBVersionControlFile >> getNewVersionNumberFor: clientID [
 		flush.
 	self unlockAt: self headerLength length: 4.
 	^versionNumber
-]
-
-{ #category : #'public/create/open/close' }
-ODBVersionControlFile >> openOn: aFileReference [
-        "Open transaction file. Signal an error if failed."
-	stream := self newCodecStreamOn: aFileReference.
-    ^self compareHeader
 ]
 
 { #category : #public }
