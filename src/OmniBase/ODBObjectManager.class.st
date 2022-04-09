@@ -215,12 +215,12 @@ ODBObjectManager >> holderAt: objectID [
 
 { #category : #private }
 ODBObjectManager >> idFileName [
-	^ self path / 'omnibase.cid'
+	^ environment path / 'omnibase.cid'
 ]
 
 { #category : #private }
 ODBObjectManager >> infoFileName [
-	^ self path / 'omnibase.cif'
+	^ environment path / 'omnibase.cif'
 ]
 
 { #category : #private }
