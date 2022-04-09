@@ -113,17 +113,16 @@ ODBFile >> newCodecStreamOn: aFileReference using: aBlock [
 { #category : #'create/open/close' }
 ODBFile >> openExclusivelyOn: aFileReference [
 
-	stream := ((File named: aFileReference pathString) openForWrite)
-		shareModeExclusive;
-		asOmnibaseCodecStream.
+	stream := self 
+		newCodecStreamOn: aFileReference  
+		using: [ :s | s shareModeExclusive ].
 	^ self compareHeader
 ]
 
 { #category : #'create/open/close' }
 ODBFile >> openOn: aFileReference [
 
-	stream := ((File named: aFileReference pathString) openForWrite)
-		asOmnibaseCodecStream.
+	stream := self newCodecStreamOn: aFileReference using: [ ].
 	^ self compareHeader
 ]
 
