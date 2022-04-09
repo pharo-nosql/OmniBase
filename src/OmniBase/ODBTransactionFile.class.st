@@ -102,9 +102,9 @@ ODBTransactionFile >> locks [
 ODBTransactionFile >> openOn: aFileReference [
 	"Open transaction file. Signal an error if failed."
 	
-	stream := ((File named: aFileReference pathString) openForWrite)
-		shareModeRead;
-		asOmnibaseCodecStream.
+	stream := self 
+		newCodecStreamOn: aFileReference  
+		using: [ :s | s shareModeRead ].
     ^ self compareHeader
 ]
 

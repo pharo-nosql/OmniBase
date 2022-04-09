@@ -194,7 +194,7 @@ ODBObjectIndexFile >> newObjectFileID [
 ODBObjectIndexFile >> openOn: aFileReference [  
 	"Open transaction file. Signal an error if failed."
 
-	stream := self newCodecStreamOn: aFileReference using: [ ].
+	stream := self newCodecStreamOn: aFileReference.
 	^ self compareHeader
 ]
 

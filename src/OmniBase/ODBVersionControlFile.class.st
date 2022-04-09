@@ -54,8 +54,7 @@ ODBVersionControlFile >> getNewVersionNumberFor: clientID [
 { #category : #'public/create/open/close' }
 ODBVersionControlFile >> openOn: aFileReference [
         "Open transaction file. Signal an error if failed."
-	stream := ((File named: aFileReference pathString) openForWrite)
-		asOmnibaseCodecStream.
+	stream := self newCodecStreamOn: aFileReference.
     ^self compareHeader
 ]
 
