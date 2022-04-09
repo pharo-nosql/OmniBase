@@ -1,6 +1,11 @@
 Extension { #name : #BinaryFileStream }
 
 { #category : #'*OmniBase' }
+BinaryFileStream >> asOmnibaseCodecStream [
+	^ ODBCodecStream on: self 
+]
+
+{ #category : #'*OmniBase' }
 BinaryFileStream >> fileHandle [
 
 	^ handle pointerAt: 9
@@ -9,6 +14,14 @@ BinaryFileStream >> fileHandle [
 { #category : #'*OmniBase' }
 BinaryFileStream >> flockClass [ 
 	^ OSPlatform current flockClass
+]
+
+{ #category : #'*OmniBase' }
+BinaryFileStream >> lockAt: position length: length [
+	^ self flockClass
+		lock: self fileHandle
+		from: position 
+		to: position + length - 1
 ]
 
 { #category : #'*OmniBase' }
@@ -49,6 +62,23 @@ BinaryFileStream >> shareModeFlagLocation [
 { #category : #'*OmniBase' }
 BinaryFileStream >> shareModeRead [
 	self setShareMode: false
+]
+
+{ #category : #'*OmniBase' }
+BinaryFileStream >> unlock [
+	self flockClass 
+		unlock: self fileHandle 
+		from: 0 
+		to: self size.
+]
+
+{ #category : #'*OmniBase' }
+BinaryFileStream >> unlockAt: position length: length [
+
+	^ self flockClass  
+		unlock: self fileHandle
+		from: position 
+		to: position + length - 1
 ]
 
 { #category : #'*OmniBase' }
