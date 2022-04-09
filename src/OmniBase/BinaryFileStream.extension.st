@@ -66,7 +66,7 @@ BinaryFileStream >> shareModeRead [
 
 { #category : #'*OmniBase' }
 BinaryFileStream >> unlock [
-	self flockClass 
+	^ self flockClass 
 		unlock: self fileHandle 
 		from: 0 
 		to: self size.

@@ -244,10 +244,11 @@ ODBCodecStream >> putWord: anInteger [
 
 { #category : #removing }
 ODBCodecStream >> remove [
-        "Close and remove receiver. Answer <true> if removed."
-
-    self close.
-    [ stream file name asFileReference delete ]
+	"Close and remove receiver. Answer <true> if removed."
+	| file |
+	file := stream name asFileReference.
+	self close.
+	[ file delete ]
 		on: Error 
 		do: [:err | ^ false ].
 	^ true
