@@ -7,6 +7,13 @@ Class {
 	#category : #'OmniBase-Tests'
 }
 
+{ #category : #running }
+ODBSerializationTest >> setUp [
+	super setUp.
+	ODBDeserializer init.
+	ODBTypeCodes initialize.
+]
+
 { #category : #tests }
 ODBSerializationTest >> testSerializationArray [
 	| object serialized materialized |

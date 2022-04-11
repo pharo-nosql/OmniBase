@@ -20,8 +20,8 @@ Class {
 
 { #category : #private }
 ODBDeserializer class >> classArray [
-	classArray isNil ifTrue: [self init].
-	^classArray
+
+	^classArray ifNil: [ self init ]
 ]
 
 { #category : #public }
@@ -130,6 +130,7 @@ ODBDeserializer class >> init [
 		at: 82 put: ODBIdentityDictionary;
 		at: 83 put: ODBPersistentDictionary;
 		at: 84 put: ODBTransaction.
+	^classArray
 ]
 
 { #category : #public }
