@@ -111,7 +111,6 @@ ODBTypeCodes class >> initializeTypeCodes [
 	ODBFloatAsIntegerCode := 43.
 	ODBFloatAs100IntegerCode := 44.
 	ODBScaledDecimalCode := 45.
-	ODBFloatCode := 46.
 	ODBSmallFloat64Code := 47.
 	"integers <= 16 are stored with code 50 + number"
 	ODBSmallPositiveIntegerBaseCode := 50. 

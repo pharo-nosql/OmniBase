@@ -58,14 +58,19 @@ ODBSerializationTest >> testSerializationBoxedFloat64 [
 	self assert: float class equals: BoxedFloat64.
 	serialized := ODBSerializer serializeToBytes: float.
 	self 
-		assert: serialized 
-		equals: #[0 1 12 66 111 120 101 100 70 108 111 97 116 54 52 1 1 0 1 0 0 0 2 1 2 128 128 224 234 6 0].
-	"self assert: (serialized at: 7) equals: ODBFloatCode."
-	self flag: #TODO. "Implement BoxedFloat Serialisation and de-serialization"
+		assert: serialized
+		equals: #[0 0 0 0 0 0 40 128 128 224 234 6 0].
+	self assert: (serialized at: 7) equals: ODBFloatCode.
 	
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: float class equals: BoxedFloat64.
-	self assert: materialized equals: 2.45227231256843e-45
+	self assert: materialized equals: 2.45227231256843e-45.
+	
+	"can we still de-serialize the old way before we used ODBFloatCode?"
+	materialized := ODBDeserializer deserializeFromBytes: 
+	#[0 1 12 66 111 120 101 100 70 108 111 97 116 54 52 1 1 0 1 0 0 0 2 1 2 128 128 224 234 6 0].
+	self assert: float class equals: BoxedFloat64.
+	self assert: materialized equals: 2.45227231256843e-45.
 
 ]
 
