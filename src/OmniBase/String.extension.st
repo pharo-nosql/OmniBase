@@ -24,10 +24,10 @@ String >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 String class >> odbDeserialize: deserializer [
 
-	| buf len |
-	buf := ByteArray new: (len := deserializer stream getPositiveInteger).
-	deserializer stream getBytesFor: buf len: len.
-	^deserializer register: buf asString
+	| string |
+	string := deserializer stream nextString.
+	deserializer register: string.
+	^ string
 ]
 
 { #category : #'*omnibase' }

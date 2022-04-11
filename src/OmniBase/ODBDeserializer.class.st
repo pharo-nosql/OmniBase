@@ -31,7 +31,7 @@ ODBDeserializer class >> deserializeFromBytes: aByteArray [
 	memoryStream getPositiveInteger = 0 
 		ifFalse: [self error: 'External references not defined'].
 	classManager := ODBClassManagerForSerialization new.
-	classManager loadFromStream: memoryStream.
+	classManager loadFromStream: memoryStream primitive.
 	^self new 
 		deserializeFrom: memoryStream
 		referenceManager: nil
@@ -185,7 +185,7 @@ ODBDeserializer >> loadError [
 { #category : #private }
 ODBDeserializer >> loadReference [
 
-	^self register: (referenceManager referenceAt: stream getPositiveInteger)
+	^self register: (referenceManager referenceAt: stream primitive getPositiveInteger)
 ]
 
 { #category : #private }

@@ -25,6 +25,11 @@ ODBMemoryStreamWrapper >> createOn: aByteArray [
 	stream := aByteArray readStream
 ]
 
+{ #category : #accessing }
+ODBMemoryStreamWrapper >> flush [ 
+
+]
+
 { #category : #public }
 ODBMemoryStreamWrapper >> getByte [
 	^ stream next

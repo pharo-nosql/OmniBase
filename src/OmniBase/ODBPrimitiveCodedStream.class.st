@@ -7,6 +7,11 @@ Class {
 	#category : #'OmniBase-Streams'
 }
 
+{ #category : #accessing }
+ODBPrimitiveCodedStream >> atEnd [ 
+	^ stream atEnd
+]
+
 { #category : #public }
 ODBPrimitiveCodedStream >> getBoolean [
 
@@ -14,9 +19,34 @@ ODBPrimitiveCodedStream >> getBoolean [
 ]
 
 { #category : #public }
+ODBPrimitiveCodedStream >> getByte [
+	self subclassResponsibility 
+]
+
+{ #category : #public }
 ODBPrimitiveCodedStream >> getBytesFor: aByteCollection [
 
     ^ self getBytesFor: aByteCollection len: aByteCollection size
+]
+
+{ #category : #public }
+ODBPrimitiveCodedStream >> getBytesFor: bytes len: size [
+	self subclassResponsibility 
+]
+
+{ #category : #public }
+ODBPrimitiveCodedStream >> getChar [
+
+    ^ Character value: stream getByte
+]
+
+{ #category : #public }
+ODBPrimitiveCodedStream >> getInteger [
+	"Answer the next Integer encoded in the receiver."
+
+	| int |
+	((int := self getPositiveInteger) bitAnd: 1) == 0 ifTrue: [^int bitShift: -1].
+	^0 - (int bitShift: -1)
 ]
 
 { #category : #public }

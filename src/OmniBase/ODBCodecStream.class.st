@@ -44,6 +44,26 @@ ODBCodecStream >> lockAt: position length: length [
 	^ stream lockAt: position length: length 
 ]
 
+{ #category : #'as yet unclassified' }
+ODBCodecStream >> nextPersistentDictionary: aDeserializer [
+		| size dict key |
+	size := stream getPositiveInteger.
+	dict := ODBPersistentDictionary new: size.
+	aDeserializer register: dict.
+	size timesRepeat: 
+			[key := aDeserializer odbNextObject.
+			dict superAt: key put: aDeserializer odbNextObject].
+	^dict
+]
+
+{ #category : #actions }
+ODBCodecStream >> nextString [
+	| buf len |
+	buf := ByteArray new: (len := stream getPositiveInteger).
+	stream getBytesFor: buf len: len.
+	^  buf asString
+]
+
 { #category : #accessing }
 ODBCodecStream >> position: anInteger [ 
 	^ stream position: anInteger 

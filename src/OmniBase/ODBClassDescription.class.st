@@ -86,11 +86,10 @@ ODBClassDescription >> isVariable [
 
 { #category : #public }
 ODBClassDescription >> loadFromStream: aStream [
-
-	name := aStream primitive getString.
-	bytes := aStream primitive getBoolean.
-	variable := aStream primitive getBoolean.
-	instSize := aStream primitive getPositiveInteger.
+	name := aStream getString.
+	bytes := aStream getBoolean.
+	variable := aStream getBoolean.
+	instSize := aStream getPositiveInteger.
 	instVarNames := Array new: instSize.
 	1 to: instSize do: [:i | instVarNames at: i put: aStream getString].
 	self updateVariableOrder.
