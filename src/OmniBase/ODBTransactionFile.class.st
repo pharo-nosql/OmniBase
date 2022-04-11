@@ -23,11 +23,13 @@ ODBTransactionFile >> collectLockClassIDsFrom: rootClass to: aDictionary [
 { #category : #'public/create/open/close' }
 ODBTransactionFile >> createOn: aFileReference [
 
-    stream := ODBFileStream createOn: aFileReference pathString
-                            createMode: #createModeCreateAlways
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareRead.
-    ^self writeHeader
+	stream := self 
+		newCodecStreamOn: aFileReference 
+		using: [ :s | 
+			s 
+				truncate: 0;
+				shareModeRead  ].
+	^ self writeHeader
 ]
 
 { #category : #'private/unclassified' }
@@ -97,14 +99,13 @@ ODBTransactionFile >> locks [
 ]
 
 { #category : #'public/create/open/close' }
-ODBTransactionFile >> openOn: aString [
-        "Open transaction file. Signal an error if failed."
-
-    stream := ODBFileStream createOn: aString
-                            createMode: #createModeOpenExisting
-                            accessMode: #accessModeReadWrite
-                            shareMode:  #shareModeShareRead.
-    ^self compareHeader
+ODBTransactionFile >> openOn: aFileReference [
+	"Open transaction file. Signal an error if failed."
+	
+	stream := self 
+		newCodecStreamOn: aFileReference  
+		using: [ :s | s shareModeRead ].
+    ^ self compareHeader
 ]
 
 { #category : #public }

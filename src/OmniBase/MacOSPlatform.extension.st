@@ -1,6 +1,6 @@
 Extension { #name : #MacOSPlatform }
 
 { #category : #'*OmniBase' }
-MacOSPlatform >> omnibaseFileStreamClass [
-	^ ODBMacFileStream
+MacOSPlatform >> flockClass [
+	^ BSDFLock 
 ]

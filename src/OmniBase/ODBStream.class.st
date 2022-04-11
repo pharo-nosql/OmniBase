@@ -32,7 +32,12 @@ ODBStream >> getByte [
 { #category : #public }
 ODBStream >> getBytesFor: aByteCollection [
 
-    ^self getBytesFor: aByteCollection len: aByteCollection size
+    ^ self getBytesFor: aByteCollection len: aByteCollection size
+]
+
+{ #category : #public }
+ODBStream >> getBytesFor: aByteCollection len: length [
+	self subclassResponsibility 
 ]
 
 { #category : #public }
@@ -109,6 +114,11 @@ ODBStream >> putByte: anInteger [
 ODBStream >> putBytesFrom: aByteCollection [
 
     ^self putBytesFrom: aByteCollection len: aByteCollection size
+]
+
+{ #category : #public }
+ODBStream >> putBytesFrom: aByteCollection len: length [ 
+	self subclassResponsibility 
 ]
 
 { #category : #public }

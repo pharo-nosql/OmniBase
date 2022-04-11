@@ -389,7 +389,7 @@ ODBSerializationTest >> testSerializationSystemDictionary [
 	self assert: (serialized at: 7) equals: ODBSystemDictionaryCode.
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
-	self assert: materialized equals: Smalltalk globals
+	self assertCollection: materialized hasSameElements: Smalltalk globals
 ]
 
 { #category : #tests }

@@ -354,17 +354,6 @@ ODBBTreeIterator >> lockTree [
     self waitForAddingLock
 ]
 
-{ #category : #'public/create/open/close' }
-ODBBTreeIterator >> openOn: aFileReference [
-        "Open transaction file. Signal an error if failed."
-
-    stream := ODBFileStream createOn: aFileReference pathString
-                            createMode: #createModeOpenExisting
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll.
-    ^self compareHeader
-]
-
 { #category : #'private/initialization' }
 ODBBTreeIterator >> opened [
                 "Private - File has just been opened."

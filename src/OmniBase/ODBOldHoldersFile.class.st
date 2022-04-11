@@ -16,7 +16,9 @@ ODBOldHoldersFile >> allocateBuffer [
 
 	self waitForAddingLock.
 	
-	[filePos := stream setToEnd.
+	[filePos := stream 
+		setToEnd;
+		position.
 	stream truncate: filePos + 512] ensure: [self unlockAdding].
 	buffer := ByteArray new: 512.
 	bufPos := 0

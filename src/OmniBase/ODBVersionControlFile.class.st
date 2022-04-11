@@ -8,16 +8,6 @@ Class {
 	#category : #'OmniBase-Files'
 }
 
-{ #category : #'public/create/open/close' }
-ODBVersionControlFile >> createOn: aFileReference [
-
-    stream := ODBFileStream createOn: aFileReference pathString
-                            createMode: #createModeCreateAlways
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll.
-    ^self writeHeader
-]
-
 { #category : #public }
 ODBVersionControlFile >> created [
 	"Create version table for maximum 255 clients."
@@ -51,17 +41,6 @@ ODBVersionControlFile >> getNewVersionNumberFor: clientID [
 		flush.
 	self unlockAt: self headerLength length: 4.
 	^versionNumber
-]
-
-{ #category : #'public/create/open/close' }
-ODBVersionControlFile >> openOn: aFileReference [
-        "Open transaction file. Signal an error if failed."
-
-    stream := ODBFileStream createOn: aFileReference pathString
-                            createMode: #createModeOpenExisting
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll.
-    ^self compareHeader
 ]
 
 { #category : #public }

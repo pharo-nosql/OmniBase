@@ -26,7 +26,9 @@ ODBClassManager >> addClassDescription: aClassDescription withId: classId [
 	
 	[pos := infoFile at: aClassDescription name
 				ifAbsent: 
-					[pos := stream setToEnd.
+					[pos := stream 
+						setToEnd; 
+						position.
 					[idTable getLastID < classId] whileTrue: [idTable add: 0].
 					idTable at: classId put: pos.
 					aClassDescription classID: classId.
@@ -220,7 +222,9 @@ ODBClassManager >> registerNewClass: aClass [
 	[pos := infoFile at: aClass name
 				ifAbsent: 
 					[stream := infoFile stream.
-					pos := stream setToEnd.
+					pos := stream 
+						setToEnd; 
+						position.
 					info classID: (idTable add: pos).
 					stream putLong: 0.	"info of previous class version"
 					info saveOnStream: stream.	"class definition"
@@ -255,7 +259,9 @@ ODBClassManager >> registerNewClassVersion: aClass from: anInteger [
 			pos == 0 
 				ifTrue: 
 					[info := self classDescriptionFor: aClass.
-					pos := stream setToEnd.
+					pos := stream 
+						setToEnd;
+						position.
 					info classID: (idTable add: pos).
 					stream putLong: 0.
 					info saveOnStream: stream.

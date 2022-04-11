@@ -89,16 +89,6 @@ ODBObjectIndexFile >> at: anInteger put: value [
 		len: valueLength
 ]
 
-{ #category : #'public/create/open/close' }
-ODBObjectIndexFile >> createOn: aFileReference [
-
-    stream := ODBFileStream createOn: aFileReference pathString 
-                            createMode: #createModeCreateNew
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll.
-    ^self writeHeader
-]
-
 { #category : #'private/unclassified' }
 ODBObjectIndexFile >> created [
 
@@ -190,17 +180,6 @@ ODBObjectIndexFile >> newObjectFileID [
 	stream atPosition: self headerLength putLong: newID] 
 			ensure: [self unlockAt: self headerLength length: 4].
 	^newID
-]
-
-{ #category : #'public/create/open/close' }
-ODBObjectIndexFile >> openOn: aFileRefernce [  
-        "Open transaction file. Signal an error if failed."
-
-    stream := ODBFileStream createOn: aFileRefernce pathString
-                            createMode: #createModeOpenExisting
-                            accessMode: #accessModeReadWrite
-                            shareMode: #shareModeShareAll.
-    ^self compareHeader
 ]
 
 { #category : #public }
