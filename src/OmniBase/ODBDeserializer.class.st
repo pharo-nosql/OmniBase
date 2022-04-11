@@ -27,7 +27,7 @@ ODBDeserializer class >> classArray [
 { #category : #public }
 ODBDeserializer class >> deserializeFromBytes: aByteArray [ 
 	| memoryStream classManager |
-	memoryStream := ODBMemoryReadStream new createOn: aByteArray.
+	memoryStream := ODBCodecStream on: (ODBMemoryStreamWrapper on: aByteArray readStream).
 	memoryStream getPositiveInteger = 0 
 		ifFalse: [self error: 'External references not defined'].
 	classManager := ODBClassManagerForSerialization new.
@@ -41,7 +41,7 @@ ODBDeserializer class >> deserializeFromBytes: aByteArray [
 { #category : #public }
 ODBDeserializer class >> deserializeFromBytes: aByteArray externalReferencesLoaderBlock: aBlock [ 
 	| memoryStream referenceManager classManager |
-	memoryStream := ODBMemoryReadStream new createOn: aByteArray.
+	memoryStream := ODBMemoryStreamWrapper on: aByteArray readStream.
 	referenceManager := ODBReferenceManager new.
 	referenceManager loadFromStream: memoryStream externalReferencesLoaderBlock: aBlock.
 	classManager := ODBClassManagerForSerialization new.
@@ -160,7 +160,7 @@ ODBDeserializer >> deserializeFrom: aStream
 	classManager := aTransaction environment classManager.
 	transaction := aTransaction.
 	classArray := self class classArray.
-	objects := Array new: stream getLong.
+	objects := Array new: stream primitive getLong.
 	classes := OrderedCollection new: 30.
 	counter := 0.
 	classesCounter := 0.
@@ -209,7 +209,7 @@ ODBDeserializer >> newObjectOldClass [
 { #category : #private }
 ODBDeserializer >> odbNextObject [
 
-	^(classArray at: stream getByte) odbDeserialize: self
+	^(classArray at: stream primitive getByte) odbDeserialize: self
 ]
 
 { #category : #private }

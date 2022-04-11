@@ -14,7 +14,7 @@ ODBSerializedObject >> commit: serializer [
 	| change bytes referenceManager newHolder classID |
 	changed == true ifFalse: [^self].
 	referenceManager := ODBReferenceManager new.
-	bytes := ODBMemoryWriteStream new.
+	bytes := ODBMemoryStreamWrapper write.
 	serializer 
 		serialize: dataBaseObject odbObject
 		onStream: bytes

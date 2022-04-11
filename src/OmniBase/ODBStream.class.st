@@ -11,28 +11,11 @@ Class {
 ODBStream >> atEnd [
         "Answer <true> if at end of stream."
 
-    ^self position == self size
+    ^ stream atEnd
 ]
 
 { #category : #public }
 ODBStream >> flush [
-]
-
-{ #category : #public }
-ODBStream >> getBoolean [
-
-    ^self getByte = 1
-]
-
-{ #category : #public }
-ODBStream >> getByte [
-	^ stream next
-]
-
-{ #category : #public }
-ODBStream >> getBytesFor: aByteCollection [
-
-    ^ self getBytesFor: aByteCollection len: aByteCollection size
 ]
 
 { #category : #public }
@@ -43,7 +26,7 @@ ODBStream >> getBytesFor: aByteCollection len: length [
 { #category : #public }
 ODBStream >> getChar [
 
-    ^Character value: self getByte
+    ^ Character value: stream getByte
 ]
 
 { #category : #public }
@@ -66,8 +49,8 @@ ODBStream >> getPositiveInteger [
 	"Answer the next Integer encoded in the receiver."
 
 	| answer |
-	(answer := self getByte) < 128 ifTrue: [^answer].
-	^(self getPositiveInteger bitShift: 7) bitOr: (answer bitAnd: 127)
+	(answer := stream getByte) < 128 ifTrue: [^answer].
+	^(stream getPositiveInteger bitShift: 7) bitOr: (answer bitAnd: 127)
 ]
 
 { #category : #public }
@@ -78,14 +61,14 @@ ODBStream >> getString [
 		ifTrue: [String new]
 		ifFalse: [
 			bytes := ByteArray new: size.
-			self getBytesFor: bytes len: size.
+			stream getBytesFor: bytes len: size.
 			bytes asString ]
 ]
 
 { #category : #public }
 ODBStream >> getWord [
 
-    ^self getByte bitOr: (self getByte bitShift: 8)
+    ^ stream getByte bitOr: (stream getByte bitShift: 8)
 ]
 
 { #category : #accessing }
@@ -113,7 +96,7 @@ ODBStream >> putByte: anInteger [
 { #category : #public }
 ODBStream >> putBytesFrom: aByteCollection [
 
-    ^self putBytesFrom: aByteCollection len: aByteCollection size
+    ^ self putBytesFrom: aByteCollection len: aByteCollection size
 ]
 
 { #category : #public }
@@ -157,14 +140,16 @@ ODBStream >> putString: aString [
 { #category : #public }
 ODBStream >> putWord: anInteger [
 
-    self putByte: (anInteger bitAnd: 255); putByte: (anInteger bitShift: -8)
+	self 
+		putByte: (anInteger bitAnd: 255); 
+		putByte: (anInteger bitShift: -8)
 ]
 
 { #category : #public }
 ODBStream >> setToEnd [
         "Set to stream to end and answer position."
 
-    ^self position: self size
+    ^ stream setToEnd
 ]
 
 { #category : #public }

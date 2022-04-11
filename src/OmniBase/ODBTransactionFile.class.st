@@ -65,7 +65,7 @@ ODBTransactionFile >> lockAdd: anODBLock [
 	locks add: anODBLock.
 	lockPositions add: newLockPosition.
 	anODBLock lockIndex: locks size.
-	(mStream := ODBMemoryWriteStream new) putByte: 0.
+	(mStream := ODBMemoryStreamWrapper write) putByte: 0.
 	anODBLock storeOnStream: mStream.
 	mStream putByte: 0.
 	stream

@@ -20,13 +20,13 @@ Class {
 ODBSerializer class >> serialize: anObject on: aWriteStream [ 
 	| classManager byteStream byteStream2 |
 	classManager := ODBClassManagerForSerialization new initializeForSerialization.
-	byteStream := ODBMemoryWriteStream new.
+	byteStream := ODBMemoryStreamWrapper write.
 	self new 
 		serialize: anObject
 		onStream: byteStream
 		referenceManager: nil
 		classManager: classManager.
-	byteStream2 := ODBMemoryWriteStream new.
+	byteStream2 := ODBMemoryStreamWrapper write.
 	byteStream2 putPositiveInteger: 0.
 	classManager saveOnStream: byteStream2.
 	byteStream2 writeOn: aWriteStream.
@@ -39,13 +39,13 @@ ODBSerializer class >> serializeToBytes: anObject [
 
 	| classManager byteStream byteStream2 |
 	classManager := ODBClassManagerForSerialization new initializeForSerialization.
-	byteStream := ODBMemoryWriteStream new.
+	byteStream := ODBMemoryStreamWrapper write.
 	self new 
 		serialize: anObject
 		onStream: byteStream
 		referenceManager: nil
 		classManager: classManager.
-	byteStream2 := ODBMemoryWriteStream new.
+	byteStream2 := ODBMemoryStreamWrapper write.
 	"without manager reference"
 	byteStream2 putPositiveInteger: 0.
 	classManager saveOnStream: byteStream2.
@@ -171,10 +171,10 @@ ODBSerializer >> serializeToBytes: anObject [
 	| byteStream2 |
 	self 
 		serialize: anObject
-		onStream: ODBMemoryWriteStream new
+		onStream: ODBMemoryStreamWrapper write
 		referenceManager: ODBReferenceManager new
 		classManager: ODBClassManagerForSerialization new initializeForSerialization.
-	byteStream2 := ODBMemoryWriteStream new.
+	byteStream2 := ODBMemoryStreamWrapper write.
 	referenceManager saveOnStream: byteStream2.
 	classManager saveOnStream: byteStream2.
 	^byteStream2 asByteArray , stream asByteArray
