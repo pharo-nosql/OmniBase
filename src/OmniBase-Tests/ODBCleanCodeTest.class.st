@@ -30,7 +30,7 @@ ODBCleanCodeTest >> testNoUncategorizedMethods [
 
 	| violating classes |
 	classes := OmniBase package definedClasses
-	           , OmniBase package definedClasses collect: [ :each | each classSide ].
+	           , (OmniBase package definedClasses collect: [ :each | each classSide ]).
 
 	violating := classes select: [ :class | 
 		             class protocols includes: #'as yet unclassified' ].

@@ -47,7 +47,7 @@ ODBLock >> lockIndex: anInteger [
     lockIndex := anInteger.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'public/accessing' }
 ODBLock >> lockRegistryKey [ 
 	^ objectID lockRegistryKey 
 ]
