@@ -53,7 +53,7 @@ ODBTransactionObject >> lock [
 	^true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 ODBTransactionObject >> lockRegistryKey [
 	^ self objectID lockRegistryKey 
 ]
