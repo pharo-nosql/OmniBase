@@ -42,7 +42,7 @@ ODBSerializer class >> serializeToBytes: anObject [
 	byteStream := ODBMemoryStreamWrapper write.
 	self new 
 		serialize: anObject
-		onStream: byteStream
+		onStream: (ODBObjectEncodingStream on: byteStream)
 		referenceManager: nil
 		classManager: classManager.
 	byteStream2 := ODBMemoryStreamWrapper write.
@@ -109,13 +109,13 @@ ODBSerializer >> registerClass: class [
 	| index classInfo |
 	(index := classes at: class) ifNil: [ 
 		classInfo := classManager register: class.
-		stream
+		stream primitive
 			putByte: 2;
 			putPositiveInteger: classInfo classID.
 		classCollection add: classInfo.
 		classes at: class put: (classesCounter := classesCounter + 1).
 		^ classInfo ].
-	stream
+	stream primitive
 		putByte: 3;
 		putPositiveInteger: index.
 	classInfo := classCollection at: index.
@@ -124,18 +124,14 @@ ODBSerializer >> registerClass: class [
 
 { #category : #private }
 ODBSerializer >> saveExternalReference: anObjectId [ 
-	stream
-		putByte: 5;
-		putPositiveInteger: (referenceManager addReference: anObjectId)
+	stream nextPutExternalReference: (referenceManager addReference: anObjectId)
 ]
 
 { #category : #private }
 ODBSerializer >> saveInternalReference: anInteger [
 	"Saves the reference to the internal object with the index an Integer"
 
-	stream
-		putByte: 4;
-		putPositiveInteger: anInteger
+	stream nextPutInternalReference: anInteger
 ]
 
 { #category : #public }
@@ -145,7 +141,7 @@ ODBSerializer >> serialize: anObject
 	classManager: aClassManager [
 
 	| startPos endPos |
-	stream := aStream.
+	stream := aStream desy: self.
 	referenceManager := aReferenceManager.
 	classManager := aClassManager.
 	mainObject := anObject.
@@ -154,13 +150,13 @@ ODBSerializer >> serialize: anObject
 	counter := 0.
 	classesCounter := 0.
 	classCollection := OrderedCollection new: 30.
-	startPos := stream position.
-	stream putLong: 0.
+	startPos := stream primitive position.
+	stream primitive putLong: 0.
 
 	mainObject odbSerialize: self.
 
-	endPos := stream position.
-	stream
+	endPos := stream primitive position.
+	stream primitive
 		position: startPos;
 		putLong: counter;
 		position: endPos.

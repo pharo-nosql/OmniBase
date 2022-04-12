@@ -1,6 +1,6 @@
 Class {
 	#name : #ODBFileStreamWrapper,
-	#superclass : #ODBPrimitiveCodedStream,
+	#superclass : #ODBPrimitiveEncodingStream,
 	#instVars : [
 		'mutex'
 	],

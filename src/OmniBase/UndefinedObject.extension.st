@@ -3,7 +3,7 @@ Extension { #name : #UndefinedObject }
 { #category : #'*omnibase' }
 UndefinedObject >> odbBasicSerialize: serializer [
 
-	serializer stream putByte: 14
+	serializer stream nextPutNil: self 
 ]
 
 { #category : #'*omnibase' }
@@ -15,7 +15,7 @@ UndefinedObject >> odbDeserialize: deserializer [
 { #category : #'*omnibase' }
 UndefinedObject class >> odbDeserialize: deserializer [
 
-	^nil
+	^ nil
 ]
 
 { #category : #'*omnibase' }

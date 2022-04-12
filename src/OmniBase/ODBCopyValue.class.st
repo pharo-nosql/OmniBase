@@ -16,7 +16,7 @@ ODBCopyValue class >> value: anObject [
 { #category : #private }
 ODBCopyValue >> odbDeserialize: deserializer [
 
-	^value copy
+	^ value copy
 ]
 
 { #category : #private }

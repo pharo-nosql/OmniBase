@@ -3,7 +3,7 @@ Extension { #name : #SystemDictionary }
 { #category : #'*omnibase' }
 SystemDictionary >> odbBasicSerialize: serializer [
 
-	serializer stream putByte: 19
+	serializer stream nextPutSystemDictionary: self 
 ]
 
 { #category : #'*omnibase' }

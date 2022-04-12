@@ -2,7 +2,7 @@ Class {
 	#name : #ODBCleanCodeTest,
 	#superclass : #TestCase,
 	#pools : [
-		'ODBTypeCodes'
+		'AnObsoleteODBTypeCodes'
 	],
 	#category : #'OmniBase-Tests'
 }

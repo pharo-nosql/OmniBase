@@ -1,5 +1,5 @@
 Class {
-	#name : #ODBPrimitiveCodedStream,
+	#name : #ODBPrimitiveEncodingStream,
 	#superclass : #Object,
 	#instVars : [
 		'stream'
@@ -8,40 +8,40 @@ Class {
 }
 
 { #category : #accessing }
-ODBPrimitiveCodedStream >> atEnd [ 
+ODBPrimitiveEncodingStream >> atEnd [ 
 	^ stream atEnd
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> getBoolean [
+ODBPrimitiveEncodingStream >> getBoolean [
 
     ^ self  getByte = 1
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> getByte [
+ODBPrimitiveEncodingStream >> getByte [
 	self subclassResponsibility 
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> getBytesFor: aByteCollection [
+ODBPrimitiveEncodingStream >> getBytesFor: aByteCollection [
 
     ^ self getBytesFor: aByteCollection len: aByteCollection size
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> getBytesFor: bytes len: size [
+ODBPrimitiveEncodingStream >> getBytesFor: bytes len: size [
 	self subclassResponsibility 
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> getChar [
+ODBPrimitiveEncodingStream >> getChar [
 
     ^ Character value: stream getByte
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> getInteger [
+ODBPrimitiveEncodingStream >> getInteger [
 	"Answer the next Integer encoded in the receiver."
 
 	| int |
@@ -50,7 +50,7 @@ ODBPrimitiveCodedStream >> getInteger [
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> getPositiveInteger [
+ODBPrimitiveEncodingStream >> getPositiveInteger [
 	"Answer the next Integer encoded in the receiver."
 
 	| answer |
@@ -59,7 +59,7 @@ ODBPrimitiveCodedStream >> getPositiveInteger [
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> getString [
+ODBPrimitiveEncodingStream >> getString [
 
 	| size bytes |
 	^(size := self getPositiveInteger) = 0
@@ -71,36 +71,36 @@ ODBPrimitiveCodedStream >> getString [
 ]
 
 { #category : #accessing }
-ODBPrimitiveCodedStream >> position [
+ODBPrimitiveEncodingStream >> position [
 	^ stream position
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> putBoolean: aBool [
+ODBPrimitiveEncodingStream >> putBoolean: aBool [
 
     self putByte: (aBool ifTrue: [ 1] ifFalse: [0])
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> putBytesFrom: aByteCollection [
+ODBPrimitiveEncodingStream >> putBytesFrom: aByteCollection [
 
     ^ self putBytesFrom: aByteCollection len: aByteCollection size
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> putChar: aCharacter [
+ODBPrimitiveEncodingStream >> putChar: aCharacter [
 
 	self putByte: aCharacter asInteger
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> putInteger: anInteger [ 
+ODBPrimitiveEncodingStream >> putInteger: anInteger [ 
 	anInteger < 0 ifTrue: [^self putPositiveInteger: (0 - anInteger bitShift: 1) + 1].
 	self putPositiveInteger: (anInteger bitShift: 1)
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> putPositiveInteger: anInteger [ 
+ODBPrimitiveEncodingStream >> putPositiveInteger: anInteger [ 
 	anInteger < 128 ifTrue: [^self putByte: anInteger].
 	self
 		putByte: ((anInteger bitAnd: 127) bitOr: 128);
@@ -108,13 +108,13 @@ ODBPrimitiveCodedStream >> putPositiveInteger: anInteger [
 ]
 
 { #category : #public }
-ODBPrimitiveCodedStream >> putString: aString [
+ODBPrimitiveEncodingStream >> putString: aString [
 
 	self putPositiveInteger: aString basicSize.
 	aString basicSize > 0 ifTrue: [ self putBytesFrom: aString asByteArray len: aString basicSize ]
 ]
 
 { #category : #accessing }
-ODBPrimitiveCodedStream >> size [ 
+ODBPrimitiveEncodingStream >> size [ 
 	^ stream size
 ]

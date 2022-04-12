@@ -98,7 +98,7 @@ Object >> odbBasicSerialize: serializer [
 	| stream classInfo instSize |
 	classInfo := serializer registerClass: self class.
 	stream := serializer stream.
-	classInfo isVariable ifTrue: [ stream putPositiveInteger: self basicSize ].
+	classInfo isVariable ifTrue: [ stream primitive putPositiveInteger: self basicSize ].
 	classInfo isBytes ifFalse: [
 		classInfo instVarIndexes do: [:i | (self instVarAt: i) odbSerialize: serializer ].
 		instSize := self class instSize.
@@ -108,7 +108,7 @@ Object >> odbBasicSerialize: serializer [
 	"variable - need to check whether we have bytes or words"
 	self class isWords
 		ifFalse: [ stream putBytesFrom: self len: self basicSize ]
-		ifTrue: [1 to: self basicSize do: [:i | stream putInteger: (self basicAt: i)]].
+		ifTrue: [1 to: self basicSize do: [:i | stream primitive putInteger: (self basicAt: i)]].
 ]
 
 { #category : #'*omnibase' }
@@ -167,7 +167,7 @@ Object class >> odbLoadVariables: deserializer classInfo: classInfo [
 	| stream order iSize object basicSize varArray |
 	stream := deserializer stream.
 	classInfo isVariable
-		ifTrue: [ object := self basicNew: (basicSize := stream getPositiveInteger) ]
+		ifTrue: [ object := self basicNew: (basicSize := stream primitive getPositiveInteger) ]
 		ifFalse: [
 			basicSize := 0.
 			object := self basicNew.
@@ -175,7 +175,7 @@ Object class >> odbLoadVariables: deserializer classInfo: classInfo [
 	deserializer register: object.
 	classInfo isBytes ifTrue: [
 		classInfo realClass isWords 
-			ifTrue: [1 to: basicSize do: [:i | object basicAt: i put: stream getInteger]]
+			ifTrue: [1 to: basicSize do: [:i | object basicAt: i put: stream primitive getInteger]]
 			ifFalse: [stream getBytesFor: object len: basicSize].
 		^object
 	].

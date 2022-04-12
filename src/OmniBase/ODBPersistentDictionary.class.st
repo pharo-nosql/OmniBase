@@ -56,13 +56,7 @@ ODBPersistentDictionary >> at: key put: value [
 
 { #category : #public }
 ODBPersistentDictionary >> odbBasicSerialize: serializer [ 
-	(serializer stream)
-		putByte: 83;
-		putPositiveInteger: self size.
-	self keysAndValuesDo: 
-			[:key :value | 
-			key odbSerialize: serializer.
-			value odbSerialize: serializer]
+	serializer stream nextPutPersistentDictionary: self
 ]
 
 { #category : #private }

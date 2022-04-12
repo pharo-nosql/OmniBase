@@ -10,11 +10,18 @@ Date >> asBtreeKeyOfSize: keySize [
 { #category : #'*omnibase' }
 Date >> odbBasicSerialize: serializer [
 
-	serializer stream putByte: 32; putInteger: self julianDayNumber - 2415386; putInteger: self offset hours
+	serializer stream nextPutDate: self
+]
+
+{ #category : #'*OmniBase' }
+Date class >> odbDateFromSeconds: seconds offset: offset [
+	^ self 
+		julianDayNumber: SqueakEpoch + seconds 
+		offset: ( Duration hours: offset)
 ]
 
 { #category : #'*omnibase' }
 Date class >> odbDeserialize: deserializer [
 
-	^deserializer register: (self julianDayNumber: SqueakEpoch+deserializer stream getInteger offset: ( Duration hours: deserializer stream getInteger))
+	^ deserializer stream nextDate: deserializer 
 ]

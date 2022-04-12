@@ -7,5 +7,5 @@ Class {
 { #category : #accessing }
 ODBFloatAsInteger class >> odbDeserialize: deserializer [
 
-    ^deserializer stream getInteger asFloat
+    ^ deserializer stream nextFloatAsInteger: deserializer
 ]
