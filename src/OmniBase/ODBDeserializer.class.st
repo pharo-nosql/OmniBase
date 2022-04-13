@@ -33,7 +33,7 @@ ODBDeserializer class >> deserializeFromBytes: aByteArray [
 	classManager := ODBClassManagerForSerialization new.
 	classManager loadFromStream: memoryStream.
 	^self new 
-		deserializeFrom:  (ODBObjectEncodingStream on: memoryStream)
+		deserializeFrom:  (ODBEncodingStream on: memoryStream)
 		referenceManager: nil
 		classManager: classManager
 ]

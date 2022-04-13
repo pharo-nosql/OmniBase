@@ -438,7 +438,7 @@ ODBSerializationTest >> testSerializationWideStringUTF16 [
 		with: 16r0155 asCharacter
 		with: 16r0111 asCharacter.
 	self assert: string isWideString.
-	ODBObjectEncodingStream characterEncoding: #utf16.
+	ODBEncodingStream characterEncoding: #utf16.
 	
 	serialized := ODBSerializer serializeToBytes: string.
 	self assert: serialized equals: #[0 0 1 0 0 0 36 8 246 0 246 3 1 85 1 17].
@@ -459,7 +459,7 @@ ODBSerializationTest >> testSerializationWideStringUTF32 [
 		with: 16r0155 asCharacter
 		with: 16r0111 asCharacter.
 	self assert: string isWideString.
-	ODBObjectEncodingStream characterEncoding: #utf32.
+	ODBEncodingStream characterEncoding: #utf32.
 	
 	serialized := ODBSerializer serializeToBytes: string.
 	self assert: serialized equals: #[0 0 1 0 0 0 36 16 0 0 246 0 0 0 246 3 0 0 1 85 0 0 1 17].
@@ -479,7 +479,7 @@ ODBSerializationTest >> testSerializationWideStringUTF8 [
 		with: 16r0155 asCharacter
 		with: 16r0111 asCharacter.
 	self assert: string isWideString.
-	ODBObjectEncodingStream characterEncoding: #utf8.
+	ODBEncodingStream characterEncoding: #utf8.
 	
 	serialized := ODBSerializer serializeToBytes: string.
 	self assert: serialized equals: #[0 0 1 0 0 0 36 10 239 152 128 239 152 131 197 149 196 145].

@@ -30,7 +30,7 @@ ODBSerializedDBObjectWithoutReferences >> makeTransactionObject: aTransaction [
 
 	| mStream bytes |
 	bytes := objectHolder loadBytes.
-	mStream := ODBObjectEncodingStream on: (ODBMemoryStreamWrapper on: bytes readStream).
+	mStream := ODBEncodingStream on: (ODBMemoryStreamWrapper on: bytes readStream).
 	^ODBSerializedObject new
 		setObjectHolder: objectHolder
 		dataBaseObject: (ODBDeserializer new

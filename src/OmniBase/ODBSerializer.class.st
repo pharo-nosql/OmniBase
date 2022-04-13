@@ -42,7 +42,7 @@ ODBSerializer class >> serializeToBytes: anObject [
 	byteStream := ODBMemoryStreamWrapper write.
 	self new 
 		serialize: anObject
-		onStream: (ODBObjectEncodingStream on: byteStream)
+		onStream: (ODBEncodingStream on: byteStream)
 		referenceManager: nil
 		classManager: classManager.
 	byteStream2 := ODBMemoryStreamWrapper write.

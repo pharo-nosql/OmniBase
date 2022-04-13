@@ -88,7 +88,8 @@ ODBTypeCodes class >> initializeTypeCodes [
 	ODBDictionaryCode := 37.
 	ODBIdentityDictionaryCode := 38.
 	ODBFractionCode := 39.
-	ODBFloatCode := 40.
+	"legacy ?"
+	"ODBFloatCode := 40."
 	ODBFloatValue0 := 41.
 	ODBFloatValue1 := 42.
 	ODBFloatAsIntegerCode := 43.

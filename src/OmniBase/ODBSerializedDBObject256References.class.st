@@ -16,7 +16,7 @@ ODBSerializedDBObject256References >> makeTransactionObject: aTransaction [
 
 	| mStream bytes referenceManager |
 	bytes := objectHolder loadBytes.
-	mStream := ODBObjectEncodingStream on: ((ODBMemoryStreamWrapper on: bytes readStream)
+	mStream := ODBEncodingStream on: ((ODBMemoryStreamWrapper on: bytes readStream)
 				position: ((referenceManager := ODBReferenceManager new) createMax256From: bytes)).
 	referenceManager transaction: aTransaction.
 	^ODBSerializedObject new

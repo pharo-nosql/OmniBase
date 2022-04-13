@@ -1,5 +1,5 @@
 Class {
-	#name : #ODBObjectEncodingStream,
+	#name : #ODBEncodingStream,
 	#superclass : #Object,
 	#instVars : [
 		'stream',
@@ -16,39 +16,39 @@ Class {
 }
 
 { #category : #accessing }
-ODBObjectEncodingStream class >> characterEncoder [
+ODBEncodingStream class >> characterEncoder [
 	^ characterEncoder
 ]
 
 { #category : #accessing }
-ODBObjectEncodingStream class >> characterEncoding: aString [
+ODBEncodingStream class >> characterEncoding: aString [
 	characterEncoder := aString asZnCharacterEncoder
 ]
 
 { #category : #convenience }
-ODBObjectEncodingStream class >> decodeBytes: aByteArray [ 
+ODBEncodingStream class >> decodeBytes: aByteArray [ 
 	^ characterEncoder decodeBytes: aByteArray 
 ]
 
 { #category : #convenience }
-ODBObjectEncodingStream class >> encodeString: aString [ 
+ODBEncodingStream class >> encodeString: aString [ 
 	^ characterEncoder encodeString: aString
 ]
 
 { #category : #initialization }
-ODBObjectEncodingStream class >> initialize [ 
+ODBEncodingStream class >> initialize [ 
 	self initializeTypeCodeMapping.
 	self initializeEncoding 
 ]
 
 { #category : #initialization }
-ODBObjectEncodingStream class >> initializeEncoding [
+ODBEncodingStream class >> initializeEncoding [
 	"see ZnUTFEncoder knownEncodingIdentifiers for all supported encodings"
 	self characterEncoding: #utf8
 ]
 
 { #category : #initialization }
-ODBObjectEncodingStream class >> initializeTypeCodeMapping [
+ODBEncodingStream class >> initializeTypeCodeMapping [
 	<script>
 
 	typeCodeMapping := Array new: 255.
@@ -81,7 +81,8 @@ ODBObjectEncodingStream class >> initializeTypeCodeMapping [
 		at: ODBDictionaryCode                    put: Dictionary;
 		at: ODBIdentityDictionaryCode            put: IdentityDictionary;
 		at: ODBFractionCode                      put: Fraction;
-		at: ODBFloatCode                         put: Float;
+		"legacy double entry with type code 46?"
+		at: 40                                   put: Float;
 		at: ODBFloatValue0                       put: (ODBCopyValue value: 0.0);
 		at: ODBFloatValue1                       put: (ODBCopyValue value: 1.0);
 		at: ODBFloatAsIntegerCode                put: ODBFloatAsInteger;
@@ -122,36 +123,36 @@ ODBObjectEncodingStream class >> initializeTypeCodeMapping [
 		at: ODBSmallStringBaseCode + 9           put: (ODBnCharacterString length: 9);
 		at: ODBByteArrayCode                     put: ByteArray;
 		at: ODBOrderedCollectionCode             put: OrderedCollection;
-		at: ODBODBIdentityDictionaryCode         put: ODBIdentityDictionary;
+		at: ODBODBIdentityDictionaryCode         put: ODBIdentityDictionary; 
 		at: ODBPersistentDictionaryCode          put: ODBPersistentDictionary;
 		at: ODBTransactionCode                   put: ODBTransaction.
 ]
 
 { #category : #'instance creation' }
-ODBObjectEncodingStream class >> on: aStream [ 
+ODBEncodingStream class >> on: aStream [ 
 	^ self new 
 		stream: aStream
 ]
 
 { #category : #'initialize-release' }
-ODBObjectEncodingStream >> close [
+ODBEncodingStream >> close [
 	stream ifNotNil: [
 		stream close.
 		stream := nil ]
 ]
 
 { #category : #accessing }
-ODBObjectEncodingStream >> desy: anODBSerializer [ 
+ODBEncodingStream >> desy: anODBSerializer [ 
 	desy := anODBSerializer 
 ]
 
 { #category : #finalization }
-ODBObjectEncodingStream >> finalize [
+ODBEncodingStream >> finalize [
 	self close
 ]
 
 { #category : #finalization }
-ODBObjectEncodingStream >> flush [
+ODBEncodingStream >> flush [
 	"Force all data written to the 
 	receiver to be recorded on disk."
 
@@ -159,7 +160,7 @@ ODBObjectEncodingStream >> flush [
 ]
 
 { #category : #public }
-ODBObjectEncodingStream >> getBytesFor: aByteCollection len: len [ 
+ODBEncodingStream >> getBytesFor: aByteCollection len: len [ 
 	"Read len bytes from stream to aByteCollection. 
 	Answer number of bytes actualy read."
 	
@@ -167,13 +168,13 @@ ODBObjectEncodingStream >> getBytesFor: aByteCollection len: len [
 ]
 
 { #category : #accessing }
-ODBObjectEncodingStream >> lockAt: position length: length [ 
+ODBEncodingStream >> lockAt: position length: length [ 
 
 	^ stream lockAt: position length: length 
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextArray: aDeserializer [ 
+ODBEncodingStream >> nextArray: aDeserializer [ 
 	| array |
 	array := Array new: stream getPositiveInteger.
 	aDeserializer register: array.
@@ -182,7 +183,7 @@ ODBObjectEncodingStream >> nextArray: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextAssociation: aDeserializer [ 
+ODBEncodingStream >> nextAssociation: aDeserializer [ 
 	| result |
 	desy register: (result := Association new).
 	^result
@@ -191,7 +192,7 @@ ODBObjectEncodingStream >> nextAssociation: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextByteArray: aDeserializer [
+ODBEncodingStream >> nextByteArray: aDeserializer [
 	| array |
 	array := ByteArray new: stream getPositiveInteger.
 	aDeserializer register: array.
@@ -203,19 +204,19 @@ ODBObjectEncodingStream >> nextByteArray: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextCharacter: aDeserializer [ 
+ODBEncodingStream >> nextCharacter: aDeserializer [ 
 	^ stream getChar
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextClass: aDeserializer [ 
+ODBEncodingStream >> nextClass: aDeserializer [ 
 	^ Smalltalk 
 		at: stream getString asSymbol 
 		ifAbsent: nil
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextDate: aDeserializer [ 
+ODBEncodingStream >> nextDate: aDeserializer [ 
 	^ aDeserializer register: (Date 
 		odbDateFromSeconds: stream getInteger 
 		offset: stream getInteger) 
@@ -223,7 +224,7 @@ ODBObjectEncodingStream >> nextDate: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextDictionary: aDeserializer [
+ODBEncodingStream >> nextDictionary: aDeserializer [
 	| size dict key |
 	size := stream getPositiveInteger.
 	dict := Dictionary new: size.
@@ -236,7 +237,7 @@ ODBObjectEncodingStream >> nextDictionary: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextDictionary: aDeserializer class: aClass [
+ODBEncodingStream >> nextDictionary: aDeserializer class: aClass [
 	| size dict key |
 	size := stream getPositiveInteger.
 	dict := aClass new: size.
@@ -249,31 +250,31 @@ ODBObjectEncodingStream >> nextDictionary: aDeserializer class: aClass [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextDoubleByteCharacter: aDeserializer [ 
+ODBEncodingStream >> nextDoubleByteCharacter: aDeserializer [ 
 	^ Character value: stream getWord
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextFloatAs100Integer: deserializer [ 
+ODBEncodingStream >> nextFloatAs100Integer: deserializer [ 
 
     ^ stream getInteger / 100.0
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextFloatAsInteger: deserializer [ 
+ODBEncodingStream >> nextFloatAsInteger: deserializer [ 
 
     ^ stream getInteger asFloat
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextFraction: aDeserializer [ 
+ODBEncodingStream >> nextFraction: aDeserializer [ 
 	^ Fraction 
 		numerator: stream getInteger
 		denominator: stream getInteger
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextIdentityDictionary: aDeserializer [ 
+ODBEncodingStream >> nextIdentityDictionary: aDeserializer [ 
 	| size dict key |
 	size := stream getPositiveInteger.
 	dict := self new: size.
@@ -285,7 +286,7 @@ ODBObjectEncodingStream >> nextIdentityDictionary: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextIdentityDictionary: anODBDeserializer class: aClass [ 
+ODBEncodingStream >> nextIdentityDictionary: anODBDeserializer class: aClass [ 
 	| size dict |
 	size := stream getPositiveInteger.
 	dict := aClass new: size.
@@ -298,17 +299,17 @@ ODBObjectEncodingStream >> nextIdentityDictionary: anODBDeserializer class: aCla
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextLargeNegativeInteger: aDeserializer [ 
+ODBEncodingStream >> nextLargeNegativeInteger: aDeserializer [ 
 	^ 0 - stream getPositiveInteger
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextLargePositiveInteger: aDeserializer [ 
+ODBEncodingStream >> nextLargePositiveInteger: aDeserializer [ 
 	^ stream getPositiveInteger
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextMessage: aDeserializer [ 
+ODBEncodingStream >> nextMessage: aDeserializer [ 
 	| result |
 	desy register: (result := Message new).
 	^ result
@@ -317,7 +318,7 @@ ODBObjectEncodingStream >> nextMessage: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextMessageSend: aDeserializer [ 
+ODBEncodingStream >> nextMessageSend: aDeserializer [ 
 	| result |
 	desy register: (result := MessageSend new).
 	^result
@@ -328,7 +329,7 @@ ODBObjectEncodingStream >> nextMessageSend: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextODBIdentityDictionary: anODBDeserializer class: aClass [ 
+ODBEncodingStream >> nextODBIdentityDictionary: anODBDeserializer class: aClass [ 
 	| size dict key |
 	size := stream getPositiveInteger.
 	dict := aClass new: size.
@@ -340,12 +341,12 @@ ODBObjectEncodingStream >> nextODBIdentityDictionary: anODBDeserializer class: a
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextOneCharacterString: aDeserializer [ 
+ODBEncodingStream >> nextOneCharacterString: aDeserializer [ 
 	^ stream getChar asString
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextOrderedCollection: aDeserializer [ 
+ODBEncodingStream >> nextOrderedCollection: aDeserializer [ 
 	| coll size |
 	size := stream getPositiveInteger.
 	aDeserializer register: (coll := OrderedCollection new: size).
@@ -354,7 +355,7 @@ ODBObjectEncodingStream >> nextOrderedCollection: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPersistentDictionary: aDeserializer [
+ODBEncodingStream >> nextPersistentDictionary: aDeserializer [
 		| size dict key |
 	size := stream getPositiveInteger.
 	dict := ODBPersistentDictionary new: size.
@@ -366,7 +367,7 @@ ODBObjectEncodingStream >> nextPersistentDictionary: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutArray: anArray [
+ODBEncodingStream >> nextPutArray: anArray [
 	stream 
 		putByte: ODBArrayCode; 
 		putPositiveInteger: anArray size.
@@ -375,14 +376,14 @@ ODBObjectEncodingStream >> nextPutArray: anArray [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutAssociation: anAssociation [ 
+ODBEncodingStream >> nextPutAssociation: anAssociation [ 
 	stream putByte: ODBAssociationCode.
 	anAssociation key odbSerialize: desy.
 	anAssociation value odbSerialize: desy.
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutBoxedFloat64: aNumber [ 
+ODBEncodingStream >> nextPutBoxedFloat64: aNumber [ 
 	stream
 		putByte: ODBFloatCode;
 		putInteger: (aNumber at: 1);
@@ -390,7 +391,7 @@ ODBObjectEncodingStream >> nextPutBoxedFloat64: aNumber [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutByteArray: aByteArray [
+ODBEncodingStream >> nextPutByteArray: aByteArray [
 	stream 
 		putByte: ODBByteArrayCode; 
 		putPositiveInteger: aByteArray size.
@@ -399,7 +400,7 @@ ODBObjectEncodingStream >> nextPutByteArray: aByteArray [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutCharacter: aCharacter [ 
+ODBEncodingStream >> nextPutCharacter: aCharacter [ 
 	aCharacter asInteger < 256 ifTrue: [
 		stream 
 			putByte: ODBCharacterCode; 
@@ -412,14 +413,14 @@ ODBObjectEncodingStream >> nextPutCharacter: aCharacter [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutClass: aClass [ 
+ODBEncodingStream >> nextPutClass: aClass [ 
 	stream 
 		putByte: ODBClassCode; 
 		putString: aClass name asString
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutDate: aDate [ 
+ODBEncodingStream >> nextPutDate: aDate [ 
 	stream 
 		putByte: ODBDateCode; 
 		putInteger: aDate julianDayNumber - 2415386; 
@@ -427,7 +428,7 @@ ODBObjectEncodingStream >> nextPutDate: aDate [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutDictionary: aDictionary [
+ODBEncodingStream >> nextPutDictionary: aDictionary [
 	aDictionary class == Dictionary ifFalse: [ ^ super odbBasicSerialize: desy ].
 	stream 
 		putByte: ODBDictionaryCode;
@@ -438,19 +439,19 @@ ODBObjectEncodingStream >> nextPutDictionary: aDictionary [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutExternalReference: anObjectID [ 
+ODBEncodingStream >> nextPutExternalReference: anObjectID [ 
 	stream
 		putByte: ODBExternalReferenceCode;
 		putPositiveInteger: anObjectID 
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutFalse: aBoolean [ 
+ODBEncodingStream >> nextPutFalse: aBoolean [ 
 	stream putByte: ODBFalseCode
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutFraction: aNumber [ 
+ODBEncodingStream >> nextPutFraction: aNumber [ 
 	stream
 		putByte: ODBFractionCode;
 		putInteger: aNumber numerator;
@@ -458,7 +459,7 @@ ODBObjectEncodingStream >> nextPutFraction: aNumber [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutIdentityDictionary: anIdentityDictionary [ 
+ODBEncodingStream >> nextPutIdentityDictionary: anIdentityDictionary [ 
 	anIdentityDictionary class == IdentityDictionary ifFalse: [ ^super odbBasicSerialize: desy ].
 	stream 
 		putByte: ODBIdentityDictionaryCode;
@@ -469,7 +470,7 @@ ODBObjectEncodingStream >> nextPutIdentityDictionary: anIdentityDictionary [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutInteger: anInteger [ 
+ODBEncodingStream >> nextPutInteger: anInteger [ 
 	anInteger < 0 ifTrue: [
 		anInteger > -4 ifTrue: [ ^ stream putByte: anInteger + 70 ].
 		^ stream 
@@ -484,14 +485,14 @@ ODBObjectEncodingStream >> nextPutInteger: anInteger [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutInternalReference: anInteger [ 
+ODBEncodingStream >> nextPutInternalReference: anInteger [ 
 	stream
 		putByte: ODBInternalReference;
 		putPositiveInteger: anInteger
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutMessage: aMessage [ 
+ODBEncodingStream >> nextPutMessage: aMessage [ 
 	(aMessage class == Message) 
 		ifFalse: [ ^ super odbBasicSerialize: desy ].
  	stream putByte: ODBMessageCode.
@@ -500,7 +501,7 @@ ODBObjectEncodingStream >> nextPutMessage: aMessage [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutMessageSend: aMessageSend [ 
+ODBEncodingStream >> nextPutMessageSend: aMessageSend [ 
 	(aMessageSend class == MessageSend) 
 		ifFalse: [ ^ super odbBasicSerialize: desy ].
 	stream putByte: ODBMessageSendCode.
@@ -510,12 +511,12 @@ ODBObjectEncodingStream >> nextPutMessageSend: aMessageSend [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutNil: anUndefinedObject [ 
+ODBEncodingStream >> nextPutNil: anUndefinedObject [ 
 	stream putByte: ODBUndefinedObjectCode 
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutOrderedCollection: aCollection [ 
+ODBEncodingStream >> nextPutOrderedCollection: aCollection [ 
 	stream
 		putByte: ODBOrderedCollectionCode;
 		putPositiveInteger: aCollection size.
@@ -523,7 +524,7 @@ ODBObjectEncodingStream >> nextPutOrderedCollection: aCollection [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutPersistentDictionary: aPersistentDictionary [
+ODBEncodingStream >> nextPutPersistentDictionary: aPersistentDictionary [
 	stream
 		putByte: ODBPersistentDictionaryCode;
 		putPositiveInteger: aPersistentDictionary size.
@@ -533,12 +534,12 @@ ODBObjectEncodingStream >> nextPutPersistentDictionary: aPersistentDictionary [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutProcessorScheduler: aProcessorScheduler [ 
+ODBEncodingStream >> nextPutProcessorScheduler: aProcessorScheduler [ 
 	stream putByte: ODBProcessSchedulerCode 
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutSmallFloat64: aNumber [ 
+ODBEncodingStream >> nextPutSmallFloat64: aNumber [ 
 	stream
 		putByte: ODBSmallFloat64Code;
 		putInteger: (aNumber at: 1);
@@ -546,7 +547,7 @@ ODBObjectEncodingStream >> nextPutSmallFloat64: aNumber [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutString: aString [ 
+ODBEncodingStream >> nextPutString: aString [ 
 		| buf |
 	(buf := aString asByteArray) size < 10
 		ifTrue: [
@@ -560,7 +561,7 @@ ODBObjectEncodingStream >> nextPutString: aString [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutSymbol: aSymbol [ 
+ODBEncodingStream >> nextPutSymbol: aSymbol [ 
 	stream
 		putByte: ODBSymbolCode;
 		putPositiveInteger: aSymbol size;
@@ -568,29 +569,29 @@ ODBObjectEncodingStream >> nextPutSymbol: aSymbol [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutSystemDictionary: aCollection [ 
+ODBEncodingStream >> nextPutSystemDictionary: aCollection [ 
 	stream putByte: ODBSystemDictionaryCode 
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutTime: aTime [ 
+ODBEncodingStream >> nextPutTime: aTime [ 
 	stream
 		putByte: ODBTimeCode;
 		putPositiveInteger: aTime asSeconds
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutTransaction: aTransaction [ 
+ODBEncodingStream >> nextPutTransaction: aTransaction [ 
 	stream putByte: ODBTransactionCode 
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutTrue: aBoolean [ 
+ODBEncodingStream >> nextPutTrue: aBoolean [ 
 	stream putByte: ODBTrueCode
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextPutWideString: aWideString [
+ODBEncodingStream >> nextPutWideString: aWideString [
 	| buf |
 	buf := self class encodeString: aWideString.
 	stream
@@ -600,7 +601,7 @@ ODBObjectEncodingStream >> nextPutWideString: aWideString [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextSmallFloat64: aDeserializer [ 
+ODBEncodingStream >> nextSmallFloat64: aDeserializer [ 
 	^ BoxedFloat64 basicNew
 		  at: 1 put: stream getInteger;
 		  at: 2 put: stream getInteger;
@@ -608,7 +609,7 @@ ODBObjectEncodingStream >> nextSmallFloat64: aDeserializer [
 ]
 
 { #category : #actions }
-ODBObjectEncodingStream >> nextString [
+ODBEncodingStream >> nextString [
 	| buf len |
 	buf := ByteArray new: (len := stream getPositiveInteger).
 	stream getBytesFor: buf len: len.
@@ -616,7 +617,7 @@ ODBObjectEncodingStream >> nextString [
 ]
 
 { #category : #actions }
-ODBObjectEncodingStream >> nextString: aDeserializer [
+ODBEncodingStream >> nextString: aDeserializer [
 	| buf len string |
 	buf := ByteArray new: (len := stream getPositiveInteger).
 	stream getBytesFor: buf len: len.
@@ -627,7 +628,7 @@ ODBObjectEncodingStream >> nextString: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextSymbol: aDeserializer [ 
+ODBEncodingStream >> nextSymbol: aDeserializer [ 
 	| bytes len |
 	bytes := ByteArray new: (len := stream getPositiveInteger).
 	stream getBytesFor: bytes len: len.
@@ -635,12 +636,12 @@ ODBObjectEncodingStream >> nextSymbol: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextTime: aDeserializer [ 
+ODBEncodingStream >> nextTime: aDeserializer [ 
 	^ aDeserializer register: (Time fromSeconds: stream getPositiveInteger)
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextWideString: aDeserializer [ 
+ODBEncodingStream >> nextWideString: aDeserializer [ 
 	| buf len |
 	buf := ByteArray new: (len := stream getPositiveInteger).
 	stream getBytesFor: buf len: len.
@@ -648,31 +649,31 @@ ODBObjectEncodingStream >> nextWideString: aDeserializer [
 ]
 
 { #category : #'as yet unclassified' }
-ODBObjectEncodingStream >> nextnCharacterString: aDeserializer size: size [
+ODBEncodingStream >> nextnCharacterString: aDeserializer size: size [
 	    | buf |
    stream getBytesFor: (buf := ByteArray new: size) len: size.
     ^ desy register: buf asString
 ]
 
 { #category : #accessing }
-ODBObjectEncodingStream >> position: anInteger [ 
+ODBEncodingStream >> position: anInteger [ 
 	^ stream position: anInteger 
 ]
 
 { #category : #accessing }
-ODBObjectEncodingStream >> primitive [
+ODBEncodingStream >> primitive [
 	^ stream 
 ]
 
 { #category : #public }
-ODBObjectEncodingStream >> putBytesFrom: aByteCollection len: len [ 
+ODBEncodingStream >> putBytesFrom: aByteCollection len: len [ 
 	"Write len bytes from aByteCollection to file."
 
 	stream putBytesFrom: aByteCollection len: len
 ]
 
 { #category : #removing }
-ODBObjectEncodingStream >> remove [
+ODBEncodingStream >> remove [
 	"Close and remove receiver. Answer <true> if removed."
 	| file |
 	file := stream name asFileReference.
@@ -684,17 +685,17 @@ ODBObjectEncodingStream >> remove [
 ]
 
 { #category : #public }
-ODBObjectEncodingStream >> size [
+ODBEncodingStream >> size [
 	^ stream size
 ]
 
 { #category : #accessing }
-ODBObjectEncodingStream >> stream: aStream [ 
+ODBEncodingStream >> stream: aStream [ 
 	stream := aStream
 ]
 
 { #category : #accessing }
-ODBObjectEncodingStream >> truncate: anInteger [ 
+ODBEncodingStream >> truncate: anInteger [ 
 	"Truncate stream so that its size will be anInteger. 
 	Position to anInteger."
 
@@ -702,7 +703,7 @@ ODBObjectEncodingStream >> truncate: anInteger [
 ]
 
 { #category : #accessing }
-ODBObjectEncodingStream >> unlockAt: position length: length [
+ODBEncodingStream >> unlockAt: position length: length [
 
 	^ stream unlockAt: position length: length 
 ]

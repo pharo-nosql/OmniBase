@@ -17,7 +17,7 @@ ODBSerializedObject >> commit: serializer [
 	bytes := ODBMemoryStreamWrapper write.
 	serializer 
 		serialize: dataBaseObject odbObject
-		onStream: (ODBObjectEncodingStream on: bytes)
+		onStream: (ODBEncodingStream on: bytes)
 		referenceManager: referenceManager
 		classManager: transaction environment classManager.
 	bytes := referenceManager asBytesWith: bytes asByteArray.
