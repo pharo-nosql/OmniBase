@@ -5,77 +5,46 @@ Class {
 		'stream',
 		'desy'
 	],
-	#classVars : [
-		'ODBArrayCode',
-		'ODBAssociationCode',
-		'ODBByteArrayCode',
-		'ODBCharacterCode',
-		'ODBClassCode',
-		'ODBDateCode',
-		'ODBDictionaryCode',
-		'ODBDoubleByteCharacterCode',
-		'ODBExternalReferenceCode',
-		'ODBFalseCode',
-		'ODBFloatAs100IntegerCode',
-		'ODBFloatAsIntegerCode',
-		'ODBFloatCode',
-		'ODBFloatValue0',
-		'ODBFloatValue1',
-		'ODBFractionCode',
-		'ODBIdentityDictionaryCode',
-		'ODBInternalReference',
-		'ODBLargeNegativeIntegerCode',
-		'ODBLargePositiveIntegerCode',
-		'ODBMessageCode',
-		'ODBMessageSendCode',
-		'ODBMinusOne',
-		'ODBMinusThreeCode',
-		'ODBMinusTwo',
-		'ODBNilCode',
-		'ODBODBIdentityDictionaryCode',
-		'ODBOrderedCollectionCode',
-		'ODBPersistentDictionaryCode',
-		'ODBProcessSchedulerCode',
-		'ODBScaledDecimalCode',
-		'ODBSmallFloat64Code',
-		'ODBSmallPositiveIntegerBaseCode',
-		'ODBSmallStringBaseCode',
-		'ODBStringCode',
-		'ODBSymbolCode',
-		'ODBSystemDictionaryCode',
-		'ODBTimeCode',
-		'ODBTransactionCode',
-		'ODBTrueCode',
-		'ODBUndefinedObjectCode',
-		'ODBWideStringCode'
+	#pools : [
+		'ODBTypeCodes'
 	],
 	#classInstVars : [
 		'typeCodeMapping',
-		'encoder'
+		'characterEncoder'
 	],
 	#category : #'OmniBase-Streams'
 }
 
 { #category : #accessing }
-ODBObjectEncodingStream class >> encoder [
-	^ encoder
+ODBObjectEncodingStream class >> characterEncoder [
+	^ characterEncoder
 ]
 
 { #category : #accessing }
-ODBObjectEncodingStream class >> encoding: aString [
-	encoder := aString asZnCharacterEncoder
+ODBObjectEncodingStream class >> characterEncoding: aString [
+	characterEncoder := aString asZnCharacterEncoder
+]
+
+{ #category : #convenience }
+ODBObjectEncodingStream class >> decodeBytes: aByteArray [ 
+	^ characterEncoder decodeBytes: aByteArray 
+]
+
+{ #category : #convenience }
+ODBObjectEncodingStream class >> encodeString: aString [ 
+	^ characterEncoder encodeString: aString
 ]
 
 { #category : #initialization }
 ODBObjectEncodingStream class >> initialize [ 
-	self initializeTypeCodes.
-	self initializeTypeCodeMapping 
+	self initializeTypeCodeMapping.
+	self initializeEncoding 
 ]
 
 { #category : #initialization }
 ODBObjectEncodingStream class >> initializeEncoding [
 	"see ZnUTFEncoder knownEncodingIdentifiers for all supported encodings"
-	self encoding: #utf8
+	self characterEncoding: #utf8
 ]
 
 { #category : #initialization }
@@ -89,7 +58,7 @@ ODBObjectEncodingStream class >> initializeTypeCodeMapping [
 		at: ODBInternalReference                 put: ODBExistingObject;
 		at: ODBExternalReferenceCode             put: ODBExternalReference;
 		at: 6                                    put: ODBClassManagerForSerialization;
-		at: ODBNilCode put: nil;
+		at: ODBNilCode                           put: nil;
 		at: ODBLargePositiveIntegerCode          put: ODBLargePositiveInteger;
 		at: ODBLargeNegativeIntegerCode          put: ODBLargeNegativeInteger;
 		at: ODBCharacterCode                     put: Character;
@@ -156,64 +125,6 @@ ODBObjectEncodingStream class >> initializeTypeCodeMapping [
 		at: ODBODBIdentityDictionaryCode         put: ODBIdentityDictionary;
 		at: ODBPersistentDictionaryCode          put: ODBPersistentDictionary;
 		at: ODBTransactionCode                   put: ODBTransaction.
-]
-
-{ #category : #initialization }
-ODBObjectEncodingStream class >> initializeTypeCodes [
-	<script>
-	"1 .. 3"
-	ODBInternalReference := 4.
-	ODBExternalReferenceCode := 5.
-	"6 .. 10"
-	ODBNilCode := 10.
-	ODBLargePositiveIntegerCode := 11.
-	ODBLargeNegativeIntegerCode := 12.
-	ODBCharacterCode := 13.
-	ODBUndefinedObjectCode := 14.
-	ODBTrueCode := 15.
-	ODBFalseCode := 16.
-	ODBMessageCode := 17.
-	ODBSymbolCode := 18.
-	ODBSystemDictionaryCode := 19.
-	ODBMessageSendCode := 20.
-	"21"
-	ODBProcessSchedulerCode := 22.
-	"23 .. 25"
-	ODBClassCode := 26.
-	"27 .. 28"
-	ODBDoubleByteCharacterCode := 29.
-	"30"
-	ODBAssociationCode := 31.
-	ODBDateCode := 32.
-	ODBTimeCode := 33.
-	ODBStringCode := 34.
-	ODBArrayCode := 35.
-	ODBWideStringCode := 36.
-	ODBDictionaryCode := 37.
-	ODBIdentityDictionaryCode := 38.
-	ODBFractionCode := 39.
-	ODBFloatCode := 40.
-	ODBFloatValue0 := 41.
-	ODBFloatValue1 := 42.
-	ODBFloatAsIntegerCode := 43.
-	ODBFloatAs100IntegerCode := 44.
-	ODBScaledDecimalCode := 45.
-	ODBFloatCode := 46.
-	ODBSmallFloat64Code := 47.
-	"integers <= 16 are stored with code 50 + number"
-	ODBSmallPositiveIntegerBaseCode := 50. 
-	"50 .. 64 integers 0 .. 16"
-	ODBMinusThreeCode := 67.
-	ODBMinusTwo := 68.
-	ODBMinusOne := 69.
-	"small strings of size small than 10 bytes are written with type 70 + size of string"
-	ODBSmallStringBaseCode := 70.
-	"70 .. 79 small strings"
-	ODBByteArrayCode := 80.
-	ODBOrderedCollectionCode := 81.
-	ODBODBIdentityDictionaryCode := 82.
-	ODBPersistentDictionaryCode := 83.
-	ODBTransactionCode := 84.
 ]
 
 { #category : #'instance creation' }
@@ -471,6 +382,14 @@ ODBObjectEncodingStream >> nextPutAssociation: anAssociation [
 ]
 
 { #category : #'as yet unclassified' }
+ODBObjectEncodingStream >> nextPutBoxedFloat64: aNumber [ 
+	stream
+		putByte: ODBFloatCode;
+		putInteger: (aNumber at: 1);
+		putInteger: (aNumber at: 2)
+]
+
+{ #category : #'as yet unclassified' }
 ODBObjectEncodingStream >> nextPutByteArray: aByteArray [
 	stream 
 		putByte: ODBByteArrayCode; 
@@ -673,7 +592,7 @@ ODBObjectEncodingStream >> nextPutTrue: aBoolean [
 { #category : #'as yet unclassified' }
 ODBObjectEncodingStream >> nextPutWideString: aWideString [
 	| buf |
-	buf := self class encoder encodeString: aWideString.
+	buf := self class encodeString: aWideString.
 	stream
 		putByte: ODBWideStringCode;
 		putPositiveInteger: buf size;
@@ -725,7 +644,7 @@ ODBObjectEncodingStream >> nextWideString: aDeserializer [
 	| buf len |
 	buf := ByteArray new: (len := stream getPositiveInteger).
 	stream getBytesFor: buf len: len.
-	^ aDeserializer register: (self class encoder decodeBytes: buf)
+	^ aDeserializer register: (self class decodeBytes: buf)
 ]
 
 { #category : #'as yet unclassified' }

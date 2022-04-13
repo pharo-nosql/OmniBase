@@ -2,7 +2,7 @@ Class {
 	#name : #ODBSerializationTest,
 	#superclass : #TestCase,
 	#pools : [
-		'AnObsoleteODBTypeCodes'
+		'ODBTypeCodes'
 	],
 	#category : #'OmniBase-Tests'
 }
@@ -88,6 +88,7 @@ ODBSerializationTest >> testSerializationByteArray [
 	serialized := ODBSerializer serializeToBytes: object.
 	self assert: serialized equals: #[0 0 1 0 0 0 80 4 1 2 3 5].
 	self assert: (serialized at: 7) equals: ODBByteArrayCode.
+
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: object
 ]
@@ -173,7 +174,7 @@ ODBSerializationTest >> testSerializationIdentityDictionary [
 			serialized = 
 			#[0 0 1 0 0 0 38 2 18 4 116 101 115 116 52 18 3 110 111 119 54]]).
 
-	self assert: (serialized at: 7) equals: 38.
+	self assert: (serialized at: 7) equals: ODBIdentityDictionaryCode.
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: object
@@ -437,7 +438,7 @@ ODBSerializationTest >> testSerializationWideStringUTF16 [
 		with: 16r0155 asCharacter
 		with: 16r0111 asCharacter.
 	self assert: string isWideString.
-	ODBObjectEncodingStream encoding: #utf16.
+	ODBObjectEncodingStream characterEncoding: #utf16.
 	
 	serialized := ODBSerializer serializeToBytes: string.
 	self assert: serialized equals: #[0 0 1 0 0 0 36 8 246 0 246 3 1 85 1 17].
@@ -458,7 +459,7 @@ ODBSerializationTest >> testSerializationWideStringUTF32 [
 		with: 16r0155 asCharacter
 		with: 16r0111 asCharacter.
 	self assert: string isWideString.
-	ODBObjectEncodingStream encoding: #utf32.
+	ODBObjectEncodingStream characterEncoding: #utf32.
 	
 	serialized := ODBSerializer serializeToBytes: string.
 	self assert: serialized equals: #[0 0 1 0 0 0 36 16 0 0 246 0 0 0 246 3 0 0 1 85 0 0 1 17].
@@ -478,7 +479,7 @@ ODBSerializationTest >> testSerializationWideStringUTF8 [
 		with: 16r0155 asCharacter
 		with: 16r0111 asCharacter.
 	self assert: string isWideString.
-	ODBObjectEncodingStream encoding: #utf8.
+	ODBObjectEncodingStream characterEncoding: #utf8.
 	
 	serialized := ODBSerializer serializeToBytes: string.
 	self assert: serialized equals: #[0 0 1 0 0 0 36 10 239 152 128 239 152 131 197 149 196 145].
