@@ -25,14 +25,8 @@ ODBIdentityDictionary class >> new: anInteger [
 
 { #category : #public }
 ODBIdentityDictionary class >> odbDeserialize: deserializer [ 
-	| size dict key |
-	size := deserializer stream getPositiveInteger.
-	dict := self new: size.
-	deserializer register: dict.
-	size timesRepeat: 
-			[key := deserializer odbNextObject.
-			dict at: key put: deserializer odbNextObject].
-	^dict
+
+	^ deserializer stream nextODBIdentityDictionary: deserializer class: self 
 ]
 
 { #category : #public }

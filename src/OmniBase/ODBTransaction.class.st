@@ -19,7 +19,7 @@ Class {
 { #category : #private }
 ODBTransaction class >> odbDeserialize: deserializer [
 
-	^deserializer transaction
+	^ deserializer transaction
 ]
 
 { #category : #public }
@@ -262,7 +262,7 @@ ODBTransaction >> objectHolderAt: objectID [
 { #category : #'private/unclassified' }
 ODBTransaction >> odbBasicSerialize: serializer [
 
-	serializer stream putByte: 84
+	serializer stream nextPutTransaction: self 
 ]
 
 { #category : #'private/unclassified' }

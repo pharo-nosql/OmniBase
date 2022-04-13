@@ -7,5 +7,5 @@ Class {
 { #category : #serialization }
 ODBExistingObject class >> odbDeserialize: deserializer [
 
-    ^deserializer existingObject
+    ^ deserializer existingObject
 ]

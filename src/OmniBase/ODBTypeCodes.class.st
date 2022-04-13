@@ -28,6 +28,7 @@ Class {
 		'ODBMinusThreeCode',
 		'ODBMinusTwo',
 		'ODBNilCode',
+		'ODBODBIdentityDictionaryCode',
 		'ODBOrderedCollectionCode',
 		'ODBPersistentDictionaryCode',
 		'ODBProcessSchedulerCode',
@@ -44,37 +45,20 @@ Class {
 		'ODBUndefinedObjectCode',
 		'ODBWideStringCode'
 	],
-	#classInstVars : [
-		'encoder'
-	],
 	#category : #'OmniBase-Base'
 }
-
-{ #category : #accessing }
-ODBTypeCodes class >> encoder [
-	^encoder
-]
-
-{ #category : #accessing }
-ODBTypeCodes class >> encoding: aString [
-	encoder := aString asZnCharacterEncoder
-]
 
 { #category : #initialization }
 ODBTypeCodes class >> initialize [ 
 	self initializeTypeCodes.
-	self initializeEncoding
-]
+	ODBEncodingStream initializeTypeCodeMapping 
 
-{ #category : #initialization }
-ODBTypeCodes class >> initializeEncoding [
-	"see ZnUTFEncoder knownEncodingIdentifiers for all supported encodings"
-	self encoding: #utf8
 ]
 
 { #category : #initialization }
 ODBTypeCodes class >> initializeTypeCodes [
-	"1 .. 3"
+	<script>
+	"1 .. 3" 
 	ODBInternalReference := 4.
 	ODBExternalReferenceCode := 5.
 	"6 .. 10"
@@ -111,6 +95,8 @@ ODBTypeCodes class >> initializeTypeCodes [
 	ODBFloatAsIntegerCode := 43.
 	ODBFloatAs100IntegerCode := 44.
 	ODBScaledDecimalCode := 45.
+	"legacy ?"
+	"ODBFloatCode := 46."
 	ODBSmallFloat64Code := 47.
 	"integers <= 16 are stored with code 50 + number"
 	ODBSmallPositiveIntegerBaseCode := 50. 
@@ -123,6 +109,7 @@ ODBTypeCodes class >> initializeTypeCodes [
 	"70 .. 79 small strings"
 	ODBByteArrayCode := 80.
 	ODBOrderedCollectionCode := 81.
+	ODBODBIdentityDictionaryCode := 82.
 	ODBPersistentDictionaryCode := 83.
 	ODBTransactionCode := 84.
 ]

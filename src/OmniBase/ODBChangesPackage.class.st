@@ -53,7 +53,7 @@ ODBChangesPackage >> loadFromStream: aStream [
 	self collectChangeClassIDsFrom: ODBChange to: classes.
 	"load changes"
 	changes := OrderedCollection new.
-	memoryStream := ODBMemoryReadStream new readFrom: aStream.
+	memoryStream := ODBMemoryStreamWrapper on: aStream.
 	[(classID := memoryStream getByte) > 0] whileTrue: 
 			[change := (classes at: classID
 						ifAbsent: [OmniBase signalError: 'Transaction rollback: Unknown change classID']) new 
@@ -74,7 +74,7 @@ ODBChangesPackage >> storeOnStream: aStream [
 	"Store receiver on aStream."
 
 	| memoryStream classID |
-	memoryStream := ODBMemoryWriteStream new.
+	memoryStream := ODBMemoryStreamWrapper write.
 	changes do: [ :each | 
 		(classID := each class changeClassID) ifNotNil: [ 
 			memoryStream putByte: classID.

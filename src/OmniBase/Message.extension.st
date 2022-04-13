@@ -2,17 +2,12 @@ Extension { #name : #Message }
 
 { #category : #'*omnibase' }
 Message >> odbBasicSerialize: serializer [ 
-	self class == Message ifFalse: [^super odbBasicSerialize: serializer].
-	serializer stream putByte: 17.
-	selector odbSerialize: serializer.
-	args odbSerialize: serializer
+	
+	serializer stream nextPutMessage: self 
 ]
 
 { #category : #'*omnibase' }
 Message class >> odbDeserialize: deserializer [ 
-	| result |
-	deserializer register: (result := self new).
-	^result
-		setSelector: deserializer odbNextObject arguments: deserializer odbNextObject;
-		yourself
+	
+	^ deserializer stream nextMessage: deserializer  
 ]

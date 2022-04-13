@@ -7,5 +7,5 @@ Class {
 { #category : #serialization }
 ODBNewObject class >> odbDeserialize: deserializer [
 
-	^deserializer newObjectOldClass
+	^ deserializer newObjectOldClass
 ]

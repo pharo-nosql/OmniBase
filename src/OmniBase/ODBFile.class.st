@@ -103,7 +103,7 @@ ODBFile >> headerLength [
 { #category : #'create/open/close' }
 ODBFile >> newCodecStreamOn: aFileReference [
 
-	^ (File named: aFileReference pathString) openForWrite asOmnibaseCodecStream.
+	^ (File named: aFileReference pathString) openForWrite asODBPrimitiveEncodingStream.
 
 ]
 
@@ -113,7 +113,7 @@ ODBFile >> newCodecStreamOn: aFileReference using: aBlock [
 	fileStream := (File named: aFileReference pathString) openForWrite.
 	[ aBlock cull: fileStream ]
 		ifCurtailed: [ fileStream close. ^ nil ].
-	^ fileStream asOmnibaseCodecStream.
+	^ fileStream asODBPrimitiveEncodingStream.
 
 ]
 
@@ -137,7 +137,7 @@ ODBFile >> openOn: aFileReference [
 ODBFile >> openReadOnlyOn: aFileReference [
 
 	stream := ((File named: aFileReference pathString) openForRead)
-		asOmnibaseCodecStream.
+		asODBPrimitiveEncodingStream.
     ^self compareHeader
 ]
 

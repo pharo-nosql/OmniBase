@@ -1,6 +1,6 @@
 Class {
-	#name : #ODBCodecStream,
-	#superclass : #ODBStream,
+	#name : #ODBFileStreamWrapper,
+	#superclass : #ODBPrimitiveEncodingStream,
 	#instVars : [
 		'mutex'
 	],
@@ -8,13 +8,13 @@ Class {
 }
 
 { #category : #'instance creation' }
-ODBCodecStream class >> on: aStream [ 
+ODBFileStreamWrapper class >> on: aFileStream [ 
 	^ self new 
-		stream: aStream
+		stream: aFileStream
 ]
 
 { #category : #accessing }
-ODBCodecStream >> atPosition: anInteger getBytesFor: aByteCollection [ 
+ODBFileStreamWrapper >> atPosition: anInteger getBytesFor: aByteCollection [ 
 	"Read bytes from stream at position anInteger. 
         Answer number of bytes actualy read."
 
@@ -27,7 +27,7 @@ ODBCodecStream >> atPosition: anInteger getBytesFor: aByteCollection [
 ]
 
 { #category : #accessing }
-ODBCodecStream >> atPosition: anInteger getBytesFor: aByteCollection len: len [ 
+ODBFileStreamWrapper >> atPosition: anInteger getBytesFor: aByteCollection len: len [ 
 	"Read len bytes from stream at position anInteger to aByteCollection. 
         Answer number of bytes actualy read."
 
@@ -40,7 +40,7 @@ ODBCodecStream >> atPosition: anInteger getBytesFor: aByteCollection len: len [
 ]
 
 { #category : #accessing }
-ODBCodecStream >> atPosition: pos putBytesFrom: aByteCollection [ 
+ODBFileStreamWrapper >> atPosition: pos putBytesFrom: aByteCollection [ 
 	"Write bytes from aByteCollection to file."
 
 	mutex critical: 
@@ -50,7 +50,7 @@ ODBCodecStream >> atPosition: pos putBytesFrom: aByteCollection [
 ]
 
 { #category : #accessing }
-ODBCodecStream >> atPosition: pos putBytesFrom: aByteCollection len: len [ 
+ODBFileStreamWrapper >> atPosition: pos putBytesFrom: aByteCollection len: len [ 
 	"Write len bytes from aByteCollection to file."
 
 	mutex critical: 
@@ -60,7 +60,7 @@ ODBCodecStream >> atPosition: pos putBytesFrom: aByteCollection len: len [
 ]
 
 { #category : #accessing }
-ODBCodecStream >> atPosition: pos putLong: anInteger [ 
+ODBFileStreamWrapper >> atPosition: pos putLong: anInteger [ 
 	| buf |
 	buf := ByteArray new: 4.
 	buf odbLongAt: 1 put: anInteger.
@@ -71,7 +71,7 @@ ODBCodecStream >> atPosition: pos putLong: anInteger [
 ]
 
 { #category : #accessing }
-ODBCodecStream >> atPositionGetLong: pos [ 
+ODBFileStreamWrapper >> atPositionGetLong: pos [ 
 	"Read long integer from stream. 
 	Answer <nil> if end of file has been reached."
 
@@ -84,8 +84,8 @@ ODBCodecStream >> atPositionGetLong: pos [
 		ifTrue: [buf odbLongAt: 1]
 ]
 
-{ #category : #public }
-ODBCodecStream >> basicGetBytesFor: aByteCollection len: len [
+{ #category : #accessing }
+ODBFileStreamWrapper >> basicGetBytesFor: aByteCollection len: len [
 		"Read len bytes from stream to aByteCollection. 
 		Answer number of bytes actualy read."
 
@@ -94,16 +94,16 @@ ODBCodecStream >> basicGetBytesFor: aByteCollection len: len [
 		readInto: aByteCollection startingAt: 1 count: len
 ]
 
-{ #category : #public }
-ODBCodecStream >> basicPosition: anInteger [
+{ #category : #accessing }
+ODBFileStreamWrapper >> basicPosition: anInteger [
 	"Positiones stream to anInteger. Answer anInteger."
 
 	stream position: anInteger.
 	^anInteger
 ]
 
-{ #category : #public }
-ODBCodecStream >> basicPutBytesFrom: aByteArray len: length [ 
+{ #category : #accessing }
+ODBFileStreamWrapper >> basicPutBytesFrom: aByteArray len: length [ 
 	(stream
 		writeFrom: aByteArray
 		startingAt: 1
@@ -115,7 +115,7 @@ ODBCodecStream >> basicPutBytesFrom: aByteArray len: length [
 ]
 
 { #category : #'initialize-release' }
-ODBCodecStream >> close [
+ODBFileStreamWrapper >> close [
 	"Close file associatied with receiver."
 	stream notNil ifTrue: [
 		stream unlock.
@@ -123,8 +123,13 @@ ODBCodecStream >> close [
 	stream := nil.
 ]
 
+{ #category : #accessing }
+ODBFileStreamWrapper >> closed [
+	^ stream closed
+]
+
 { #category : #public }
-ODBCodecStream >> compare: aString at: pos [ 
+ODBFileStreamWrapper >> compare: aString at: pos [ 
 	"Answer <true>, if aString is stored at pos."
 
 	| str str2 len |
@@ -140,20 +145,17 @@ ODBCodecStream >> compare: aString at: pos [
 ]
 
 { #category : #finalization }
-ODBCodecStream >> finalize [
+ODBFileStreamWrapper >> finalize [
 	self close
 ]
 
-{ #category : #finalization }
-ODBCodecStream >> flush [
-	"Force all data written to the 
-	receiver to be recorded on disk."
-
+{ #category : #accessing }
+ODBFileStreamWrapper >> flush [
 	stream flush
 ]
 
 { #category : #public }
-ODBCodecStream >> getByte [
+ODBFileStreamWrapper >> getByte [
 	"Read byte from file stream. Answer <nil> if
 	end of file has been reached."
 
@@ -163,7 +165,7 @@ ODBCodecStream >> getByte [
 ]
 
 { #category : #public }
-ODBCodecStream >> getBytesFor: aByteCollection len: len [ 
+ODBFileStreamWrapper >> getBytesFor: aByteCollection len: len [ 
 	"Read len bytes from stream to aByteCollection. 
 	Answer number of bytes actualy read."
 
@@ -173,7 +175,7 @@ ODBCodecStream >> getBytesFor: aByteCollection len: len [
 ]
 
 { #category : #public }
-ODBCodecStream >> getLong [
+ODBFileStreamWrapper >> getLong [
 	"Read long integer from stream. 
 	Answer <nil> if end of file has been reached."
 
@@ -183,7 +185,7 @@ ODBCodecStream >> getLong [
 ]
 
 { #category : #public }
-ODBCodecStream >> getWord [
+ODBFileStreamWrapper >> getWord [
 	"Read word from file stream.
 	Answer <nil> if end of file has been reached."
 
@@ -193,19 +195,24 @@ ODBCodecStream >> getWord [
 ]
 
 { #category : #initialization }
-ODBCodecStream >> initialize [ 
+ODBFileStreamWrapper >> initialize [ 
 	super initialize.
 	mutex := Semaphore forMutualExclusion 
 ]
 
-{ #category : #accessing }
-ODBCodecStream >> lockAt: position length: length [ 
+{ #category : #public }
+ODBFileStreamWrapper >> lockAt: position length: length [ 
 
 	^ stream lockAt: position length: length 
 ]
 
 { #category : #accessing }
-ODBCodecStream >> position: anInteger [ 
+ODBFileStreamWrapper >> name [
+	^ stream name
+]
+
+{ #category : #accessing }
+ODBFileStreamWrapper >> position: anInteger [ 
 	"Positiones stream to anInteger. Answer anInteger."
 
 	| result |
@@ -213,21 +220,21 @@ ODBCodecStream >> position: anInteger [
 	^result
 ]
 
-{ #category : #accessing }
-ODBCodecStream >> putByte: anInteger [
+{ #category : #public }
+ODBFileStreamWrapper >> putByte: anInteger [
 
     self putBytesFrom: (ByteArray with: anInteger) len: 1
 ]
 
 { #category : #public }
-ODBCodecStream >> putBytesFrom: aByteCollection len: len [ 
+ODBFileStreamWrapper >> putBytesFrom: aByteCollection len: len [ 
 	"Write len bytes from aByteCollection to file."
 
 	mutex critical: [self basicPutBytesFrom: aByteCollection len: len]
 ]
 
 { #category : #public }
-ODBCodecStream >> putLong: anInteger [ 
+ODBFileStreamWrapper >> putLong: anInteger [ 
 	| buf |
 	buf := ByteArray new: 4.
 	buf odbLongAt: 1 put: anInteger.
@@ -235,15 +242,20 @@ ODBCodecStream >> putLong: anInteger [
 ]
 
 { #category : #public }
-ODBCodecStream >> putWord: anInteger [ 
+ODBFileStreamWrapper >> putWord: anInteger [ 
 	| buf |
 	buf := ByteArray new: 2.
 	buf odbShortAt: 1 put: anInteger.
 	self putBytesFrom: buf len: 2
 ]
 
+{ #category : #accessing }
+ODBFileStreamWrapper >> readInto: readBufger startingAt: startIndex count: count [
+	^ stream readInto: readBufger startingAt: startIndex count: count
+]
+
 { #category : #removing }
-ODBCodecStream >> remove [
+ODBFileStreamWrapper >> remove [
 	"Close and remove receiver. Answer <true> if removed."
 	| file |
 	file := stream name asFileReference.
@@ -255,12 +267,19 @@ ODBCodecStream >> remove [
 ]
 
 { #category : #accessing }
-ODBCodecStream >> stream: aStream [ 
-	stream := aStream
+ODBFileStreamWrapper >> setToEnd [
+	^ stream 
+		setToEnd;
+		position 
 ]
 
 { #category : #accessing }
-ODBCodecStream >> truncate: anInteger [ 
+ODBFileStreamWrapper >> stream: aFileStream [ 
+	stream := aFileStream 
+]
+
+{ #category : #accessing }
+ODBFileStreamWrapper >> truncate: anInteger [ 
 	"Truncate stream so that its size will be anInteger. 
 	Position to anInteger."
 
@@ -269,8 +288,13 @@ ODBCodecStream >> truncate: anInteger [
 		stream truncate: anInteger ]
 ]
 
+{ #category : #locking }
+ODBFileStreamWrapper >> unlock [
+	stream unlock
+]
+
 { #category : #accessing }
-ODBCodecStream >> unlockAt: position length: length [
+ODBFileStreamWrapper >> unlockAt: position length: length [
 
 	^ stream unlockAt: position length: length 
 ]

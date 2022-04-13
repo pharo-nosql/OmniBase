@@ -7,5 +7,5 @@ Class {
 { #category : #serialization }
 ODBExternalReference class >> odbDeserialize: deserializer [
 
-	^deserializer loadReference
+	^ deserializer loadReference
 ]

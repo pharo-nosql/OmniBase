@@ -1,8 +1,8 @@
 Extension { #name : #BinaryFileStream }
 
 { #category : #'*OmniBase' }
-BinaryFileStream >> asOmnibaseCodecStream [
-	^ ODBCodecStream on: self 
+BinaryFileStream >> asODBPrimitiveEncodingStream [
+	^ ODBFileStreamWrapper on: self
 ]
 
 { #category : #'*OmniBase' }

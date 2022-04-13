@@ -86,7 +86,6 @@ ODBClassDescription >> isVariable [
 
 { #category : #public }
 ODBClassDescription >> loadFromStream: aStream [
-
 	name := aStream getString.
 	bytes := aStream getBoolean.
 	variable := aStream getBoolean.

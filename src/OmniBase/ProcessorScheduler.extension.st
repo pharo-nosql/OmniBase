@@ -3,7 +3,7 @@ Extension { #name : #ProcessorScheduler }
 { #category : #'*omnibase' }
 ProcessorScheduler >> odbBasicSerialize: serializer [
 
-	serializer stream putByte: 22
+	serializer stream nextPutProcessorScheduler: self 
 ]
 
 { #category : #'*omnibase' }

@@ -3,13 +3,13 @@ Extension { #name : #Class }
 { #category : #'*omnibase' }
 Class >> odbBasicSerialize: serializer [
 
-	serializer stream putByte: 26; putString: name asString
+	serializer stream nextPutClass: self 
 ]
 
 { #category : #'*omnibase' }
 Class class >> odbDeserialize: deserializer [
 
-	^Smalltalk at: deserializer stream getString asSymbol ifAbsent: nil
+	^ deserializer stream nextClass: deserializer 
 ]
 
 { #category : #'*omnibase' }

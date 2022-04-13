@@ -255,7 +255,6 @@ OmniBase class >> warningMessage: aString [
 
 { #category : #private }
 OmniBase >> classManager [
-
 	^ classManager ifNil: [ classManager := self classManagerClass new ]
 ]
 

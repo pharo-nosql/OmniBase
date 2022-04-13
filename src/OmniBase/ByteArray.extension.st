@@ -30,18 +30,13 @@ ByteArray >> odbAsInteger [
 { #category : #'*OmniBase' }
 ByteArray >> odbBasicSerialize: serializer [
 
-	serializer stream putByte: 80; putPositiveInteger: self size.
-	1 to: self size do: [:i |serializer stream putByte: (self at: i)].
+	serializer stream nextPutByteArray: self 
 ]
 
 { #category : #'*OmniBase' }
 ByteArray class >> odbDeserialize: deserializer [
 
-	| array |
-	array := self new: deserializer stream getPositiveInteger.
-	deserializer register: array.
-	1 to: array size do: [:i | array at: i put: deserializer stream getPositiveInteger ].
-	^array
+	^ deserializer stream nextByteArray: deserializer 
 ]
 
 { #category : #'*omnibase' }

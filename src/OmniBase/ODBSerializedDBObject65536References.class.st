@@ -15,8 +15,7 @@ ODBSerializedDBObject65536References class >> classID [
 ODBSerializedDBObject65536References >> makeTransactionObject: aTransaction [ 
 	| mStream bytes referenceManager |
 	bytes := objectHolder loadBytes.
-	mStream := (ODBMemoryReadStream new)
-				createOn: bytes;
+	mStream := (ODBMemoryStreamWrapper on: bytes readStream)
 				position: ((referenceManager := ODBReferenceManager new) createMax65536From: bytes).
 	referenceManager transaction: aTransaction.
 	^ODBSerializedObject new 

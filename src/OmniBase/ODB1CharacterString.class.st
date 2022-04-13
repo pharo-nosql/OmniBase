@@ -7,7 +7,5 @@ Class {
 { #category : #accessing }
 ODB1CharacterString class >> odbDeserialize: deserializer [
 
-    | str |
-    (str := String new: 1) at: 1 put: deserializer stream getChar.
-    ^deserializer register: str
+   ^ deserializer stream nextOneCharacterString: deserializer  
 ]

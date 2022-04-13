@@ -9,14 +9,8 @@ Class {
 
 { #category : #public }
 ODBPersistentDictionary class >> odbDeserialize: deserializer [ 
-	| size dict key |
-	size := deserializer stream getPositiveInteger.
-	dict := self new: size.
-	deserializer register: dict.
-	size timesRepeat: 
-			[key := deserializer odbNextObject.
-			dict superAt: key put: deserializer odbNextObject].
-	^dict
+
+	^ deserializer stream nextPersistentDictionary: deserializer
 ]
 
 { #category : #adding }
@@ -62,13 +56,7 @@ ODBPersistentDictionary >> at: key put: value [
 
 { #category : #public }
 ODBPersistentDictionary >> odbBasicSerialize: serializer [ 
-	(serializer stream)
-		putByte: 83;
-		putPositiveInteger: self size.
-	self keysAndValuesDo: 
-			[:key :value | 
-			key odbSerialize: serializer.
-			value odbSerialize: serializer]
+	serializer stream nextPutPersistentDictionary: self
 ]
 
 { #category : #private }

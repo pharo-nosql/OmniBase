@@ -106,6 +106,7 @@ ODBDatabaseTest >> testIdentity [
 	str := 'This is a string'.
 	coll1 add: str.
 	coll2 add: str.
+
 	OmniBase root at: 'one' put: coll1.
 	OmniBase root at: 'two' put: coll2. ]
 		evaluateAndCommitIn: db newTransaction.
