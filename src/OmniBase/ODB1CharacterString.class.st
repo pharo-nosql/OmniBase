@@ -7,5 +7,5 @@ Class {
 { #category : #accessing }
 ODB1CharacterString class >> odbDeserialize: deserializer [
 
-   ^ deserializer stream nextOneCharacterString: deserializer  
+   ^ deserializer stream nextOneCharacterString
 ]

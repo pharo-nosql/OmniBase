@@ -26,7 +26,7 @@ ODBIdentityDictionary class >> new: anInteger [
 { #category : #public }
 ODBIdentityDictionary class >> odbDeserialize: deserializer [ 
 
-	^ deserializer stream nextODBIdentityDictionary: deserializer class: self 
+	^ deserializer stream nextODBIdentityDictionary:  self 
 ]
 
 { #category : #public }

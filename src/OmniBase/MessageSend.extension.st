@@ -9,5 +9,5 @@ MessageSend >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 MessageSend class >> odbDeserialize: deserializer [ 
 
-	^ deserializer stream nextMessageSend: deserializer  
+	^ deserializer stream nextMessageSend: self  
 ]

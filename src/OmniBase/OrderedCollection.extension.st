@@ -9,5 +9,5 @@ OrderedCollection >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 OrderedCollection class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextOrderedCollection: deserializer 
+	^ deserializer stream nextOrderedCollection: self 
 ]

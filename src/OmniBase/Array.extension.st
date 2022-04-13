@@ -9,5 +9,5 @@ Array >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 Array class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextArray: deserializer 
+	^ deserializer stream nextArray: self
 ]

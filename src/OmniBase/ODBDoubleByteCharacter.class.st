@@ -7,5 +7,5 @@ Class {
 { #category : #serialization }
 ODBDoubleByteCharacter class >> odbDeserialize: deserializer [
 
-    ^ deserializer stream nextDoubleByteCharacter: deserializer 
+    ^ deserializer stream nextDoubleByteCharacter
 ]

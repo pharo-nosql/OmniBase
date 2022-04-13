@@ -36,7 +36,7 @@ ByteArray >> odbBasicSerialize: serializer [
 { #category : #'*OmniBase' }
 ByteArray class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextByteArray: deserializer 
+	^ deserializer stream nextByteArray: self
 ]
 
 { #category : #'*omnibase' }

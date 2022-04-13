@@ -7,5 +7,5 @@ Class {
 { #category : #'no category' }
 ODBLargeNegativeInteger class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextLargeNegativeInteger: deserializer 
+	^ deserializer stream nextLargeNegativeInteger
 ]

@@ -10,7 +10,7 @@ Class {
 { #category : #public }
 ODBPersistentDictionary class >> odbDeserialize: deserializer [ 
 
-	^ deserializer stream nextPersistentDictionary: deserializer
+	^ deserializer stream nextPersistentDictionary: self
 ]
 
 { #category : #adding }
