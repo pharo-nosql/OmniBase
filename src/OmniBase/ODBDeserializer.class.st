@@ -135,7 +135,7 @@ ODBDeserializer class >> init [
 
 { #category : #public }
 ODBDeserializer >> deserializeFrom: aStream referenceManager: aReferenceManager classManager: aClassManager [ 
-	stream := aStream desy: self.
+	stream := aStream readerWriter: self.
 	referenceManager := aReferenceManager.
 	classManager := aClassManager.
 	classArray := self class classArray.
@@ -151,7 +151,7 @@ ODBDeserializer >> deserializeFrom: aStream
 	referenceManager: aReferenceManager
 	transaction: aTransaction [
 
-	stream := aStream desy: self.
+	stream := aStream readerWriter: self.
 	referenceManager := aReferenceManager.
 	classManager := aTransaction environment classManager.
 	transaction := aTransaction.

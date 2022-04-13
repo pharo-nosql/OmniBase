@@ -141,7 +141,7 @@ ODBSerializer >> serialize: anObject
 	classManager: aClassManager [
 
 	| startPos endPos |
-	stream := aStream desy: self.
+	stream := aStream readerWriter: self.
 	referenceManager := aReferenceManager.
 	classManager := aClassManager.
 	mainObject := anObject.

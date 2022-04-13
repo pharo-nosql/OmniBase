@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'stream',
-		'desy'
+		'readerWriter'
 	],
 	#pools : [
 		'ODBTypeCodes'
@@ -141,11 +141,6 @@ ODBEncodingStream >> close [
 		stream := nil ]
 ]
 
-{ #category : #accessing }
-ODBEncodingStream >> desy: anODBSerializer [ 
-	desy := anODBSerializer 
-]
-
 { #category : #finalization }
 ODBEncodingStream >> finalize [
 	self close
@@ -185,10 +180,10 @@ ODBEncodingStream >> nextArray: aDeserializer [
 { #category : #'as yet unclassified' }
 ODBEncodingStream >> nextAssociation: aDeserializer [ 
 	| result |
-	desy register: (result := Association new).
+	readerWriter register: (result := Association new).
 	^result
-		key: desy odbNextObject;
-		value: desy odbNextObject
+		key: readerWriter odbNextObject;
+		value: readerWriter odbNextObject
 ]
 
 { #category : #'as yet unclassified' }
@@ -290,11 +285,11 @@ ODBEncodingStream >> nextIdentityDictionary: anODBDeserializer class: aClass [
 	| size dict |
 	size := stream getPositiveInteger.
 	dict := aClass new: size.
-	desy register: dict.
+	readerWriter register: dict.
 	size timesRepeat: [
 		dict 
-			at: desy odbNextObject
-			put: desy odbNextObject].
+			at: readerWriter odbNextObject
+			put: readerWriter odbNextObject].
 	^dict
 ]
 
@@ -311,20 +306,20 @@ ODBEncodingStream >> nextLargePositiveInteger: aDeserializer [
 { #category : #'as yet unclassified' }
 ODBEncodingStream >> nextMessage: aDeserializer [ 
 	| result |
-	desy register: (result := Message new).
+	readerWriter register: (result := Message new).
 	^ result
-		setSelector: desy odbNextObject arguments: desy odbNextObject;
+		setSelector: readerWriter odbNextObject arguments: readerWriter odbNextObject;
 		yourself
 ]
 
 { #category : #'as yet unclassified' }
 ODBEncodingStream >> nextMessageSend: aDeserializer [ 
 	| result |
-	desy register: (result := MessageSend new).
+	readerWriter register: (result := MessageSend new).
 	^result
-		receiver: desy odbNextObject;
-		selector: desy odbNextObject;
-		arguments: desy odbNextObject;
+		receiver: readerWriter odbNextObject;
+		selector: readerWriter odbNextObject;
+		arguments: readerWriter odbNextObject;
 		yourself
 ]
 
@@ -333,10 +328,10 @@ ODBEncodingStream >> nextODBIdentityDictionary: anODBDeserializer class: aClass 
 	| size dict key |
 	size := stream getPositiveInteger.
 	dict := aClass new: size.
-	desy register: dict.
+	readerWriter register: dict.
 	size timesRepeat: 
-			[key := desy odbNextObject.
-			dict at: key put: desy odbNextObject].
+			[key := readerWriter odbNextObject.
+			dict at: key put: readerWriter odbNextObject].
 	^dict
 ]
 
@@ -372,14 +367,14 @@ ODBEncodingStream >> nextPutArray: anArray [
 		putByte: ODBArrayCode; 
 		putPositiveInteger: anArray size.
 	1 to: anArray size do: [:i | 
-		(anArray at: i) odbSerialize: desy ].
+		(anArray at: i) odbSerialize: readerWriter ].
 ]
 
 { #category : #'as yet unclassified' }
 ODBEncodingStream >> nextPutAssociation: anAssociation [ 
 	stream putByte: ODBAssociationCode.
-	anAssociation key odbSerialize: desy.
-	anAssociation value odbSerialize: desy.
+	anAssociation key odbSerialize: readerWriter.
+	anAssociation value odbSerialize: readerWriter.
 ]
 
 { #category : #'as yet unclassified' }
@@ -429,13 +424,13 @@ ODBEncodingStream >> nextPutDate: aDate [
 
 { #category : #'as yet unclassified' }
 ODBEncodingStream >> nextPutDictionary: aDictionary [
-	aDictionary class == Dictionary ifFalse: [ ^ super odbBasicSerialize: desy ].
+	aDictionary class == Dictionary ifFalse: [ ^ super odbBasicSerialize: readerWriter ].
 	stream 
 		putByte: ODBDictionaryCode;
 		putPositiveInteger: aDictionary size.
 	aDictionary keysAndValuesDo: [:key :value |
-		key odbSerialize: desy.
-		value odbSerialize: desy ]
+		key odbSerialize: readerWriter.
+		value odbSerialize: readerWriter ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -460,13 +455,13 @@ ODBEncodingStream >> nextPutFraction: aNumber [
 
 { #category : #'as yet unclassified' }
 ODBEncodingStream >> nextPutIdentityDictionary: anIdentityDictionary [ 
-	anIdentityDictionary class == IdentityDictionary ifFalse: [ ^super odbBasicSerialize: desy ].
+	anIdentityDictionary class == IdentityDictionary ifFalse: [ ^super odbBasicSerialize: readerWriter ].
 	stream 
 		putByte: ODBIdentityDictionaryCode;
 		putPositiveInteger: anIdentityDictionary size.
 	anIdentityDictionary keysAndValuesDo: [:key :value |
-		key odbSerialize: desy.
-		value odbSerialize: desy ]
+		key odbSerialize: readerWriter.
+		value odbSerialize: readerWriter ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -494,20 +489,20 @@ ODBEncodingStream >> nextPutInternalReference: anInteger [
 { #category : #'as yet unclassified' }
 ODBEncodingStream >> nextPutMessage: aMessage [ 
 	(aMessage class == Message) 
-		ifFalse: [ ^ super odbBasicSerialize: desy ].
+		ifFalse: [ ^ super odbBasicSerialize: readerWriter ].
  	stream putByte: ODBMessageCode.
-	aMessage selector odbSerialize: desy.
-	aMessage arguments odbSerialize: desy
+	aMessage selector odbSerialize: readerWriter.
+	aMessage arguments odbSerialize: readerWriter
 ]
 
 { #category : #'as yet unclassified' }
 ODBEncodingStream >> nextPutMessageSend: aMessageSend [ 
 	(aMessageSend class == MessageSend) 
-		ifFalse: [ ^ super odbBasicSerialize: desy ].
+		ifFalse: [ ^ super odbBasicSerialize: readerWriter ].
 	stream putByte: ODBMessageSendCode.
-	aMessageSend receiver odbSerialize: desy.
-	aMessageSend selector odbSerialize: desy.
-	aMessageSend arguments odbSerialize: desy
+	aMessageSend receiver odbSerialize: readerWriter.
+	aMessageSend selector odbSerialize: readerWriter.
+	aMessageSend arguments odbSerialize: readerWriter
 ]
 
 { #category : #'as yet unclassified' }
@@ -520,7 +515,7 @@ ODBEncodingStream >> nextPutOrderedCollection: aCollection [
 	stream
 		putByte: ODBOrderedCollectionCode;
 		putPositiveInteger: aCollection size.
-	aCollection do: [:each | each odbSerialize: desy ].
+	aCollection do: [:each | each odbSerialize: readerWriter ].
 ]
 
 { #category : #'as yet unclassified' }
@@ -529,8 +524,8 @@ ODBEncodingStream >> nextPutPersistentDictionary: aPersistentDictionary [
 		putByte: ODBPersistentDictionaryCode;
 		putPositiveInteger: aPersistentDictionary size.
 	aPersistentDictionary keysAndValuesDo: [:key :value | 
-		key odbSerialize: desy.
-		value odbSerialize: desy ]
+		key odbSerialize: readerWriter.
+		value odbSerialize: readerWriter ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -652,7 +647,7 @@ ODBEncodingStream >> nextWideString: aDeserializer [
 ODBEncodingStream >> nextnCharacterString: aDeserializer size: size [
 	    | buf |
    stream getBytesFor: (buf := ByteArray new: size) len: size.
-    ^ desy register: buf asString
+    ^ readerWriter register: buf asString
 ]
 
 { #category : #accessing }
@@ -670,6 +665,11 @@ ODBEncodingStream >> putBytesFrom: aByteCollection len: len [
 	"Write len bytes from aByteCollection to file."
 
 	stream putBytesFrom: aByteCollection len: len
+]
+
+{ #category : #accessing }
+ODBEncodingStream >> readerWriter: anODBSerializer [ 
+	readerWriter := anODBSerializer 
 ]
 
 { #category : #removing }
