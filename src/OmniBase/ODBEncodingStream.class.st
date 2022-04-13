@@ -37,7 +37,6 @@ ODBEncodingStream class >> encodeString: aString [
 
 { #category : #initialization }
 ODBEncodingStream class >> initialize [ 
-	self initializeTypeCodeMapping.
 	self initializeEncoding 
 ]
 
