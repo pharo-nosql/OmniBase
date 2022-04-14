@@ -9,7 +9,7 @@ Fraction >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 Fraction class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextFraction: deserializer 
+	^ deserializer stream nextFraction: self 
 ]
 
 { #category : #'*omnibase' }

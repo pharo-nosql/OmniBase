@@ -9,5 +9,5 @@ Association >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 Association class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextAssociation: deserializer  
+	^ deserializer stream nextAssociation: self
 ]

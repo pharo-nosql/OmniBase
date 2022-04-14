@@ -168,28 +168,28 @@ ODBEncodingStream >> lockAt: position length: length [
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextArray: aDeserializer [ 
+ODBEncodingStream >> nextArray: aClass [
 	| array |
-	array := Array new: stream getPositiveInteger.
-	aDeserializer register: array.
-	1 to: array size do: [:i | array at: i put: aDeserializer odbNextObject ].
+	array := aClass new: stream getPositiveInteger.
+	readerWriter register: array.
+	1 to: array size do: [:i | array at: i put: readerWriter odbNextObject ].
 	^array
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextAssociation: aDeserializer [ 
+ODBEncodingStream >> nextAssociation: aClass [
 	| result |
-	readerWriter register: (result := Association new).
+	readerWriter register: (result := aClass new).
 	^result
 		key: readerWriter odbNextObject;
 		value: readerWriter odbNextObject
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextByteArray: aDeserializer [
+ODBEncodingStream >> nextByteArray: aClass [
 	| array |
-	array := ByteArray new: stream getPositiveInteger.
-	aDeserializer register: array.
+	array := aClass new: stream getPositiveInteger.
+	readerWriter register: array.
 	1 to: array size do: [:i | 
 		array 
 			at: i 
@@ -198,123 +198,85 @@ ODBEncodingStream >> nextByteArray: aDeserializer [
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextCharacter: aDeserializer [ 
+ODBEncodingStream >> nextCharacter [
 	^ stream getChar
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextClass: aDeserializer [ 
+ODBEncodingStream >> nextClass [
 	^ Smalltalk 
 		at: stream getString asSymbol 
 		ifAbsent: nil
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextDate: aDeserializer [ 
-	^ aDeserializer register: (Date 
+ODBEncodingStream >> nextDate: aClass [
+	^ readerWriter register: (aClass 
 		odbDateFromSeconds: stream getInteger 
 		offset: stream getInteger) 
 		
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextDictionary: aDeserializer [
-	| size dict key |
-	size := stream getPositiveInteger.
-	dict := Dictionary new: size.
-	aDeserializer register: dict.
-	size timesRepeat: [
-		key := aDeserializer odbNextObject.
-		dict at: key put: aDeserializer odbNextObject.
-	].
-	^dict
-]
-
-{ #category : #reading }
-ODBEncodingStream >> nextDictionary: aDeserializer class: aClass [
+ODBEncodingStream >> nextDictionary: aClass [
 	| size dict key |
 	size := stream getPositiveInteger.
 	dict := aClass new: size.
-	aDeserializer register: dict.
+	readerWriter register: dict.
 	size timesRepeat: [
-		key := aDeserializer odbNextObject.
-		dict at: key put: aDeserializer odbNextObject.
+		key := readerWriter odbNextObject.
+		dict at: key put: readerWriter odbNextObject.
 	].
 	^dict
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextDoubleByteCharacter: aDeserializer [ 
+ODBEncodingStream >> nextDoubleByteCharacter [
 	^ Character value: stream getWord
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextFloatAs100Integer: deserializer [ 
+ODBEncodingStream >> nextFloatAs100Integer [
 
     ^ stream getInteger / 100.0
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextFloatAsInteger: deserializer [ 
+ODBEncodingStream >> nextFloatAsInteger [
 
     ^ stream getInteger asFloat
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextFraction: aDeserializer [ 
-	^ Fraction 
+ODBEncodingStream >> nextFraction: aClass [
+	^ aClass 
 		numerator: stream getInteger
 		denominator: stream getInteger
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextIdentityDictionary: aDeserializer [ 
-	| size dict key |
-	size := stream getPositiveInteger.
-	dict := self new: size.
-	aDeserializer register: dict.
-	size timesRepeat: 
-			[key := aDeserializer odbNextObject.
-			dict at: key put: aDeserializer odbNextObject].
-	^dict
-]
-
-{ #category : #reading }
-ODBEncodingStream >> nextIdentityDictionary: anODBDeserializer class: aClass [ 
-	| size dict |
-	size := stream getPositiveInteger.
-	dict := aClass new: size.
-	readerWriter register: dict.
-	size timesRepeat: [
-		dict 
-			at: readerWriter odbNextObject
-			put: readerWriter odbNextObject].
-	^dict
-]
-
-{ #category : #reading }
-ODBEncodingStream >> nextLargeNegativeInteger: aDeserializer [ 
+ODBEncodingStream >> nextLargeNegativeInteger [
 	^ 0 - stream getPositiveInteger
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextLargePositiveInteger: aDeserializer [ 
+ODBEncodingStream >> nextLargePositiveInteger [
 	^ stream getPositiveInteger
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextMessage: aDeserializer [ 
+ODBEncodingStream >> nextMessage: aClass [
 	| result |
-	readerWriter register: (result := Message new).
+	readerWriter register: (result := aClass new).
 	^ result
 		setSelector: readerWriter odbNextObject arguments: readerWriter odbNextObject;
 		yourself
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextMessageSend: aDeserializer [ 
+ODBEncodingStream >> nextMessageSend: aClass [
 	| result |
-	readerWriter register: (result := MessageSend new).
+	readerWriter register: (result := aClass new).
 	^result
 		receiver: readerWriter odbNextObject;
 		selector: readerWriter odbNextObject;
@@ -323,7 +285,7 @@ ODBEncodingStream >> nextMessageSend: aDeserializer [
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextODBIdentityDictionary: anODBDeserializer class: aClass [ 
+ODBEncodingStream >> nextODBIdentityDictionary: aClass [ 
 	| size dict key |
 	size := stream getPositiveInteger.
 	dict := aClass new: size.
@@ -335,28 +297,29 @@ ODBEncodingStream >> nextODBIdentityDictionary: anODBDeserializer class: aClass 
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextOneCharacterString: aDeserializer [ 
+ODBEncodingStream >> nextOneCharacterString [
 	^ stream getChar asString
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextOrderedCollection: aDeserializer [ 
+ODBEncodingStream >> nextOrderedCollection: aClass [
 	| coll size |
 	size := stream getPositiveInteger.
-	aDeserializer register: (coll := OrderedCollection new: size).
-	size timesRepeat: [ coll addLast: aDeserializer odbNextObject ].
+	readerWriter register: (coll := aClass new: size).
+	size timesRepeat: [ coll addLast: readerWriter odbNextObject ].
 	^coll
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextPersistentDictionary: aDeserializer [
-		| size dict key |
+ODBEncodingStream >> nextPersistentDictionary: aClass [
+		| size dict |
 	size := stream getPositiveInteger.
-	dict := ODBPersistentDictionary new: size.
-	aDeserializer register: dict.
-	size timesRepeat: 
-			[key := aDeserializer odbNextObject.
-			dict superAt: key put: aDeserializer odbNextObject].
+	dict := aClass new: size.
+	readerWriter register: dict.
+	size timesRepeat: [
+		dict 
+			superAt: readerWriter odbNextObject 
+			put: readerWriter odbNextObject ].
 	^dict
 ]
 

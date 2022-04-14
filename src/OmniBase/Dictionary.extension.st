@@ -9,5 +9,5 @@ Dictionary >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 Dictionary class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextDictionary: deserializer class: self 
+	^ deserializer stream nextDictionary: self 
 ]

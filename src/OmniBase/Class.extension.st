@@ -9,7 +9,7 @@ Class >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 Class class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextClass: deserializer 
+	^ deserializer stream nextClass
 ]
 
 { #category : #'*omnibase' }
