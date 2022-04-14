@@ -1,9 +1,6 @@
 Class {
 	#name : #ODBSerializedObject,
 	#superclass : #ODBTransactionObject,
-	#instVars : [
-		'changed'
-	],
 	#category : #'OmniBase-Transaction'
 }
 

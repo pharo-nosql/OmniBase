@@ -2,7 +2,6 @@ Class {
 	#name : #ODBBTreeIndexDictionary,
 	#superclass : #ODBTransactionObject,
 	#instVars : [
-		'changed',
 		'currentKey',
 		'keySize'
 	],
