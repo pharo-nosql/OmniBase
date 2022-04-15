@@ -7,6 +7,25 @@ Class {
 	#category : #'OmniBase-Tests'
 }
 
+{ #category : #cleanup }
+ODBCleanCodeTest class >> cleanupWhiteSpaceTrimRight [
+	<script>
+	| badCases |
+	badCases := (OmniBase package methods, self package methods) select: [ :each | 
+		            each sourceCode trimRight size ~= each sourceCode size ].
+
+	badCases do: [ :each | 
+		| refactoring classOrTrait |
+		classOrTrait := each traitSource
+			                ifNil: [ each methodClass ]
+			                ifNotNil: [ each traitSource innerClass ].
+		refactoring := RBAddMethodChange
+			               compile: each sourceCode trimRight
+			               in: classOrTrait
+			               for: nil.
+		refactoring execute ]
+]
+
 { #category : #tests }
 ODBCleanCodeTest >> testNoDuplicatedMethodInHierarchy [
 	"There should be no methods in the hierachy that are already in a superclass"

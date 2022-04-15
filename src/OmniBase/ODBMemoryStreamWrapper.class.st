@@ -26,8 +26,7 @@ ODBMemoryStreamWrapper >> createOn: aByteArray [
 ]
 
 { #category : #accessing }
-ODBMemoryStreamWrapper >> flush [ 
-
+ODBMemoryStreamWrapper >> flush [
 ]
 
 { #category : #public }
@@ -94,7 +93,7 @@ ODBMemoryStreamWrapper >> putWord: anInteger [
 
 { #category : #accessing }
 ODBMemoryStreamWrapper >> stream: aCollection [ 
-	stream := aCollection 
+	stream := aCollection
 ]
 
 { #category : #writing }

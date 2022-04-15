@@ -94,7 +94,6 @@ ODBDatabaseTest >> testGC [
 	"Test garbage collection"
 	self timeLimit: 1 minute. 
 	"self shouldnt: [" db garbageCollect "] raise: Error."
-
 ]
 
 { #category : #tests }
@@ -143,7 +142,6 @@ ODBDatabaseTest >> testMakePersistent [
 	txn := db newTransaction.
 	txn makePersistent: self collection.
 	txn commit.
-	
 ]
 
 { #category : #tests }
@@ -164,7 +162,6 @@ ODBDatabaseTest >> testNewPersistent [
 ODBDatabaseTest >> testNoClientsAfterCreation [
 
 	self assert: db numberOfClients equals: 0.
-	
 ]
 
 { #category : #tests }
@@ -217,7 +214,6 @@ ODBDatabaseTest >> testOneClientAfterOpening [
 	| client |
 	client := db localClient.
 	self assert: db numberOfClients equals: 1.
-	
 ]
 
 { #category : #tests }
@@ -234,7 +230,6 @@ ODBDatabaseTest >> testPersistTwoObjectsInCluster [
 	
 	self assert: txn changesPackage changes size equals: 1.
 	txn abort.
-	
 ]
 
 { #category : #tests }
@@ -252,7 +247,6 @@ ODBDatabaseTest >> testPersistTwoObjectsSeparate [
 	
 	self assert: txn changesPackage changes size equals: 2.
 	txn abort.
-	
 ]
 
 { #category : #tests }
@@ -270,7 +264,6 @@ ODBDatabaseTest >> testPersistTwoObjectsWithCollectionInCluster [
 	
 	self assert: txn changesPackage changes size equals: 1.
 	txn abort.
-	
 ]
 
 { #category : #tests }
@@ -290,7 +283,6 @@ ODBDatabaseTest >> testPersistTwoObjectsWithCollectionSeparate [
 	
 	self assert: txn changesPackage changes size equals: 2.
 	txn abort.
-	
 ]
 
 { #category : #tests }
@@ -313,7 +305,6 @@ ODBDatabaseTest >> testPersistTwoObjectsWithDictionaryInCluster [
 	
 	self assert: txn changesPackage changes size equals: 2.
 	txn abort.
-	
 ]
 
 { #category : #tests }
@@ -337,5 +328,4 @@ ODBDatabaseTest >> testPersistTwoObjectsWithODBDictionary [
 	
 	self assert: txn changesPackage changes size equals: 3.
 	txn abort.
-	
 ]

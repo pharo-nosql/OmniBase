@@ -56,7 +56,6 @@ ODBTransactionTest >> testReadOnlyTransaction [
 	balanceB := ((transaction root at: 'Accounts') at: 'B') balance.
 	"should be still the old value as the re-only transaction should have no impact"
 	self assert: balanceB equals: 200.
-
 ]
 
 { #category : #tests }
@@ -75,7 +74,6 @@ ODBTransactionTest >> testReferenceToSecondContainer [
 	transaction2 := db newTransaction. 
 	self assert: (transaction2 root at: 'test1') first isODBReference.
 	self assert: (db containerNamed: 'second' ifAbsent: [self error]) numberOfObjects equals: 1.
-	
 ]
 
 { #category : #tests }
@@ -108,5 +106,4 @@ ODBTransactionTest >> testTransactionPreservesState [
 	"should be still the old value as the transaction should snapshot data to the time 
 	of transaction creation"
 	self assert: balanceB equals: 200
-
 ]

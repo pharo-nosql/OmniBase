@@ -390,7 +390,7 @@ ODBBTreeIndexDictionary >> keyLength [
 { #category : #accessing }
 ODBBTreeIndexDictionary >> keySize [ 
 
-	^ keySize 
+	^ keySize
 ]
 
 { #category : #private }

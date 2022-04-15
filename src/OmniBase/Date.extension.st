@@ -23,5 +23,5 @@ Date class >> odbDateFromSeconds: seconds offset: offset [
 { #category : #'*omnibase' }
 Date class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextDate: self 
+	^ deserializer stream nextDate: self
 ]

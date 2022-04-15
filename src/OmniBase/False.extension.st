@@ -3,7 +3,7 @@ Extension { #name : #False }
 { #category : #'*omnibase' }
 False >> odbBasicSerialize: serializer [
 
-	serializer stream nextPutFalse: self 
+	serializer stream nextPutFalse: self
 ]
 
 { #category : #'*omnibase' }

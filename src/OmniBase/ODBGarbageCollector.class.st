@@ -309,7 +309,6 @@ ODBGarbageCollector >> walkObjectReferencesOf: objectID addInto: firstToDo oidSe
 						firstToDo add: oid.
 						progressBlock value ] ].
 			dbObject close ]
-
 ]
 
 { #category : #private }

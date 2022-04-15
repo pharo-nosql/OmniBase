@@ -214,7 +214,6 @@ OmniBase class >> reset [
 	processToTransactionDict := IdentityDictionary new.
 	processToTransactionMutex := Semaphore forMutualExclusion.
 	currentTransaction := nil.
-	
 ]
 
 { #category : #public }
@@ -312,7 +311,7 @@ OmniBase >> containerNamed: aName [
 OmniBase >> containerNamed: aName ifAbsent: aBlock [
 	"Answers the container the receiver locates at aName or executes aBlock if not found."
 
-	^ objectManager containerNamed: aName ifAbsent: aBlock 
+	^ objectManager containerNamed: aName ifAbsent: aBlock
 ]
 
 { #category : #public }

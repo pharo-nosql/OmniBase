@@ -20,7 +20,7 @@ ODBLock class >> lockClassID [
 
 { #category : #testing }
 ODBLock >> isSameTransaction: anODBLocalTransaction [ 
-	^ transaction = anODBLocalTransaction 
+	^ transaction = anODBLocalTransaction
 ]
 
 { #category : #'public/accessing' }
@@ -49,7 +49,7 @@ ODBLock >> lockIndex: anInteger [
 
 { #category : #'public/accessing' }
 ODBLock >> lockRegistryKey [ 
-	^ objectID lockRegistryKey 
+	^ objectID lockRegistryKey
 ]
 
 { #category : #'public/accessing' }

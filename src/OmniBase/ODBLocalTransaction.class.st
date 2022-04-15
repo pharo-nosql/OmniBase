@@ -27,7 +27,6 @@ ODBLocalTransaction >> addLoggedLock: aKeyLock [
 	locks add: aKeyLock.
 	transactionFile lockAdd: aKeyLock.
 	^ true
-	
 ]
 
 { #category : #public }
@@ -111,8 +110,7 @@ ODBLocalTransaction >> hasForeignLockFor: aTransactionObject [
 ODBLocalTransaction >> hasKeyLockOn: aBtreeDictionary key: aCollection [ 
 	^ lockRegistry 
 		hasKeyLockOn: aBtreeDictionary 
-		key: aCollection 
-
+		key: aCollection
 ]
 
 { #category : #testing }
@@ -150,7 +148,6 @@ ODBLocalTransaction >> isPersistent: anObject [
 	"Answers true if anObject is persistent, false otherwise."
 	
 	^ (self getTransactionObject: anObject ifAbsent:[nil]) notNil
-	
 ]
 
 { #category : #testing }

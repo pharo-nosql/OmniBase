@@ -179,7 +179,6 @@ FLock class >> setNonBlock: fileHandle [
 	
 	flags := self fcntl: fd command: F_GETFL value: 0.
 	flags := self fcntl: fd command: F_SETFL value: flags | O_NONBLOCK
-	
 ]
 
 { #category : #'accessing locking' }
