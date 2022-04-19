@@ -21,7 +21,7 @@ ODBSerializedDBObject65536References >> makeTransactionObject: aTransaction [
 	^ODBSerializedObject new 
 		setObjectHolder: objectHolder
 		dataBaseObject: (ODBDeserializer new 
-				deserializeFrom: mStream
+				deserializeFrom: (ODBEncodingStream on: mStream)
 				referenceManager: referenceManager
 				transaction: aTransaction)
 		transaction: aTransaction
