@@ -143,11 +143,6 @@ ODBFileStreamWrapper >> finalize [
 	self close
 ]
 
-{ #category : #accessing }
-ODBFileStreamWrapper >> flush [
-	stream flush
-]
-
 { #category : #public }
 ODBFileStreamWrapper >> getByte [
 	"Read byte from file stream. Answer <nil> if

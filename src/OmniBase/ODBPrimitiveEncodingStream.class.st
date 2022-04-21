@@ -25,8 +25,8 @@ ODBPrimitiveEncodingStream >> atEnd [
 ]
 
 { #category : #accessing }
-ODBPrimitiveEncodingStream >> flush [ 
-
+ODBPrimitiveEncodingStream >> flush [
+	stream flush
 ]
 
 { #category : #public }
