@@ -4,12 +4,6 @@ Class {
 	#category : #'OmniBase-Streams'
 }
 
-{ #category : #'instance creation' }
-ODBMemoryStreamWrapper class >> on: aFileStream [ 
-	^ self new 
-		stream: aFileStream
-]
-
 { #category : #writing }
 ODBMemoryStreamWrapper class >> write [
 	^ self on: (WriteStream on: ByteArray new)
@@ -23,11 +17,6 @@ ODBMemoryStreamWrapper >> asByteArray [
 { #category : #public }
 ODBMemoryStreamWrapper >> createOn: aByteArray [
 	stream := aByteArray readStream
-]
-
-{ #category : #accessing }
-ODBMemoryStreamWrapper >> flush [ 
-
 ]
 
 { #category : #public }
@@ -60,11 +49,6 @@ ODBMemoryStreamWrapper >> getWord [
     ^self getByte bitOr: (self getByte bitShift: 8)
 ]
 
-{ #category : #accessing }
-ODBMemoryStreamWrapper >> position: anInteger [ 
-	stream position: anInteger
-]
-
 { #category : #public }
 ODBMemoryStreamWrapper >> putByte: anInteger [
 
@@ -90,11 +74,6 @@ ODBMemoryStreamWrapper >> putWord: anInteger [
 	self 
 		putByte: (anInteger bitAnd: 255); 
 		putByte: (anInteger bitShift: -8)
-]
-
-{ #category : #accessing }
-ODBMemoryStreamWrapper >> stream: aCollection [ 
-	stream := aCollection 
 ]
 
 { #category : #writing }

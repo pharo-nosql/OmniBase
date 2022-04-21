@@ -7,9 +7,26 @@ Class {
 	#category : #'OmniBase-Streams'
 }
 
+{ #category : #testing }
+ODBPrimitiveEncodingStream class >> isAbstract [
+		
+	^ self == ODBPrimitiveEncodingStream
+]
+
+{ #category : #'instance creation' }
+ODBPrimitiveEncodingStream class >> on: aFileStream [ 
+	^ self new 
+		stream: aFileStream
+]
+
 { #category : #accessing }
 ODBPrimitiveEncodingStream >> atEnd [ 
 	^ stream atEnd
+]
+
+{ #category : #accessing }
+ODBPrimitiveEncodingStream >> flush [ 
+
 ]
 
 { #category : #public }
@@ -49,6 +66,11 @@ ODBPrimitiveEncodingStream >> getInteger [
 	^0 - (int bitShift: -1)
 ]
 
+{ #category : #accessing }
+ODBPrimitiveEncodingStream >> getLong [
+	^ self subclassResponsibility
+]
+
 { #category : #public }
 ODBPrimitiveEncodingStream >> getPositiveInteger [
 	"Answer the next Integer encoded in the receiver."
@@ -71,8 +93,18 @@ ODBPrimitiveEncodingStream >> getString [
 ]
 
 { #category : #accessing }
+ODBPrimitiveEncodingStream >> getWord [
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 ODBPrimitiveEncodingStream >> position [
 	^ stream position
+]
+
+{ #category : #accessing }
+ODBPrimitiveEncodingStream >> position: anInteger [ 
+	stream position: anInteger
 ]
 
 { #category : #public }
@@ -81,10 +113,20 @@ ODBPrimitiveEncodingStream >> putBoolean: aBool [
     self putByte: (aBool ifTrue: [ 1] ifFalse: [0])
 ]
 
+{ #category : #accessing }
+ODBPrimitiveEncodingStream >> putByte: anInteger [ 
+	^ self subclassResponsibility
+]
+
 { #category : #public }
 ODBPrimitiveEncodingStream >> putBytesFrom: aByteCollection [
 
     ^ self putBytesFrom: aByteCollection len: aByteCollection size
+]
+
+{ #category : #accessing }
+ODBPrimitiveEncodingStream >> putBytesFrom: aByteCollection len: len [ 
+	^ self subclassResponsibility
 ]
 
 { #category : #public }
@@ -97,6 +139,11 @@ ODBPrimitiveEncodingStream >> putChar: aCharacter [
 ODBPrimitiveEncodingStream >> putInteger: anInteger [ 
 	anInteger < 0 ifTrue: [^self putPositiveInteger: (0 - anInteger bitShift: 1) + 1].
 	self putPositiveInteger: (anInteger bitShift: 1)
+]
+
+{ #category : #accessing }
+ODBPrimitiveEncodingStream >> putLong: anInteger [ 
+	^ self subclassResponsibility
 ]
 
 { #category : #public }
@@ -115,6 +162,16 @@ ODBPrimitiveEncodingStream >> putString: aString [
 ]
 
 { #category : #accessing }
+ODBPrimitiveEncodingStream >> putWord: anInteger [ 
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 ODBPrimitiveEncodingStream >> size [ 
 	^ stream size
+]
+
+{ #category : #accessing }
+ODBPrimitiveEncodingStream >> stream: aCollection [ 
+	stream := aCollection 
 ]

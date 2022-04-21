@@ -7,12 +7,6 @@ Class {
 	#category : #'OmniBase-Streams'
 }
 
-{ #category : #'instance creation' }
-ODBFileStreamWrapper class >> on: aFileStream [ 
-	^ self new 
-		stream: aFileStream
-]
-
 { #category : #accessing }
 ODBFileStreamWrapper >> atPosition: anInteger getBytesFor: aByteCollection [ 
 	"Read bytes from stream at position anInteger. 
@@ -271,11 +265,6 @@ ODBFileStreamWrapper >> setToEnd [
 	^ stream 
 		setToEnd;
 		position 
-]
-
-{ #category : #accessing }
-ODBFileStreamWrapper >> stream: aFileStream [ 
-	stream := aFileStream 
 ]
 
 { #category : #accessing }
