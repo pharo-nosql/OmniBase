@@ -430,22 +430,10 @@ OmniBase >> newBTreeIdentityDictionary [
 ]
 
 { #category : #accessing }
-OmniBase >> newBTreeIndexDictionary: keySize [
-
-    ^self class newBTreeIndexDictionary: keySize
-]
-
-{ #category : #accessing }
 OmniBase >> newContainer: aString [
 	"Create new container named aString."
 
     ^objectManager containerNew: aString
-]
-
-{ #category : #accessing }
-OmniBase >> newPersistentDictionary [
-
-	^self class newPersistentDictionary
 ]
 
 { #category : #public }

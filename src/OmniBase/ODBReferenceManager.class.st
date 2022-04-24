@@ -86,25 +86,22 @@ ODBReferenceManager >> databaseObjectClassID [
 ]
 
 { #category : #'load/store' }
-ODBReferenceManager >> loadFromStream: stream [ 
-	| n |
-	n := stream getPositiveInteger.
-	n > 10000 ifTrue: [self error: '[Deserialization] Too many external references'].
-	n > 0 
-		ifTrue: 
-			[references := OrderedCollection new: n.
-			n timesRepeat: [references add: (ODBObjectID new loadFromStream: stream)]]
+ODBReferenceManager >> loadFromStream: stream [
+
+	self loadFromStream: stream externalReferencesLoaderBlock: [ODBObjectID new loadFromStream: stream]
 ]
 
 { #category : #'load/store' }
-ODBReferenceManager >> loadFromStream: stream externalReferencesLoaderBlock: referencedObjectLoaderBlock [ 
+ODBReferenceManager >> loadFromStream: stream externalReferencesLoaderBlock: referencedObjectLoaderBlock [
+
 	| n |
 	n := stream getPositiveInteger.
-	n > 10000 ifTrue: [self error: '[Deserialization] Too many external references'].
-	n > 0 
-		ifTrue: 
-			[references := OrderedCollection new: n.
-			n timesRepeat: [references add: (referencedObjectLoaderBlock value: stream)]]
+	n > 10000 ifTrue: [ 
+		self error: '[Deserialization] Too many external references' ].
+	n > 0 ifFalse: [ ^ self ].
+	references := OrderedCollection new: n.
+	n timesRepeat: [ 
+		references add: (referencedObjectLoaderBlock value: stream) ]
 ]
 
 { #category : #public }
