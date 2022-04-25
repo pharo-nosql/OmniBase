@@ -88,7 +88,9 @@ ODBReferenceManager >> databaseObjectClassID [
 { #category : #'load/store' }
 ODBReferenceManager >> loadFromStream: stream [
 
-	self loadFromStream: stream externalReferencesLoaderBlock: [ODBObjectID new loadFromStream: stream]
+	self
+		loadFromStream: stream
+		externalReferencesLoaderBlock: [ :str | ODBObjectID new loadFromStream: str ]
 ]
 
 { #category : #'load/store' }
