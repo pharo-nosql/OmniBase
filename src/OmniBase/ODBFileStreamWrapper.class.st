@@ -90,10 +90,7 @@ ODBFileStreamWrapper >> basicGetBytesFor: aByteCollection len: len [
 
 { #category : #accessing }
 ODBFileStreamWrapper >> basicPosition: anInteger [
-	"Positiones stream to anInteger. Answer anInteger."
-
-	stream position: anInteger.
-	^anInteger
+	stream position: anInteger
 ]
 
 { #category : #accessing }
@@ -202,11 +199,7 @@ ODBFileStreamWrapper >> name [
 
 { #category : #accessing }
 ODBFileStreamWrapper >> position: anInteger [ 
-	"Positiones stream to anInteger. Answer anInteger."
-
-	| result |
-	mutex critical: [result := self basicPosition: anInteger].
-	^result
+	mutex critical: [stream position: anInteger]
 ]
 
 { #category : #public }
