@@ -254,6 +254,7 @@ ODBFileStreamWrapper >> setToEnd [
 		position
 ]
 
+{ #category : #public }
 ODBFileStreamWrapper >> truncate: anInteger [ 
 	"Truncate stream so that its size will be anInteger. 
 	Position to anInteger."
