@@ -104,7 +104,6 @@ ODBFile >> headerLength [
 ODBFile >> newCodecStreamOn: aFileReference [
 
 	^ (File named: aFileReference pathString) openForWrite asODBPrimitiveEncodingStream.
-
 ]
 
 { #category : #'create/open/close' }
@@ -114,7 +113,6 @@ ODBFile >> newCodecStreamOn: aFileReference using: aBlock [
 	[ aBlock cull: fileStream ]
 		ifCurtailed: [ fileStream close. ^ nil ].
 	^ fileStream asODBPrimitiveEncodingStream.
-
 ]
 
 { #category : #'create/open/close' }
@@ -196,8 +194,7 @@ ODBFile >> waitForAddingLock [
 
 	^ self
 		waitForLockAt: 0 
-		length: 1 
-
+		length: 1
 ]
 
 { #category : #public }

@@ -18,14 +18,14 @@ Account >> balance: anInteger [
 	balance := anInteger
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Account >> decrement: anInteger [ 
-	balance := balance - anInteger 
+	balance := balance - anInteger
 ]
 
 { #category : #accessing }
 Account >> increment: anInteger [ 
-	balance := balance + anInteger 
+	balance := balance + anInteger
 ]
 
 { #category : #transferring }

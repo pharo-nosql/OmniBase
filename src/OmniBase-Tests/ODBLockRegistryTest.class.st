@@ -57,5 +57,5 @@ ODBLockRegistryTest >> testRegisterByOpeningDatabase [
 	Smalltalk garbageCollect .
 	Smalltalk garbageCollect .
 	Smalltalk garbageCollect .
-	self assert: ODBLockRegistry registeredPaths size equals: 0 
+	self assert: ODBLockRegistry registeredPaths size equals: 0
 ]

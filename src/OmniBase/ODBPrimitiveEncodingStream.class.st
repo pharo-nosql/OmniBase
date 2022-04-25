@@ -37,7 +37,7 @@ ODBPrimitiveEncodingStream >> getBoolean [
 
 { #category : #public }
 ODBPrimitiveEncodingStream >> getByte [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #public }
@@ -48,7 +48,7 @@ ODBPrimitiveEncodingStream >> getBytesFor: aByteCollection [
 
 { #category : #public }
 ODBPrimitiveEncodingStream >> getBytesFor: bytes len: size [
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #public }

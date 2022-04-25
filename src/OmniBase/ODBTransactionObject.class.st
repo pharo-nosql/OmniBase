@@ -65,14 +65,12 @@ ODBTransactionObject >> lock [
 
 { #category : #accessing }
 ODBTransactionObject >> lockRegistryKey [
-	^ self objectID lockRegistryKey 
+	^ self objectID lockRegistryKey
 ]
 
 { #category : #public }
 ODBTransactionObject >> objectChanged [
 	"This message is sent from transaction the first time it is marked as dirty."
-
-	
 ]
 
 { #category : #public }
@@ -95,15 +93,11 @@ ODBTransactionObject >> objectID [
 { #category : #public }
 ODBTransactionObject >> objectLoaded [
 	"Sent to transaction object when it is loaded into transaction."
-
-	
 ]
 
 { #category : #public }
 ODBTransactionObject >> objectStored [
 	"Sent to transaction object when it is stored for the first time."
-
-	
 ]
 
 { #category : #printing }

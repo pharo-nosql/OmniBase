@@ -28,8 +28,7 @@ ODBExpiredProxyObject >> doesNotUnderstand: aMessage [
 			self becomeForward: freshTarget.
 			freshTarget 
 				perform: aMessage selector
-				withArguments: aMessage arguments]. 
-
+				withArguments: aMessage arguments].
 ]
 
 { #category : #public }

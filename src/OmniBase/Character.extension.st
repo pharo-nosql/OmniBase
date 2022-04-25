@@ -3,7 +3,7 @@ Extension { #name : #Character }
 { #category : #'*omnibase' }
 Character >> odbBasicSerialize: serializer [
 
-	serializer stream nextPutCharacter: self 
+	serializer stream nextPutCharacter: self
 ]
 
 { #category : #'*omnibase' }

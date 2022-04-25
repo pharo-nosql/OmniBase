@@ -102,7 +102,6 @@ ODBFileStreamWrapper >> basicPutBytesFrom: aByteArray len: length [
 		= length ifFalse: [OmniBase signalError: 'Could not write the whole data'].
 	stream flush.
 	^self
-
 ]
 
 { #category : #'initialize-release' }
@@ -183,13 +182,13 @@ ODBFileStreamWrapper >> getWord [
 { #category : #initialization }
 ODBFileStreamWrapper >> initialize [ 
 	super initialize.
-	mutex := Semaphore forMutualExclusion 
+	mutex := Semaphore forMutualExclusion
 ]
 
 { #category : #public }
 ODBFileStreamWrapper >> lockAt: position length: length [ 
 
-	^ stream lockAt: position length: length 
+	^ stream lockAt: position length: length
 ]
 
 { #category : #accessing }
@@ -252,10 +251,9 @@ ODBFileStreamWrapper >> remove [
 ODBFileStreamWrapper >> setToEnd [
 	^ stream 
 		setToEnd;
-		position 
+		position
 ]
 
-{ #category : #accessing }
 ODBFileStreamWrapper >> truncate: anInteger [ 
 	"Truncate stream so that its size will be anInteger. 
 	Position to anInteger."
@@ -273,5 +271,5 @@ ODBFileStreamWrapper >> unlock [
 { #category : #accessing }
 ODBFileStreamWrapper >> unlockAt: position length: length [
 
-	^ stream unlockAt: position length: length 
+	^ stream unlockAt: position length: length
 ]

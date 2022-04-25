@@ -9,5 +9,5 @@ Float >> asBtreeKeyOfSize: keySize [
 { #category : #'*omnibase' }
 Float class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextSmallFloat64: deserializer 
+	^ deserializer stream nextSmallFloat64: deserializer
 ]

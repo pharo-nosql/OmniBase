@@ -30,7 +30,7 @@ ByteArray >> odbAsInteger [
 { #category : #'*OmniBase' }
 ByteArray >> odbBasicSerialize: serializer [
 
-	serializer stream nextPutByteArray: self 
+	serializer stream nextPutByteArray: self
 ]
 
 { #category : #'*OmniBase' }

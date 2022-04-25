@@ -29,7 +29,6 @@ ODBTransaction >> abort [
 	transactionManager isNil ifFalse: [transactionManager critical: [self basicAbort]].
 
 	self triggerEvent: #finishedTransaction: with: self.
-
 ]
 
 { #category : #public }
@@ -262,7 +261,7 @@ ODBTransaction >> objectHolderAt: objectID [
 { #category : #'private/unclassified' }
 ODBTransaction >> odbBasicSerialize: serializer [
 
-	serializer stream nextPutTransaction: self 
+	serializer stream nextPutTransaction: self
 ]
 
 { #category : #'private/unclassified' }
