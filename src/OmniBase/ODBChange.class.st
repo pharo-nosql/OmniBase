@@ -29,8 +29,6 @@ ODBChange >> committed [
 { #category : #public }
 ODBChange >> loadFromStream: aStream [ 
 	"Load receiver from aStream.  Implemented by subclasses."
-
-	
 ]
 
 { #category : #accessing }

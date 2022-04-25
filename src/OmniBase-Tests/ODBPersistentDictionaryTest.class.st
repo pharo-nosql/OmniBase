@@ -11,8 +11,6 @@ ODBPersistentDictionaryTest >> testAdd [
 		add: (#test -> true);
 		yourself] evaluateAndCommitIn: db newTransaction.
 	self assert: (dict at: #test)
-	
-
 ]
 
 { #category : #tests }
@@ -32,8 +30,6 @@ ODBPersistentDictionaryTest >> testNewPersistentDictionary [
 		yourself.
 	dict := dict asDictionary ] evaluateAndCommitIn: db newTransaction.
 	self assert: (dict at: #test)
-	
-
 ]
 
 { #category : #tests }
@@ -49,8 +45,6 @@ ODBPersistentDictionaryTest >> testRemoveKeyifAbsent [
 		] evaluateAndCommitIn: db newTransaction.
 	self assert: (dict at: #tt).
 	self assert: tag
-	
-
 ]
 
 { #category : #tests }
@@ -63,6 +57,4 @@ ODBPersistentDictionaryTest >> testTransaction [
 		self assert: dict transaction equals: transaction.	
 		] evaluateAndCommitIn: transaction.
 	self assert: (dict at: #test)
-	
-
 ]

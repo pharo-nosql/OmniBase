@@ -15,7 +15,7 @@ String >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 String class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextString: deserializer 
+	^ deserializer stream nextString: deserializer
 ]
 
 { #category : #'*omnibase' }

@@ -54,7 +54,6 @@ ODBReference >> isIdenticalTo: anObject [
 { #category : #hacks }
 ODBReference >> isMorph [
 	^ false
-
 ]
 
 { #category : #public }
@@ -73,8 +72,6 @@ ODBReference >> isODBReference [
 { #category : #accessing }
 ODBReference >> makePersistent [
 	"Do nothing, object is already persistent."
-
-	
 ]
 
 { #category : #accessing }

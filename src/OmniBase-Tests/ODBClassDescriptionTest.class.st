@@ -17,7 +17,5 @@ ODBClassDescriptionTest >> testReshape [
 		"addInstVarNamed: 'four';"
 		addInstVarNamed: 'two'.
 	self assertCollection: tmpClass instVarNames hasSameElements: #( one three two).
-	desc2 := ODBClassDescription new createFor: tmpClass. 
-
-		
+	desc2 := ODBClassDescription new createFor: tmpClass.
 ]

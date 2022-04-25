@@ -3,7 +3,7 @@ Extension { #name : #Association }
 { #category : #'*omnibase' }
 Association >> odbBasicSerialize: serializer [
 
-	serializer stream nextPutAssociation: self 
+	serializer stream nextPutAssociation: self
 ]
 
 { #category : #'*omnibase' }

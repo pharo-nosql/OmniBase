@@ -27,7 +27,7 @@ ODBEncodingStream class >> characterEncoding: aString [
 
 { #category : #convenience }
 ODBEncodingStream class >> decodeBytes: aByteArray [ 
-	^ characterEncoder decodeBytes: aByteArray 
+	^ characterEncoder decodeBytes: aByteArray
 ]
 
 { #category : #convenience }
@@ -37,7 +37,7 @@ ODBEncodingStream class >> encodeString: aString [
 
 { #category : #initialization }
 ODBEncodingStream class >> initialize [ 
-	self initializeEncoding 
+	self initializeEncoding
 ]
 
 { #category : #initialization }
@@ -158,13 +158,13 @@ ODBEncodingStream >> getBytesFor: aByteCollection len: len [
 	"Read len bytes from stream to aByteCollection. 
 	Answer number of bytes actualy read."
 	
-	^ stream getBytesFor: aByteCollection len: len 
+	^ stream getBytesFor: aByteCollection len: len
 ]
 
 { #category : #accessing }
 ODBEncodingStream >> lockAt: position length: length [ 
 
-	^ stream lockAt: position length: length 
+	^ stream lockAt: position length: length
 ]
 
 { #category : #reading }
@@ -213,8 +213,7 @@ ODBEncodingStream >> nextClass [
 ODBEncodingStream >> nextDate: aClass [
 	^ readerWriter register: (aClass 
 		odbDateFromSeconds: stream getInteger 
-		offset: stream getInteger) 
-		
+		offset: stream getInteger)
 ]
 
 { #category : #reading }
@@ -399,7 +398,7 @@ ODBEncodingStream >> nextPutDictionary: aDictionary [
 ODBEncodingStream >> nextPutExternalReference: anObjectID [ 
 	stream
 		putByte: ODBExternalReferenceCode;
-		putPositiveInteger: anObjectID 
+		putPositiveInteger: anObjectID
 ]
 
 { #category : #writing }
@@ -469,7 +468,7 @@ ODBEncodingStream >> nextPutMessageSend: aMessageSend [
 
 { #category : #writing }
 ODBEncodingStream >> nextPutNil: anUndefinedObject [ 
-	stream putByte: ODBUndefinedObjectCode 
+	stream putByte: ODBUndefinedObjectCode
 ]
 
 { #category : #writing }
@@ -492,7 +491,7 @@ ODBEncodingStream >> nextPutPersistentDictionary: aPersistentDictionary [
 
 { #category : #writing }
 ODBEncodingStream >> nextPutProcessorScheduler: aProcessorScheduler [ 
-	stream putByte: ODBProcessSchedulerCode 
+	stream putByte: ODBProcessSchedulerCode
 ]
 
 { #category : #writing }
@@ -500,7 +499,7 @@ ODBEncodingStream >> nextPutSmallFloat64: aNumber [
 	stream
 		putByte: ODBSmallFloat64Code;
 		putInteger: (aNumber at: 1);
-		putInteger: (aNumber at: 2)  
+		putInteger: (aNumber at: 2)
 ]
 
 { #category : #writing }
@@ -527,7 +526,7 @@ ODBEncodingStream >> nextPutSymbol: aSymbol [
 
 { #category : #writing }
 ODBEncodingStream >> nextPutSystemDictionary: aCollection [ 
-	stream putByte: ODBSystemDictionaryCode 
+	stream putByte: ODBSystemDictionaryCode
 ]
 
 { #category : #writing }
@@ -539,7 +538,7 @@ ODBEncodingStream >> nextPutTime: aTime [
 
 { #category : #writing }
 ODBEncodingStream >> nextPutTransaction: aTransaction [ 
-	stream putByte: ODBTransactionCode 
+	stream putByte: ODBTransactionCode
 ]
 
 { #category : #writing }
@@ -581,7 +580,6 @@ ODBEncodingStream >> nextString: aDeserializer [
 	string := buf asString.
 	aDeserializer register: string.
 	^ string
-
 ]
 
 { #category : #reading }
@@ -614,12 +612,12 @@ ODBEncodingStream >> nextnCharacterString: aDeserializer size: size [
 
 { #category : #accessing }
 ODBEncodingStream >> position: anInteger [ 
-	^ stream position: anInteger 
+	^ stream position: anInteger
 ]
 
 { #category : #accessing }
 ODBEncodingStream >> primitive [
-	^ stream 
+	^ stream
 ]
 
 { #category : #public }
@@ -631,7 +629,7 @@ ODBEncodingStream >> putBytesFrom: aByteCollection len: len [
 
 { #category : #accessing }
 ODBEncodingStream >> readerWriter: anODBSerializer [ 
-	readerWriter := anODBSerializer 
+	readerWriter := anODBSerializer
 ]
 
 { #category : #removing }
@@ -661,11 +659,11 @@ ODBEncodingStream >> truncate: anInteger [
 	"Truncate stream so that its size will be anInteger. 
 	Position to anInteger."
 
-	stream truncate: anInteger 
+	stream truncate: anInteger
 ]
 
 { #category : #accessing }
 ODBEncodingStream >> unlockAt: position length: length [
 
-	^ stream unlockAt: position length: length 
+	^ stream unlockAt: position length: length
 ]

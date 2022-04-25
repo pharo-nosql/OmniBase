@@ -27,7 +27,7 @@ Integer >> asBtreeKeyOfSize: keySize [
 { #category : #'*omnibase' }
 Integer >> odbBasicSerialize: serializer [
 
-	serializer stream nextPutInteger: self 
+	serializer stream nextPutInteger: self
 ]
 
 { #category : #'*omnibase' }

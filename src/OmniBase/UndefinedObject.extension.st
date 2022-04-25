@@ -3,7 +3,7 @@ Extension { #name : #UndefinedObject }
 { #category : #'*omnibase' }
 UndefinedObject >> odbBasicSerialize: serializer [
 
-	serializer stream nextPutNil: self 
+	serializer stream nextPutNil: self
 ]
 
 { #category : #'*omnibase' }

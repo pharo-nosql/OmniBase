@@ -78,7 +78,6 @@ ODBSerializationTest >> testSerializationBoxedFloat64 [
 	#[0 1 12 66 111 120 101 100 70 108 111 97 116 54 52 1 1 0 1 0 0 0 2 1 2 128 128 224 234 6 0].
 	self assert: materialized class equals: BoxedFloat64.
 	self assert: materialized equals: 2.45227231256843e-45.
-
 ]
 
 { #category : #tests }
@@ -309,7 +308,6 @@ ODBSerializationTest >> testSerializationSmallFloat64 [
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized class equals: SmallFloat64.
 	self assert: materialized equals: 1.11
-
 ]
 
 { #category : #tests }
@@ -446,7 +444,6 @@ ODBSerializationTest >> testSerializationWideStringUTF16 [
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: string.
-
 ]
 
 { #category : #tests }
@@ -467,7 +464,6 @@ ODBSerializationTest >> testSerializationWideStringUTF32 [
 	
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: string.
-
 ]
 
 { #category : #tests }
@@ -487,5 +483,4 @@ ODBSerializationTest >> testSerializationWideStringUTF8 [
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: string.
-
 ]

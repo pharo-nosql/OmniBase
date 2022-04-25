@@ -3,7 +3,7 @@ Extension { #name : #Array }
 { #category : #'*omnibase' }
 Array >> odbBasicSerialize: serializer [
 
-	serializer stream nextPutArray: self 
+	serializer stream nextPutArray: self
 ]
 
 { #category : #'*omnibase' }

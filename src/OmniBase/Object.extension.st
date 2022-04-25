@@ -9,7 +9,6 @@ Object >> asBtreeKeyOfSize: keySize [
 { #category : #'*omnibase' }
 Object >> commit: serializer [
 	"do nothing"
-
 ]
 
 { #category : #'*omnibase' }
@@ -63,7 +62,6 @@ Object >> makePersistent [
 		ifFalse:[OmniBase currentTransaction makePersistent: self in: ARCurrentContainer value]"
 	
 	OmniBase currentTransaction makePersistent: self
-		
 ]
 
 { #category : #'*omnibase' }
@@ -88,8 +86,6 @@ Object >> odbAboutToCommitIn: anOmniBaseTransaction [
 	"Sent before transaction writes changes to the database (right before commit).
 	In this method you can use transaction the same way as usual.
 	Do nothing by default."
-
-	
 ]
 
 { #category : #'*omnibase' }
