@@ -399,6 +399,33 @@ ODBSerializationTest >> testSerializationString [
 ]
 
 { #category : #tests }
+ODBSerializationTest >> testSerializationStringTwice [
+	
+	| object serialized materialized |
+	
+	"try to serialize an object that references twice the string"
+	object := {'h' . 'h'}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object.
+	
+
+	object := {'hello' . 'hello'}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object.
+	
+
+	object := {'helloWithMoreCharacters' . 'helloWithMoreCharacters'}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object.
+]
+
+{ #category : #tests }
 ODBSerializationTest >> testSerializationSymbol [
 	| object serialized materialized |
 	object := #someSelector.
