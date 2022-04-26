@@ -355,7 +355,28 @@ ODBSerializationTest >> testSerializationSmallInteger [
 { #category : #tests }
 ODBSerializationTest >> testSerializationString [ 
 	| string serialized materialized |
-	"First Small String with size < 10"
+	
+	"empty String"
+	
+	string := ''.
+	serialized := ODBSerializer serializeToBytes: string.
+	self assert: serialized equals:#[0 0 1 0 0 0 70].
+	self assert: (serialized at: 7) equals: ODBSmallStringBaseCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: ''.
+	
+	"Small String with size 1"
+	
+	string := 'h'.
+	serialized := ODBSerializer serializeToBytes: string.
+	self assert: serialized equals:#[0 0 1 0 0 0 71 104].
+	self assert: (serialized at: 7) equals: ODBSmallStringBaseCode + string size.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: 'h'.
+	
+	"Small String with size < 10"
 	
 	string := 'hello'.
 	serialized := ODBSerializer serializeToBytes: string.
