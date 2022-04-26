@@ -297,7 +297,7 @@ ODBEncodingStream >> nextODBIdentityDictionary: aClass [
 
 { #category : #reading }
 ODBEncodingStream >> nextOneCharacterString [
-	^ stream getChar asString
+	^  readerWriter register: stream getChar asString
 ]
 
 { #category : #reading }

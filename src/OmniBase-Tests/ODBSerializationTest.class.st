@@ -355,7 +355,28 @@ ODBSerializationTest >> testSerializationSmallInteger [
 { #category : #tests }
 ODBSerializationTest >> testSerializationString [ 
 	| string serialized materialized |
-	"First Small String with size < 10"
+	
+	"empty String"
+	
+	string := ''.
+	serialized := ODBSerializer serializeToBytes: string.
+	self assert: serialized equals:#[0 0 1 0 0 0 70].
+	self assert: (serialized at: 7) equals: ODBSmallStringBaseCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: ''.
+	
+	"Small String with size 1"
+	
+	string := 'h'.
+	serialized := ODBSerializer serializeToBytes: string.
+	self assert: serialized equals:#[0 0 1 0 0 0 71 104].
+	self assert: (serialized at: 7) equals: ODBSmallStringBaseCode + string size.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: 'h'.
+	
+	"Small String with size < 10"
 	
 	string := 'hello'.
 	serialized := ODBSerializer serializeToBytes: string.
@@ -375,6 +396,33 @@ ODBSerializationTest >> testSerializationString [
 	self assert: (serialized at: 7) equals: ODBStringCode.
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: string
+]
+
+{ #category : #tests }
+ODBSerializationTest >> testSerializationStringTwice [
+	
+	| object serialized materialized |
+	
+	"try to serialize an object that references twice the string"
+	object := {'h' . 'h'}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object.
+	
+
+	object := {'hello' . 'hello'}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object.
+	
+
+	object := {'helloWithMoreCharacters' . 'helloWithMoreCharacters'}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object.
 ]
 
 { #category : #tests }
