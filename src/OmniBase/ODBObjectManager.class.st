@@ -315,9 +315,10 @@ ODBObjectManager >> reopenExclusively [
 { #category : #private }
 ODBObjectManager >> unifyContainerName: aString [ 
 	"Private - unifies aString that represents a container name."
-
-	aString trimBlanks.
-	^aString size > 20 ifTrue: [aString copyFrom: 1 to: 20] ifFalse: [aString]
+	
+	| str |
+	str := aString withBlanksCondensed.
+	^str size > 20 ifTrue: [str first: 20] ifFalse: [str]
 ]
 
 { #category : #public }

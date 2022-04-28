@@ -17,8 +17,3 @@ String class >> odbDeserialize: deserializer [
 
 	^ deserializer stream nextString: deserializer
 ]
-
-{ #category : #'*omnibase' }
-String >> trimBlanks [
-	^self withBlanksCondensed
-]
