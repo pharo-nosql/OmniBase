@@ -7,12 +7,6 @@ Class {
 	#category : #'OmniBase-Streams'
 }
 
-{ #category : #'instance creation' }
-ODBFileStreamWrapper class >> on: aFileStream [ 
-	^ self new 
-		stream: aFileStream
-]
-
 { #category : #accessing }
 ODBFileStreamWrapper >> atPosition: anInteger getBytesFor: aByteCollection [ 
 	"Read bytes from stream at position anInteger. 
@@ -96,10 +90,7 @@ ODBFileStreamWrapper >> basicGetBytesFor: aByteCollection len: len [
 
 { #category : #accessing }
 ODBFileStreamWrapper >> basicPosition: anInteger [
-	"Positiones stream to anInteger. Answer anInteger."
-
-	stream position: anInteger.
-	^anInteger
+	stream position: anInteger
 ]
 
 { #category : #accessing }
@@ -146,11 +137,6 @@ ODBFileStreamWrapper >> compare: aString at: pos [
 { #category : #finalization }
 ODBFileStreamWrapper >> finalize [
 	self close
-]
-
-{ #category : #accessing }
-ODBFileStreamWrapper >> flush [
-	stream flush
 ]
 
 { #category : #public }
@@ -212,11 +198,7 @@ ODBFileStreamWrapper >> name [
 
 { #category : #accessing }
 ODBFileStreamWrapper >> position: anInteger [ 
-	"Positiones stream to anInteger. Answer anInteger."
-
-	| result |
-	mutex critical: [result := self basicPosition: anInteger].
-	^result
+	mutex critical: [stream position: anInteger]
 ]
 
 { #category : #public }
@@ -272,12 +254,7 @@ ODBFileStreamWrapper >> setToEnd [
 		position
 ]
 
-{ #category : #accessing }
-ODBFileStreamWrapper >> stream: aFileStream [ 
-	stream := aFileStream
-]
-
-{ #category : #accessing }
+{ #category : #public }
 ODBFileStreamWrapper >> truncate: anInteger [ 
 	"Truncate stream so that its size will be anInteger. 
 	Position to anInteger."
