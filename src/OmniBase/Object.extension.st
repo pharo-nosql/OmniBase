@@ -66,13 +66,13 @@ Object >> makePersistent [
 
 { #category : #'*omnibase' }
 Object >> markDirty [
-	| t |
-	(t := OmniBase currentTransactionOrNil) isNil 
-		ifTrue: 
-			[(t := self odbGetTransaction) isNil 
-				ifTrue: 
-					[OmniBase signalError: 'Can not mark object as dirty. Transaction context is unknown. ']].
-	t markDirty: self
+
+	| transaction |
+	(transaction := OmniBase currentTransactionOrNil) ifNil: [ 
+		(transaction := self odbGetTransaction) ifNil: [ 
+			OmniBase signalError:
+				'Can not mark object as dirty. Transaction context is unknown. ' ] ].
+	transaction markDirty: self
 ]
 
 { #category : #'*omnibase' }
@@ -220,9 +220,4 @@ Object >> odbResolve [
 Object >> odbSerialize: serializer [ 
 	(serializer register: self) ifTrue: [^self].
 	self odbBasicSerialize: serializer
-]
-
-{ #category : #'*omnibase' }
-Object >> signalError: aString [
-	self error: aString
 ]

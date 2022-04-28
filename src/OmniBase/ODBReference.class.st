@@ -109,8 +109,8 @@ ODBReference >> odbNotLoaded [
 
 { #category : #accessing }
 ODBReference >> odbObjectID [
-	transactionObject == nil ifTrue: [^demandLoader odbObjectID].
-	^transactionObject objectID
+
+	^ transactionObject ifNil: [ demandLoader odbObjectID ] ifNotNil: [ :obj | obj objectID ]
 ]
 
 { #category : #public }
