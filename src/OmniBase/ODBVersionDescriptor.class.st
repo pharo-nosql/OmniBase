@@ -11,7 +11,7 @@ Class {
 	#category : #'OmniBase-Model'
 }
 
-{ #category : #public }
+{ #category : #comparing }
 ODBVersionDescriptor >> = anObject [ 
 	anObject class == self class ifFalse: [^false].
 	^topVersionNumber == anObject topVersionNumber 
@@ -24,7 +24,7 @@ ODBVersionDescriptor >> committingTransactions [
         ^committingTransactions
 ]
 
-{ #category : #'public/unclassified' }
+{ #category : #copying }
 ODBVersionDescriptor >> copy [
 
     ^self class new
@@ -49,6 +49,14 @@ ODBVersionDescriptor >> fromVersionTable: aByteArray [
 					[committingTransactions add: vn.
 					vn <= readVersionNumber ifTrue: [readVersionNumber := vn - 1]].
 			i := i + 4]
+]
+
+{ #category : #comparing }
+ODBVersionDescriptor >> hash [
+
+	^ (self class hash
+		bitXor: self topVersionNumber hash)
+		bitXor: self committingTransactions hash
 ]
 
 { #category : #'private/unclassified' }
