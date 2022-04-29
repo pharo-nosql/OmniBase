@@ -28,8 +28,8 @@ ODBLocalClient >> createOn: aClientManager clientID: anInteger [
 { #category : #'private/for transaction control only' }
 ODBLocalClient >> currentGlobalLockedTransaction [
 
-    transactions do: [:each | each transactionFile == nil ifFalse: [ ^each ]].
-    ^nil
+	transactions do: [ :each | each transactionFile ifNotNil: [ ^ each ] ].
+	^ nil
 ]
 
 { #category : #'public/accessing' }
@@ -41,20 +41,21 @@ ODBLocalClient >> description: aString [
 
 { #category : #'public/unclassified' }
 ODBLocalClient >> globalLock [
-        "Set global write lock to all objects in the database.
-        No other client will be able to write to the database
-        until the lock is released by globalUnlock. Answer <true>
-        if sucessfull or <false> if failed. Global lock will fail if
-        any client (including local client) allready has read-write
-        transactions running. When database is globaly locked only one
-        read-write transaction can run at that time."
 
-    | count |
-    count := transactionFiles size.
-    freeTransactionFile isNil ifFalse: [ count := count - 1 ].
-    (hasGlobalLock not and: [ count == 0 ])
-        ifTrue: [ hasGlobalLock := clientManager setGlobalLockFor: id ].
-    ^hasGlobalLock
+	"Set global write lock to all objects in the database.
+    No other client will be able to write to the database
+    until the lock is released by globalUnlock. Answer <true>
+    if sucessfull or <false> if failed. Global lock will fail if
+    any client (including local client) allready has read-write
+    transactions running. When database is globaly locked only one
+    read-write transaction can run at that time."
+
+	| count |
+	count := transactionFiles size.
+	freeTransactionFile ifNotNil: [ count := count - 1 ].
+	(hasGlobalLock not and: [ count == 0 ]) ifTrue: [ 
+		hasGlobalLock := clientManager setGlobalLockFor: id ].
+	^ hasGlobalLock
 ]
 
 { #category : #'public/unclassified' }
@@ -112,13 +113,16 @@ ODBLocalClient >> newReadOnlyTransaction [
 
 { #category : #'public/unclassified' }
 ODBLocalClient >> newTransaction [
-        "Answer new transaction for receiver."
 
-    | transaction |
-    hasGlobalLock
-        ifFalse: [ transaction := ODBLocalTransaction new ]
-        ifTrue: [ transaction := ODBGlobalLockedTransaction new ].
-    ^transaction setClient: self environment: clientManager environment; start
+	"Answer new transaction for receiver."
+
+	| transaction |
+	transaction := hasGlobalLock
+		               ifFalse: [ ODBLocalTransaction new ]
+		               ifTrue: [ ODBGlobalLockedTransaction new ].
+	^ transaction
+		  setClient: self environment: clientManager environment;
+		  start
 ]
 
 { #category : #private }
@@ -159,50 +163,53 @@ ODBLocalClient >> newTransactionFileFor: aTransaction [
 
 { #category : #'public/unclassified' }
 ODBLocalClient >> newTransactionFrom: aTransaction [
-        "Answer new transaction for receiver from aTransaction. 
-        Objects accessible in aTransaction will also be accessible 
-        in new transaction."
 
-    | transaction |
-    transaction := aTransaction class new.
-    ^transaction setClient: self environment: clientManager environment; startFrom: aTransaction
+	"Answer new transaction for receiver from aTransaction. 
+    Objects accessible in aTransaction will also be accessible 
+    in new transaction."
+
+	^ aTransaction class new
+		  setClient: self environment: clientManager environment;
+		  startFrom: aTransaction
 ]
 
 { #category : #'public/unclassified' }
 ODBLocalClient >> newTransactionInVersion: aVersionDescriptor [
-        "Answer new transaction with given version descriptor."
 
-    | transaction |
-    hasGlobalLock
-        ifFalse: [ transaction := ODBLocalTransaction new ]
-        ifTrue: [ transaction := ODBGlobalLockedTransaction new ].
-    ^transaction setClient: self environment: clientManager environment; startInVersion: aVersionDescriptor
+	"Answer new transaction with given version descriptor."
+
+	| transaction |
+	transaction := hasGlobalLock
+		               ifFalse: [ ODBLocalTransaction new ]
+		               ifTrue: [ ODBGlobalLockedTransaction new ].
+	^ transaction
+		  setClient: self environment: clientManager environment;
+		  startInVersion: aVersionDescriptor
 ]
 
 { #category : #'public/unclassified' }
 ODBLocalClient >> remove [
 
-    freeTransactionFile isNil ifFalse: [ freeTransactionFile remove ].
-    freeTransactionFile := true. "do not cache transaction files anymore"
-    ^super remove
+	freeTransactionFile ifNotNil: [ freeTransactionFile remove ].
+	freeTransactionFile := true. "do not cache transaction files anymore"
+	^ super remove
 ]
 
 { #category : #'private/unclassified' }
 ODBLocalClient >> transactionRemove: aTransaction [
-        "Private - Remove aTransaction."
 
-    | trnFile trID |
-    (trnFile := aTransaction transactionFile) == nil ifTrue: [ ^self ].
-    freeTransactionFile == nil
-        ifTrue: [ freeTransactionFile := trnFile reinitialize ]
-        ifFalse: [
-            trID := trnFile transactionID.
-            trnFile remove
-                ifTrue: [
-                    transactionFiles remove: trID ifAbsent: [].
-                    clientFile transactionIDs: transactionFiles.
-                ]
-        ].
-    transactionFiles size > 1 ifFalse: [ clientManager removeLocksFor: id ].
-    transactions remove: aTransaction ifAbsent: []
+	"Private - Remove aTransaction."
+
+	| trnFile trID |
+	(trnFile := aTransaction transactionFile) ifNil: [ ^ self ].
+	freeTransactionFile
+		ifNil: [ freeTransactionFile := trnFile reinitialize ]
+		ifNotNil: [ 
+			trID := trnFile transactionID.
+			trnFile remove ifTrue: [ 
+				transactionFiles remove: trID ifAbsent: [  ].
+				clientFile transactionIDs: transactionFiles ] ].
+	transactionFiles size > 1 ifFalse: [ 
+		clientManager removeLocksFor: id ].
+	transactions remove: aTransaction ifAbsent: [  ]
 ]
