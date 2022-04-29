@@ -14,43 +14,39 @@ ODBFileStreamWrapper >> atPosition: anInteger getBytesFor: aByteCollection [
 
 	| result |
 	mutex critical: 
-			[result := self
-						basicPosition: anInteger;
-						basicGetBytesFor: aByteCollection len: aByteCollection size].
+			[stream position: anInteger.
+			result := self basicGetBytesFor: aByteCollection len: aByteCollection size].
 	^result
 ]
 
 { #category : #accessing }
-ODBFileStreamWrapper >> atPosition: anInteger getBytesFor: aByteCollection len: len [ 
+ODBFileStreamWrapper >> atPosition: anInteger getBytesFor: aByteCollection len: len [
 	"Read len bytes from stream at position anInteger to aByteCollection. 
-        Answer number of bytes actualy read."
+    Answer number of bytes actualy read."
 
 	| result |
-	mutex critical: 
-			[result := self
-						basicPosition: anInteger;
-						basicGetBytesFor: aByteCollection len: len].
-	^result
+	mutex critical: [ 
+		stream position: anInteger.
+		result := self basicGetBytesFor: aByteCollection len: len ].
+	^ result
 ]
 
 { #category : #accessing }
-ODBFileStreamWrapper >> atPosition: pos putBytesFrom: aByteCollection [ 
+ODBFileStreamWrapper >> atPosition: pos putBytesFrom: aByteCollection [
 	"Write bytes from aByteCollection to file."
 
-	mutex critical: 
-			[self
-				basicPosition: pos;
-				basicPutBytesFrom: aByteCollection len: aByteCollection size]
+	mutex critical: [ 
+		stream position: pos.
+		self basicPutBytesFrom: aByteCollection len: aByteCollection size ]
 ]
 
 { #category : #accessing }
-ODBFileStreamWrapper >> atPosition: pos putBytesFrom: aByteCollection len: len [ 
+ODBFileStreamWrapper >> atPosition: pos putBytesFrom: aByteCollection len: len [
 	"Write len bytes from aByteCollection to file."
 
-	mutex critical: 
-			[self
-				basicPosition: pos;
-				basicPutBytesFrom: aByteCollection len: len]
+	mutex critical: [ 
+		stream position: pos.
+		self basicPutBytesFrom: aByteCollection len: len ]
 ]
 
 { #category : #accessing }
@@ -86,11 +82,6 @@ ODBFileStreamWrapper >> basicGetBytesFor: aByteCollection len: len [
 	^ stream 
 		flush; 
 		readInto: aByteCollection startingAt: 1 count: len
-]
-
-{ #category : #accessing }
-ODBFileStreamWrapper >> basicPosition: anInteger [
-	stream position: anInteger
 ]
 
 { #category : #accessing }
@@ -260,7 +251,7 @@ ODBFileStreamWrapper >> truncate: anInteger [
 	Position to anInteger."
 
 	mutex critical: [ 
-		self basicPosition: anInteger.
+		stream position: anInteger.
 		stream truncate: anInteger ]
 ]
 

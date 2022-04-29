@@ -612,7 +612,7 @@ ODBEncodingStream >> nextnCharacterString: aDeserializer size: size [
 
 { #category : #accessing }
 ODBEncodingStream >> position: anInteger [ 
-	^ stream position: anInteger
+	stream position: anInteger
 ]
 
 { #category : #accessing }
