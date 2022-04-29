@@ -199,6 +199,7 @@ ODBEncodingStream >> nextByteArray: aClass [
 
 { #category : #reading }
 ODBEncodingStream >> nextCharacter [
+	"call to #register: not needed as character is an immediate Object"
 	^ stream getChar
 ]
 
@@ -231,6 +232,7 @@ ODBEncodingStream >> nextDictionary: aClass [
 
 { #category : #reading }
 ODBEncodingStream >> nextDoubleByteCharacter [
+	"call to #register: not needed as character is an immediate Object"
 	^ Character value: stream getWord
 ]
 
@@ -558,6 +560,7 @@ ODBEncodingStream >> nextPutWideString: aWideString [
 
 { #category : #reading }
 ODBEncodingStream >> nextSmallFloat64: aDeserializer [ 
+	"We multiply the Boxesfloat by 1, this way we create a SmallFloat if possible"
 	^ BoxedFloat64 basicNew
 		  at: 1 put: stream getInteger;
 		  at: 2 put: stream getInteger;

@@ -81,6 +81,20 @@ ODBSerializationTest >> testSerializationBoxedFloat64 [
 ]
 
 { #category : #tests }
+ODBSerializationTest >> testSerializationBoxedFloat64Twice [
+	| float object serialized materialized |
+	
+	"try to serialize an object that references twice the boxed floats"
+	float := 2.45227231256843e-45.
+	object := {float . float}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: object first identicalTo: object second.
+	self assert: materialized equals: object.
+]
+
+{ #category : #tests }
 ODBSerializationTest >> testSerializationByteArray [
 	| object serialized materialized |
 	object := #[1 2 3 5].
@@ -110,6 +124,27 @@ ODBSerializationTest >> testSerializationCharacter [
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: object.
+]
+
+{ #category : #tests }
+ODBSerializationTest >> testSerializationCharacterTwice [
+	| object character serialized materialized |
+	character := $a.
+	object := {character. character}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: object first identicalTo: object second.
+	self assert: materialized equals: object.
+
+	character := 16rF600 asCharacter.
+	object := {character. character}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: object first identicalTo: object second.
+	self assert: materialized equals: object.
+
 ]
 
 { #category : #tests }
@@ -157,6 +192,18 @@ ODBSerializationTest >> testSerializationFraction [
 	self assert: (serialized at: 7) equals: ODBFractionCode.
 	
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object
+]
+
+{ #category : #tests }
+ODBSerializationTest >> testSerializationFractionTwice [
+	| fraction object serialized materialized |
+	fraction := 1/2.
+	object := {fraction . fraction}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: object first identicalTo: object second.
 	self assert: materialized equals: object
 ]
 
@@ -219,6 +266,33 @@ ODBSerializationTest >> testSerializationLargeInteger [
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: object
+]
+
+{ #category : #tests }
+ODBSerializationTest >> testSerializationLargeIntegerTwice [
+
+	| object integer serialized materialized |
+	
+	"LargeInteger"
+	
+	integer := SmallInteger maxVal + 1.
+	object := {integer. integer}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: object first identicalTo: object second.
+	self assert: materialized equals: object.
+	
+	"SmallInteger"
+	
+	integer := SmallInteger minVal - 1.
+	object := {integer. integer}.
+
+	serialized := ODBSerializer serializeToBytes: object.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: object first identicalTo: object second.
+	self assert: materialized equals: object.
+	
 ]
 
 { #category : #tests }
