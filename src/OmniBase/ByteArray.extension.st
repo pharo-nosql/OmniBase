@@ -29,7 +29,7 @@ ByteArray >> odbAsInteger [
 
 { #category : #'*OmniBase' }
 ByteArray >> odbBasicSerialize: serializer [
-
+	self class == ByteArray ifFalse: [ ^ super odbBasicSerialize: serializer ].
 	serializer stream nextPutByteArray: self
 ]
 
