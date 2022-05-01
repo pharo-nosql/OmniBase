@@ -8,7 +8,6 @@ String >> asBtreeKeyOfSize: keySize [
 
 { #category : #'*omnibase' }
 String >> odbBasicSerialize: serializer [
-
 	serializer stream nextPutString: self
 ]
 

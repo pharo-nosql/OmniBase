@@ -2,7 +2,7 @@ Extension { #name : #Dictionary }
 
 { #category : #'*omnibase' }
 Dictionary >> odbBasicSerialize: serializer [
-
+	self class == Dictionary ifFalse: [ ^ super odbBasicSerialize: serializer ].
 	serializer stream nextPutDictionary: self
 ]
 

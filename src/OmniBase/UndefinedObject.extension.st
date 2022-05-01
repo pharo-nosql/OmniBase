@@ -2,7 +2,7 @@ Extension { #name : #UndefinedObject }
 
 { #category : #'*omnibase' }
 UndefinedObject >> odbBasicSerialize: serializer [
-
+	self class == UndefinedObject ifFalse: [ ^ super odbBasicSerialize: serializer ].
 	serializer stream nextPutNil: self
 ]
 

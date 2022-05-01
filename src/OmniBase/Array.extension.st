@@ -2,7 +2,7 @@ Extension { #name : #Array }
 
 { #category : #'*omnibase' }
 Array >> odbBasicSerialize: serializer [
-
+	self class == Array ifFalse: [ ^ super odbBasicSerialize: serializer ].
 	serializer stream nextPutArray: self
 ]
 

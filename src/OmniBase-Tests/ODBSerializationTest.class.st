@@ -207,23 +207,6 @@ ODBSerializationTest >> testSerializationFractionTwice [
 	self assert: materialized equals: object
 ]
 
-{ #category : #'tests-encoded-subclasses' }
-ODBSerializationTest >> testSerializationGlobalVariable [
-	"TTLAssociation is a subclass of Association, make sure it works"
-
-	| object serialized materialized |
-	object := TTLAssociation key: #t value: 1.
-	serialized := ODBSerializer serializeToBytes: object.
-	
-	"this is NOT serialized using ODBAssociationCode"
-	self deny: (serialized at: 7) equals: ODBAssociationCode.
-
-	materialized := ODBDeserializer deserializeFromBytes: serialized.
-	self assert: materialized class equals: object class.
-	self assert: materialized equals: object
-
-]
-
 { #category : #tests }
 ODBSerializationTest >> testSerializationIdentityDictionary [
 	| object serialized materialized |
@@ -443,6 +426,21 @@ ODBSerializationTest >> testSerializationSmallInteger [
 		self assert: ((ODBSerializer serializeToBytes: -2) at: 7) equals: ODBMinusTwo.
 ]
 
+{ #category : #'tests-encoded-subclasses' }
+ODBSerializationTest >> testSerializationSortedCollection [
+	"SortedCollection is a subclass of OrderedCollection, make sure it works"
+
+	| object serialized materialized |
+	object := SortedCollection new.
+	serialized := ODBSerializer serializeToBytes: object.
+	
+	"this is NOT serialized using ODBOrderedCollectionCode"
+	self deny: (serialized at: 7) equals: ODBOrderedCollectionCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object
+]
+
 { #category : #tests }
 ODBSerializationTest >> testSerializationString [ 
 	| string serialized materialized |
@@ -541,6 +539,23 @@ ODBSerializationTest >> testSerializationSystemDictionary [
 	self assertCollection: materialized hasSameElements: Smalltalk globals
 ]
 
+{ #category : #'tests-encoded-subclasses' }
+ODBSerializationTest >> testSerializationTTLAssociation [
+	"TTLAssociation is a subclass of Association, make sure it works"
+
+	| object serialized materialized |
+	object := TTLAssociation key: #t value: 1.
+	serialized := ODBSerializer serializeToBytes: object.
+	
+	"this is NOT serialized using ODBAssociationCode"
+	self deny: (serialized at: 7) equals: ODBAssociationCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized class equals: object class.
+	self assert: materialized equals: object
+
+]
+
 { #category : #tests }
 ODBSerializationTest >> testSerializationTime [
 	| object serialized materialized |
@@ -582,6 +597,21 @@ ODBSerializationTest >> testSerializationUndefindedObject [
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: nil
+]
+
+{ #category : #'tests-encoded-subclasses' }
+ODBSerializationTest >> testSerializationWeakArray [
+	"WeakArray is a subclass of Array, make sure it works"
+
+	| object serialized materialized |
+	object := WeakArray new.
+	serialized := ODBSerializer serializeToBytes: object.
+	
+	"this is NOT serialized using ODBOrderedCollectionCode"
+	self deny: (serialized at: 7) equals: ODBArrayCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object
 ]
 
 { #category : #tests }
