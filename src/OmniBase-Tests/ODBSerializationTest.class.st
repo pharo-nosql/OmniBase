@@ -81,6 +81,34 @@ ODBSerializationTest >> testSerializationBoxedFloat64 [
 ]
 
 { #category : #tests }
+ODBSerializationTest >> testSerializationBoxedFloat64Infinity [
+	| float serialized materialized |
+	float := Float infinity.
+	self assert: float class equals: BoxedFloat64.
+	serialized := ODBSerializer serializeToBytes: float.
+	self 
+		assert: serialized
+		equals: #[0 0 0 0 0 0 40 128 128 128 255 15 0].
+	self assert: (serialized at: 7) equals: ODBFloatCode.
+	
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized class equals: BoxedFloat64.
+	self assert: materialized equals: float.
+	
+	float := Float negativeInfinity.
+	self assert: float class equals: BoxedFloat64.
+	serialized := ODBSerializer serializeToBytes: float.
+	self 
+		assert: serialized
+		equals: #[0 0 0 0 0 0 40 128 128 128 255 31 0].
+	self assert: (serialized at: 7) equals: ODBFloatCode.
+	
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized class equals: BoxedFloat64.
+	self assert: materialized equals: float
+]
+
+{ #category : #tests }
 ODBSerializationTest >> testSerializationBoxedFloat64Twice [
 	| float object serialized materialized |
 	
@@ -381,11 +409,18 @@ ODBSerializationTest >> testSerializationSmallFloat64 [
 	self assert: (serialized at: 7) equals: ODBSmallFloat64Code.
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized class equals: SmallFloat64.
-	self assert: materialized equals: 1.11
+	self assert: materialized identicalTo: float.
+	
+	"We changed serialization fixing https://github.com/ApptiveGrid/MoniBase/issues/22
+	This checks that we can load the old serialized Floats after the change"
+	
+	materialized := ODBDeserializer 
+		deserializeFromBytes: #[0 0 1 0 0 0 47 158 138 142 255 7 134 215 199 194 11].
+	self assert: materialized identicalTo: float.
 ]
 
 { #category : #tests }
-ODBSerializationTest >> testSerializationSmallFloat64Two [
+ODBSerializationTest >> testSerializationSmallFloat64Twice [
 	| object serialized materialized |
 	
 	"try to serialize an object that references twice the same small floats"
@@ -394,13 +429,43 @@ ODBSerializationTest >> testSerializationSmallFloat64Two [
 	serialized := ODBSerializer serializeToBytes: object.
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: object.
+	self assert: materialized first identicalTo: object first.
+	self assert: materialized second identicalTo: object second.
+]
+
+{ #category : #tests }
+ODBSerializationTest >> testSerializationSmallFloat64ZeroAndOne [
+	| float serialized materialized |
 	
-	"We changed serialization fixing https://github.com/ApptiveGrid/MoniBase/issues/22
-	This checks that we can load the old serialized Floats after the change"
+	float := 0.0.
+	self assert: float class equals: SmallFloat64.
+	serialized := ODBSerializer serializeToBytes: float.
+	self assert: serialized equals: #[0 0 0 0 0 0 47 0 0].
+	self assert: (serialized at: 7) equals: ODBSmallFloat64Code.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized class equals: SmallFloat64.
+	self assert: materialized identicalTo: float.
+	self assert: materialized identicalTo: Float zero.
 	
-	materialized := ODBDeserializer 
-		deserializeFromBytes: #[0 0 1 0 0 0 47 158 138 142 255 7 134 215 199 194 11].
-	self assert: materialized equals: object first.
+	float := 1.0.
+	self assert: float class equals: SmallFloat64.
+	serialized := ODBSerializer serializeToBytes: float.
+	self assert: serialized equals: #[0 0 0 0 0 0 47 128 128 128 255 7 0].
+	self assert: (serialized at: 7) equals: ODBSmallFloat64Code.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized class equals: SmallFloat64.
+	self assert: materialized identicalTo: float.
+	self assert: materialized identicalTo: Float one.
+	
+	float := -0.0.
+	self assert: float class equals: SmallFloat64.
+	serialized := ODBSerializer serializeToBytes: float.
+	self assert: serialized equals: #[0 0 0 0 0 0 47 128 128 128 128 16 0].
+	self assert: (serialized at: 7) equals: ODBSmallFloat64Code.
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized class equals: SmallFloat64.
+	self assert: materialized identicalTo: float.
+	self assert: materialized identicalTo: Float negativeZero.
 ]
 
 { #category : #tests }
