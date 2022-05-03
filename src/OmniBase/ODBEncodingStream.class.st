@@ -387,7 +387,6 @@ ODBEncodingStream >> nextPutDate: aDate [
 
 { #category : #writing }
 ODBEncodingStream >> nextPutDictionary: aDictionary [
-	aDictionary class == Dictionary ifFalse: [ ^ super odbBasicSerialize: readerWriter ].
 	stream 
 		putByte: ODBDictionaryCode;
 		putPositiveInteger: aDictionary size.
@@ -418,7 +417,6 @@ ODBEncodingStream >> nextPutFraction: aNumber [
 
 { #category : #writing }
 ODBEncodingStream >> nextPutIdentityDictionary: anIdentityDictionary [ 
-	anIdentityDictionary class == IdentityDictionary ifFalse: [ ^super odbBasicSerialize: readerWriter ].
 	stream 
 		putByte: ODBIdentityDictionaryCode;
 		putPositiveInteger: anIdentityDictionary size.
@@ -451,8 +449,6 @@ ODBEncodingStream >> nextPutInternalReference: anInteger [
 
 { #category : #writing }
 ODBEncodingStream >> nextPutMessage: aMessage [ 
-	(aMessage class == Message) 
-		ifFalse: [ ^ super odbBasicSerialize: readerWriter ].
  	stream putByte: ODBMessageCode.
 	aMessage selector odbSerialize: readerWriter.
 	aMessage arguments odbSerialize: readerWriter
@@ -460,8 +456,6 @@ ODBEncodingStream >> nextPutMessage: aMessage [
 
 { #category : #writing }
 ODBEncodingStream >> nextPutMessageSend: aMessageSend [ 
-	(aMessageSend class == MessageSend) 
-		ifFalse: [ ^ super odbBasicSerialize: readerWriter ].
 	stream putByte: ODBMessageSendCode.
 	aMessageSend receiver odbSerialize: readerWriter.
 	aMessageSend selector odbSerialize: readerWriter.

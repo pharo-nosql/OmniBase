@@ -9,7 +9,7 @@ Date >> asBtreeKeyOfSize: keySize [
 
 { #category : #'*omnibase' }
 Date >> odbBasicSerialize: serializer [
-
+	self class == Date ifFalse: [ ^ super odbBasicSerialize: serializer ].
 	serializer stream nextPutDate: self
 ]
 

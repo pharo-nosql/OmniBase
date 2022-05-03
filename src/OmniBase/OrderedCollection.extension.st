@@ -2,7 +2,7 @@ Extension { #name : #OrderedCollection }
 
 { #category : #'*omnibase' }
 OrderedCollection >> odbBasicSerialize: serializer [
-
+	self class == OrderedCollection ifFalse: [ ^ super odbBasicSerialize: serializer ].
 	serializer stream nextPutOrderedCollection: self
 ]
 

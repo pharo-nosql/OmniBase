@@ -2,7 +2,7 @@ Extension { #name : #Character }
 
 { #category : #'*omnibase' }
 Character >> odbBasicSerialize: serializer [
-
+	self class == Character ifFalse: [ ^ super odbBasicSerialize: serializer ].
 	serializer stream nextPutCharacter: self
 ]
 

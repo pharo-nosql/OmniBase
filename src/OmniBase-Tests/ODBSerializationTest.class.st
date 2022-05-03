@@ -426,6 +426,21 @@ ODBSerializationTest >> testSerializationSmallInteger [
 		self assert: ((ODBSerializer serializeToBytes: -2) at: 7) equals: ODBMinusTwo.
 ]
 
+{ #category : #'tests-encoded-subclasses' }
+ODBSerializationTest >> testSerializationSortedCollection [
+	"SortedCollection is a subclass of OrderedCollection, make sure it works"
+
+	| object serialized materialized |
+	object := SortedCollection new.
+	serialized := ODBSerializer serializeToBytes: object.
+	
+	"this is NOT serialized using ODBOrderedCollectionCode"
+	self deny: (serialized at: 7) equals: ODBOrderedCollectionCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object
+]
+
 { #category : #tests }
 ODBSerializationTest >> testSerializationString [ 
 	| string serialized materialized |
@@ -524,6 +539,23 @@ ODBSerializationTest >> testSerializationSystemDictionary [
 	self assertCollection: materialized hasSameElements: Smalltalk globals
 ]
 
+{ #category : #'tests-encoded-subclasses' }
+ODBSerializationTest >> testSerializationTTLAssociation [
+	"TTLAssociation is a subclass of Association, make sure it works"
+
+	| object serialized materialized |
+	object := TTLAssociation key: #t value: 1.
+	serialized := ODBSerializer serializeToBytes: object.
+	
+	"this is NOT serialized using ODBAssociationCode"
+	self deny: (serialized at: 7) equals: ODBAssociationCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized class equals: object class.
+	self assert: materialized equals: object
+
+]
+
 { #category : #tests }
 ODBSerializationTest >> testSerializationTime [
 	| object serialized materialized |
@@ -531,6 +563,25 @@ ODBSerializationTest >> testSerializationTime [
 	serialized := ODBSerializer serializeToBytes: object.
 	self assert: serialized equals: #[0 0 1 0 0 0 33 0].
 	self assert: (serialized at: 7) equals: ODBTimeCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object
+]
+
+{ #category : #'tests-encoded-subclasses' }
+ODBSerializationTest >> testSerializationUUID [
+	"UUID is a subclass of ByteArray, make sure it works"
+
+	| object serialized materialized |
+	object := UUID fromString: 'e42b03f8-3e9a-0d00-862e-bf1701b4bbce'.
+	serialized := ODBSerializer serializeToBytes: object.
+	
+	"this is NOT serialized using ODBByteArrayCode"
+	self deny: (serialized at: 7) equals: ODBByteArrayCode.
+	
+	self 
+		assert: serialized
+		equals: #[0 1 4 85 85 73 68 1 1 0 1 0 0 0 2 1 16 228 43 3 248 62 154 13 0 134 46 191 23 1 180 187 206].
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: object
@@ -546,6 +597,21 @@ ODBSerializationTest >> testSerializationUndefindedObject [
 
 	materialized := ODBDeserializer deserializeFromBytes: serialized.
 	self assert: materialized equals: nil
+]
+
+{ #category : #'tests-encoded-subclasses' }
+ODBSerializationTest >> testSerializationWeakArray [
+	"WeakArray is a subclass of Array, make sure it works"
+
+	| object serialized materialized |
+	object := WeakArray new.
+	serialized := ODBSerializer serializeToBytes: object.
+	
+	"this is NOT serialized using ODBOrderedCollectionCode"
+	self deny: (serialized at: 7) equals: ODBArrayCode.
+
+	materialized := ODBDeserializer deserializeFromBytes: serialized.
+	self assert: materialized equals: object
 ]
 
 { #category : #tests }
