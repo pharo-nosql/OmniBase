@@ -22,5 +22,5 @@ ODBnCharacterString >> n: anInteger [
 { #category : #accessing }
 ODBnCharacterString >> odbDeserialize: deserializer [
 
-  ^ deserializer stream nextnCharacterString: deserializer size: n
+  ^ deserializer stream nextnCharacterStringSize: n
 ]

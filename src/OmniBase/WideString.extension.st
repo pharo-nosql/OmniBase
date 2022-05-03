@@ -9,5 +9,5 @@ WideString >> odbBasicSerialize: serializer [
 { #category : #'*OmniBase' }
 WideString class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextWideString: deserializer
+	^ deserializer stream nextWideString
 ]

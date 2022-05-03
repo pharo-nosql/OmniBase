@@ -9,5 +9,5 @@ Time >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 Time class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextTime: deserializer
+	^ deserializer stream nextTime
 ]

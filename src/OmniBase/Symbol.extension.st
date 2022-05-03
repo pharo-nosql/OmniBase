@@ -9,7 +9,7 @@ Symbol >> odbBasicSerialize: serializer [
 { #category : #'*omnibase' }
 Symbol class >> odbDeserialize: deserializer [
 
-	^ deserializer stream nextSymbol: deserializer
+	^ deserializer stream nextSymbol
 ]
 
 { #category : #'*omnibase' }

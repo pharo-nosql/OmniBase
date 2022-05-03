@@ -566,21 +566,12 @@ ODBEncodingStream >> nextString [
 	| buf len |
 	buf := ByteArray new: (len := stream getPositiveInteger).
 	stream getBytesFor: buf len: len.
-	^  buf asString
-]
+	^ readerWriter register: buf asString.
 
-{ #category : #actions }
-ODBEncodingStream >> nextString: aDeserializer [
-	| buf len string |
-	buf := ByteArray new: (len := stream getPositiveInteger).
-	stream getBytesFor: buf len: len.
-	string := buf asString.
-	aDeserializer register: string.
-	^ string
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextSymbol: aDeserializer [ 
+ODBEncodingStream >> nextSymbol [
 	| bytes len |
 	bytes := ByteArray new: (len := stream getPositiveInteger).
 	stream getBytesFor: bytes len: len.
@@ -588,20 +579,20 @@ ODBEncodingStream >> nextSymbol: aDeserializer [
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextTime: aDeserializer [ 
-	^ aDeserializer register: (Time fromSeconds: stream getPositiveInteger)
+ODBEncodingStream >> nextTime [
+	^ readerWriter register: (Time fromSeconds: stream getPositiveInteger)
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextWideString: aDeserializer [ 
+ODBEncodingStream >> nextWideString [
 	| buf len |
 	buf := ByteArray new: (len := stream getPositiveInteger).
 	stream getBytesFor: buf len: len.
-	^ aDeserializer register: (self class decodeBytes: buf)
+	^ readerWriter register: (self class decodeBytes: buf)
 ]
 
 { #category : #reading }
-ODBEncodingStream >> nextnCharacterString: aDeserializer size: size [
+ODBEncodingStream >> nextnCharacterStringSize: size [
 	    | buf |
    stream getBytesFor: (buf := ByteArray new: size) len: size.
     ^ readerWriter register: buf asString
