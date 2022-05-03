@@ -13,16 +13,16 @@ Class {
 
 { #category : #'public/accessing' }
 ODBClient >> clientID [
-        "Answer client ID."
+    "Answer client ID."
 
     ^id
 ]
 
 { #category : #'public/accessing' }
 ODBClient >> description [
-        "Answer client description string."
+	"Answer client description string."
 
-    ^clientFile clientDescription
+	^ clientFile clientDescription
 ]
 
 { #category : #initialization }
@@ -46,15 +46,16 @@ ODBClient >> isTerminated [
 
 { #category : #'public/unclassified' }
 ODBClient >> remove [
-        "Remove client from database."
 
-    | cf |
-    clientFile isNil ifFalse: [
-        clientManager removePending: id.
-        self transactions copy do: [:t | t abort].
-        cf := clientFile.
-        clientFile := nil.
-        cf remove ifTrue: [clientManager removed: id]]
+	"Remove client from database."
+
+	| cf |
+	clientFile ifNotNil: [ 
+		clientManager removePending: id.
+		self transactions copy do: [ :t | t abort ].
+		cf := clientFile.
+		clientFile := nil.
+		cf remove ifTrue: [ clientManager removed: id ] ]
 ]
 
 { #category : #'private/unclassified' }
@@ -67,28 +68,25 @@ ODBClient >> transactionAdd: aTransaction [
 
 { #category : #'private/unclassified' }
 ODBClient >> transactionRemove: aTransaction [
-        "Private - Remove aTransaction."
 
-    | trnFile trID |
-    (trnFile := aTransaction transactionFile) == nil
-        ifFalse: [
-            trID := trnFile transactionID.
-            trnFile remove
-                ifTrue: [
-                    transactionFiles remove: trID ifAbsent: [].
-                    clientFile transactionIDs: transactionFiles.
-                    transactionFiles isEmpty
-                        ifTrue: [ clientManager removeLocksFor: id ]
-                ]
-        ].
-    transactions remove: aTransaction ifAbsent: []
+	"Private - Remove aTransaction."
+
+	| trnFile trID |
+	(trnFile := aTransaction transactionFile) ifNotNil: [ 
+		trID := trnFile transactionID.
+		trnFile remove ifTrue: [ 
+			transactionFiles remove: trID ifAbsent: nil.
+			clientFile transactionIDs: transactionFiles.
+			transactionFiles isEmpty ifTrue: [ 
+				clientManager removeLocksFor: id ] ] ].
+	transactions remove: aTransaction ifAbsent: nil
 ]
 
 { #category : #'public/accessing' }
 ODBClient >> transactions [
-        "Answer collection of R/W transactions started by client."
+	"Answer collection of R/W transactions started by client."
 
-    ^transactions asArray
+	^ transactions asArray
 ]
 
 { #category : #private }

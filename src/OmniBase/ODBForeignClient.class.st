@@ -22,17 +22,17 @@ ODBForeignClient >> openOn: aClientManager clientID: clientID [
     clientManager addOpenedClient: self
 ]
 
-{ #category : #public }
+{ #category : #'public/unclassified' }
 ODBForeignClient >> remove [
+
 	"Remove client from database. 
 	Close files only, because client may be still active."
 
-	clientFile isNil 
-		ifFalse: 
-			[self transactions copy do: [:each | each abort].
-			clientFile close.
-			clientFile := nil.
-			clientManager removeForeignActiveClient: id]
+	clientFile ifNotNil: [ 
+		self transactions copy do: [ :each | each abort ].
+		clientFile close.
+		clientFile := nil.
+		clientManager removeForeignActiveClient: id ]
 ]
 
 { #category : #'public/accessing' }
