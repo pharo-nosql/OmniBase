@@ -8,15 +8,13 @@ Class {
 }
 
 { #category : #accessing }
-ODBFileStreamWrapper >> atPosition: anInteger getBytesFor: aByteCollection [ 
+ODBFileStreamWrapper >> atPosition: anInteger getBytesFor: aByteCollection [
 	"Read bytes from stream at position anInteger. 
-        Answer number of bytes actualy read."
+    Answer number of bytes actualy read."
 
-	| result |
-	mutex critical: 
-			[stream position: anInteger.
-			result := self basicGetBytesFor: aByteCollection len: aByteCollection size].
-	^result
+	^ mutex critical: [ 
+		  stream position: anInteger.
+		  self basicGetBytesFor: aByteCollection len: aByteCollection size ]
 ]
 
 { #category : #accessing }
@@ -24,11 +22,9 @@ ODBFileStreamWrapper >> atPosition: anInteger getBytesFor: aByteCollection len: 
 	"Read len bytes from stream at position anInteger to aByteCollection. 
     Answer number of bytes actualy read."
 
-	| result |
-	mutex critical: [ 
+	^ mutex critical: [ 
 		stream position: anInteger.
-		result := self basicGetBytesFor: aByteCollection len: len ].
-	^ result
+		self basicGetBytesFor: aByteCollection len: len ]
 ]
 
 { #category : #accessing }
@@ -145,9 +141,7 @@ ODBFileStreamWrapper >> getBytesFor: aByteCollection len: len [
 	"Read len bytes from stream to aByteCollection. 
 	Answer number of bytes actualy read."
 
-	| result |
-	mutex critical: [result := self basicGetBytesFor: aByteCollection len: len].
-	^result
+	^ mutex critical: [self basicGetBytesFor: aByteCollection len: len]
 ]
 
 { #category : #public }
