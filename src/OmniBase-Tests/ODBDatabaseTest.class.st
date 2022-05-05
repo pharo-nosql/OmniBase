@@ -329,3 +329,29 @@ ODBDatabaseTest >> testPersistTwoObjectsWithODBDictionary [
 	self assert: txn changesPackage changes size equals: 3.
 	txn abort.
 ]
+
+{ #category : #tests }
+ODBDatabaseTest >> testSetInclusion [
+
+    | obj1 obj2 fromDb1 fromDb2 |
+    [ 
+    obj1 := Set new.
+    obj1 makePersistent.
+    obj2 := ODBTestClass1 new.
+    obj2 makePersistent.
+    obj1 add: obj2.
+    
+    OmniBase root at: 'one' put: obj1.
+    OmniBase root at: 'two' put: obj2 ] evaluateAndCommitIn: db newTransaction.
+    
+    self assert: (obj1 includes: obj2).
+
+    [ 
+    fromDb1 := OmniBase root at: 'one'.
+    fromDb2 := OmniBase root at: 'two'.
+
+    self assert: (fromDb1 anyOne isIdenticalTo: fromDb2 ).
+"fails"    self assert: (fromDb1 includes: fromDb2 odbResolve).    
+    ] evaluateIn:
+        db newReadOnlyTransaction
+]
